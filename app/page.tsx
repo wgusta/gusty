@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
 import DangerCard from '@/components/DangerCard';
@@ -557,6 +558,8 @@ export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
   const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(null);
   const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
+  const [isDangerZoneInView, setIsDangerZoneInView] = useState(false);
+  const dangerZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     // Check localStorage for danger zone confirmation
@@ -592,6 +595,28 @@ export default function Home() {
       window.removeEventListener('mousemove', updateCursor);
     };
   }, []);
+
+  // Intersection Observer to detect when danger zone is in view
+  useEffect(() => {
+    if (!dangerZoneRef.current || dangerZoneConfirmed !== null) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsDangerZoneInView(entry.isIntersecting);
+        });
+      },
+      {
+        threshold: 0.1, // Trigger when 10% of the section is visible
+      }
+    );
+
+    observer.observe(dangerZoneRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [dangerZoneConfirmed]);
 
   const handleDangerZoneConfirm = () => {
     setDangerZoneConfirmed(true);
