@@ -129,7 +129,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Header */}
         <div className="p-4 md:p-6 border-b border-brand-black/10">
-          <h2 id="modal-title" className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-black font-stylish mb-2">
+          <h2 id="modal-title" className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-black font-terminal mb-2">
             {project.title}
           </h2>
           <p id="modal-description" className="text-sm md:text-base text-brand-black/80 font-terminal">{project.description}</p>

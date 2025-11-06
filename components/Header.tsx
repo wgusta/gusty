@@ -1,7 +1,6 @@
 'use client';
 
 import Link from 'next/link';
-import Image from 'next/image';
 
 export default function Header() {
   return (
@@ -14,20 +13,8 @@ export default function Header() {
         Skip to main content
       </a>
       
-      {/* Left Side - Logo and Name */}
+      {/* Left Side - Name */}
       <div className="flex items-center gap-4 md:gap-5 lg:gap-6 flex-shrink-0">
-        {/* Logo PNG */}
-        <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex-shrink-0 relative">
-          <Image
-            src="/logo.png"
-            alt="Sihl Icon Valley Logo"
-            width={96}
-            height={96}
-            className="w-full h-full object-contain"
-            priority
-          />
-        </div>
-
         {/* Stylized Name */}
         <div className="flex flex-col flex-1">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
