@@ -144,12 +144,15 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_100px_1fr] min-h-screen pt-24 md:pt-32 pb-20 relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen pt-24 md:pt-32 pb-20 relative">
         {/* Left Column - Design */}
         <div className="bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 overflow-y-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-2 md:mb-4">
-            Design & Writing
+            Original Design & Concept
           </h2>
+          <p className="text-sm md:text-base text-brand-white/90 font-stylish mb-4 md:mb-6">
+            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
+          </p>
           <div className="flex flex-col gap-6">
             {designProjects.map((project) => (
               <ProjectCard
@@ -161,15 +164,14 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Center Divider */}
-        <div className="hidden md:block bg-sun-red border-l border-r border-brand-white relative min-w-[100px]">
-        </div>
-
         {/* Right Column - AI */}
         <div className="bg-teal p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 overflow-y-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-2 md:mb-4">
-            AI Engineering
+            AI Integration
           </h2>
+          <p className="text-sm md:text-base text-brand-white/90 font-terminal mb-4 md:mb-6">
+            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
+          </p>
           <div className="flex flex-col gap-6">
             {aiProjects.map((project) => (
               <ProjectCard
@@ -183,7 +185,7 @@ export default function Home() {
         
         {/* Bridged Projects - Full Width Covering Both Columns */}
         {bridgedProjects.length > 0 && (
-          <div className="col-span-1 md:col-span-3 absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 px-6 md:px-8 lg:px-12">
+          <div className="col-span-1 md:col-span-2 absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 px-6 md:px-8 lg:px-12">
             <div className="flex flex-col gap-6">
               {bridgedProjects.map((project) => (
                 <div key={project.id} className="w-full">
@@ -199,10 +201,10 @@ export default function Home() {
       </div>
 
       {/* Footer with Contact */}
-      <footer className="bg-brand-black py-8 md:py-12 px-6 md:px-8">
+      <footer className="bg-transparent py-8 md:py-12 px-6 md:px-8">
         <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-stylish text-off-white">Get in Touch</h3>
-          <p className="mb-4 md:mb-6 font-terminal text-sm md:text-base text-off-white/80">
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-stylish text-brand-black">Get in Touch</h3>
+          <p className="mb-4 md:mb-6 font-terminal text-sm md:text-base text-brand-black/80">
             Interested in collaborating? Let's connect.
           </p>
           <a

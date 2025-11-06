@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-center justify-between gap-4 md:gap-8">
+    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-center justify-between gap-4 md:gap-8 bg-transparent">
       {/* Left Side - Logo and Name */}
       <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
         {/* Logo PNG */}
@@ -22,11 +22,14 @@ export default function Header() {
 
         {/* Stylized Name */}
         <div className="flex flex-col">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap text-brand-white">
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap text-sun-red">
             sihliconvalley
           </h1>
+          <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-stylish">
+            Güney Usta
+          </p>
           <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
-            Designer & Writer I AI Engineer / AI Integrator
+            Design x AI Integration
           </p>
         </div>
       </div>
