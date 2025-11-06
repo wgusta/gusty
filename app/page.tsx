@@ -555,6 +555,21 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(null);
+  const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
+
+  useEffect(() => {
+    // Check localStorage for danger zone confirmation
+    const savedConfirmation = localStorage.getItem('dangerZoneConfirmed');
+    if (savedConfirmation === 'true') {
+      setDangerZoneConfirmed(true);
+    } else if (savedConfirmation === 'false') {
+      setDangerZoneConfirmed(false);
+      setShowDangerZoneMessage(true);
+    } else {
+      setDangerZoneConfirmed(null); // Show modal
+    }
+  }, []);
 
   useEffect(() => {
     // Only enable custom cursor on non-touch devices
@@ -577,6 +592,17 @@ export default function Home() {
       window.removeEventListener('mousemove', updateCursor);
     };
   }, []);
+
+  const handleDangerZoneConfirm = () => {
+    setDangerZoneConfirmed(true);
+    localStorage.setItem('dangerZoneConfirmed', 'true');
+  };
+
+  const handleDangerZoneDecline = () => {
+    setDangerZoneConfirmed(false);
+    setShowDangerZoneMessage(true);
+    localStorage.setItem('dangerZoneConfirmed', 'false');
+  };
 
   // Filter and sort projects (exclude danger zone)
   const nonDangerProjects = projects.filter(p => p.column !== 'danger');
@@ -688,8 +714,49 @@ export default function Home() {
         </div>
       </div>
 
+      {/* Danger Zone Confirmation Modal */}
+      {dangerZoneConfirmed === null && sortedDangerProjects.length > 0 && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+          <div className="relative w-full max-w-lg mx-4 bg-off-white rounded-lg shadow-2xl p-6 md:p-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
+              DANGER ZONE WARNING
+            </h3>
+            <p className="text-base md:text-lg text-brand-black font-terminal mb-6 md:mb-8 leading-relaxed">
+              I confirm that I enter the DANGER ZONE, a place where I find no practical value and will maybe even see some weird stuff.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <button
+                onClick={handleDangerZoneConfirm}
+                className="flex-1 px-6 py-3 bg-sun-red text-brand-white font-erratic text-lg rounded-lg hover:bg-sun-red/90 active:bg-sun-red/80 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation"
+                data-interactive
+              >
+                OK
+              </button>
+              <button
+                onClick={handleDangerZoneDecline}
+                className="flex-1 px-6 py-3 bg-brand-black/10 text-brand-black font-terminal text-lg rounded-lg hover:bg-brand-black/20 active:bg-brand-black/30 focus:outline-none focus:ring-2 focus:ring-brand-black focus:ring-offset-2 transition-colors touch-manipulation"
+                data-interactive
+              >
+                Um no, what is this?
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Danger Zone Message (if declined) */}
+      {showDangerZoneMessage && (
+        <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 text-center">
+            <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-white">
+              If you're asking questions, you're not ready yet. Come back later.
+            </p>
+          </div>
+        </div>
+      )}
+
       {/* Danger Zone Section */}
-      {sortedDangerProjects.length > 0 && (
+      {dangerZoneConfirmed === true && sortedDangerProjects.length > 0 && (
         <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
             {/* Danger Zone Title */}
@@ -719,6 +786,6 @@ export default function Home() {
         isOpen={selectedProject !== null}
         onClose={() => setSelectedProject(null)}
       />
-    </main>
+      </main>
   );
 }
