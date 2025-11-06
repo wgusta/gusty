@@ -1,8 +1,19 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
+  const [showCorrection, setShowCorrection] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowCorrection(true);
+    }, 15000); // 15 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <header className="absolute top-0 left-0 right-0 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full">
       {/* Skip to main content link for accessibility */}
@@ -25,7 +36,18 @@ export default function Header() {
           Words x Design x AI Integration
         </p>
         <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
-          Building things that last. Close to the Sihl, occasionally iconic, always trustworthy.
+          Building things that last. Close to the Sihl, occasionally iconic,{' '}
+          <span className="relative inline-block">
+            {!showCorrection ? (
+              <span>allveys</span>
+            ) : (
+              <>
+                <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">allveys</span>
+                <span className="text-sun-red ml-1 animate-fadeIn">always</span>
+              </>
+            )}
+          </span>{' '}
+          trustworthy.
         </p>
         <blockquote className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6">
           I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made.
