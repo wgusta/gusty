@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
+import MarkdownContent from './MarkdownContent';
 
 interface Project {
   id: string;
@@ -10,8 +11,8 @@ interface Project {
   imageUrl?: string;
   tags: string[];
   column: 'design' | 'ai' | 'bridged' | 'danger';
-  designContent?: React.ReactNode;
-  aiContent?: React.ReactNode;
+  designContent?: React.ReactNode | string;
+  aiContent?: React.ReactNode | string;
 }
 
 interface ProjectModalProps {
@@ -180,21 +181,33 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
-          <div className={`${activeTab === 'design' ? 'font-stylish' : 'font-terminal'}`}>
-            {activeTab === 'design' && project.designContent && (
-              <div className="prose prose-lg max-w-none text-brand-black">
+          {activeTab === 'design' && project.designContent && (
+            typeof project.designContent === 'string' ? (
+              <MarkdownContent 
+                content={project.designContent} 
+                fontFamily={project.column === 'danger' ? 'erratic' : 'stylish'}
+              />
+            ) : (
+              <div className={`prose prose-lg max-w-none text-brand-black font-stylish`}>
                 {project.designContent}
               </div>
-            )}
-            {activeTab === 'ai' && project.aiContent && (
-              <div className="prose prose-lg max-w-none text-brand-black">
+            )
+          )}
+          {activeTab === 'ai' && project.aiContent && (
+            typeof project.aiContent === 'string' ? (
+              <MarkdownContent 
+                content={project.aiContent} 
+                fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
+              />
+            ) : (
+              <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
                 {project.aiContent}
               </div>
-            )}
-            {!hasDesignContent && !hasAiContent && (
-              <p className="text-brand-black/60">No content available for this project.</p>
-            )}
-          </div>
+            )
+          )}
+          {!hasDesignContent && !hasAiContent && (
+            <p className="text-brand-black/60">No content available for this project.</p>
+          )}
         </div>
       </div>
     </div>
