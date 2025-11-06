@@ -44,11 +44,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         </div>
       )}
       
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 md:mb-4 font-terminal text-brand-white bg-sun-red px-4 py-3 md:px-6 md:py-4 rounded-lg">
+      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal text-brand-black">
         {project.title}
       </h3>
       
-      <p className="text-sm md:text-base mb-3 md:mb-4 font-terminal text-brand-black/80">
+      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-black/80">
         {project.description}
       </p>
       

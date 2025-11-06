@@ -5,11 +5,11 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm rounded-lg shadow-lg px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 max-w-7xl mx-auto">
+    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-sun-red rounded-lg shadow-lg px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 max-w-7xl mx-auto">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-sun-red focus:text-brand-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-brand-white focus:text-sun-red focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-white"
       >
         Skip to main content
       </a>
@@ -30,16 +30,16 @@ export default function Header() {
 
         {/* Stylized Name */}
         <div className="flex flex-col flex-1">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap text-sun-red">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight whitespace-nowrap text-brand-white">
             sihliconvalley
           </h1>
-          <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-stylish">
+          <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-white font-stylish">
             Güney Usta
           </p>
-          <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
+          <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-white font-terminal">
             Design x AI Integration
           </p>
-          <p className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed">
+          <p className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-white/80 font-terminal leading-relaxed">
             On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
           </p>
         </div>
@@ -50,7 +50,7 @@ export default function Header() {
             href="https://x.com/GueneyUsta"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-black hover:text-sun-red focus:text-sun-red focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 rounded transition-colors touch-manipulation"
+            className="text-brand-white hover:text-brand-white/80 focus:text-brand-white/80 focus:outline-none focus:ring-2 focus:ring-brand-white focus:ring-offset-2 rounded transition-colors touch-manipulation"
             aria-label="X (Twitter) - Opens in new tab"
             data-interactive
           >
@@ -62,7 +62,7 @@ export default function Header() {
             href="https://github.com/wgusta"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-brand-black hover:text-teal focus:text-teal focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 rounded transition-colors touch-manipulation"
+            className="text-brand-white hover:text-brand-white/80 focus:text-brand-white/80 focus:outline-none focus:ring-2 focus:ring-brand-white focus:ring-offset-2 rounded transition-colors touch-manipulation"
             aria-label="GitHub - Opens in new tab"
             data-interactive
           >
@@ -72,7 +72,7 @@ export default function Header() {
           </Link>
           <Link
             href="mailto:hello@sihliconvalley.ch"
-            className="text-brand-black hover:text-sun-red focus:text-sun-red focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 rounded transition-colors touch-manipulation"
+            className="text-brand-white hover:text-brand-white/80 focus:text-brand-white/80 focus:outline-none focus:ring-2 focus:ring-brand-white focus:ring-offset-2 rounded transition-colors touch-manipulation"
             aria-label="Send message - Opens email"
             data-interactive
           >
