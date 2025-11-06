@@ -18,6 +18,40 @@
       cursor: none;
     }
   }
+
+  /* Standardize typography - line heights and spacing */
+  h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  /* Screen reader only class */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+
+  .sr-only:focus {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
 }
 
 @layer utilities {
@@ -47,5 +81,23 @@
   .touch-manipulation {
     touch-action: manipulation;
     -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Accessible focus styles - visible focus indicators */
+  *:focus-visible {
+    outline: 2px solid #E62F2D;
+    outline-offset: 2px;
+  }
+
+  /* Ensure minimum touch target size (44x44px) */
+  button, a, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Small buttons exception */
+  button.text-xs, a.text-xs {
+    min-height: 32px;
+    min-width: 32px;
   }
 }

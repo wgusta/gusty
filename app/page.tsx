@@ -102,6 +102,7 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   useEffect(() => {
     // Only enable custom cursor on non-touch devices
@@ -125,12 +126,25 @@ export default function Home() {
     };
   }, []);
 
-  const designProjects = projects.filter((p) => p.column === 'design');
-  const aiProjects = projects.filter((p) => p.column === 'ai');
-  const bridgedProjects = projects.filter((p) => p.column === 'bridged');
+  // Get all unique tags
+  const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
+
+  // Filter projects by selected tag
+  const filterProjects = (projectList: Project[]) => {
+    if (!selectedTag) return projectList;
+    return projectList.filter(p => p.tags.includes(selectedTag));
+  };
+
+  const designProjects = filterProjects(projects.filter((p) => p.column === 'design'));
+  const aiProjects = filterProjects(projects.filter((p) => p.column === 'ai'));
+  const bridgedProjects = filterProjects(projects.filter((p) => p.column === 'bridged'));
+
+  const handleTagClick = (tag: string) => {
+    setSelectedTag(selectedTag === tag ? null : tag);
+  };
 
   return (
-    <main className="min-h-screen relative">
+    <main id="main-content" className="min-h-screen relative" tabIndex={-1}>
       {/* Custom Cursor - Hidden on touch devices */}
       <div
         className={`custom-cursor hidden md:block ${isHovering ? 'hover' : ''}`}
@@ -143,24 +157,59 @@ export default function Home() {
       {/* Header */}
       <Header />
 
+      {/* Tag Filter */}
+      {allTags.length > 0 && (
+        <div className="absolute top-24 md:top-32 left-1/2 transform -translate-x-1/2 z-40 px-4 md:px-6">
+          <div className="flex flex-wrap gap-2 justify-center max-w-4xl bg-off-white/95 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg">
+            <span className="text-xs md:text-sm font-terminal text-brand-black/60 mr-2 self-center">Filter:</span>
+            {allTags.map((tag) => (
+              <button
+                key={tag}
+                onClick={() => handleTagClick(tag)}
+                className={`px-3 py-1.5 text-xs md:text-sm rounded font-terminal transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-1 ${
+                  selectedTag === tag
+                    ? 'bg-sun-red text-brand-white focus:ring-sun-red'
+                    : 'bg-brand-black/10 text-brand-black hover:bg-brand-black/20 focus:ring-sun-red'
+                }`}
+                aria-label={selectedTag === tag ? `Remove filter: ${tag}` : `Filter by: ${tag}`}
+                aria-pressed={selectedTag === tag}
+              >
+                {tag}
+              </button>
+            ))}
+            {selectedTag && (
+              <button
+                onClick={() => setSelectedTag(null)}
+                className="px-3 py-1.5 text-xs md:text-sm rounded font-terminal bg-brand-black/20 text-brand-black hover:bg-brand-black/30 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 transition-all touch-manipulation"
+                aria-label="Clear all filters"
+              >
+                Clear
+              </button>
+            )}
+          </div>
+        </div>
+      )}
+
       {/* Split Screen Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen pt-24 md:pt-32 pb-20 relative">
+      <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen pt-32 md:pt-40 pb-20 relative">
         {/* Left Column - Design */}
         <div className="bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 overflow-y-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-2 md:mb-4">
             Original Design & Concept
           </h2>
-          <p className="text-sm md:text-base text-brand-white/90 font-stylish mb-4 md:mb-6">
-            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
-          </p>
           <div className="flex flex-col gap-6">
-            {designProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
-            ))}
+            {designProjects.length > 0 ? (
+              designProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => setSelectedProject(project)}
+                  onTagClick={handleTagClick}
+                />
+              ))
+            ) : (
+              <p className="text-brand-white/80 font-stylish">No projects found with the selected filter.</p>
+            )}
           </div>
         </div>
 
@@ -169,17 +218,19 @@ export default function Home() {
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-2 md:mb-4">
             AI Integration
           </h2>
-          <p className="text-sm md:text-base text-brand-white/90 font-terminal mb-4 md:mb-6">
-            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
-          </p>
           <div className="flex flex-col gap-6">
-            {aiProjects.map((project) => (
-              <ProjectCard
-                key={project.id}
-                project={project}
-                onClick={() => setSelectedProject(project)}
-              />
-            ))}
+            {aiProjects.length > 0 ? (
+              aiProjects.map((project) => (
+                <ProjectCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => setSelectedProject(project)}
+                  onTagClick={handleTagClick}
+                />
+              ))
+            ) : (
+              <p className="text-brand-white/80 font-terminal">No projects found with the selected filter.</p>
+            )}
           </div>
         </div>
         
@@ -192,6 +243,7 @@ export default function Home() {
                   <ProjectCard
                     project={project}
                     onClick={() => setSelectedProject(project)}
+                    onTagClick={handleTagClick}
                   />
                 </div>
               ))}
@@ -209,7 +261,7 @@ export default function Home() {
           </p>
           <a
             href="mailto:hello@sihliconvalley.ch"
-            className="inline-block px-6 md:px-8 py-3 md:py-4 bg-sun-red text-brand-white rounded-lg font-stylish text-base md:text-lg hover:bg-sun-red/90 active:bg-sun-red/80 transition-colors touch-manipulation"
+            className="inline-block px-6 md:px-8 py-3 md:py-4 bg-sun-red text-brand-white rounded-lg font-stylish text-base md:text-lg hover:bg-sun-red/90 active:bg-sun-red/80 focus:bg-sun-red/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red transition-colors touch-manipulation"
             data-interactive
           >
             Send an Email

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 
 interface Project {
@@ -22,6 +22,8 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [activeTab, setActiveTab] = useState<'design' | 'ai'>('design');
+  const modalRef = useRef<HTMLDivElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (project) {
@@ -37,12 +39,58 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = 'hidden';
+      // Focus trap: focus the close button when modal opens
+      setTimeout(() => {
+        closeButtonRef.current?.focus();
+      }, 100);
     } else {
       document.body.style.overflow = 'unset';
     }
     return () => {
       document.body.style.overflow = 'unset';
     };
+  }, [isOpen]);
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) {
+        onClose();
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, [isOpen, onClose]);
+
+  // Focus trap within modal
+  useEffect(() => {
+    if (!isOpen || !modalRef.current) return;
+
+    const modal = modalRef.current;
+    const focusableElements = modal.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    );
+    const firstElement = focusableElements[0] as HTMLElement;
+    const lastElement = focusableElements[focusableElements.length - 1] as HTMLElement;
+
+    const handleTab = (e: KeyboardEvent) => {
+      if (e.key !== 'Tab') return;
+
+      if (e.shiftKey) {
+        if (document.activeElement === firstElement) {
+          e.preventDefault();
+          lastElement?.focus();
+        }
+      } else {
+        if (document.activeElement === lastElement) {
+          e.preventDefault();
+          firstElement?.focus();
+        }
+      }
+    };
+
+    modal.addEventListener('keydown', handleTab);
+    return () => modal.removeEventListener('keydown', handleTab);
   }, [isOpen]);
 
   if (!isOpen || !project) return null;
@@ -54,15 +102,22 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
       onClick={onClose}
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modal-title"
+      aria-describedby="modal-description"
     >
       <div
-        className="relative w-full h-full md:w-[90%] md:h-[90%] md:max-w-6xl md:max-h-[90vh] md:rounded-lg bg-off-white shadow-2xl overflow-hidden flex flex-col"
+        ref={modalRef}
+        className="relative w-full h-full md:w-[90%] md:h-[90%] md:max-w-6xl md:max-h-[90vh] md:rounded-lg bg-off-white shadow-2xl overflow-hidden flex flex-col focus:outline-none"
         onClick={(e) => e.stopPropagation()}
+        tabIndex={-1}
       >
         {/* Close Button */}
         <button
+          ref={closeButtonRef}
           onClick={onClose}
-          className="absolute top-2 right-2 md:top-4 md:right-4 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-brand-black text-brand-white rounded-full hover:bg-sun-red active:bg-sun-red transition-colors touch-manipulation"
+          className="absolute top-2 right-2 md:top-4 md:right-4 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-brand-black text-brand-white rounded-full hover:bg-sun-red active:bg-sun-red focus:bg-sun-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red transition-colors touch-manipulation"
           aria-label="Close modal"
           data-interactive
         >
@@ -73,10 +128,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Header */}
         <div className="p-4 md:p-6 border-b border-brand-black/10">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-brand-black font-stylish mb-2">
+          <h2 id="modal-title" className="text-xl md:text-2xl lg:text-3xl font-bold text-brand-black font-stylish mb-2">
             {project.title}
           </h2>
-          <p className="text-sm md:text-base text-brand-black/80 font-terminal">{project.description}</p>
+          <p id="modal-description" className="text-sm md:text-base text-brand-black/80 font-terminal">{project.description}</p>
           {project.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
               {project.tags.map((tag, index) => (
@@ -96,22 +151,26 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           <div className="flex border-b border-brand-black/10">
             <button
               onClick={() => setActiveTab('design')}
-              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-stylish text-base md:text-lg transition-colors touch-manipulation ${
+              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-stylish text-base md:text-lg transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-pink ${
                 activeTab === 'design'
                   ? 'bg-deep-pink text-brand-white'
                   : 'bg-off-white text-brand-black hover:bg-deep-pink/10 active:bg-deep-pink/20'
               }`}
+              aria-pressed={activeTab === 'design'}
+              aria-label="Design & Writing tab"
               data-interactive
             >
               Design & Writing
             </button>
             <button
               onClick={() => setActiveTab('ai')}
-              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-terminal text-base md:text-lg transition-colors touch-manipulation ${
+              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-terminal text-base md:text-lg transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal ${
                 activeTab === 'ai'
                   ? 'bg-teal text-brand-white'
                   : 'bg-off-white text-brand-black hover:bg-teal/10 active:bg-teal/20'
               }`}
+              aria-pressed={activeTab === 'ai'}
+              aria-label="AI Engineering tab"
               data-interactive
             >
               AI Engineering

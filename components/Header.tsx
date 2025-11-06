@@ -5,16 +5,24 @@ import Image from 'next/image';
 
 export default function Header() {
   return (
-    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-center justify-between gap-4 md:gap-8 bg-transparent">
+    <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-center justify-between gap-4 md:gap-8 bg-transparent px-4 md:px-6 lg:px-8 py-2 md:py-4">
+      {/* Skip to main content link for accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-sun-red focus:text-brand-white focus:rounded-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red"
+      >
+        Skip to main content
+      </a>
+      
       {/* Left Side - Logo and Name */}
-      <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
+      <div className="flex items-center gap-4 md:gap-5 lg:gap-6 flex-shrink-0">
         {/* Logo PNG */}
-        <div className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 relative">
+        <div className="w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 flex-shrink-0 relative">
           <Image
             src="/logo.png"
             alt="Sihl Icon Valley Logo"
-            width={80}
-            height={80}
+            width={96}
+            height={96}
             className="w-full h-full object-contain"
             priority
           />
@@ -31,6 +39,9 @@ export default function Header() {
           <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
             Design x AI Integration
           </p>
+          <p className="text-xs sm:text-sm md:text-base mt-2 md:mt-3 max-w-md text-brand-black/80 font-terminal leading-relaxed">
+            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
+          </p>
         </div>
       </div>
 
@@ -40,8 +51,8 @@ export default function Header() {
           href="https://x.com/GueneyUsta"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-brand-black hover:text-sun-red transition-colors touch-manipulation"
-          aria-label="X (Twitter)"
+          className="text-brand-black hover:text-sun-red focus:text-sun-red focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 rounded transition-colors touch-manipulation"
+          aria-label="X (Twitter) - Opens in new tab"
           data-interactive
         >
           <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
@@ -52,8 +63,8 @@ export default function Header() {
           href="https://github.com/wgusta"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-brand-black hover:text-teal transition-colors touch-manipulation"
-          aria-label="GitHub"
+          className="text-brand-black hover:text-teal focus:text-teal focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 rounded transition-colors touch-manipulation"
+          aria-label="GitHub - Opens in new tab"
           data-interactive
         >
           <svg className="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
