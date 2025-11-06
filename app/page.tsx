@@ -742,9 +742,10 @@ export default function Home() {
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
         <div 
           ref={dangerZoneRef}
-          className={`w-full bg-sun-red py-12 md:py-16 lg:py-20 relative ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}
+          className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative"
         >
-          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+          {/* Content - blurred when not confirmed */}
+          <div className={`max-w-7xl mx-auto px-6 md:px-8 lg:px-12 ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}>
             {/* Danger Zone Title */}
             <div className="mb-8 md:mb-12">
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
@@ -764,9 +765,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Interaction Box (Confirmation Modal) - Fixed to this section */}
+          {/* Interaction Box (Confirmation Modal) - Fixed to this section, NOT blurred */}
           {dangerZoneConfirmed === null && isDangerZoneInView && (
-            <div className="absolute inset-0 z-50 flex items-center justify-center">
+            <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ filter: 'none' }}>
               <div className="relative w-full max-w-lg mx-4 bg-off-white rounded-lg shadow-2xl p-6 md:p-8">
                 <h3 className="text-2xl md:text-3xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
                   DANGER ZONE WARNING
