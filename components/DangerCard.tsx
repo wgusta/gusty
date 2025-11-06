@@ -43,11 +43,15 @@ export default function DangerCard({ project, onClick }: DangerCardProps) {
         </div>
       )}
       
-      <h3 className="text-lg md:text-xl font-bold mb-2 font-terminal text-brand-white">
+      <h3 className="text-lg md:text-xl font-bold mb-2 font-erratic text-brand-white transform-gpu" style={{
+        transform: 'rotate(-1deg) skewX(-2deg)',
+        textShadow: '2px 2px 0px rgba(255,255,255,0.1), -1px -1px 0px rgba(0,0,0,0.3)',
+        letterSpacing: '0.05em',
+      }}>
         {project.title}
       </h3>
       
-      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-white/80">
+      <p className="text-xs md:text-sm mb-3 md:mb-4 font-erratic text-brand-white/80">
         {project.description}
       </p>
       
@@ -55,8 +59,11 @@ export default function DangerCard({ project, onClick }: DangerCardProps) {
         {project.tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 text-xs rounded bg-brand-white/20 text-brand-white font-terminal"
+            className="px-2 py-1 text-xs rounded bg-brand-white/20 text-brand-white font-erratic"
             role="listitem"
+            style={{
+              transform: `rotate(${index % 2 === 0 ? '-0.5deg' : '0.5deg'})`,
+            }}
           >
             {tag}
           </span>

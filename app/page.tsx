@@ -364,6 +364,191 @@ const projects: Project[] = [
       </RichContent>
     ),
   },
+  // Danger Zone Projects (3)
+  {
+    id: 'danger-1',
+    title: 'Toddler Eye-Tracking LLM',
+    description: 'Created a local large language model that tracks and analyzes eye movement patterns of toddlers',
+    tags: ['AI', 'LLM', 'Eye Tracking', 'Toddlers', 'Privacy'],
+    column: 'danger',
+    finalizedAt: '2024-11-05',
+    designContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">Interface Design</h3>
+        <p className="mb-4">
+          Designed a minimal, non-intrusive interface for parents to monitor their child's visual attention patterns.
+          The UI emphasizes privacy and ethical considerations while presenting complex data in an accessible format.
+        </p>
+        <p>
+          The design process involved extensive consultation with child development experts to ensure
+          the interface respects both the child's privacy and parental concerns.
+        </p>
+      </RichContent>
+    ),
+    aiContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">Local LLM Architecture</h3>
+        <p className="mb-4">
+          Built a custom local language model that processes eye-tracking data to identify attention patterns,
+          learning preferences, and potential developmental indicators. The model runs entirely on-device to ensure privacy.
+        </p>
+        <CodeSnippet
+          code={`class ToddlerEyeTracker {
+  constructor() {
+    this.model = this.loadLocalLLM();
+    this.eyeData = [];
+  }
+  
+  trackEyeMovement(frame) {
+    const gazePoint = this.detectGaze(frame);
+    this.eyeData.push({
+      timestamp: Date.now(),
+      position: gazePoint,
+      duration: this.calculateFocusDuration(gazePoint)
+    });
+    
+    return this.model.analyze(this.eyeData);
+  }
+  
+  generateInsights() {
+    return this.model.predict({
+      attentionPatterns: this.eyeData,
+      ageGroup: 'toddler',
+      privacyMode: true
+    });
+  }
+}`}
+          language="javascript"
+        />
+        <p>
+          The system uses advanced computer vision and local AI processing to maintain complete data privacy
+          while providing valuable insights into early childhood development patterns.
+        </p>
+      </RichContent>
+    ),
+  },
+  {
+    id: 'danger-2',
+    title: 'Back Scratcher with Integrated 3D-Printed Gun',
+    description: 'Designed a multi-functional back scratcher featuring an integrated 3D-printed firearm component',
+    tags: ['Product Design', '3D Printing', 'Weapons', 'Ergonomics'],
+    column: 'danger',
+    finalizedAt: '2024-10-28',
+    designContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">Product Design</h3>
+        <p className="mb-4">
+          Created an ergonomic design that combines everyday utility with controversial functionality.
+          The back scratcher features an ergonomic grip and extendable reach, while the integrated component
+          raises significant ethical and legal questions.
+        </p>
+        <p>
+          The design process involved extensive material testing and ergonomic studies to ensure
+          the primary function (back scratching) remains effective despite the additional complexity.
+        </p>
+      </RichContent>
+    ),
+    aiContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">3D Printing & Manufacturing</h3>
+        <p className="mb-4">
+          Utilized AI-assisted design optimization to create printable components that meet both
+          functional and structural requirements. The manufacturing process involved careful material selection
+          and layer-by-layer quality control.
+        </p>
+        <CodeSnippet
+          code={`function generateBackScratcherDesign() {
+  const ergonomics = analyzeErgonomicRequirements();
+  const structural = calculateStructuralIntegrity();
+  const legal = checkLegalConstraints();
+  
+  return optimizeDesign({
+    primaryFunction: 'backScratching',
+    secondaryFunction: 'firearm',
+    materials: ['PLA', 'metalComponents'],
+    constraints: [ergonomics, structural, legal],
+    printSettings: {
+      layerHeight: 0.2,
+      infill: 80,
+      supports: true
+    }
+  });
+}`}
+          language="javascript"
+        />
+        <p>
+          This project explores the boundaries of product design, 3D printing capabilities, and
+          the intersection of utility with controversial functionality.
+        </p>
+      </RichContent>
+    ),
+  },
+  {
+    id: 'danger-3',
+    title: 'Beer Marathon Challenge',
+    description: 'Completed a full marathon while consuming 15 liters of beer throughout the race',
+    tags: ['Endurance', 'Alcohol', 'Marathon', 'Extreme Sports'],
+    column: 'danger',
+    finalizedAt: '2024-09-30',
+    designContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">Event Design & Planning</h3>
+        <p className="mb-4">
+          Designed a comprehensive event structure that balanced safety concerns with the extreme nature
+          of the challenge. Created checkpoints, hydration strategies, and medical support systems
+          throughout the marathon route.
+        </p>
+        <p>
+          The visual identity emphasized the extreme nature of the challenge while maintaining
+          a sense of responsibility and awareness of the risks involved.
+        </p>
+      </RichContent>
+    ),
+    aiContent: (
+      <RichContent>
+        <h3 className="text-2xl font-bold mb-4">Performance Tracking & Analysis</h3>
+        <p className="mb-4">
+          Developed a real-time monitoring system that tracked alcohol consumption, hydration levels,
+          heart rate, and running pace throughout the marathon. The system provided alerts and
+          recommendations to maintain safety while attempting the challenge.
+        </p>
+        <CodeSnippet
+          code={`class BeerMarathonTracker {
+  constructor() {
+    this.beerConsumed = 0; // liters
+    this.distance = 0; // km
+    this.hydrationLevel = 100;
+    this.heartRate = 0;
+  }
+  
+  updateMetrics(beerAmount, distance, heartRate) {
+    this.beerConsumed += beerAmount;
+    this.distance += distance;
+    this.heartRate = heartRate;
+    this.hydrationLevel = this.calculateHydration();
+    
+    if (this.shouldStop()) {
+      return this.generateStopAlert();
+    }
+    
+    return this.generateRecommendation();
+  }
+  
+  shouldStop() {
+    return this.beerConsumed > 15 || 
+           this.hydrationLevel < 60 || 
+           this.heartRate > 180;
+  }
+}`}
+          language="javascript"
+        />
+        <p>
+          This project pushed the boundaries of endurance sports and highlighted the importance
+          of safety monitoring in extreme challenges, regardless of their controversial nature.
+        </p>
+      </RichContent>
+    ),
+  },
 ];
 
 export default function Home() {
@@ -509,7 +694,7 @@ export default function Home() {
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
             {/* Danger Zone Title */}
             <div className="mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-terminal mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
                 DANGER ZONE
               </h2>
             </div>

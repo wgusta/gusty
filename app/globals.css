@@ -100,4 +100,35 @@
     min-height: 32px;
     min-width: 32px;
   }
+
+  /* Erratic font styling - unfinished, edgy look */
+  .font-erratic {
+    font-family: 'Permanent Marker', cursive;
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: none;
+    -moz-osx-font-smoothing: unset;
+  }
+
+  /* Make erratic titles look unfinished and edgy - only for h2 and h3 with font-erratic */
+  h2.font-erratic,
+  h3.font-erratic {
+    position: relative;
+    text-decoration: line-through;
+    text-decoration-color: rgba(255, 255, 255, 0.15);
+    text-decoration-thickness: 1px;
+    text-decoration-style: wavy;
+  }
+
+  h2.font-erratic::after,
+  h3.font-erratic::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: 50%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+    transform: translateY(-50%) rotate(0.3deg);
+    z-index: -1;
+  }
 }

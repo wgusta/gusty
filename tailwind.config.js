@@ -18,6 +18,7 @@ module.exports = {
       fontFamily: {
         'stylish': ['Playfair Display', 'serif'],
         'terminal': ['IBM Plex Mono', 'monospace'],
+        'erratic': ['Permanent Marker', 'cursive'],
       },
     },
   },

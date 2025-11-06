@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Playfair_Display, IBM_Plex_Mono } from "next/font/google";
+import { Playfair_Display, IBM_Plex_Mono, Permanent_Marker } from "next/font/google";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -12,6 +12,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
+});
+
+const permanentMarker = Permanent_Marker({
+  variable: "--font-permanent-marker",
+  subsets: ["latin"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -28,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${playfairDisplay.variable} ${ibmPlexMono.variable} antialiased`}
+        className={`${playfairDisplay.variable} ${ibmPlexMono.variable} ${permanentMarker.variable} antialiased`}
       >
         {children}
       </body>
