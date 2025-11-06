@@ -158,10 +158,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   : 'bg-off-white text-brand-black hover:bg-deep-pink/10 active:bg-deep-pink/20'
               }`}
               aria-pressed={activeTab === 'design'}
-              aria-label="Design tab"
+              aria-label="human-made tab"
               data-interactive
             >
-              Design
+              human-made
             </button>
             <button
               onClick={() => setActiveTab('ai')}
@@ -171,10 +171,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   : 'bg-off-white text-brand-black hover:bg-teal/10 active:bg-teal/20'
               }`}
               aria-pressed={activeTab === 'ai'}
-              aria-label="AI Integration tab"
+              aria-label="AI-assisted tab"
               data-interactive
             >
-              AI Integration
+              AI-assisted
             </button>
           </div>
         )}
