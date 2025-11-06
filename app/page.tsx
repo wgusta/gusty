@@ -155,40 +155,12 @@ export default function Home() {
       />
 
       {/* Header */}
-      <Header />
-
-      {/* Tag Filter */}
-      {allTags.length > 0 && (
-        <div className="absolute top-24 md:top-32 left-1/2 transform -translate-x-1/2 z-40 px-4 md:px-6">
-          <div className="flex flex-wrap gap-2 justify-center max-w-4xl bg-off-white/95 backdrop-blur-sm rounded-lg p-3 md:p-4 shadow-lg">
-            <span className="text-xs md:text-sm font-terminal text-brand-black/60 mr-2 self-center">Filter:</span>
-            {allTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => handleTagClick(tag)}
-                className={`px-3 py-1.5 text-xs md:text-sm rounded font-terminal transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-1 ${
-                  selectedTag === tag
-                    ? 'bg-sun-red text-brand-white focus:ring-sun-red'
-                    : 'bg-brand-black/10 text-brand-black hover:bg-brand-black/20 focus:ring-sun-red'
-                }`}
-                aria-label={selectedTag === tag ? `Remove filter: ${tag}` : `Filter by: ${tag}`}
-                aria-pressed={selectedTag === tag}
-              >
-                {tag}
-              </button>
-            ))}
-            {selectedTag && (
-              <button
-                onClick={() => setSelectedTag(null)}
-                className="px-3 py-1.5 text-xs md:text-sm rounded font-terminal bg-brand-black/20 text-brand-black hover:bg-brand-black/30 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 transition-all touch-manipulation"
-                aria-label="Clear all filters"
-              >
-                Clear
-              </button>
-            )}
-          </div>
-        </div>
-      )}
+      <Header 
+        allTags={allTags}
+        selectedTag={selectedTag}
+        onTagClick={handleTagClick}
+        onClearFilter={() => setSelectedTag(null)}
+      />
 
       {/* Split Screen Layout */}
       <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen pt-32 md:pt-40 pb-20 relative">
@@ -199,7 +171,7 @@ export default function Home() {
           </h2>
           <div className="flex flex-col gap-6">
             {designProjects.length > 0 ? (
-              designProjects.map((project) => (
+              designProjects.slice(0, 1).map((project) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
@@ -220,7 +192,7 @@ export default function Home() {
           </h2>
           <div className="flex flex-col gap-6">
             {aiProjects.length > 0 ? (
-              aiProjects.map((project) => (
+              aiProjects.slice(0, 1).map((project) => (
                 <ProjectCard
                   key={project.id}
                   project={project}
@@ -238,7 +210,7 @@ export default function Home() {
         {bridgedProjects.length > 0 && (
           <div className="col-span-1 md:col-span-2 absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 px-6 md:px-8 lg:px-12">
             <div className="flex flex-col gap-6">
-              {bridgedProjects.map((project) => (
+              {bridgedProjects.slice(0, 1).map((project) => (
                 <div key={project.id} className="w-full">
                   <ProjectCard
                     project={project}
@@ -251,23 +223,6 @@ export default function Home() {
           </div>
         )}
       </div>
-
-      {/* Footer with Contact */}
-      <footer className="bg-transparent py-8 md:py-12 px-6 md:px-8">
-        <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-stylish text-brand-black">Get in Touch</h3>
-          <p className="mb-4 md:mb-6 font-terminal text-sm md:text-base text-brand-black/80">
-            Interested in collaborating? Let's connect.
-          </p>
-          <a
-            href="mailto:hello@sihliconvalley.ch"
-            className="inline-block px-6 md:px-8 py-3 md:py-4 bg-sun-red text-brand-white rounded-lg font-stylish text-base md:text-lg hover:bg-sun-red/90 active:bg-sun-red/80 focus:bg-sun-red/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red transition-colors touch-manipulation"
-            data-interactive
-          >
-            Send an Email
-          </a>
-        </div>
-      </footer>
 
       {/* Project Modal */}
       <ProjectModal
