@@ -24,11 +24,14 @@ export default function Header() {
             Güney Usta
           </p>
           <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
-            Design x AI Integration
+            Words x Design x AI Integration
           </p>
-          <p className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed">
-            On this page you can browse through my completed and ongoing projects. The idea is to show, what was my own original design and concept and where I used AI.
+          <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
+            Building things that last. Close to the Sihl, occasionally iconic, always trustworthy.
           </p>
+          <blockquote className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6">
+            I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made.
+          </blockquote>
         </div>
         
         {/* Right Side - Social Links */}
