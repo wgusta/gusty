@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import ProjectCard from '@/components/ProjectCard';
+import DangerCard from '@/components/DangerCard';
 import ProjectModal from '@/components/ProjectModal';
 import { RichContent, VideoEmbed, CodeSnippet } from '@/components/ProjectModal';
 
@@ -12,7 +13,7 @@ interface Project {
   description: string;
   imageUrl?: string;
   tags: string[];
-  column: 'design' | 'ai' | 'bridged';
+  column: 'design' | 'ai' | 'bridged' | 'danger';
   finalizedAt: string; // ISO date string
   designContent?: React.ReactNode;
   aiContent?: React.ReactNode;
@@ -392,8 +393,15 @@ export default function Home() {
     };
   }, []);
 
-  // Sort all projects by finalization date (newest first)
-  const sortedProjects = [...projects].sort((a, b) => 
+  // Filter and sort projects (exclude danger zone)
+  const nonDangerProjects = projects.filter(p => p.column !== 'danger');
+  const sortedProjects = [...nonDangerProjects].sort((a, b) => 
+    new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
+  );
+  
+  // Sort danger zone projects by finalization date (newest first)
+  const dangerProjects = projects.filter(p => p.column === 'danger');
+  const sortedDangerProjects = [...dangerProjects].sort((a, b) => 
     new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
   );
 
@@ -494,6 +502,31 @@ export default function Home() {
           )}
         </div>
       </div>
+
+      {/* Danger Zone Section */}
+      {sortedDangerProjects.length > 0 && (
+        <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
+          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+            {/* Danger Zone Title */}
+            <div className="mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-terminal mb-4 md:mb-6">
+                DANGER ZONE
+              </h2>
+            </div>
+            
+            {/* Danger Zone Projects */}
+            <div className="flex flex-col gap-6 md:gap-8">
+              {sortedDangerProjects.map((project) => (
+                <DangerCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => setSelectedProject(project)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Project Modal */}
       <ProjectModal

@@ -11,16 +11,15 @@ interface Project {
   column: 'design' | 'ai' | 'bridged' | 'danger';
 }
 
-interface ProjectCardProps {
+interface DangerCardProps {
   project: Project;
   onClick: () => void;
 }
 
-export default function ProjectCard({ project, onClick }: ProjectCardProps) {
-
+export default function DangerCard({ project, onClick }: DangerCardProps) {
   return (
     <article
-      className="w-full bg-off-white p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2"
+      className="w-full bg-brand-black p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-brand-white focus-within:ring-offset-2"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -44,11 +43,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         </div>
       )}
       
-      <h3 className="text-lg md:text-xl font-bold mb-2 font-terminal text-brand-black">
+      <h3 className="text-lg md:text-xl font-bold mb-2 font-terminal text-brand-white">
         {project.title}
       </h3>
       
-      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-black/80">
+      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-white/80">
         {project.description}
       </p>
       
@@ -56,7 +55,7 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         {project.tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 text-xs rounded bg-brand-black/10 text-brand-black font-terminal"
+            className="px-2 py-1 text-xs rounded bg-brand-white/20 text-brand-white font-terminal"
             role="listitem"
           >
             {tag}

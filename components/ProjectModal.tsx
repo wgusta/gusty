@@ -9,7 +9,7 @@ interface Project {
   description: string;
   imageUrl?: string;
   tags: string[];
-  column: 'design' | 'ai' | 'bridged';
+  column: 'design' | 'ai' | 'bridged' | 'danger';
   designContent?: React.ReactNode;
   aiContent?: React.ReactNode;
 }
