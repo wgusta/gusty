@@ -414,21 +414,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-32 md:pt-40 pb-20">
-        {/* Bridged Projects - Show first if available, full width */}
-        {bridgedProjects.length > 0 && (
-          <div className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 mb-6 md:mb-8">
-            <div className="max-w-7xl mx-auto">
-              <ProjectCard
-                project={bridgedProjects[0]}
-                onClick={() => setSelectedProject(bridgedProjects[0])}
-                onTagClick={handleTagClick}
-              />
-            </div>
-          </div>
-        )}
-        
-        {/* Two Column Layout for Design and AI */}
+      <div className="min-h-screen pt-48 md:pt-56 lg:pt-64 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
           {/* Left Column - Design */}
           <div className="bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 min-h-[60vh]">
@@ -471,6 +457,23 @@ export default function Home() {
               )}
             </div>
           </div>
+
+          {/* Bridged Projects - Full width spanning both columns */}
+          {bridgedProjects.length > 0 && (
+            <div className="col-span-1 md:col-span-2 px-6 md:px-8 lg:px-12 py-6 md:py-8">
+              <div className="relative">
+                {/* Background gradient from pink to teal */}
+                <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
+                <div className="relative z-10 max-w-7xl mx-auto">
+                  <ProjectCard
+                    project={bridgedProjects[0]}
+                    onClick={() => setSelectedProject(bridgedProjects[0])}
+                    onTagClick={handleTagClick}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
