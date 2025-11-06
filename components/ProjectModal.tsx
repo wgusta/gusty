@@ -129,10 +129,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Header */}
         <div className="p-4 md:p-6 border-b border-brand-black/10">
-          <h2 id="modal-title" className="text-xl md:text-2xl lg:text-3xl font-bold text-brand-black font-stylish mb-2">
+          <h2 id="modal-title" className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-brand-white font-stylish mb-3 md:mb-4 bg-sun-red px-4 py-3 md:px-6 md:py-4 rounded-lg">
             {project.title}
           </h2>
-          <p id="modal-description" className="text-sm md:text-base text-brand-black/80 font-terminal">{project.description}</p>
+          <p id="modal-description" className="text-base md:text-lg text-brand-black/80 font-terminal">{project.description}</p>
           {project.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
               {project.tags.map((tag, index) => (
