@@ -4,14 +4,26 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
-  const [showCorrection, setShowCorrection] = useState(false);
+  const [animationStage, setAnimationStage] = useState(0); // 0: valley, 1: valley crossed, 2: allveys shown, 3: allveys crossed + always shown
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowCorrection(true);
-    }, 15000); // 15 seconds
+    const timer1 = setTimeout(() => {
+      setAnimationStage(1); // Cross out valley after 5 seconds
+    }, 5000);
 
-    return () => clearTimeout(timer);
+    const timer2 = setTimeout(() => {
+      setAnimationStage(2); // Show allveys after 10 seconds
+    }, 10000);
+
+    const timer3 = setTimeout(() => {
+      setAnimationStage(3); // Cross out allveys and show always after 15 seconds
+    }, 15000);
+
+    return () => {
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+      clearTimeout(timer3);
+    };
   }, []);
 
   return (
@@ -38,11 +50,20 @@ export default function Header() {
         <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
           Building things that last. Close to the Sihl, occasionally iconic,{' '}
           <span className="relative inline-block">
-            {!showCorrection ? (
-              <span>allveys</span>
-            ) : (
+            {animationStage === 0 && <span>valley</span>}
+            {animationStage === 1 && (
+              <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">valley</span>
+            )}
+            {animationStage === 2 && (
               <>
-                <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">allveys</span>
+                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
+                <span className="ml-1 animate-fadeIn">allveys</span>
+              </>
+            )}
+            {animationStage === 3 && (
+              <>
+                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
+                <span className="line-through decoration-2 decoration-brand-black/60 ml-1 animate-strikethrough">allveys</span>
                 <span className="text-sun-red ml-1 animate-fadeIn">always</span>
               </>
             )}
