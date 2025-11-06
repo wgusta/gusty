@@ -714,9 +714,34 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Danger Zone Confirmation Modal */}
+      {/* Danger Zone Section - Always visible, blurred when not confirmed */}
+      {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
+        <div className={`w-full bg-sun-red py-12 md:py-16 lg:py-20 relative ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}>
+          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+            {/* Danger Zone Title */}
+            <div className="mb-8 md:mb-12">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
+                DANGER ZONE
+              </h2>
+            </div>
+            
+            {/* Danger Zone Projects */}
+            <div className="flex flex-col gap-6 md:gap-8">
+              {sortedDangerProjects.map((project) => (
+                <DangerCard
+                  key={project.id}
+                  project={project}
+                  onClick={() => setSelectedProject(project)}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Interaction Box (Confirmation Modal) */}
       {dangerZoneConfirmed === null && sortedDangerProjects.length > 0 && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <div className="relative w-full max-w-lg mx-4 bg-off-white rounded-lg shadow-2xl p-6 md:p-8">
             <h3 className="text-2xl md:text-3xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
               DANGER ZONE WARNING
@@ -751,31 +776,6 @@ export default function Home() {
             <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-white">
               If you're asking questions, you're not ready yet. Come back later.
             </p>
-          </div>
-        </div>
-      )}
-
-      {/* Danger Zone Section */}
-      {dangerZoneConfirmed === true && sortedDangerProjects.length > 0 && (
-        <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
-          <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-            {/* Danger Zone Title */}
-            <div className="mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
-                DANGER ZONE
-              </h2>
-            </div>
-            
-            {/* Danger Zone Projects */}
-            <div className="flex flex-col gap-6 md:gap-8">
-              {sortedDangerProjects.map((project) => (
-                <DangerCard
-                  key={project.id}
-                  project={project}
-                  onClick={() => setSelectedProject(project)}
-                />
-              ))}
-            </div>
           </div>
         </div>
       )}
