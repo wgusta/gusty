@@ -17,18 +17,9 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onClick }: ProjectCardProps) {
-  const isBridged = project.column === 'bridged';
-
   return (
     <div
-      className={`
-        ${isBridged 
-          ? 'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10 w-[90%] max-w-md hidden md:block' 
-          : 'w-full'
-        }
-        bg-off-white p-4 md:p-6 rounded-lg shadow-lg cursor-pointer
-        transition-transform hover:scale-105 hover:shadow-xl active:scale-95
-      `}
+      className="w-full bg-off-white p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-transform hover:scale-105 hover:shadow-xl active:scale-95"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -52,13 +43,13 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
       )}
       
       <h3 className={`text-lg md:text-xl font-bold mb-2 ${
-        project.column === 'design' ? 'font-stylish' : 'font-terminal'
+        project.column === 'design' ? 'font-stylish' : project.column === 'ai' ? 'font-terminal' : 'font-stylish'
       } text-brand-black`}>
         {project.title}
       </h3>
       
       <p className={`text-xs md:text-sm mb-3 md:mb-4 ${
-        project.column === 'design' ? 'font-stylish' : 'font-terminal'
+        project.column === 'design' ? 'font-stylish' : project.column === 'ai' ? 'font-terminal' : 'font-stylish'
       } text-brand-black/80`}>
         {project.description}
       </p>

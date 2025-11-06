@@ -1,39 +1,29 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Header() {
   return (
     <header className="absolute top-4 md:top-8 left-4 md:left-8 right-4 md:right-8 z-50 flex items-center justify-between gap-4 md:gap-8">
       {/* Left Side - Logo and Name */}
       <div className="flex items-center gap-3 md:gap-4 flex-shrink-0">
-        {/* Logo SVG */}
-        <div className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0">
-          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" className="w-full h-full">
-            <title>Sihl Icon Valley Logo</title>
-            <defs>
-              <clipPath id="circleView">
-                <circle cx="50" cy="50" r="45" />
-              </clipPath>
-            </defs>
-            <g clipPath="url(#circleView)">
-              <rect x="0" y="0" width="100" height="100" fill="#D9366B" />
-              <circle cx="50" cy="48" r="14" fill="#E62F2D" />
-              <path d="M -10 100 L 30 40 L 45 55 L 60 42 L 110 100 Z" fill="#2A7C82" />
-              <path d="M 30 40 L 25 45 L 35 46 Z" fill="#FFFFFF" />
-              <path d="M 60 42 L 55 48 L 65 48 Z" fill="#FFFFFF" />
-              <path d="M 50 62 C 45 75, 55 85, 50 95" fill="none" stroke="#FFFFFF" strokeWidth="20" strokeLinecap="round" />
-            </g>
-            <circle cx="50" cy="50" r="45" fill="none" stroke="#1A1A1A" strokeWidth="3" />
-          </svg>
+        {/* Logo PNG */}
+        <div className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 flex-shrink-0 relative">
+          <Image
+            src="/logo.png"
+            alt="Sihl Icon Valley Logo"
+            width={80}
+            height={80}
+            className="w-full h-full object-contain"
+            priority
+          />
         </div>
 
         {/* Stylized Name */}
         <div className="flex flex-col">
-          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap">
-            <span className="text-brand-white">sihl</span>
-            <span className="text-sun-red">icon</span>
-            <span className="text-teal">valley</span>
+          <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold leading-tight whitespace-nowrap text-brand-white">
+            sihliconvalley
           </h1>
           <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
             Designer & Writer I AI Engineer / AI Integrator

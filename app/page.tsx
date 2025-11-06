@@ -144,7 +144,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr] min-h-screen pt-24 md:pt-32 pb-20">
+      <div className="grid grid-cols-1 md:grid-cols-[1fr_100px_1fr] min-h-screen pt-24 md:pt-32 pb-20 relative">
         {/* Left Column - Design */}
         <div className="bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 overflow-y-auto">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-2 md:mb-4">
@@ -162,35 +162,8 @@ export default function Home() {
         </div>
 
         {/* Center Divider */}
-        <div className="hidden md:block bg-sun-red border-l border-r border-brand-white relative min-w-[4px]">
-          {/* Bridged Projects */}
-          {bridgedProjects.map((project) => (
-            <ProjectCard
-              key={project.id}
-              project={project}
-              onClick={() => setSelectedProject(project)}
-            />
-          ))}
+        <div className="hidden md:block bg-sun-red border-l border-r border-brand-white relative min-w-[100px]">
         </div>
-        
-        {/* Bridged Projects for Mobile - Show in Design column */}
-        {bridgedProjects.length > 0 && (
-          <div className="md:hidden bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-2 md:mb-4">
-              Bridged Projects
-            </h2>
-            <div className="flex flex-col gap-6">
-              {bridgedProjects.map((project) => (
-                <div key={project.id} className="w-full">
-                  <ProjectCard
-                    project={{ ...project, column: 'design' }}
-                    onClick={() => setSelectedProject(project)}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
 
         {/* Right Column - AI */}
         <div className="bg-teal p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 overflow-y-auto">
@@ -207,12 +180,28 @@ export default function Home() {
             ))}
           </div>
         </div>
+        
+        {/* Bridged Projects - Full Width Covering Both Columns */}
+        {bridgedProjects.length > 0 && (
+          <div className="col-span-1 md:col-span-3 absolute inset-x-0 top-1/2 -translate-y-1/2 z-20 px-6 md:px-8 lg:px-12">
+            <div className="flex flex-col gap-6">
+              {bridgedProjects.map((project) => (
+                <div key={project.id} className="w-full">
+                  <ProjectCard
+                    project={project}
+                    onClick={() => setSelectedProject(project)}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Footer with Contact */}
-      <footer className="bg-brand-black text-off-white py-8 md:py-12 px-6 md:px-8">
+      <footer className="bg-brand-black py-8 md:py-12 px-6 md:px-8">
         <div className="max-w-6xl mx-auto text-center">
-          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-stylish">Get in Touch</h3>
+          <h3 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4 font-stylish text-off-white">Get in Touch</h3>
           <p className="mb-4 md:mb-6 font-terminal text-sm md:text-base text-off-white/80">
             Interested in collaborating? Let's connect.
           </p>
