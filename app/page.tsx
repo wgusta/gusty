@@ -416,9 +416,26 @@ export default function Home() {
       {/* Split Screen Layout */}
       <div className="min-h-screen pt-48 md:pt-56 lg:pt-64 pb-20">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
+          {/* Bridged Projects - Full width spanning both columns, shown first in same section */}
+          {bridgedProjects.length > 0 && (
+            <div className="col-span-1 md:col-span-2 px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
+              <div className="relative">
+                {/* Background gradient from pink to teal */}
+                <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
+                <div className="relative z-10 max-w-7xl mx-auto">
+                  <ProjectCard
+                    project={bridgedProjects[0]}
+                    onClick={() => setSelectedProject(bridgedProjects[0])}
+                    onTagClick={handleTagClick}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Left Column - Design */}
           <div className="bg-deep-pink p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 min-h-[60vh]">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-2 md:mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
               Design
             </h2>
             <div className="flex flex-col gap-6">
@@ -439,7 +456,7 @@ export default function Home() {
 
           {/* Right Column - AI */}
           <div className="bg-teal p-6 md:p-8 lg:p-12 flex flex-col gap-6 md:gap-8 min-h-[60vh]">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-2 md:mb-4">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
               AI Integration
             </h2>
             <div className="flex flex-col gap-6">
@@ -457,23 +474,6 @@ export default function Home() {
               )}
             </div>
           </div>
-
-          {/* Bridged Projects - Full width spanning both columns */}
-          {bridgedProjects.length > 0 && (
-            <div className="col-span-1 md:col-span-2 px-6 md:px-8 lg:px-12 py-6 md:py-8">
-              <div className="relative">
-                {/* Background gradient from pink to teal */}
-                <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
-                <div className="relative z-10 max-w-7xl mx-auto">
-                  <ProjectCard
-                    project={bridgedProjects[0]}
-                    onClick={() => setSelectedProject(bridgedProjects[0])}
-                    onTagClick={handleTagClick}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
 
