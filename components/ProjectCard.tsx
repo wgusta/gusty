@@ -14,16 +14,9 @@ interface Project {
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
-  onTagClick?: (tag: string) => void;
 }
 
-export default function ProjectCard({ project, onClick, onTagClick }: ProjectCardProps) {
-  const handleTagClick = (e: React.MouseEvent, tag: string) => {
-    e.stopPropagation();
-    if (onTagClick) {
-      onTagClick(tag);
-    }
-  };
+export default function ProjectCard({ project, onClick }: ProjectCardProps) {
 
   return (
     <article
@@ -65,16 +58,13 @@ export default function ProjectCard({ project, onClick, onTagClick }: ProjectCar
       
       <div className="flex flex-wrap gap-2" role="list" aria-label="Project tags">
         {project.tags.map((tag, index) => (
-          <button
+          <span
             key={index}
-            onClick={(e) => handleTagClick(e, tag)}
-            className="px-2 py-1 text-xs rounded bg-brand-black/10 text-brand-black font-terminal hover:bg-brand-black/20 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 transition-colors touch-manipulation"
-            aria-label={`Filter by tag: ${tag}`}
+            className="px-2 py-1 text-xs rounded bg-brand-black/10 text-brand-black font-terminal"
             role="listitem"
-            tabIndex={0}
           >
             {tag}
-          </button>
+          </span>
         ))}
       </div>
     </article>

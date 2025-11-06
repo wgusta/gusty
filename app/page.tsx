@@ -13,6 +13,7 @@ interface Project {
   imageUrl?: string;
   tags: string[];
   column: 'design' | 'ai' | 'bridged';
+  finalizedAt: string; // ISO date string
   designContent?: React.ReactNode;
   aiContent?: React.ReactNode;
 }
@@ -26,6 +27,7 @@ const projects: Project[] = [
     description: 'Complete brand redesign for an eco-conscious startup, focusing on minimalism and environmental values',
     tags: ['Branding', 'Identity', 'Typography'],
     column: 'design',
+    finalizedAt: '2024-01-15',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Brand Identity Design</h3>
@@ -51,6 +53,7 @@ const projects: Project[] = [
     description: 'Design system for a quarterly magazine focusing on contemporary art and culture',
     tags: ['Editorial', 'Layout', 'Print'],
     column: 'design',
+    finalizedAt: '2024-03-22',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Editorial Design</h3>
@@ -71,6 +74,7 @@ const projects: Project[] = [
     description: 'Sustainable packaging design for a premium skincare line with focus on unboxing experience',
     tags: ['Packaging', 'Product Design', 'Sustainability'],
     column: 'design',
+    finalizedAt: '2024-05-10',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Packaging Design</h3>
@@ -91,6 +95,7 @@ const projects: Project[] = [
     description: 'Custom typeface and web typography guidelines for a digital publication platform',
     tags: ['Typography', 'Web Design', 'System Design'],
     column: 'design',
+    finalizedAt: '2024-07-08',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Typography System</h3>
@@ -111,6 +116,7 @@ const projects: Project[] = [
     description: 'Visual identity and wayfinding system for a contemporary art exhibition',
     tags: ['Identity', 'Exhibition', 'Wayfinding'],
     column: 'design',
+    finalizedAt: '2024-09-14',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Exhibition Design</h3>
@@ -132,6 +138,7 @@ const projects: Project[] = [
     description: 'Custom framework for integrating large language models into existing web applications',
     tags: ['AI', 'LLM', 'Integration', 'Framework'],
     column: 'ai',
+    finalizedAt: '2024-02-28',
     aiContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">AI Integration Framework</h3>
@@ -172,6 +179,7 @@ const projects: Project[] = [
     description: 'AI-powered system for analyzing and categorizing large volumes of user-generated content',
     tags: ['AI', 'NLP', 'Automation', 'Analysis'],
     column: 'ai',
+    finalizedAt: '2024-06-05',
     aiContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Content Analysis System</h3>
@@ -211,6 +219,7 @@ const projects: Project[] = [
     description: 'Interactive design application that uses AI to suggest layout improvements and color palettes',
     tags: ['Design', 'AI', 'Tool', 'Interface'],
     column: 'bridged',
+    finalizedAt: '2024-04-18',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Design Interface</h3>
@@ -260,6 +269,7 @@ const projects: Project[] = [
     description: 'Content management system with AI-powered writing assistance and design automation',
     tags: ['Design', 'AI', 'CMS', 'Automation'],
     column: 'bridged',
+    finalizedAt: '2024-08-20',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Visual Design System</h3>
@@ -309,6 +319,7 @@ const projects: Project[] = [
     description: 'Custom data visualization tool with AI-driven insights and adaptive design',
     tags: ['Design', 'AI', 'Data Visualization', 'Analytics'],
     column: 'bridged',
+    finalizedAt: '2024-10-12',
     designContent: (
       <RichContent>
         <h3 className="text-2xl font-bold mb-4">Visualization Design</h3>
@@ -358,7 +369,6 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   useEffect(() => {
     // Only enable custom cursor on non-touch devices
@@ -382,22 +392,10 @@ export default function Home() {
     };
   }, []);
 
-  // Get all unique tags
-  const allTags = Array.from(new Set(projects.flatMap(p => p.tags))).sort();
-
-  // Filter projects by selected tag
-  const filterProjects = (projectList: Project[]) => {
-    if (!selectedTag) return projectList;
-    return projectList.filter(p => p.tags.includes(selectedTag));
-  };
-
-  const designProjects = filterProjects(projects.filter((p) => p.column === 'design'));
-  const aiProjects = filterProjects(projects.filter((p) => p.column === 'ai'));
-  const bridgedProjects = filterProjects(projects.filter((p) => p.column === 'bridged'));
-
-  const handleTagClick = (tag: string) => {
-    setSelectedTag(selectedTag === tag ? null : tag);
-  };
+  // Sort all projects by finalization date (newest first)
+  const sortedProjects = [...projects].sort((a, b) => 
+    new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
+  );
 
   return (
     <main id="main-content" className="min-h-screen relative" tabIndex={-1}>
@@ -414,103 +412,89 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-48 md:pt-56 lg:pt-64 pb-20">
-        <div className="flex flex-col gap-0">
-          {/* Unified project list - one card per row */}
-          {(() => {
-            // Create a unified list: bridged first, then interleave design and AI
-            const allProjects: Array<{ project: Project; type: 'bridged' | 'design' | 'ai' }> = [];
-            
-            // Add bridged projects
-            bridgedProjects.forEach(p => allProjects.push({ project: p, type: 'bridged' }));
-            
-            // Interleave design and AI projects
-            const maxLength = Math.max(designProjects.length, aiProjects.length);
-            for (let i = 0; i < maxLength; i++) {
-              if (i < designProjects.length) {
-                allProjects.push({ project: designProjects[i], type: 'design' });
-              }
-              if (i < aiProjects.length) {
-                allProjects.push({ project: aiProjects[i], type: 'ai' });
-              }
-            }
-            
-            let designHeadingShown = false;
-            let aiHeadingShown = false;
-            
-            return allProjects.map((item, index) => {
-              if (item.type === 'bridged') {
-                // Bridged project - full width
-                return (
-                  <div key={item.project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
-                      <div className="relative z-10 max-w-7xl mx-auto">
-                        <ProjectCard
-                          project={item.project}
-                          onClick={() => setSelectedProject(item.project)}
-                          onTagClick={handleTagClick}
-                        />
+      <div className="min-h-screen pt-48 md:pt-56 lg:pt-64 pb-20 relative">
+        {/* Full-height background columns */}
+        <div className="absolute inset-0 top-48 md:top-56 lg:top-64 bottom-0 grid grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
+          <div className="bg-deep-pink"></div>
+          <div className="bg-teal"></div>
+        </div>
+        
+        {/* Project content - sorted by finalization date */}
+        <div className="relative z-10 flex flex-col gap-0">
+          {sortedProjects.length > 0 ? (
+            (() => {
+              let designHeadingShown = false;
+              let aiHeadingShown = false;
+              
+              return sortedProjects.map((project) => {
+                if (project.column === 'bridged') {
+                  // Bridged project - full width
+                  return (
+                    <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
+                        <div className="relative z-10 max-w-7xl mx-auto">
+                          <ProjectCard
+                            project={project}
+                            onClick={() => setSelectedProject(project)}
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              } else if (item.type === 'design') {
-                // Design project - left column
-                const showHeading = !designHeadingShown;
-                if (showHeading) designHeadingShown = true;
-                return (
-                  <div 
-                    key={item.project.id} 
-                    className="w-full md:w-1/2 bg-deep-pink p-6 md:p-8 lg:p-12 md:mr-auto"
-                  >
-                    {showHeading && (
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
-                        Design
-                      </h2>
-                    )}
-                    <ProjectCard
-                      project={item.project}
-                      onClick={() => setSelectedProject(item.project)}
-                      onTagClick={handleTagClick}
-                    />
-                  </div>
-                );
-              } else {
-                // AI project - right column
-                const showHeading = !aiHeadingShown;
-                if (showHeading) aiHeadingShown = true;
-                return (
-                  <div 
-                    key={item.project.id} 
-                    className="w-full md:w-1/2 bg-teal p-6 md:p-8 lg:p-12 md:ml-auto"
-                  >
-                    {showHeading && (
-                      <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
-                        AI Integration
-                      </h2>
-                    )}
-                    <ProjectCard
-                      project={item.project}
-                      onClick={() => setSelectedProject(item.project)}
-                      onTagClick={handleTagClick}
-                    />
-                  </div>
-                );
-              }
-            });
-          })()}
-          
-          {/* Show empty state messages if no projects */}
-          {designProjects.length === 0 && aiProjects.length === 0 && bridgedProjects.length === 0 && (
+                  );
+                } else if (project.column === 'design') {
+                  // Design project - left column
+                  const showHeading = !designHeadingShown;
+                  if (showHeading) designHeadingShown = true;
+                  return (
+                    <div 
+                      key={project.id} 
+                      className="w-full md:w-1/2 p-6 md:p-8 lg:p-12 md:mr-auto"
+                    >
+                      {showHeading && (
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
+                          Design
+                        </h2>
+                      )}
+                      <ProjectCard
+                        project={project}
+                        onClick={() => setSelectedProject(project)}
+                      />
+                    </div>
+                  );
+                } else {
+                  // AI project - right column
+                  const showHeading = !aiHeadingShown;
+                  if (showHeading) aiHeadingShown = true;
+                  return (
+                    <div 
+                      key={project.id} 
+                      className="w-full md:w-1/2 p-6 md:p-8 lg:p-12 md:ml-auto"
+                    >
+                      {showHeading && (
+                        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
+                          AI Integration
+                        </h2>
+                      )}
+                      <ProjectCard
+                        project={project}
+                        onClick={() => setSelectedProject(project)}
+                      />
+                    </div>
+                  );
+                }
+              });
+            })()
+          ) : (
+            // Show empty state messages if no projects
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
-              <div className="bg-deep-pink p-6 md:p-8 lg:p-12">
+              <div className="p-6 md:p-8 lg:p-12">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
                   Design
                 </h2>
                 <p className="text-brand-white/80 font-stylish">No projects found with the selected filter.</p>
               </div>
-              <div className="bg-teal p-6 md:p-8 lg:p-12">
+              <div className="p-6 md:p-8 lg:p-12">
                 <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 pt-2 md:pt-4">
                   AI Integration
                 </h2>
