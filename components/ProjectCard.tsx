@@ -44,15 +44,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         </div>
       )}
       
-      <h3 className={`text-lg md:text-xl font-bold mb-2 ${
-        project.column === 'design' ? 'font-stylish' : project.column === 'ai' ? 'font-terminal' : 'font-stylish'
-      } text-brand-black`}>
+      <h3 className="text-lg md:text-xl font-bold mb-2 font-terminal text-brand-black">
         {project.title}
       </h3>
       
-      <p className={`text-xs md:text-sm mb-3 md:mb-4 ${
-        project.column === 'design' ? 'font-stylish' : project.column === 'ai' ? 'font-terminal' : 'font-stylish'
-      } text-brand-black/80`}>
+      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-black/80">
         {project.description}
       </p>
       

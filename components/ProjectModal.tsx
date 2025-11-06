@@ -151,16 +151,16 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           <div className="flex border-b border-brand-black/10">
             <button
               onClick={() => setActiveTab('design')}
-              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-stylish text-base md:text-lg transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-pink ${
+              className={`flex-1 px-4 md:px-6 py-3 md:py-4 text-center font-terminal text-base md:text-lg transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-deep-pink ${
                 activeTab === 'design'
                   ? 'bg-deep-pink text-brand-white'
                   : 'bg-off-white text-brand-black hover:bg-deep-pink/10 active:bg-deep-pink/20'
               }`}
               aria-pressed={activeTab === 'design'}
-              aria-label="Design & Writing tab"
+              aria-label="Design tab"
               data-interactive
             >
-              Design & Writing
+              Design
             </button>
             <button
               onClick={() => setActiveTab('ai')}
@@ -170,10 +170,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   : 'bg-off-white text-brand-black hover:bg-teal/10 active:bg-teal/20'
               }`}
               aria-pressed={activeTab === 'ai'}
-              aria-label="AI Engineering tab"
+              aria-label="AI Integration tab"
               data-interactive
             >
-              AI Engineering
+              AI Integration
             </button>
           </div>
         )}

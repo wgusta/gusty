@@ -424,7 +424,7 @@ export default function Home() {
           {/* Section Titles at the top */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8">
             <div className="w-full md:w-1/2 px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 md:mr-auto">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-stylish mb-4 md:mb-6 lg:mb-8 px-2 md:px-4">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4">
                 Design
               </h2>
             </div>
