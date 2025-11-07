@@ -700,9 +700,9 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-64 md:pt-72 lg:pt-80 pb-20 relative">
+      <div className="min-h-screen pt-80 md:pt-96 lg:pt-[28rem] xl:pt-[32rem] pb-20 relative">
         {/* Full-height background columns */}
-        <div className="absolute inset-0 top-64 md:top-72 lg:top-80 bottom-0 grid grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
+        <div className="absolute inset-0 top-80 md:top-96 lg:top-[28rem] xl:top-[32rem] bottom-0 grid grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
           <div className="bg-deep-pink"></div>
           <div className="bg-teal"></div>
         </div>
@@ -710,14 +710,14 @@ export default function Home() {
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
           {/* Section Titles at the top */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8">
-            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full">
+            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 relative z-20 block">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 human-made
               </h2>
             </div>
-            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4">
+            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 relative z-20 block">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 AI-assisted
               </h2>
             </div>

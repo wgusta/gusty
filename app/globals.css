@@ -63,7 +63,7 @@
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: #1A1A1A;
+      background-color: #E62F2D;
       pointer-events: none;
       z-index: 9999;
       transform: translate(-50%, -50%);
@@ -73,8 +73,8 @@
     .custom-cursor.hover {
       width: 40px;
       height: 40px;
-      background-color: rgba(26, 26, 26, 0.1);
-      border: 2px solid #1A1A1A;
+      background-color: rgba(230, 47, 45, 0.1);
+      border: 2px solid #E62F2D;
     }
   }
   
