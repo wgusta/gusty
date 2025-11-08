@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Mobile Navigation - Only visible on mobile */}
-      <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
+      <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm mt-64 sm:mt-72">
         <div className="px-4 py-3">
           <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
           <div className="flex gap-2">
@@ -761,7 +761,7 @@ export default function Home() {
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
           {/* Section Titles at the top */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full">
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full">
             <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 relative z-20 block">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 human-made
