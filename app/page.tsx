@@ -707,9 +707,6 @@ export default function Home() {
 
       {/* Split Screen Layout */}
       <div className="min-h-screen pt-80 md:pt-32 lg:pt-40 xl:pt-48 pb-20 relative">
-        {/* Spacer for mobile - ensures 30px gap between header and explore projects */}
-        <div className="block md:hidden h-[30px]"></div>
-        
         {/* Mobile Navigation - Only visible on mobile */}
         <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm mb-[30px] md:my-0">
           <div className="px-4 py-3">
