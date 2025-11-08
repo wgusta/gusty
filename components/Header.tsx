@@ -117,7 +117,7 @@ export default function Header() {
       {/* Mobile Menu Button */}
       <button
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 right-6 md:hidden z-50 w-10 h-10 flex items-center justify-center bg-off-white rounded-lg border border-brand-black/20 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation"
+        className="absolute top-4 right-6 md:hidden z-[70] w-10 h-10 flex items-center justify-center bg-off-white rounded-lg border border-brand-black/20 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation"
         aria-label="Toggle menu"
         aria-expanded={isMenuOpen}
         data-interactive
@@ -133,7 +133,7 @@ export default function Header() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden bg-off-white border-t border-brand-black/10 shadow-lg z-40">
+        <div className="absolute top-full left-0 right-0 md:hidden bg-off-white border-t border-brand-black/10 shadow-lg z-[70]">
           <div className="flex flex-col p-4 gap-4">
             <Link
               href="https://x.com/GueneyUsta"
