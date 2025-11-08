@@ -114,75 +114,111 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* Mobile Menu Button */}
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          setIsMenuOpen(!isMenuOpen);
-        }}
-        className="absolute top-4 right-6 md:hidden z-[70] w-10 h-10 flex items-center justify-center bg-off-white rounded-lg border border-brand-black/20 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation pointer-events-auto"
-        aria-label="Toggle menu"
-        aria-expanded={isMenuOpen}
-        data-interactive
-        type="button"
-      >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          {isMenuOpen ? (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          ) : (
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+      {/* Mobile Menu - Red Circle */}
+      <div className="md:hidden fixed top-0 right-0 z-[70]" style={{ overflow: 'hidden', width: '64px', height: '64px' }}>
+        {/* Menu Button - Red Circle (only 1/4 visible) */}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            setIsMenuOpen(!isMenuOpen);
+          }}
+          className={`relative w-16 h-16 rounded-full bg-sun-red flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 focus:ring-offset-off-white touch-manipulation ${!isMenuOpen ? 'animate-heart-pulse' : ''}`}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          data-interactive
+          type="button"
+          style={{
+            position: 'absolute',
+            top: '-48px',
+            right: '-48px',
+            ...(isMenuOpen && { transform: 'scale(1.1)' }),
+          }}
+        >
+          {/* X Icon - shown when menu is open, positioned at the cropped edge */}
+          {isMenuOpen && (
+            <svg 
+              className="w-8 h-8 text-brand-white absolute z-10 transition-opacity duration-200"
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+              style={{ 
+                opacity: 1,
+                left: '20%',
+                top: '20%',
+              }}
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
+            </svg>
           )}
-        </svg>
-      </button>
+        </button>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="absolute top-full left-0 right-0 md:hidden bg-off-white border-t border-brand-black/10 shadow-lg z-[70]">
-          <div className="flex flex-col p-4 gap-4">
+        {/* Menu Icons - Animate into circle */}
+        {isMenuOpen && (
+          <div className="fixed top-0 right-0 z-[69]" style={{ pointerEvents: 'none' }}>
+            {/* X (Twitter) Icon */}
             <Link
               href="https://x.com/GueneyUsta"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-brand-black hover:text-sun-red hover:bg-brand-black/5 focus:text-sun-red focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 rounded-lg transition-colors touch-manipulation"
+              className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+              style={{
+                top: '80px',
+                right: '6px',
+                animation: 'jumpIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.1s both',
+                pointerEvents: 'auto',
+              }}
               aria-label="X (Twitter) - Opens in new tab"
               data-interactive
             >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
-              <span className="font-terminal">X (Twitter)</span>
             </Link>
+
+            {/* GitHub Icon */}
             <Link
               href="https://github.com/wgusta"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-brand-black hover:text-teal hover:bg-brand-black/5 focus:text-teal focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 rounded-lg transition-colors touch-manipulation"
+              className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+              style={{
+                top: '140px',
+                right: '6px',
+                animation: 'jumpIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.2s both',
+                pointerEvents: 'auto',
+              }}
               aria-label="GitHub - Opens in new tab"
               data-interactive
             >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 24 24">
                 <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clipRule="evenodd" />
               </svg>
-              <span className="font-terminal">GitHub</span>
             </Link>
+
+            {/* Email Icon */}
             <Link
               href="mailto:hello@sihliconvalley.ch"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center gap-3 px-4 py-3 text-brand-black hover:text-sun-red hover:bg-brand-black/5 focus:text-sun-red focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 rounded-lg transition-colors touch-manipulation"
+              className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+              style={{
+                top: '200px',
+                right: '6px',
+                animation: 'jumpIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s both',
+                pointerEvents: 'auto',
+              }}
               aria-label="Send message - Opens email"
               data-interactive
             >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <svg className="w-6 h-6 text-brand-black" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
-              <span className="font-terminal">Email</span>
             </Link>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </header>
   );
 }
