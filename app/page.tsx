@@ -710,8 +710,8 @@ export default function Home() {
         {/* Mobile Navigation - Only visible on mobile */}
         <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm my-6 md:my-0">
           <div className="px-4 py-3">
-            <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
-            <div className="flex flex-col gap-2">
+            <h3 className="text-sm md:text-base font-terminal text-brand-black mb-4 md:mb-3 uppercase tracking-wide">Explore projects</h3>
+            <div className="flex flex-col gap-3">
               <button
                 onClick={() => setActiveFilter(activeFilter === 'design' ? null : 'design')}
                 className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
@@ -844,13 +844,13 @@ export default function Home() {
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
         <div 
           ref={dangerZoneRef}
-          className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative"
+          className="w-full bg-off-white py-12 md:py-16 lg:py-20 relative"
         >
           {/* Content - blurred when not confirmed */}
           <div className={`max-w-7xl mx-auto px-6 md:px-8 lg:px-12 ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}>
             {/* Danger Zone Title */}
             <div className="mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
                 DANGER ZONE
               </h2>
             </div>
@@ -901,9 +901,9 @@ export default function Home() {
 
       {/* Danger Zone Message (if declined) */}
       {showDangerZoneMessage && (
-        <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
+        <div className="w-full bg-off-white py-12 md:py-16 lg:py-20 relative">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 text-center">
-            <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-white">
+            <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-black">
               If you're asking questions, you're not ready yet. Come back later.
             </p>
           </div>

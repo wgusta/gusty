@@ -18,19 +18,21 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onClick, activeFilter }: ProjectCardProps) {
-  // Determine background color for mobile based on active filter
+  // Determine background color for mobile based on project column type
   const getMobileBgColor = () => {
-    if (!activeFilter) return 'bg-off-white';
-    if (activeFilter === 'design') return 'md:bg-off-white bg-deep-pink';
-    if (activeFilter === 'ai') return 'md:bg-off-white bg-teal';
-    if (activeFilter === 'bridged') return 'md:bg-off-white bg-gradient-to-r from-deep-pink to-teal';
+    // On desktop, always use off-white
+    // On mobile, use colors based on project column
+    if (project.column === 'design') return 'md:bg-off-white bg-deep-pink';
+    if (project.column === 'ai') return 'md:bg-off-white bg-teal';
+    if (project.column === 'bridged') return 'md:bg-off-white bg-gradient-to-r from-deep-pink to-teal';
     return 'bg-off-white';
   };
 
-  // Determine text color for mobile based on active filter
+  // Determine text color for mobile based on project column type
   const getMobileTextColor = () => {
-    if (!activeFilter) return 'text-brand-black';
-    if (activeFilter === 'design' || activeFilter === 'ai' || activeFilter === 'bridged') {
+    // On desktop, always use black
+    // On mobile, use white for colored backgrounds
+    if (project.column === 'design' || project.column === 'ai' || project.column === 'bridged') {
       return 'md:text-brand-black text-brand-white';
     }
     return 'text-brand-black';
@@ -66,7 +68,11 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         {project.title}
       </h3>
       
-      <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal ${activeFilter ? 'md:text-brand-black/80 text-brand-white/80' : 'text-brand-black/80'}`}>
+      <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal ${
+        (project.column === 'design' || project.column === 'ai' || project.column === 'bridged')
+          ? 'md:text-brand-black/80 text-brand-white/80'
+          : 'text-brand-black/80'
+      }`}>
         {project.description}
       </p>
       
@@ -75,9 +81,9 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
           <span
             key={index}
             className={`px-2 py-1 text-xs rounded font-terminal ${
-              activeFilter 
-                ? 'md:bg-brand-black/10 md:text-brand-black bg-brand-white/20 text-brand-white' 
-                : 'bg-brand-black/10 text-brand-black'
+              (project.column === 'design' || project.column === 'ai' || project.column === 'bridged')
+                ? 'md:bg-brand-black/10 md:text-sun-red bg-brand-white/20 text-brand-white'
+                : 'bg-brand-black/10 text-sun-red'
             }`}
             role="listitem"
           >

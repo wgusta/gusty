@@ -59,7 +59,7 @@ export default function DangerCard({ project, onClick }: DangerCardProps) {
         {project.tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 text-xs rounded bg-brand-white/20 text-brand-white font-erratic"
+            className="px-2 py-1 text-xs rounded bg-brand-white/20 text-sun-red font-erratic"
             role="listitem"
             style={{
               transform: `rotate(${index % 2 === 0 ? '-0.5deg' : '0.5deg'})`,
