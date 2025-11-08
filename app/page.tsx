@@ -775,7 +775,7 @@ export default function Home() {
           </div>
           
           {/* Projects list */}
-          {/* On mobile: only show when filter is selected. On desktop: always show all */}
+          {/* On mobile: only show when a button is clicked. On desktop: always show all */}
           <div className={activeFilter === null ? 'hidden md:block' : 'block'}>
             {(activeFilter === null ? sortedProjects : filteredProjects).length > 0 ? (
               (activeFilter === null ? sortedProjects : filteredProjects).map((project) => {
