@@ -603,7 +603,7 @@ export default function Home() {
   const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(null);
   const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
   const [isDangerZoneInView, setIsDangerZoneInView] = useState(false);
-  const [activeFilter, setActiveFilter] = useState<'all' | 'design' | 'ai' | 'bridged'>('all');
+  const [activeFilter, setActiveFilter] = useState<'design' | 'ai' | 'bridged' | null>(null);
   const dangerZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -681,8 +681,8 @@ export default function Home() {
   );
   
   // Filter projects based on active filter (mobile only)
-  const filteredProjects = activeFilter === 'all' 
-    ? sortedProjects 
+  const filteredProjects = activeFilter === null
+    ? [] 
     : sortedProjects.filter(p => p.column === activeFilter);
   
   // Sort danger zone projects by finalization date (newest first)
@@ -706,16 +706,16 @@ export default function Home() {
       <Header />
 
       {/* Mobile Navigation - Only visible on mobile */}
-      <div className="sticky top-0 md:hidden z-30 bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
+      <div className="md:hidden z-30 bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
         <div className="px-4 py-3">
           <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
           <div className="flex gap-2">
             <button
-              onClick={() => setActiveFilter(activeFilter === 'design' ? 'all' : 'design')}
+              onClick={() => setActiveFilter(activeFilter === 'design' ? null : 'design')}
               className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
                 activeFilter === 'design'
                   ? 'bg-deep-pink text-brand-white shadow-md scale-105'
-                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+                  : 'bg-deep-pink/20 text-deep-pink active:scale-95'
               }`}
               aria-label="Filter human-made projects"
               data-interactive
@@ -723,11 +723,11 @@ export default function Home() {
               human-made
             </button>
             <button
-              onClick={() => setActiveFilter(activeFilter === 'ai' ? 'all' : 'ai')}
+              onClick={() => setActiveFilter(activeFilter === 'ai' ? null : 'ai')}
               className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
                 activeFilter === 'ai'
                   ? 'bg-teal text-brand-white shadow-md scale-105'
-                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+                  : 'bg-teal/20 text-teal active:scale-95'
               }`}
               aria-label="Filter AI-assisted projects"
               data-interactive
@@ -735,11 +735,11 @@ export default function Home() {
               AI-assisted
             </button>
             <button
-              onClick={() => setActiveFilter(activeFilter === 'bridged' ? 'all' : 'bridged')}
+              onClick={() => setActiveFilter(activeFilter === 'bridged' ? null : 'bridged')}
               className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
                 activeFilter === 'bridged'
                   ? 'bg-gradient-to-r from-deep-pink to-teal text-brand-white shadow-md scale-105'
-                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+                  : 'bg-gradient-to-r from-deep-pink/20 to-teal/20 text-brand-black active:scale-95'
               }`}
               aria-label="Filter teamed-up projects"
               data-interactive
@@ -775,8 +775,10 @@ export default function Home() {
           </div>
           
           {/* Projects list */}
-          {(activeFilter === 'all' ? sortedProjects : filteredProjects).length > 0 ? (
-            (activeFilter === 'all' ? sortedProjects : filteredProjects).map((project) => {
+          {/* On mobile: only show when filter is selected. On desktop: always show all */}
+          <div className={activeFilter === null ? 'hidden md:block' : 'block'}>
+            {(activeFilter === null ? sortedProjects : filteredProjects).length > 0 ? (
+              (activeFilter === null ? sortedProjects : filteredProjects).map((project) => {
               if (project.column === 'bridged') {
                 // Bridged project - full width
                 return (
@@ -831,6 +833,7 @@ export default function Home() {
               </div>
             </div>
           )}
+          </div>
         </div>
       </div>
 
