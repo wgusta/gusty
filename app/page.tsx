@@ -604,8 +604,6 @@ export default function Home() {
   const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
   const [isDangerZoneInView, setIsDangerZoneInView] = useState(false);
   const [activeFilter, setActiveFilter] = useState<'design' | 'ai' | 'bridged' | null>(null);
-  const [showMobileNav, setShowMobileNav] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const dangerZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -642,29 +640,6 @@ export default function Home() {
       window.removeEventListener('mousemove', updateCursor);
     };
   }, []);
-
-  // Scroll detection for mobile navigation
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-      
-      // Show nav when at top or scrolling up
-      if (currentScrollY < 100) {
-        setShowMobileNav(true);
-      } else if (currentScrollY < lastScrollY) {
-        // Scrolling up
-        setShowMobileNav(true);
-      } else if (currentScrollY > lastScrollY) {
-        // Scrolling down
-        setShowMobileNav(false);
-      }
-      
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [lastScrollY]);
 
   // Intersection Observer to detect when danger zone is in view
   useEffect(() => {
@@ -732,16 +707,14 @@ export default function Home() {
 
       {/* Split Screen Layout */}
       <div className="min-h-screen pt-80 md:pt-96 lg:pt-[28rem] xl:pt-[32rem] pb-20 relative">
-        {/* Mobile Navigation - Only visible on mobile, sticky when scrolling up */}
-        <div className={`block md:hidden fixed left-0 right-0 z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm transition-transform duration-300 ease-in-out ${
-          showMobileNav ? 'translate-y-0' : '-translate-y-full'
-        }`}>
+        {/* Mobile Navigation - Only visible on mobile */}
+        <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm my-6 md:my-0">
           <div className="px-4 py-3">
             <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
-            <div className="flex gap-2">
+            <div className="flex flex-col gap-2">
               <button
                 onClick={() => setActiveFilter(activeFilter === 'design' ? null : 'design')}
-                className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
                   activeFilter === 'design'
                     ? 'bg-deep-pink text-brand-white shadow-md scale-105'
                     : 'bg-deep-pink/20 text-deep-pink active:scale-95'
@@ -753,7 +726,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveFilter(activeFilter === 'ai' ? null : 'ai')}
-                className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
                   activeFilter === 'ai'
                     ? 'bg-teal text-brand-white shadow-md scale-105'
                     : 'bg-teal/20 text-teal active:scale-95'
@@ -765,7 +738,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveFilter(activeFilter === 'bridged' ? null : 'bridged')}
-                className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
                   activeFilter === 'bridged'
                     ? 'bg-gradient-to-r from-deep-pink to-teal text-brand-white shadow-md scale-105'
                     : 'bg-gradient-to-r from-deep-pink/20 to-teal/20 text-brand-black active:scale-95'
@@ -818,6 +791,7 @@ export default function Home() {
                         <ProjectCard
                           project={project}
                           onClick={() => setSelectedProject(project)}
+                          activeFilter={activeFilter}
                         />
                       </div>
                     </div>

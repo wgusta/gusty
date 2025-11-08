@@ -14,13 +14,31 @@ interface Project {
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
+  activeFilter?: 'design' | 'ai' | 'bridged' | null;
 }
 
-export default function ProjectCard({ project, onClick }: ProjectCardProps) {
+export default function ProjectCard({ project, onClick, activeFilter }: ProjectCardProps) {
+  // Determine background color for mobile based on active filter
+  const getMobileBgColor = () => {
+    if (!activeFilter) return 'bg-off-white';
+    if (activeFilter === 'design') return 'md:bg-off-white bg-deep-pink';
+    if (activeFilter === 'ai') return 'md:bg-off-white bg-teal';
+    if (activeFilter === 'bridged') return 'md:bg-off-white bg-gradient-to-r from-deep-pink to-teal';
+    return 'bg-off-white';
+  };
+
+  // Determine text color for mobile based on active filter
+  const getMobileTextColor = () => {
+    if (!activeFilter) return 'text-brand-black';
+    if (activeFilter === 'design' || activeFilter === 'ai' || activeFilter === 'bridged') {
+      return 'md:text-brand-black text-brand-white';
+    }
+    return 'text-brand-black';
+  };
 
   return (
     <article
-      className="w-full bg-off-white p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2"
+      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2`}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -44,11 +62,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         </div>
       )}
       
-      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal text-brand-black">
+      <h3 className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal ${getMobileTextColor()}`}>
         {project.title}
       </h3>
       
-      <p className="text-xs md:text-sm mb-3 md:mb-4 font-terminal text-brand-black/80">
+      <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal ${activeFilter ? 'md:text-brand-black/80 text-brand-white/80' : 'text-brand-black/80'}`}>
         {project.description}
       </p>
       
@@ -56,7 +74,11 @@ export default function ProjectCard({ project, onClick }: ProjectCardProps) {
         {project.tags.map((tag, index) => (
           <span
             key={index}
-            className="px-2 py-1 text-xs rounded bg-brand-black/10 text-brand-black font-terminal"
+            className={`px-2 py-1 text-xs rounded font-terminal ${
+              activeFilter 
+                ? 'md:bg-brand-black/10 md:text-brand-black bg-brand-white/20 text-brand-white' 
+                : 'bg-brand-black/10 text-brand-black'
+            }`}
             role="listitem"
           >
             {tag}
