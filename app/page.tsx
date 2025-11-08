@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-80 md:pt-96 lg:pt-[28rem] xl:pt-[32rem] pb-20 relative">
+      <div className="min-h-screen pt-80 md:pt-64 lg:pt-72 xl:pt-80 pb-20 relative">
         {/* Mobile Navigation - Only visible on mobile */}
         <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm my-6 md:my-0">
           <div className="px-4 py-3">
@@ -753,12 +753,12 @@ export default function Home() {
         </div>
 
         {/* Full-height background columns - Hidden on mobile, show off-white instead */}
-        <div className="hidden md:grid absolute inset-0 top-80 md:top-96 lg:top-[28rem] xl:top-[32rem] bottom-0 grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
+        <div className="hidden md:grid absolute inset-0 top-64 md:top-64 lg:top-72 xl:top-80 bottom-0 grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
           <div className="bg-deep-pink"></div>
           <div className="bg-teal"></div>
         </div>
         {/* Mobile background - off-white */}
-        <div className="md:hidden absolute inset-0 top-80 bottom-0 bg-off-white pointer-events-none z-0"></div>
+        <div className="md:hidden absolute inset-0 top-64 bottom-0 bg-off-white pointer-events-none z-0"></div>
         
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
@@ -784,11 +784,9 @@ export default function Home() {
               if (project.column === 'bridged') {
                 // Bridged project - full width
                 return (
-                  <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10 relative">
-                    {/* Gradient background - only on mobile */}
-                    <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal pointer-events-none"></div>
-                    {/* Card - same background as other cards on desktop */}
-                    <div className="relative z-10 max-w-7xl mx-auto">
+                  <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
+                    {/* Card - same background as other cards on desktop, gradient only on mobile */}
+                    <div className="max-w-7xl mx-auto">
                       <ProjectCard
                         project={project}
                         onClick={() => setSelectedProject(project)}
