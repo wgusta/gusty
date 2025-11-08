@@ -25,8 +25,8 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
     if (project.column === 'design') return 'bg-deep-pink md:bg-off-white';
     if (project.column === 'ai') return 'bg-teal md:bg-off-white';
     if (project.column === 'bridged') {
-      // On mobile: gradient background, on desktop: off-white (no gradient)
-      return 'bg-off-white';
+      // On mobile: transparent so gradient shows through, on desktop: off-white (no gradient)
+      return 'bg-transparent md:bg-off-white';
     }
     return 'bg-off-white';
   };
@@ -43,7 +43,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
 
   return (
     <article
-      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2 font-terminal relative`}
+      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-transform duration-200 hover:scale-105 active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2 font-terminal relative`}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -58,7 +58,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
     >
       {/* Gradient background - only on mobile for bridged projects */}
       {project.column === 'bridged' && (
-        <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal rounded-lg -z-10"></div>
+        <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal rounded-lg z-0"></div>
       )}
       
       {project.imageUrl && (
