@@ -26,7 +26,8 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
     if (project.column === 'ai') return 'bg-teal md:bg-off-white';
     if (project.column === 'bridged') {
       // On mobile: gradient background, on desktop: off-white (no gradient)
-      return 'bg-gradient-to-r from-deep-pink to-teal md:bg-off-white';
+      // Use gradient on mobile, override with solid color on desktop
+      return 'bg-gradient-to-r from-deep-pink to-teal md:bg-off-white md:bg-gradient-none';
     }
     return 'bg-off-white';
   };
