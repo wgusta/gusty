@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative pb-2 md:pb-6 lg:pb-8">
+    <header className="sticky top-0 left-0 right-0 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative pb-2 md:pb-6 lg:pb-8">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -42,10 +42,10 @@ export default function Header() {
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
           sihl icon valley
         </h1>
-        <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-stylish">
+        <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-terminal font-bold">
           Güney Usta
         </p>
-        <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal">
+        <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
           Words x Design x AI Integration
         </p>
         <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
@@ -108,17 +108,15 @@ export default function Header() {
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
-          {/* X Icon - shown when menu is open, positioned at the corner of the page */}
+          {/* X Icon - shown when menu is open, positioned at the center of the circle */}
           {isMenuOpen && (
             <svg 
-              className="w-8 h-8 text-brand-white absolute z-10 transition-opacity duration-200"
+              className="w-8 h-8 text-brand-white z-10 transition-opacity duration-200"
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
               style={{ 
                 opacity: 1,
-                top: '0',
-                right: '0',
               }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
@@ -272,17 +270,15 @@ export default function Header() {
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
-          {/* X Icon - shown when menu is open, positioned at the corner of the page */}
+          {/* X Icon - shown when menu is open, positioned at the center of the circle */}
           {isMenuOpen && (
             <svg 
-              className="w-8 h-8 text-brand-white absolute z-10 transition-opacity duration-200"
+              className="w-8 h-8 text-brand-white z-10 transition-opacity duration-200"
               fill="none" 
               stroke="currentColor" 
               viewBox="0 0 24 24"
               style={{ 
                 opacity: 1,
-                top: '0',
-                right: '0',
               }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
