@@ -40,7 +40,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
 
   return (
     <article
-      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2`}
+      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2 font-terminal`}
       onClick={onClick}
       role="button"
       tabIndex={0}

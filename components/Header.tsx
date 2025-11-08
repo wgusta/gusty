@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-start gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -116,11 +116,16 @@ export default function Header() {
 
       {/* Mobile Menu Button */}
       <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className="absolute top-4 right-6 md:hidden z-[70] w-10 h-10 flex items-center justify-center bg-off-white rounded-lg border border-brand-black/20 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation"
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          setIsMenuOpen(!isMenuOpen);
+        }}
+        className="absolute top-4 right-6 md:hidden z-[70] w-10 h-10 flex items-center justify-center bg-off-white rounded-lg border border-brand-black/20 hover:bg-brand-black/5 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-colors touch-manipulation pointer-events-auto"
         aria-label="Toggle menu"
         aria-expanded={isMenuOpen}
         data-interactive
+        type="button"
       >
         <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           {isMenuOpen ? (

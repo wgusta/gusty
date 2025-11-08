@@ -786,7 +786,7 @@ export default function Home() {
                 return (
                   <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
                     <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal md:hidden"></div>
                       <div className="relative z-10 max-w-7xl mx-auto">
                         <ProjectCard
                           project={project}
@@ -844,13 +844,13 @@ export default function Home() {
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
         <div 
           ref={dangerZoneRef}
-          className="w-full bg-off-white py-12 md:py-16 lg:py-20 relative"
+          className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative"
         >
           {/* Content - blurred when not confirmed */}
           <div className={`max-w-7xl mx-auto px-6 md:px-8 lg:px-12 ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}>
             {/* Danger Zone Title */}
             <div className="mb-8 md:mb-12">
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-white font-erratic mb-4 md:mb-6">
                 DANGER ZONE
               </h2>
             </div>
@@ -901,9 +901,9 @@ export default function Home() {
 
       {/* Danger Zone Message (if declined) */}
       {showDangerZoneMessage && (
-        <div className="w-full bg-off-white py-12 md:py-16 lg:py-20 relative">
+        <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 text-center">
-            <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-black">
+            <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-white">
               If you're asking questions, you're not ready yet. Come back later.
             </p>
           </div>
