@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-80 md:pt-32 lg:pt-40 xl:pt-48 pb-20 relative">
+      <div className="min-h-screen pt-0 md:pt-32 lg:pt-40 xl:pt-48 pb-20 relative">
         {/* Mobile Navigation - Only visible on mobile */}
         <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm mb-[30px] md:my-0">
           <div className="px-4 py-3">
