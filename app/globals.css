@@ -213,4 +213,26 @@
   .animate-heart-pulse {
     animation: heartPulse 2s ease-in-out infinite;
   }
+
+  /* Orbit rotation animation */
+  @keyframes rotateOrbit {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Fade in and scale animation for icons */
+  @keyframes fadeInScale {
+    0% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
 }
