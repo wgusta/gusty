@@ -603,6 +603,7 @@ export default function Home() {
   const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(null);
   const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
   const [isDangerZoneInView, setIsDangerZoneInView] = useState(false);
+  const [activeFilter, setActiveFilter] = useState<'all' | 'design' | 'ai' | 'bridged'>('all');
   const dangerZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -679,6 +680,11 @@ export default function Home() {
     new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
   );
   
+  // Filter projects based on active filter (mobile only)
+  const filteredProjects = activeFilter === 'all' 
+    ? sortedProjects 
+    : sortedProjects.filter(p => p.column === activeFilter);
+  
   // Sort danger zone projects by finalization date (newest first)
   const dangerProjects = projects.filter(p => p.column === 'danger');
   const sortedDangerProjects = [...dangerProjects].sort((a, b) => 
@@ -699,6 +705,51 @@ export default function Home() {
       {/* Header */}
       <Header />
 
+      {/* Mobile Navigation - Only visible on mobile */}
+      <div className="sticky top-0 md:hidden z-30 bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
+        <div className="px-4 py-3">
+          <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
+          <div className="flex gap-2">
+            <button
+              onClick={() => setActiveFilter(activeFilter === 'design' ? 'all' : 'design')}
+              className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                activeFilter === 'design'
+                  ? 'bg-deep-pink text-brand-white shadow-md scale-105'
+                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+              }`}
+              aria-label="Filter human-made projects"
+              data-interactive
+            >
+              human-made
+            </button>
+            <button
+              onClick={() => setActiveFilter(activeFilter === 'ai' ? 'all' : 'ai')}
+              className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                activeFilter === 'ai'
+                  ? 'bg-teal text-brand-white shadow-md scale-105'
+                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+              }`}
+              aria-label="Filter AI-assisted projects"
+              data-interactive
+            >
+              AI-assisted
+            </button>
+            <button
+              onClick={() => setActiveFilter(activeFilter === 'bridged' ? 'all' : 'bridged')}
+              className={`flex-1 px-3 py-2.5 rounded-lg font-terminal text-xs transition-all duration-300 touch-manipulation ${
+                activeFilter === 'bridged'
+                  ? 'bg-gradient-to-r from-deep-pink to-teal text-brand-white shadow-md scale-105'
+                  : 'bg-brand-black/5 text-brand-black hover:bg-brand-black/10 active:scale-95'
+              }`}
+              aria-label="Filter teamed-up projects"
+              data-interactive
+            >
+              teamed-up
+            </button>
+          </div>
+        </div>
+      </div>
+
       {/* Split Screen Layout */}
       <div className="min-h-screen pt-80 md:pt-96 lg:pt-[28rem] xl:pt-[32rem] pb-20 relative">
         {/* Full-height background columns */}
@@ -716,16 +767,16 @@ export default function Home() {
                 human-made
               </h2>
             </div>
-            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 relative z-20 block">
-              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
+            <div className="px-6 md:px-8 lg:px-12 md:pl-0 pt-6 md:pt-8 lg:pt-10 relative z-20 block md:flex md:justify-end">
+              <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 md:pr-8 lg:pr-12 xl:pr-16 relative z-20 block">
                 AI-assisted
               </h2>
             </div>
           </div>
           
           {/* Projects list */}
-          {sortedProjects.length > 0 ? (
-            sortedProjects.map((project) => {
+          {(activeFilter === 'all' ? sortedProjects : filteredProjects).length > 0 ? (
+            (activeFilter === 'all' ? sortedProjects : filteredProjects).map((project) => {
               if (project.column === 'bridged') {
                 // Bridged project - full width
                 return (
