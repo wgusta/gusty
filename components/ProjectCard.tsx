@@ -22,9 +22,12 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
   const getMobileBgColor = () => {
     // On desktop, always use off-white
     // On mobile, use colors based on project column
-    if (project.column === 'design') return 'md:bg-off-white bg-deep-pink';
-    if (project.column === 'ai') return 'md:bg-off-white bg-teal';
-    if (project.column === 'bridged') return 'md:bg-off-white bg-gradient-to-r from-deep-pink to-teal';
+    if (project.column === 'design') return 'bg-deep-pink md:bg-off-white';
+    if (project.column === 'ai') return 'bg-teal md:bg-off-white';
+    if (project.column === 'bridged') {
+      // On mobile: gradient overlay, on desktop: off-white (no gradient)
+      return 'bg-off-white md:bg-off-white';
+    }
     return 'bg-off-white';
   };
 
@@ -40,7 +43,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
 
   return (
     <article
-      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2 font-terminal`}
+      className={`w-full ${getMobileBgColor()} p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-sun-red focus-within:ring-offset-2 font-terminal relative`}
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -53,6 +56,11 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         }
       }}
     >
+      {/* Gradient background overlay - only on mobile for bridged projects */}
+      {project.column === 'bridged' && (
+        <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal pointer-events-none rounded-lg -z-10"></div>
+      )}
+      
       {project.imageUrl && (
         <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
           <Image
@@ -64,11 +72,11 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         </div>
       )}
       
-      <h3 className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal ${getMobileTextColor()}`}>
+      <h3 className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal ${getMobileTextColor()} relative z-10`}>
         {project.title}
       </h3>
       
-      <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal ${
+      <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal relative z-10 ${
         (project.column === 'design' || project.column === 'ai' || project.column === 'bridged')
           ? 'md:text-brand-black/80 text-brand-white/80'
           : 'text-brand-black/80'
@@ -76,7 +84,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         {project.description}
       </p>
       
-      <div className="flex flex-wrap gap-2" role="list" aria-label="Project tags">
+      <div className="flex flex-wrap gap-2 relative z-10" role="list" aria-label="Project tags">
         {project.tags.map((tag, index) => (
           <span
             key={index}

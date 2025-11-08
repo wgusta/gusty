@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className="min-h-screen pt-80 md:pt-64 lg:pt-72 xl:pt-80 pb-20 relative">
+      <div className="min-h-screen pt-80 md:pt-32 lg:pt-40 xl:pt-48 pb-20 relative">
         {/* Mobile Navigation - Only visible on mobile */}
         <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm my-6 md:my-0">
           <div className="px-4 py-3">
@@ -753,12 +753,12 @@ export default function Home() {
         </div>
 
         {/* Full-height background columns - Hidden on mobile, show off-white instead */}
-        <div className="hidden md:grid absolute inset-0 top-64 md:top-64 lg:top-72 xl:top-80 bottom-0 grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
+        <div className="hidden md:grid absolute inset-0 top-32 md:top-32 lg:top-40 xl:top-48 bottom-0 grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
           <div className="bg-deep-pink"></div>
           <div className="bg-teal"></div>
         </div>
         {/* Mobile background - off-white */}
-        <div className="md:hidden absolute inset-0 top-64 bottom-0 bg-off-white pointer-events-none z-0"></div>
+        <div className="md:hidden absolute inset-0 top-80 bottom-0 bg-off-white pointer-events-none z-0"></div>
         
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
