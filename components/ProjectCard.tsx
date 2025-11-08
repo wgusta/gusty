@@ -26,8 +26,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
     if (project.column === 'ai') return 'bg-teal md:bg-off-white';
     if (project.column === 'bridged') {
       // On mobile: gradient background, on desktop: off-white (no gradient)
-      // Use gradient on mobile, override with solid color on desktop
-      return 'bg-gradient-to-r from-deep-pink to-teal md:bg-off-white md:bg-gradient-none';
+      return 'bg-off-white';
     }
     return 'bg-off-white';
   };
@@ -57,6 +56,11 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         }
       }}
     >
+      {/* Gradient background - only on mobile for bridged projects */}
+      {project.column === 'bridged' && (
+        <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal rounded-lg -z-10"></div>
+      )}
+      
       {project.imageUrl && (
         <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
           <Image

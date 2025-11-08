@@ -56,13 +56,6 @@
 }
 
 @layer utilities {
-  /* Remove gradient on desktop for bridged cards */
-  @media (min-width: 768px) {
-    .md\:bg-gradient-none {
-      background-image: none !important;
-    }
-  }
-  
   /* Custom cursor - only on desktop */
   @media (hover: hover) and (pointer: fine) {
     .custom-cursor {
