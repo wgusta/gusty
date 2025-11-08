@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Mobile Navigation - Only visible on mobile */}
-      <div className="md:hidden z-30 bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
+      <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm">
         <div className="px-4 py-3">
           <h3 className="text-xs font-terminal text-brand-black mb-3 uppercase tracking-wide">Explore projects</h3>
           <div className="flex gap-2">
