@@ -708,7 +708,7 @@ export default function Home() {
       {/* Split Screen Layout */}
       <div className="min-h-screen pt-80 md:pt-32 lg:pt-40 xl:pt-48 pb-20 relative">
         {/* Mobile Navigation - Only visible on mobile */}
-        <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm mt-3 mb-6 md:my-0">
+        <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm mt-[30px] mb-[30px] md:my-0">
           <div className="px-4 py-3">
             <h3 className="text-sm md:text-base font-terminal text-brand-black mb-4 md:mb-3 uppercase tracking-wide">Explore projects</h3>
             <div className="flex flex-col gap-3">
