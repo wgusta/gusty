@@ -81,8 +81,8 @@ export default function Header() {
         className="hidden md:block fixed top-0 right-0 z-[70] transition-all duration-500 ease-out" 
         style={{ 
           overflow: 'visible',
-          width: isMenuOpen ? '200px' : '64px',
-          height: isMenuOpen ? '200px' : '64px',
+          width: isMenuOpen ? '300px' : '96px',
+          height: isMenuOpen ? '300px' : '96px',
           position: 'fixed',
           willChange: 'transform',
         }}
@@ -101,10 +101,10 @@ export default function Header() {
           type="button"
           style={{
             position: 'absolute',
-            top: '-16px',
-            right: '-16px',
-            width: isMenuOpen ? '120px' : '64px',
-            height: isMenuOpen ? '120px' : '64px',
+            top: '-24px',
+            right: '-24px',
+            width: isMenuOpen ? '180px' : '96px',
+            height: isMenuOpen ? '180px' : '96px',
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
@@ -129,10 +129,10 @@ export default function Header() {
           <div 
             className="fixed z-[69]"
             style={{ 
-              width: '200px',
-              height: '200px',
-              top: '-68px',
-              right: '-68px',
+              width: '300px',
+              height: '300px',
+              top: '-102px',
+              right: '-102px',
               pointerEvents: 'none',
             }}
           >
@@ -140,11 +140,11 @@ export default function Header() {
             <div 
               className="absolute"
               style={{
-                width: '200px',
-                height: '200px',
+                width: '300px',
+                height: '300px',
                 top: '0',
                 left: '0',
-                transformOrigin: '100px 100px',
+                transformOrigin: '150px 150px',
                 animation: 'rotateOrbit 6s linear infinite',
               }}
             >
@@ -243,8 +243,8 @@ export default function Header() {
         className="md:hidden fixed top-0 right-0 z-[70] transition-all duration-500 ease-out" 
         style={{ 
           overflow: 'visible',
-          width: isMenuOpen ? '200px' : '64px',
-          height: isMenuOpen ? '200px' : '64px',
+          width: isMenuOpen ? '300px' : '96px',
+          height: isMenuOpen ? '300px' : '96px',
           position: 'fixed',
           willChange: 'transform',
         }}
@@ -263,10 +263,10 @@ export default function Header() {
           type="button"
           style={{
             position: 'absolute',
-            top: '-16px',
-            right: '-16px',
-            width: isMenuOpen ? '120px' : '64px',
-            height: isMenuOpen ? '120px' : '64px',
+            top: '-24px',
+            right: '-24px',
+            width: isMenuOpen ? '180px' : '96px',
+            height: isMenuOpen ? '180px' : '96px',
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
@@ -291,10 +291,10 @@ export default function Header() {
           <div 
             className="fixed z-[69]"
             style={{ 
-              width: '200px',
-              height: '200px',
-              top: '-68px',
-              right: '-68px',
+              width: '300px',
+              height: '300px',
+              top: '-102px',
+              right: '-102px',
               pointerEvents: 'none',
             }}
           >
@@ -302,11 +302,11 @@ export default function Header() {
             <div 
               className="absolute"
               style={{
-                width: '200px',
-                height: '200px',
+                width: '300px',
+                height: '300px',
                 top: '0',
                 left: '0',
-                transformOrigin: '100px 100px',
+                transformOrigin: '150px 150px',
                 animation: 'rotateOrbit 6s linear infinite',
               }}
             >
