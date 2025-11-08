@@ -132,7 +132,7 @@ export default function Header() {
             e.stopPropagation();
             setIsMenuOpen(!isMenuOpen);
           }}
-          className={`relative rounded-full bg-sun-red flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 focus:ring-offset-off-white touch-manipulation transition-all duration-500 ${!isMenuOpen ? 'animate-heart-pulse' : ''}`}
+          className={`relative rounded-full bg-sun-red flex items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 focus:ring-offset-off-white touch-manipulation transition-all duration-500 ${!isMenuOpen ? 'animate-heart-pulse' : ''}`}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMenuOpen}
           data-interactive
@@ -185,7 +185,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '100px 100px',
-                animation: 'rotateOrbit 8s linear infinite',
+                animation: 'rotateOrbit 4s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -210,7 +210,7 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* GitHub Icon - at 120 degrees */}
+              {/* GitHub Icon - at 90 degrees */}
               <Link
                 href="https://github.com/wgusta"
                 target="_blank"
@@ -218,8 +218,8 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
-                  top: `${50 + 50 * Math.cos((120 * Math.PI) / 180)}%`,
-                  left: `${50 + 50 * Math.sin((120 * Math.PI) / 180)}%`,
+                  top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
+                  left: `${50 + 50 * Math.sin((90 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
                   animation: 'fadeInScale 0.5s ease-out 0.2s both',
                   pointerEvents: 'auto',
@@ -232,16 +232,38 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* Email Icon - at 240 degrees */}
+              {/* LinkedIn Icon - at 180 degrees */}
+              <Link
+                href="https://linkedin.com/in/gueneyusta"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => setIsMenuOpen(false)}
+                className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+                style={{
+                  top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
+                  left: `${50 + 50 * Math.sin((180 * Math.PI) / 180)}%`,
+                  transform: 'translate(-50%, -50%)',
+                  animation: 'fadeInScale 0.5s ease-out 0.3s both',
+                  pointerEvents: 'auto',
+                }}
+                aria-label="LinkedIn - Opens in new tab"
+                data-interactive
+              >
+                <svg className="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                </svg>
+              </Link>
+
+              {/* Email Icon - at 270 degrees */}
               <Link
                 href="mailto:hello@sihliconvalley.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
-                  top: `${50 + 50 * Math.cos((240 * Math.PI) / 180)}%`,
-                  left: `${50 + 50 * Math.sin((240 * Math.PI) / 180)}%`,
+                  top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
+                  left: `${50 + 50 * Math.sin((270 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.3s both',
+                  animation: 'fadeInScale 0.5s ease-out 0.4s both',
                   pointerEvents: 'auto',
                 }}
                 aria-label="Send message - Opens email"
