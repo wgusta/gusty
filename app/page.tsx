@@ -764,12 +764,12 @@ export default function Home() {
         <div className="relative z-10 flex flex-col gap-0">
           {/* Section Titles at the top */}
           <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full">
-            <div className="px-6 md:px-8 lg:px-12 pt-6 md:pt-8 lg:pt-10 relative z-20 block">
+            <div className="px-6 md:px-8 lg:px-12 pt-2 md:pt-4 relative z-20 block">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 human-made
               </h2>
             </div>
-            <div className="px-6 md:px-8 lg:px-12 md:pl-0 pt-6 md:pt-8 lg:pt-10 relative z-20 block md:flex md:justify-end">
+            <div className="px-6 md:px-8 lg:px-12 md:pl-0 pt-2 md:pt-4 relative z-20 block md:flex md:justify-end">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 md:pr-8 lg:pr-12 xl:pr-16 relative z-20 block">
                 AI-assisted
               </h2>
@@ -784,16 +784,16 @@ export default function Home() {
               if (project.column === 'bridged') {
                 // Bridged project - full width
                 return (
-                  <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
-                    <div className="relative">
-                      <div className="absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal md:hidden"></div>
-                      <div className="relative z-10 max-w-7xl mx-auto">
-                        <ProjectCard
-                          project={project}
-                          onClick={() => setSelectedProject(project)}
-                          activeFilter={activeFilter}
-                        />
-                      </div>
+                  <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10 relative">
+                    {/* Gradient background - only on mobile */}
+                    <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink via-deep-pink/50 to-teal pointer-events-none"></div>
+                    {/* Card - same background as other cards on desktop */}
+                    <div className="relative z-10 max-w-7xl mx-auto">
+                      <ProjectCard
+                        project={project}
+                        onClick={() => setSelectedProject(project)}
+                        activeFilter={activeFilter}
+                      />
                     </div>
                   </div>
                 );

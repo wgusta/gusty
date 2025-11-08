@@ -138,7 +138,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 text-sm rounded bg-brand-black/10 text-sun-red font-terminal"
+                  className="px-3 py-1 text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
                 >
                   {tag}
                 </span>

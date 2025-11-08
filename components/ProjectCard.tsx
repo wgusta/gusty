@@ -82,8 +82,8 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
             key={index}
             className={`px-2 py-1 text-xs rounded font-terminal ${
               (project.column === 'design' || project.column === 'ai' || project.column === 'bridged')
-                ? 'md:bg-brand-black/10 md:text-sun-red bg-brand-white/20 text-brand-white'
-                : 'bg-brand-black/10 text-sun-red'
+                ? 'md:bg-brand-black/10 md:text-brand-black bg-brand-white/20 text-brand-white'
+                : 'bg-brand-black/10 text-brand-black'
             }`}
             role="listitem"
           >
