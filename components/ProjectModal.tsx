@@ -98,6 +98,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
   const hasDesignContent = project.designContent !== undefined;
   const hasAiContent = project.aiContent !== undefined;
+  const showTabs = project.column === 'bridged' && hasDesignContent && hasAiContent;
 
   return (
     <div
@@ -148,7 +149,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         </div>
 
         {/* Tabs */}
-        {(hasDesignContent && hasAiContent) && (
+        {showTabs && (
           <div className="flex border-b border-brand-black/10">
             <button
               onClick={() => setActiveTab('design')}
@@ -181,32 +182,65 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Content */}
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
-          {activeTab === 'design' && project.designContent && (
-            typeof project.designContent === 'string' ? (
-              <MarkdownContent 
-                content={project.designContent} 
-                fontFamily={project.column === 'danger' ? 'erratic' : 'stylish'}
-              />
-            ) : (
-              <div className={`prose prose-lg max-w-none text-brand-black font-stylish`}>
-                {project.designContent}
-              </div>
-            )
-          )}
-          {activeTab === 'ai' && project.aiContent && (
-            typeof project.aiContent === 'string' ? (
-              <MarkdownContent 
-                content={project.aiContent} 
-                fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
-              />
-            ) : (
-              <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
-                {project.aiContent}
-              </div>
-            )
-          )}
-          {!hasDesignContent && !hasAiContent && (
-            <p className="text-brand-black/60">No content available for this project.</p>
+          {showTabs ? (
+            // Show content based on active tab for bridged projects
+            <>
+              {activeTab === 'design' && project.designContent && (
+                typeof project.designContent === 'string' ? (
+                  <MarkdownContent 
+                    content={project.designContent} 
+                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
+                  />
+                ) : (
+                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                    {project.designContent}
+                  </div>
+                )
+              )}
+              {activeTab === 'ai' && project.aiContent && (
+                typeof project.aiContent === 'string' ? (
+                  <MarkdownContent 
+                    content={project.aiContent} 
+                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
+                  />
+                ) : (
+                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                    {project.aiContent}
+                  </div>
+                )
+              )}
+            </>
+          ) : (
+            // Show all available content for non-bridged projects (no tabs)
+            <>
+              {project.designContent && (
+                typeof project.designContent === 'string' ? (
+                  <MarkdownContent 
+                    content={project.designContent} 
+                    fontFamily={project.column === 'danger' ? 'erratic' : 'stylish'}
+                  />
+                ) : (
+                  <div className={`prose prose-lg max-w-none text-brand-black font-stylish`}>
+                    {project.designContent}
+                  </div>
+                )
+              )}
+              {project.aiContent && (
+                typeof project.aiContent === 'string' ? (
+                  <MarkdownContent 
+                    content={project.aiContent} 
+                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
+                  />
+                ) : (
+                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                    {project.aiContent}
+                  </div>
+                )
+              )}
+              {!hasDesignContent && !hasAiContent && (
+                <p className="text-brand-black/60">No content available for this project.</p>
+              )}
+            </>
           )}
         </div>
       </div>
