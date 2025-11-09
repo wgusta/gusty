@@ -844,7 +844,7 @@ export default function Home() {
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
         <div 
           ref={dangerZoneRef}
-          className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative"
+          className="w-full bg-sun-red pt-4 pb-12 md:py-16 lg:py-20 relative"
         >
           {/* Content - blurred when not confirmed */}
           <div className={`max-w-7xl mx-auto px-6 md:px-8 lg:px-12 ${dangerZoneConfirmed !== true ? 'blur-md' : ''}`}>
