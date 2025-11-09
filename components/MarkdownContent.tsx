@@ -9,7 +9,7 @@ import rehypeRaw from 'rehype-raw';
 interface MarkdownContentProps {
   content: string;
   className?: string;
-  fontFamily?: 'stylish' | 'terminal' | 'erratic';
+  fontFamily?: 'terminal' | 'erratic';
 }
 
 export default function MarkdownContent({ 
@@ -17,9 +17,7 @@ export default function MarkdownContent({
   className = '',
   fontFamily = 'terminal'
 }: MarkdownContentProps) {
-  const fontClass = fontFamily === 'stylish' ? 'font-stylish' : 
-                   fontFamily === 'erratic' ? 'font-erratic' : 
-                   'font-terminal';
+  const fontClass = fontFamily === 'erratic' ? 'font-erratic' : 'font-terminal';
   
   return (
     <div className={`prose prose-lg max-w-none ${className} ${fontClass}`}>

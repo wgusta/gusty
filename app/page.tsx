@@ -829,7 +829,7 @@ export default function Home() {
             // Show empty state messages if no projects
             <div className="grid grid-cols-1 md:grid-cols-2 gap-0">
               <div className="p-6 md:p-8 lg:p-12">
-                <p className="text-brand-white/80 font-stylish">No projects found.</p>
+                <p className="text-brand-white/80 font-terminal">No projects found.</p>
               </div>
               <div className="p-6 md:p-8 lg:p-12">
                 <p className="text-brand-white/80 font-terminal">No projects found.</p>

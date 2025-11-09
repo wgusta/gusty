@@ -217,10 +217,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 typeof project.designContent === 'string' ? (
                   <MarkdownContent 
                     content={project.designContent} 
-                    fontFamily={project.column === 'danger' ? 'erratic' : 'stylish'}
+                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
                   />
                 ) : (
-                  <div className={`prose prose-lg max-w-none text-brand-black font-stylish`}>
+                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
                     {project.designContent}
                   </div>
                 )
