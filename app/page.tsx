@@ -707,7 +707,8 @@ export default function Home() {
 
       {/* Split Screen Layout */}
       <div className={`min-h-screen pt-0 md:pt-32 lg:pt-40 xl:pt-48 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
-        {/* Mobile Navigation - Only visible on mobile */}
+        {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
+        {selectedProject === null && (
         <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'}`}>
           <div className="px-4 py-3">
             <h3 className="text-sm md:text-base font-terminal text-brand-black mb-4 md:mb-3 uppercase tracking-wide">Explore projects</h3>
@@ -751,6 +752,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+        )}
 
         {/* Full-height background columns - Hidden on mobile, show off-white instead */}
         <div className="hidden md:grid absolute inset-0 top-32 md:top-32 lg:top-40 xl:top-48 bottom-0 grid-cols-1 md:grid-cols-2 pointer-events-none z-0">
