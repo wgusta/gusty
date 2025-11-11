@@ -709,7 +709,7 @@ export default function Home() {
       <div className={`min-h-screen pt-0 md:pt-8 lg:pt-10 xl:pt-12 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
         {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
         {selectedProject === null && (
-        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-48`}>
+        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-24`}>
           <div className="px-4 py-4">
             <h3 className="text-base font-terminal text-brand-black mb-8 uppercase tracking-wide">Explore projects</h3>
             <div className="flex flex-col gap-6">
