@@ -706,16 +706,16 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className={`min-h-screen pt-0 md:pt-32 lg:pt-40 xl:pt-48 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
+      <div className={`min-h-screen pt-0 md:pt-8 lg:pt-10 xl:pt-12 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
         {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
         {selectedProject === null && (
-        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm border-b border-brand-black/10 shadow-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'}`}>
-          <div className="px-4 py-3">
-            <h3 className="text-sm md:text-base font-terminal text-brand-black mb-4 md:mb-3 uppercase tracking-wide">Explore projects</h3>
-            <div className="flex flex-col gap-3">
+        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-72`}>
+          <div className="px-4 py-6">
+            <h3 className="text-base font-terminal text-brand-black mb-8 uppercase tracking-wide">Explore projects</h3>
+            <div className="flex flex-col gap-6">
               <button
                 onClick={() => setActiveFilter(activeFilter === 'design' ? null : 'design')}
-                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
+                className={`w-full px-6 py-6 rounded-lg font-terminal text-base transition-all duration-300 touch-manipulation ${
                   activeFilter === 'design'
                     ? 'bg-deep-pink text-brand-white shadow-md scale-105'
                     : 'bg-deep-pink/20 text-deep-pink active:scale-95'
@@ -727,7 +727,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveFilter(activeFilter === 'ai' ? null : 'ai')}
-                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
+                className={`w-full px-6 py-6 rounded-lg font-terminal text-base transition-all duration-300 touch-manipulation ${
                   activeFilter === 'ai'
                     ? 'bg-teal text-brand-white shadow-md scale-105'
                     : 'bg-teal/20 text-teal active:scale-95'
@@ -739,7 +739,7 @@ export default function Home() {
               </button>
               <button
                 onClick={() => setActiveFilter(activeFilter === 'bridged' ? null : 'bridged')}
-                className={`w-full px-4 py-3 rounded-lg font-terminal text-sm transition-all duration-300 touch-manipulation ${
+                className={`w-full px-6 py-6 rounded-lg font-terminal text-base transition-all duration-300 touch-manipulation ${
                   activeFilter === 'bridged'
                     ? 'bg-gradient-to-r from-deep-pink to-teal text-brand-white shadow-md scale-105'
                     : 'bg-gradient-to-r from-deep-pink/20 to-teal/20 text-brand-black active:scale-95'
