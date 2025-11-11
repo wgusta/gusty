@@ -706,7 +706,7 @@ export default function Home() {
       <Header />
 
       {/* Split Screen Layout */}
-      <div className={`min-h-screen pt-0 md:pt-4 lg:pt-5 xl:pt-6 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
+      <div className={`min-h-screen pt-0 md:pt-8 lg:pt-10 xl:pt-12 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
         {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
         {selectedProject === null && (
         <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-24`}>
@@ -750,6 +750,11 @@ export default function Home() {
                 teamed-up
               </button>
             </div>
+            {activeFilter === null && (
+              <p className="text-xs font-terminal text-brand-black/60 italic text-center mt-[30px]">
+                ↓ Scroll down, if you're brave enough. ↓
+              </p>
+            )}
           </div>
         </div>
         )}
@@ -765,7 +770,7 @@ export default function Home() {
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
           {/* Section Titles at the top */}
-          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full pt-28 md:pt-28 lg:pt-[140px] xl:pt-[168px]">
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full pt-32 md:pt-32 lg:pt-40 xl:pt-48">
             <div className="px-6 md:px-8 lg:px-12 relative z-20 block">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 human-made
@@ -839,15 +844,6 @@ export default function Home() {
           </div>
         </div>
       </div>
-
-      {/* Scroll down text - Mobile only, between projects and Danger Zone */}
-      {activeFilter === null && (
-        <div className="block md:hidden w-full bg-off-white min-h-[200px] flex items-center justify-center">
-          <p className="text-xs font-terminal text-brand-black/60 italic text-center">
-            ↓ Scroll down, if you're brave enough. ↓
-          </p>
-        </div>
-      )}
 
       {/* Danger Zone Section - Always visible, blurred when not confirmed */}
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
