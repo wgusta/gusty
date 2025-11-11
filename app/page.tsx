@@ -750,6 +750,9 @@ export default function Home() {
                 teamed-up
               </button>
             </div>
+            <p className="text-xs font-terminal text-brand-black/60 italic text-center mt-4">
+              Scroll down, if your'e brave enough.
+            </p>
           </div>
         </div>
         )}

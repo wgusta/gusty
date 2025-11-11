@@ -70,8 +70,9 @@ export default function Header() {
             )}
           </span>{' '}
           trustworthy.
+          <br />
         </p>
-        <blockquote className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6">
+        <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-6 md:mb-8 lg:mb-10">
           I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
         </blockquote>
       </div>
