@@ -750,9 +750,6 @@ export default function Home() {
                 teamed-up
               </button>
             </div>
-            <p className="text-xs font-terminal text-brand-black/60 italic text-center mt-4">
-              Scroll down, if your'e brave enough.
-            </p>
           </div>
         </div>
         )}
@@ -842,6 +839,15 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      {/* Scroll down text - Mobile only, between projects and Danger Zone */}
+      {activeFilter === null && (
+        <div className="block md:hidden w-full bg-off-white py-8">
+          <p className="text-xs font-terminal text-brand-black/60 italic text-center">
+            ↓ Scroll down, if you're brave enough. ↓
+          </p>
+        </div>
+      )}
 
       {/* Danger Zone Section - Always visible, blurred when not confirmed */}
       {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
