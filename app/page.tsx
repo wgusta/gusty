@@ -709,8 +709,8 @@ export default function Home() {
       <div className={`min-h-screen pt-0 md:pt-8 lg:pt-10 xl:pt-12 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
         {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
         {selectedProject === null && (
-        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-72`}>
-          <div className="px-4 py-6">
+        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-48`}>
+          <div className="px-4 py-4">
             <h3 className="text-base font-terminal text-brand-black mb-8 uppercase tracking-wide">Explore projects</h3>
             <div className="flex flex-col gap-6">
               <button
@@ -765,13 +765,13 @@ export default function Home() {
         {/* Project content - sorted by finalization date */}
         <div className="relative z-10 flex flex-col gap-0">
           {/* Section Titles at the top */}
-          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full">
-            <div className="px-6 md:px-8 lg:px-12 pt-2 md:pt-4 relative z-20 block">
+          <div className="hidden md:grid grid-cols-1 md:grid-cols-2 gap-0 mb-6 md:mb-8 relative z-20 w-full pt-32 md:pt-32 lg:pt-40 xl:pt-48">
+            <div className="px-6 md:px-8 lg:px-12 relative z-20 block">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 relative z-20 block">
                 human-made
               </h2>
             </div>
-            <div className="px-6 md:px-8 lg:px-12 md:pl-0 pt-2 md:pt-4 relative z-20 block md:flex md:justify-end">
+            <div className="px-6 md:px-8 lg:px-12 md:pl-0 relative z-20 block md:flex md:justify-end">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-white font-terminal mb-4 md:mb-6 lg:mb-8 px-2 md:px-4 md:pr-8 lg:pr-12 xl:pr-16 relative z-20 block">
                 AI-assisted
               </h2>
