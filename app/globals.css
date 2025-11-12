@@ -214,21 +214,154 @@
     animation: heartPulse 2s ease-in-out infinite;
   }
 
-  /* Orbit rotation animation */
+  /* Orbit rotation animation - Multi-phase with varying speeds */
   @keyframes rotateOrbit {
-    from {
+    /* Phase 1: Double speed (6s) - 0% to 18.18% */
+    0% {
       transform: rotate(360deg);
     }
-    to {
+    18.18% {
       transform: rotate(0deg);
+    }
+    /* Phase 2: Normal speed (12s) - 18.18% to 54.55% */
+    54.55% {
+      transform: rotate(360deg);
+    }
+    /* Phase 3: Quadruple speed (3s) - 54.55% to 63.64% */
+    63.64% {
+      transform: rotate(0deg);
+    }
+    /* Phase 4: Normal speed (12s) - 63.64% to 100% */
+    100% {
+      transform: rotate(360deg);
     }
   }
 
-  /* Fade in and scale animation for icons */
+  /* Fade in and scale animation for icons - Phase 1: Visible, Phase 2: All appear together */
   @keyframes fadeInScale {
     0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    18.18% {
       opacity: 0;
       transform: translate(-50%, -50%) scale(0);
+    }
+    18.19% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Staggered fade in for phase 3 - Icon 1 (X/Twitter) */
+  @keyframes fadeInScaleStagger1 {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    18.18% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    18.19% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    54.55% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    54.56% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Staggered fade in for phase 3 - Icon 2 (GitHub) */
+  @keyframes fadeInScaleStagger2 {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    18.18% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    18.19% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    54.55% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    56.82% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Staggered fade in for phase 3 - Icon 3 (LinkedIn) */
+  @keyframes fadeInScaleStagger3 {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    18.18% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    18.19% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    54.55% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    59.09% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  /* Staggered fade in for phase 3 - Icon 4 (Email) */
+  @keyframes fadeInScaleStagger4 {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    18.18% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    18.19% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+    54.55% {
+      opacity: 0;
+      transform: translate(-50%, -50%) scale(0);
+    }
+    61.36% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
     }
     100% {
       opacity: 1;

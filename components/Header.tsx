@@ -146,7 +146,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '150px 150px',
-                animation: 'rotateOrbit 12s linear infinite',
+                animation: 'rotateOrbit 33s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -160,7 +160,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((0 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.1s both',
+                  animation: 'fadeInScaleStagger1 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="X (Twitter) - Opens in new tab"
@@ -182,7 +182,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((90 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.2s both',
+                  animation: 'fadeInScaleStagger2 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="GitHub - Opens in new tab"
@@ -204,7 +204,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((180 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.3s both',
+                  animation: 'fadeInScaleStagger3 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="LinkedIn - Opens in new tab"
@@ -224,7 +224,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((270 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.4s both',
+                  animation: 'fadeInScaleStagger4 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="Send message - Opens email"
@@ -308,7 +308,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '94px 94px',
-                animation: 'rotateOrbit 12s linear infinite',
+                animation: 'rotateOrbit 33s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -317,12 +317,12 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+                className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((0 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.1s both',
+                  animation: 'fadeInScaleStagger1 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="X (Twitter) - Opens in new tab"
@@ -339,12 +339,12 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+                className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((90 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.2s both',
+                  animation: 'fadeInScaleStagger2 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="GitHub - Opens in new tab"
@@ -361,12 +361,12 @@ export default function Header() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+                className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((180 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.3s both',
+                  animation: 'fadeInScaleStagger3 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="LinkedIn - Opens in new tab"
@@ -381,12 +381,12 @@ export default function Header() {
               <Link
                 href="mailto:hello@sihliconvalley.ch"
                 onClick={() => setIsMenuOpen(false)}
-                className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
+                className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((270 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScale 0.5s ease-out 0.4s both',
+                  animation: 'fadeInScaleStagger4 33s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="Send message - Opens email"
