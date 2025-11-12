@@ -146,7 +146,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '150px 150px',
-                animation: 'rotateOrbit 33s linear infinite',
+                animation: 'rotateOrbit 30s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -160,7 +160,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((0 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger1 33s linear infinite',
+                  animation: 'fadeInScaleStagger1 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="X (Twitter) - Opens in new tab"
@@ -182,7 +182,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((90 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger2 33s linear infinite',
+                  animation: 'fadeInScaleStagger2 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="GitHub - Opens in new tab"
@@ -204,7 +204,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((180 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger3 33s linear infinite',
+                  animation: 'fadeInScaleStagger3 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="LinkedIn - Opens in new tab"
@@ -224,7 +224,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((270 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger4 33s linear infinite',
+                  animation: 'fadeInScaleStagger4 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="Send message - Opens email"
@@ -308,7 +308,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '94px 94px',
-                animation: 'rotateOrbit 33s linear infinite',
+                animation: 'rotateOrbit 30s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -322,7 +322,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((0 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger1 33s linear infinite',
+                  animation: 'fadeInScaleStagger1 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="X (Twitter) - Opens in new tab"
@@ -344,7 +344,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((90 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger2 33s linear infinite',
+                  animation: 'fadeInScaleStagger2 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="GitHub - Opens in new tab"
@@ -366,7 +366,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((180 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger3 33s linear infinite',
+                  animation: 'fadeInScaleStagger3 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="LinkedIn - Opens in new tab"
@@ -386,7 +386,7 @@ export default function Header() {
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
                   left: `${50 + 50 * Math.sin((270 * Math.PI) / 180)}%`,
                   transform: 'translate(-50%, -50%)',
-                  animation: 'fadeInScaleStagger4 33s linear infinite',
+                  animation: 'fadeInScaleStagger4 30s linear infinite',
                   pointerEvents: 'auto',
                 }}
                 aria-label="Send message - Opens email"
