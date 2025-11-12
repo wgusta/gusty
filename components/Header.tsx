@@ -6,7 +6,6 @@ import Link from 'next/link';
 export default function Header() {
   const [animationStage, setAnimationStage] = useState(0); // 0: valley, 1: valley crossed, 2: allveys shown, 3: allveys crossed + always shown
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isRotationPaused, setIsRotationPaused] = useState(false);
 
   useEffect(() => {
     const timer1 = setTimeout(() => {
@@ -29,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative min-h-screen">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative min-h-[80vh] md:min-h-[85vh]">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -39,50 +38,43 @@ export default function Header() {
       </a>
       
       {/* Content */}
-      <div className="flex flex-col md:flex-row flex-1 gap-6 md:gap-8 lg:gap-12 items-center md:items-start">
-        {/* Left Side - Main Content */}
-        <div className="flex flex-col flex-1 w-full md:w-auto">
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
-            sihl icon valley
-          </h1>
-          <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-terminal font-bold">
-            Güney Usta
-          </p>
-          <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
-            Words x Design x AI Integration
-          </p>
-          <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
-            Building things that last. Close to the Sihl, occasionally iconic,{' '}
-            <span className="relative inline-block">
-              {animationStage === 0 && <span>valley</span>}
-              {animationStage === 1 && (
-                <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">valley</span>
-              )}
-              {animationStage === 2 && (
-                <>
-                  <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
-                  <span className="ml-1 animate-fadeIn">allveys</span>
-                </>
-              )}
-              {animationStage === 3 && (
-                <>
-                  <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
-                  <span className="line-through decoration-2 decoration-brand-black/60 ml-1 animate-strikethrough">allveys</span>
-                  <span className="text-sun-red ml-1 animate-fadeIn">always</span>
-                </>
-              )}
-            </span>{' '}
-            trustworthy.
-            <br />
-          </p>
-        </div>
-        
-        {/* Right Side - Blockquote */}
-        <div className="flex flex-col md:flex-shrink-0 md:w-1/2 lg:w-2/5 w-full md:w-auto">
-          <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-0 max-w-2xl md:max-w-none text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-6 md:mb-0">
-            I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
-          </blockquote>
-        </div>
+      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-center text-center">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
+          sihl icon valley
+        </h1>
+        <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-terminal font-bold">
+          Güney Usta
+        </p>
+        <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
+          Words x Design x AI Integration
+        </p>
+        <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
+          Building things that last. Close to the Sihl, occasionally iconic,{' '}
+          <span className="relative inline-block">
+            {animationStage === 0 && <span>valley</span>}
+            {animationStage === 1 && (
+              <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">valley</span>
+            )}
+            {animationStage === 2 && (
+              <>
+                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
+                <span className="ml-1 animate-fadeIn">allveys</span>
+              </>
+            )}
+            {animationStage === 3 && (
+              <>
+                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
+                <span className="line-through decoration-2 decoration-brand-black/60 ml-1 animate-strikethrough">allveys</span>
+                <span className="text-sun-red ml-1 animate-fadeIn">always</span>
+              </>
+            )}
+          </span>{' '}
+          trustworthy.
+          <br />
+        </p>
+        <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-6 md:mb-8 lg:mb-10 text-left">
+          I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
+        </blockquote>
       </div>
       
       {/* Desktop Menu - Red Circle - Same as mobile */}
@@ -102,7 +94,6 @@ export default function Header() {
             e.preventDefault();
             e.stopPropagation();
             setIsMenuOpen(!isMenuOpen);
-            setIsRotationPaused(true);
           }}
           className={`relative rounded-full bg-sun-red flex items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 focus:ring-offset-off-white touch-manipulation transition-all duration-500 ${!isMenuOpen ? 'animate-heart-pulse' : ''}`}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -155,7 +146,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '150px 150px',
-                animation: isRotationPaused ? 'none' : 'rotateOrbit 6s linear infinite',
+                animation: 'rotateOrbit 6s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -163,10 +154,7 @@ export default function Header() {
                 href="https://x.com/GueneyUsta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
@@ -188,10 +176,7 @@ export default function Header() {
                 href="https://github.com/wgusta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
@@ -213,10 +198,7 @@ export default function Header() {
                 href="https://linkedin.com/in/gueneyusta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
@@ -236,10 +218,7 @@ export default function Header() {
               {/* Email Icon - at 270 degrees */}
               <Link
                 href="mailto:hello@sihliconvalley.ch"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
@@ -277,7 +256,6 @@ export default function Header() {
             e.preventDefault();
             e.stopPropagation();
             setIsMenuOpen(!isMenuOpen);
-            setIsRotationPaused(true);
           }}
           className={`relative rounded-full bg-sun-red flex items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 focus:ring-offset-off-white touch-manipulation transition-all duration-500 ${!isMenuOpen ? 'animate-heart-pulse' : ''}`}
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -330,7 +308,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '94px 94px',
-                animation: isRotationPaused ? 'none' : 'rotateOrbit 6s linear infinite',
+                animation: 'rotateOrbit 6s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -338,10 +316,7 @@ export default function Header() {
                 href="https://x.com/GueneyUsta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((0 * Math.PI) / 180)}%`,
@@ -363,10 +338,7 @@ export default function Header() {
                 href="https://github.com/wgusta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-teal focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((90 * Math.PI) / 180)}%`,
@@ -388,10 +360,7 @@ export default function Header() {
                 href="https://linkedin.com/in/gueneyusta"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((180 * Math.PI) / 180)}%`,
@@ -411,10 +380,7 @@ export default function Header() {
               {/* Email Icon - at 270 degrees */}
               <Link
                 href="mailto:hello@sihliconvalley.ch"
-                onClick={() => {
-                  setIsMenuOpen(false);
-                  setIsRotationPaused(true);
-                }}
+                onClick={() => setIsMenuOpen(false)}
                 className="absolute w-8 h-8 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
                   top: `${50 + 50 * Math.cos((270 * Math.PI) / 180)}%`,
