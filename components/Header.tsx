@@ -38,11 +38,11 @@ export default function Header() {
       </a>
       
       {/* Content */}
-      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-center text-center">
+      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-start md:items-center text-left md:text-center">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
           sihl icon valley
         </h1>
-        <p className="text-sm sm:text-base md:text-lg mt-1 md:mt-2 text-brand-black font-terminal font-bold">
+        <p className="text-sm sm:text-base md:text-lg mt-2.5 md:mt-5 text-brand-black font-terminal font-bold">
           Güney Usta
         </p>
         <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
@@ -72,7 +72,7 @@ export default function Header() {
           trustworthy.
           <br />
         </p>
-        <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-6 md:mb-8 lg:mb-10 text-left">
+        <blockquote className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-6 md:mb-8 lg:mb-10 text-left">
           I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
         </blockquote>
       </div>
@@ -146,7 +146,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '150px 150px',
-                animation: 'rotateOrbit 6s linear infinite',
+                animation: 'rotateOrbit 12s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -210,7 +210,7 @@ export default function Header() {
                 aria-label="LinkedIn - Opens in new tab"
                 data-interactive
               >
-                <svg className="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 24 24" style={{ transform: 'rotate(360deg)' }}>
+                <svg className="w-6 h-6 text-brand-black" fill="currentColor" viewBox="0 0 24 24" style={{ transform: 'rotate(180deg)' }}>
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </Link>
@@ -308,7 +308,7 @@ export default function Header() {
                 top: '0',
                 left: '0',
                 transformOrigin: '94px 94px',
-                animation: 'rotateOrbit 6s linear infinite',
+                animation: 'rotateOrbit 12s linear infinite',
               }}
             >
               {/* X (Twitter) Icon - at 0 degrees (right side) */}
@@ -372,7 +372,7 @@ export default function Header() {
                 aria-label="LinkedIn - Opens in new tab"
                 data-interactive
               >
-                <svg className="w-5 h-5 text-brand-black" fill="currentColor" viewBox="0 0 24 24" style={{ transform: 'rotate(360deg)' }}>
+                <svg className="w-5 h-5 text-brand-black" fill="currentColor" viewBox="0 0 24 24" style={{ transform: 'rotate(180deg)' }}>
                   <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                 </svg>
               </Link>
