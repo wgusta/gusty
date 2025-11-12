@@ -214,7 +214,7 @@
     animation: heartPulse 2s ease-in-out infinite;
   }
 
-  /* Orbit rotation animation - Regular and Quadruple speed rotations */
+  /* Orbit rotation animation - Regular and Quadruple speed rotations, always clockwise */
   @keyframes rotateOrbit {
     /* Phase 1: Regular speed (12s) - 0% to 40% */
     0% {
@@ -225,19 +225,19 @@
     }
     /* Phase 2: Quadruple speed (3s) - 40% to 50% - FIRST TIME */
     50% {
-      transform: rotate(360deg);
+      transform: rotate(-360deg);
     }
     /* Phase 3: Regular speed (12s) - 50% to 90% */
     90% {
-      transform: rotate(0deg);
+      transform: rotate(-720deg);
     }
     /* Phase 4: Quadruple speed (3s) - 90% to 100% - SECOND TIME */
     100% {
-      transform: rotate(360deg);
+      transform: rotate(-1080deg);
     }
   }
 
-  /* Fade in and scale animation for icons - Regular phases: Always visible */
+  /* Icons always visible at full size - no fade or scale */
   @keyframes fadeInScale {
     0% {
       opacity: 1;
@@ -249,125 +249,42 @@
     }
   }
 
-  /* Staggered fade in for quadruple speed phases - Icon 1 (X/Twitter) */
+  /* Icons always visible - no fade, no scale */
   @keyframes fadeInScaleStagger1 {
     0% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
-    40% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    40.14% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    90% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    90.14% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
     100% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
   }
 
-  /* Staggered fade in for quadruple speed phases - Icon 2 (GitHub) */
   @keyframes fadeInScaleStagger2 {
     0% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
-    40% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    42.22% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    90% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    92.22% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
     100% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
   }
 
-  /* Staggered fade in for quadruple speed phases - Icon 3 (LinkedIn) */
   @keyframes fadeInScaleStagger3 {
     0% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
-    40% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    44.31% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    90% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    94.31% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
     100% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
   }
 
-  /* Staggered fade in for quadruple speed phases - Icon 4 (Email) */
   @keyframes fadeInScaleStagger4 {
     0% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    40% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    46.39% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    50% {
-      opacity: 1;
-      transform: translate(-50%, -50%) scale(1);
-    }
-    90% {
-      opacity: 0;
-      transform: translate(-50%, -50%) scale(0);
-    }
-    96.39% {
       opacity: 1;
       transform: translate(-50%, -50%) scale(1);
     }
