@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative min-h-[60vh] md:min-h-[65vh]">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-center justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 py-4 md:py-6 lg:py-8 w-full relative min-h-[50vh] md:min-h-[55vh]">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
