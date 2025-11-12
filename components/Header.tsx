@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 pt-20 pb-4 md:pb-6 lg:pb-8 w-full relative min-h-[35vh] md:min-h-[40vh]">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 pt-[110px] pb-4 md:pb-6 lg:pb-8 w-full relative min-h-[35vh] md:min-h-[40vh]">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
