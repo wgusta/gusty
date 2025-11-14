@@ -28,7 +28,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-center gap-4 md:gap-6 lg:gap-8 bg-off-white/95 backdrop-blur-sm px-6 md:px-8 lg:px-10 pt-[110px] pb-4 md:pb-6 lg:pb-8 w-full relative min-h-[35vh] md:min-h-[40vh]">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-start bg-off-white/95 backdrop-blur-sm pt-32 md:pt-32 lg:pt-40 xl:pt-48 pb-4 md:pb-6 lg:pb-8 w-full relative min-h-[35vh] md:min-h-[40vh]">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -38,7 +38,7 @@ export default function Header() {
       </a>
       
       {/* Content */}
-      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-start text-left">
+      <div className="flex flex-col items-start text-left px-6 md:px-8 lg:px-12">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
           sihl icon valley
         </h1>
@@ -72,7 +72,7 @@ export default function Header() {
           trustworthy.
           <br />
         </p>
-        <blockquote className="text-xs sm:text-sm md:text-base mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-0 text-left">
+        <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-0 text-left">
           I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
         </blockquote>
       </div>

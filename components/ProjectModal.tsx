@@ -157,22 +157,25 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{project.description}</p>
           </div>
           
-          {/* Tech Stack Accordion with red round button */}
+          {/* Tech Stack Accordion - Clickable button */}
           {project.tags.length > 0 && (
             <div className="mt-4 md:mt-6">
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60">Tech Stack</h3>
-                <button
-                  onClick={() => setExpandedTechStack(!expandedTechStack)}
-                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-sun-red text-brand-white flex items-center justify-center hover:bg-sun-red/90 active:bg-sun-red/80 transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1"
-                  aria-expanded={expandedTechStack}
-                  aria-label="Toggle tech stack"
+              <button
+                onClick={() => setExpandedTechStack(!expandedTechStack)}
+                className="flex items-center gap-2 text-left hover:text-brand-black transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 rounded"
+                aria-expanded={expandedTechStack}
+                aria-label="Toggle tech stack"
+              >
+                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">Tech Stack</h3>
+                <svg 
+                  className={`w-4 h-4 text-brand-black/60 transition-transform duration-200 ${expandedTechStack ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
                 >
-                  <span className={`font-terminal text-base md:text-lg transition-transform duration-200 ${expandedTechStack ? 'rotate-45' : ''}`}>
-                    +
-                  </span>
-                </button>
-              </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
               {expandedTechStack && (
                 <div className="mt-2">
                   <div className="flex flex-wrap gap-2">
@@ -190,22 +193,25 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             </div>
           )}
 
-          {/* Lessons Learned Accordion with red round button - Only for BadenLEG project */}
+          {/* Lessons Learned Accordion - Clickable button - Only for BadenLEG project */}
           {project.id === 'badenleg' && (
             <div className="mt-4 md:mt-6">
-              <div className="flex items-center gap-3 mb-2">
-                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60">Lessons Learned</h3>
-                <button
-                  onClick={() => setExpandedLessons(!expandedLessons)}
-                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-sun-red text-brand-white flex items-center justify-center hover:bg-sun-red/90 active:bg-sun-red/80 transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1"
-                  aria-expanded={expandedLessons}
-                  aria-label="Toggle lessons learned"
+              <button
+                onClick={() => setExpandedLessons(!expandedLessons)}
+                className="flex items-center gap-2 text-left hover:text-brand-black transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 rounded"
+                aria-expanded={expandedLessons}
+                aria-label="Toggle lessons learned"
+              >
+                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">Lessons Learned</h3>
+                <svg 
+                  className={`w-4 h-4 text-brand-black/60 transition-transform duration-200 ${expandedLessons ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
                 >
-                  <span className={`font-terminal text-base md:text-lg transition-transform duration-200 ${expandedLessons ? 'rotate-45' : ''}`}>
-                    +
-                  </span>
-                </button>
-              </div>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
               {expandedLessons && (
                 <div className="mt-2 space-y-3">
                   <div>
