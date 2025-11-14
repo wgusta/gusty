@@ -217,7 +217,7 @@ export default function Header() {
 
               {/* Email Icon - at 270 degrees */}
               <Link
-                href="mailto:hello@sihliconvalley.ch"
+                href="mailto:hey@sihliconvalley.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
@@ -379,7 +379,7 @@ export default function Header() {
 
               {/* Email Icon - at 270 degrees */}
               <Link
-                href="mailto:hello@sihliconvalley.ch"
+                href="mailto:hey@sihliconvalley.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
