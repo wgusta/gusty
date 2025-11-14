@@ -38,7 +38,7 @@ export default function Header() {
       </a>
       
       {/* Content */}
-      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-start md:items-center text-left md:text-center">
+      <div className="flex flex-col flex-1 max-w-4xl mx-auto items-start text-left">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
           sihl icon valley
         </h1>

@@ -88,156 +88,7 @@ BadenLEG connects homeowners who want to share solar energy together. Users ente
 - Railway setup & configuration
 - GitHub Actions workflow for CI/CD
 - DNS configuration (Infomaniak)
-- SendGrid domain authentication
-
----
-
-## Challenges & Solutions
-
-### Problem 1: Token Persistence on Railway
-
-**Challenge:** Railway deletes the filesystem on every deployment. Tokens in separate JSON files were lost.
-
-**Solution:** Store tokens directly in main database records.
-
-\`\`\`python
-def issue_verification_token(building_id):
-    """Creates a verification token and stores it in the DB record."""
-    token = str(uuid.uuid4())
-    
-    # Invalidate old tokens for this building_id
-    tokens_to_remove = [
-        t for t, info in DB_VERIFICATION_TOKENS.items()
-        if info.get('building_id') == building_id
-    ]
-    for t in tokens_to_remove:
-        DB_VERIFICATION_TOKENS.pop(t, None)
-    
-    # Store token in main database record (persistent!)
-    with db_lock:
-        record, source = _get_record_for_building_no_lock(building_id)
-        if record:
-            record['verification_token'] = token  # Directly in record
-            if source == 'registered':
-                DB_BUILDINGS[building_id] = record
-            elif source == 'anonymous':
-                DB_INTEREST_POOL[building_id] = record
-    
-    DB_VERIFICATION_TOKENS[token] = {
-        'building_id': building_id,
-        'created_at': time.time()
-    }
-    return token
-\`\`\`
-
-### Problem 2: Performance Optimization After Address Input
-
-**Challenge:** After address input, timeouts occurred due to slow external API calls and intensive ML calculations.
-
-**Solution:** Fast endpoint with pre-fetched coordinates, background threading and deterministic mock data.
-
-\`\`\`python
-@app.route("/api/check_potential_fast", methods=['POST'])
-def api_check_potential_fast():
-    """Ultra-fast endpoint: Uses pre-fetched coordinates, no external APIs."""
-    if not request.json:
-        return jsonify({"error": "No data."}), 400
-    
-    # Directly from autocomplete suggestion (already geocoded!)
-    lat = request.json.get('lat')
-    lon = request.json.get('lon')
-    
-    if not lat or not lon:
-        return jsonify({"error": "Coordinates missing."}), 400
-    
-    # Generate deterministic profile (no external API calls!)
-    profile = generate_quick_profile(lat, lon, address_string)
-    
-    # Fast distance search (no autarky calculation)
-    provisional_matches = find_provisional_matches_fast(profile)
-    
-    # Email sending in background thread (does not block!)
-    if provisional_matches:
-        threading.Thread(
-            target=send_confirmation_email,
-            args=(email, unsubscribe_url),
-            daemon=True
-        ).start()
-    
-    return jsonify({"match": provisional_matches})
-\`\`\`
-
-### Problem 3: DMARC Bounce on Emails
-
-**Challenge:** Emails from badenleg.ch were blocked.
-
-**Solution:** SendGrid domain authentication with SPF, DKIM, DMARC records.
-
-### Problem 4: Mobile UX
-
-**Challenge:** Map overlapped with input fields.
-
-**Solution:** Hide map on mobile, full-screen input panel, centered logo.
-
----
-
-## ML Functions
-
-### DBSCAN Clustering
-
-- Groups buildings by geographic proximity (150m radius)
-- Uses Haversine distance for earth curvature
-- Minimum size: 2-3 buildings per cluster
-- Identifies isolated buildings as noise (-1)
-
-### Autarky Simulation
-
-- Generates 15-minute time series profiles for consumption and PV production
-- Simulates seasonal variations (summer/winter)
-- Calculates daily patterns (consumption peaks, PV production)
-- Aggregates profiles at cluster level
-- Calculates autarky score: (Total consumption - Grid import) / Total consumption
-
-### Profile Generation
-
-- Consumption: Cosine-based curve with daily pattern (higher 6-22h)
-- PV production: Sine-based curve with seasonality
-- Considers building type, postal code statistics and estimated PV capacity
-
-### Ranking
-
-- Clusters sorted by autarky score
-- Highest autarky = best match quality
-- Results visualized in real-time on the map
-
----
-
-## Lessons Learned
-
-**What worked well:**
-
-- Simple architecture (Flask + In-Memory DB) for MVP
-- Railway for fast deployment
-- TailwindCSS for fast styling
-- Leaflet.js for map integration
-
-**What I would do differently:**
-
-- PostgreSQL from the start instead of In-Memory DB
-- Structured logging (e.g. structlog)
-- Unit tests for critical functions
-- Monitoring & alerting (e.g. Sentry)
-
-**AI Assistance:**
-
-- Efficient for boilerplate code and repetitive tasks
-- Useful for debugging and error analysis
-- Less helpful for complex architecture decisions
-- Important: Always understand and adapt code, don't blindly adopt
-
-**Surprise:**
-
-The number of add-on services for a supposedly simple AI application was higher than expected: SendGrid (emails), Railway (hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Each service brought its own configuration and error sources.`,
+- SendGrid domain authentication`,
     aiContent: `## AI-Assisted Development
 
 ### Code Generation
@@ -298,7 +149,96 @@ Generates 15-minute time series profiles for consumption and PV production, simu
 
 ### Ranking
 
-Clusters are sorted by autarky score - highest autarky = best match quality. Results are visualized in real-time on the map.`
+Clusters are sorted by autarky score - highest autarky = best match quality. Results are visualized in real-time on the map.
+
+---
+
+## Technical Solutions & Improvements
+
+### Solution 1: Persistent Token Management
+
+**Challenge:** Railway deletes the filesystem on every deployment. Tokens in separate JSON files were lost.
+
+**Solution:** Store tokens directly in main database records for reliable persistence.
+
+\`\`\`python
+def issue_verification_token(building_id):
+    """Creates a verification token and stores it in the DB record."""
+    token = str(uuid.uuid4())
+    
+    # Invalidate old tokens for this building_id
+    tokens_to_remove = [
+        t for t, info in DB_VERIFICATION_TOKENS.items()
+        if info.get('building_id') == building_id
+    ]
+    for t in tokens_to_remove:
+        DB_VERIFICATION_TOKENS.pop(t, None)
+    
+    # Store token in main database record (persistent!)
+    with db_lock:
+        record, source = _get_record_for_building_no_lock(building_id)
+        if record:
+            record['verification_token'] = token  # Directly in record
+            if source == 'registered':
+                DB_BUILDINGS[building_id] = record
+            elif source == 'anonymous':
+                DB_INTEREST_POOL[building_id] = record
+    
+    DB_VERIFICATION_TOKENS[token] = {
+        'building_id': building_id,
+        'created_at': time.time()
+    }
+    return token
+\`\`\`
+
+### Solution 2: Fast Response Endpoint
+
+**Challenge:** After address input, timeouts occurred due to slow external API calls and intensive ML calculations.
+
+**Solution:** Implemented fast endpoint with pre-fetched coordinates, background threading and deterministic mock data for instant responses.
+
+\`\`\`python
+@app.route("/api/check_potential_fast", methods=['POST'])
+def api_check_potential_fast():
+    """Ultra-fast endpoint: Uses pre-fetched coordinates, no external APIs."""
+    if not request.json:
+        return jsonify({"error": "No data."}), 400
+    
+    # Directly from autocomplete suggestion (already geocoded!)
+    lat = request.json.get('lat')
+    lon = request.json.get('lon')
+    
+    if not lat or not lon:
+        return jsonify({"error": "Coordinates missing."}), 400
+    
+    # Generate deterministic profile (no external API calls!)
+    profile = generate_quick_profile(lat, lon, address_string)
+    
+    # Fast distance search (no autarky calculation)
+    provisional_matches = find_provisional_matches_fast(profile)
+    
+    # Email sending in background thread (does not block!)
+    if provisional_matches:
+        threading.Thread(
+            target=send_confirmation_email,
+            args=(email, unsubscribe_url),
+            daemon=True
+        ).start()
+    
+    return jsonify({"match": provisional_matches})
+\`\`\`
+
+### Solution 3: Email Delivery Optimization
+
+**Challenge:** Emails from badenleg.ch were blocked.
+
+**Solution:** Configured SendGrid domain authentication with SPF, DKIM, DMARC records for reliable email delivery.
+
+### Solution 4: Mobile User Experience
+
+**Challenge:** Map overlapped with input fields.
+
+**Solution:** Optimized mobile layout by hiding map on mobile devices, implementing full-screen input panel and centered logo for better usability.`
   },
   // Design Projects (5)
   {

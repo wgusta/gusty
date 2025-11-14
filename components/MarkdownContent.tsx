@@ -47,7 +47,7 @@ export default function MarkdownContent({
             const match = /language-(\w+)/.exec(className || '');
             const codeFontClass = fontFamily === 'erratic' ? 'font-erratic' : 'font-terminal';
             return !inline && match ? (
-              <pre className="bg-brand-black text-off-white p-4 rounded-lg overflow-x-auto my-6 text-sm">
+              <pre className="bg-brand-black text-off-white p-4 rounded-lg overflow-x-auto mt-8 mb-6 text-sm">
                 <code className={`${className} ${codeFontClass}`} {...props}>
                   {children}
                 </code>

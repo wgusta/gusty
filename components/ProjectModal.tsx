@@ -26,6 +26,8 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [activeTab, setActiveTab] = useState<'design' | 'ai'>('design');
+  const [expandedTechStack, setExpandedTechStack] = useState(false);
+  const [expandedLessons, setExpandedLessons] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -155,20 +157,75 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{project.description}</p>
           </div>
           
-          {/* Tech Stack Section */}
+          {/* Tech Stack Accordion with red round button */}
           {project.tags.length > 0 && (
             <div className="mt-4 md:mt-6">
-              <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 mb-2 md:mb-3">Tech Stack</h3>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag, index) => (
-                  <span
-                    key={index}
-                    className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
-                  >
-                    {tag}
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60">Tech Stack</h3>
+                <button
+                  onClick={() => setExpandedTechStack(!expandedTechStack)}
+                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-sun-red text-brand-white flex items-center justify-center hover:bg-sun-red/90 active:bg-sun-red/80 transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1"
+                  aria-expanded={expandedTechStack}
+                  aria-label="Toggle tech stack"
+                >
+                  <span className={`font-terminal text-base md:text-lg transition-transform duration-200 ${expandedTechStack ? 'rotate-45' : ''}`}>
+                    +
                   </span>
-                ))}
+                </button>
               </div>
+              {expandedTechStack && (
+                <div className="mt-2">
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, index) => (
+                      <span
+                        key={index}
+                        className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Lessons Learned Accordion with red round button - Only for BadenLEG project */}
+          {project.id === 'badenleg' && (
+            <div className="mt-4 md:mt-6">
+              <div className="flex items-center gap-3 mb-2">
+                <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60">Lessons Learned</h3>
+                <button
+                  onClick={() => setExpandedLessons(!expandedLessons)}
+                  className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-sun-red text-brand-white flex items-center justify-center hover:bg-sun-red/90 active:bg-sun-red/80 transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1"
+                  aria-expanded={expandedLessons}
+                  aria-label="Toggle lessons learned"
+                >
+                  <span className={`font-terminal text-base md:text-lg transition-transform duration-200 ${expandedLessons ? 'rotate-45' : ''}`}>
+                    +
+                  </span>
+                </button>
+              </div>
+              {expandedLessons && (
+                <div className="mt-2 space-y-3">
+                  <div>
+                    <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What worked well:</p>
+                    <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Simple architecture (Flask + In-Memory DB) for MVP, Railway for fast deployment, TailwindCSS for fast styling, Leaflet.js for map integration.</p>
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What I would do differently:</p>
+                    <p className="text-xs md:text-sm text-brand-black/80 font-terminal">PostgreSQL from the start instead of In-Memory DB, Structured logging (e.g. structlog), Unit tests for critical functions, Monitoring & alerting (e.g. Sentry).</p>
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">AI Assistance:</p>
+                    <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Efficient for boilerplate code and repetitive tasks, Useful for debugging and error analysis, Less helpful for complex architecture decisions, Important: Always understand and adapt code, don't blindly adopt.</p>
+                  </div>
+                  <div>
+                    <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">Surprise:</p>
+                    <p className="text-xs md:text-sm text-brand-black/80 font-terminal">The number of add-on services for a supposedly simple AI application was higher than expected: SendGrid (emails), Railway (hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Each service brought its own configuration and error sources.</p>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
