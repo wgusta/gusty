@@ -157,11 +157,12 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{project.description}</p>
           </div>
           
-          {/* Tech Stack and Lessons Learned - Side by side, only one open at a time */}
-          <div className="mt-4 md:mt-6 flex flex-wrap gap-4 md:gap-6">
-            {/* Tech Stack Accordion - Clickable button */}
-            {project.tags.length > 0 && (
-              <div className="flex-1 min-w-0">
+          {/* Tech Stack and Lessons Learned - Buttons side by side, content uses full width */}
+          <div className="mt-4 md:mt-6">
+            {/* Buttons row - side by side */}
+            <div className="flex flex-wrap gap-4 md:gap-6">
+              {/* Tech Stack Button */}
+              {project.tags.length > 0 && (
                 <button
                   onClick={() => {
                     if (expandedTechStack) {
@@ -185,26 +186,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                {expandedTechStack && (
-                  <div className="mt-2">
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            )}
+              )}
 
-            {/* Lessons Learned Accordion - Clickable button - Only for BadenLEG project */}
-            {project.id === 'badenleg' && (
-              <div className="flex-1 min-w-0">
+              {/* Lessons Learned Button - Only for BadenLEG project */}
+              {project.id === 'badenleg' && (
                 <button
                   onClick={() => {
                     if (expandedLessons) {
@@ -228,26 +213,43 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </button>
-                {expandedLessons && (
-                  <div className="mt-2 space-y-3">
-                    <div>
-                      <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What worked well:</p>
-                      <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Simple architecture (Flask + In-Memory DB) for MVP, Railway for fast deployment, TailwindCSS for fast styling, Leaflet.js for map integration.</p>
-                    </div>
-                    <div>
-                      <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What I would do differently:</p>
-                      <p className="text-xs md:text-sm text-brand-black/80 font-terminal">PostgreSQL from the start instead of In-Memory DB, Structured logging (e.g. structlog), Unit tests for critical functions, Monitoring & alerting (e.g. Sentry).</p>
-                    </div>
-                    <div>
-                      <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">AI Assistance:</p>
-                      <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Efficient for boilerplate code and repetitive tasks, Useful for debugging and error analysis, Less helpful for complex architecture decisions, Important: Always understand and adapt code, don't blindly adopt.</p>
-                    </div>
-                    <div>
-                      <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">Surprise:</p>
-                      <p className="text-xs md:text-sm text-brand-black/80 font-terminal">The number of add-on services for a supposedly simple AI application was higher than expected: SendGrid (emails), Railway (hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Each service brought its own configuration and error sources.</p>
-                    </div>
-                  </div>
-                )}
+              )}
+            </div>
+
+            {/* Content - Full width below buttons */}
+            {expandedTechStack && (
+              <div className="mt-2 w-full">
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag, index) => (
+                    <span
+                      key={index}
+                      className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {expandedLessons && (
+              <div className="mt-2 w-full space-y-3">
+                <div>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What worked well:</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Simple architecture (Flask + In-Memory DB) for MVP, Railway for fast deployment, TailwindCSS for fast styling, Leaflet.js for map integration.</p>
+                </div>
+                <div>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What I would do differently:</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">PostgreSQL from the start instead of In-Memory DB, Structured logging (e.g. structlog), Unit tests for critical functions, Monitoring & alerting (e.g. Sentry).</p>
+                </div>
+                <div>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">AI Assistance:</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Efficient for boilerplate code and repetitive tasks, Useful for debugging and error analysis, Less helpful for complex architecture decisions, Important: Always understand and adapt code, don't blindly adopt.</p>
+                </div>
+                <div>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">Surprise:</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">The number of add-on services for a supposedly simple AI application was higher than expected: SendGrid (emails), Railway (hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Each service brought its own configuration and error sources.</p>
+                </div>
               </div>
             )}
           </div>
