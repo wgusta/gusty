@@ -17,10 +17,295 @@ interface Project {
   finalizedAt: string; // ISO date string
   designContent?: React.ReactNode | string;
   aiContent?: React.ReactNode | string;
+  status?: 'live' | 'development' | 'archived';
+  liveUrl?: string;
+  techStack?: { [category: string]: string[] };
 }
 
 // Project data
 const projects: Project[] = [
+  // BadenLEG Platform - Bridged Project
+  {
+    id: 'badenleg',
+    title: 'BadenLEG Platform',
+    description: 'Matchmaking für lokale Energiegemeinschaften - Eine Web-Plattform, die Hausbesitzer in Baden (Schweiz) dabei hilft, Nachbarn zu finden, um ab 2026 Lokale Elektrizitätsgemeinschaften (LEG) zu gründen.',
+    tags: ['Web Platform', 'ML', 'Flask', 'Energy'],
+    column: 'bridged',
+    finalizedAt: '2024-11-14',
+    status: 'live',
+    liveUrl: 'https://badenleg.ch',
+    techStack: {
+      'Backend': ['Flask (Python 3.11+)', 'scikit-learn (DBSCAN)', 'pandas/numpy/scipy', 'SendGrid', 'Flask-Limiter', 'Flask-Talisman'],
+      'Frontend': ['TailwindCSS', 'Leaflet.js', 'Vanilla JavaScript'],
+      'Infrastructure': ['Railway', 'GitHub Actions', 'Gunicorn'],
+      'Security': ['Input Validation (bleach)', 'Rate Limiting', 'Security Headers (CSP, HSTS)', 'Token-basierte E-Mail-Verifizierung']
+    },
+    designContent: `## Human-Made
+
+### Konzept & Architektur
+
+**Produktkonzept und User Flow**
+
+BadenLEG verbindet Hausbesitzer, die gemeinsam Solarstrom teilen möchten. Nutzer geben ihre Adresse ein, das System findet passende Nachbarn in der Nähe und ermöglicht den direkten Kontakt – alles mit Fokus auf Datenschutz und Anonymität.
+
+**Systemarchitektur**
+
+- Flask-App mit klarer API-Struktur
+- In-Memory Datenbank für MVP
+- Multi-Layer Security-Ansatz
+- DSGVO-konformes Datenschutz-Design
+
+**Sicherheitskonzept**
+
+- Input Validation & Sanitization (bleach)
+- Rate Limiting (Flask-Limiter)
+- Security Headers (CSP, HSTS, X-Frame-Options)
+- Token-basierte E-Mail-Verifizierung
+- Koordinaten-Anonymisierung (120m Radius)
+
+### Design & UX
+
+**UI/UX Design**
+
+- TailwindCSS für schnelles, konsistentes Styling
+- Mobile-First Responsive Layout
+- Interaktive Karten-Integration mit Leaflet.js
+- Typografie & Branding in Stadtfarben Baden
+
+**Kernfunktionen**
+
+- Adressbasiertes Matching mit ML-Clustering
+- Interaktive Karte mit anonymisierten Standorten (120m Jitter)
+- Automatische E-Mail-Benachrichtigungen bei neuen Interessenten
+- Bildungsinhalte zu LEG, EVL/vEVL und ZEV/vZEV
+- DSGVO-konform mit One-Click-Abmeldung
+
+### Development
+
+**Code-Architektur**
+
+- Klare Strukturierung und Modularisierung
+- API-Endpoint-Design
+- E-Mail-Templates und -Logik
+- Error Handling & Logging
+
+**Deployment**
+
+- Railway Setup & Konfiguration
+- GitHub Actions Workflow für CI/CD
+- DNS-Konfiguration (Infomaniak)
+- SendGrid Domain Authentication
+
+---
+
+## Herausforderungen & Lösungen
+
+### Problem 1: Token-Persistenz auf Railway
+
+**Challenge:** Railway löscht das Dateisystem bei jedem Deployment. Tokens in separaten JSON-Dateien gingen verloren.
+
+**Lösung:** Tokens direkt in den Hauptdatenbank-Records speichern.
+
+\`\`\`python
+def issue_verification_token(building_id):
+    """Erstellt einen Verifizierungs-Token und speichert ihn im DB-Record."""
+    token = str(uuid.uuid4())
+    
+    # Invalidate alte Tokens für dieses building_id
+    tokens_to_remove = [
+        t for t, info in DB_VERIFICATION_TOKENS.items()
+        if info.get('building_id') == building_id
+    ]
+    for t in tokens_to_remove:
+        DB_VERIFICATION_TOKENS.pop(t, None)
+    
+    # Speichere Token im Hauptdatenbank-Record (persistent!)
+    with db_lock:
+        record, source = _get_record_for_building_no_lock(building_id)
+        if record:
+            record['verification_token'] = token  # ← Direkt im Record
+            if source == 'registered':
+                DB_BUILDINGS[building_id] = record
+            elif source == 'anonymous':
+                DB_INTEREST_POOL[building_id] = record
+    
+    DB_VERIFICATION_TOKENS[token] = {
+        'building_id': building_id,
+        'created_at': time.time()
+    }
+    return token
+\`\`\`
+
+### Problem 2: Performance-Optimierung nach Adresseingabe
+
+**Challenge:** Nach der Adresseingabe kam es zu Timeouts durch langsame externe API-Calls und aufwendige ML-Berechnungen.
+
+**Lösung:** Fast-Endpoint mit Pre-fetched Coordinates, Background-Threading und deterministischen Mock-Daten.
+
+\`\`\`python
+@app.route("/api/check_potential_fast", methods=['POST'])
+def api_check_potential_fast():
+    """Ultra-schneller Endpoint: Nutzt Pre-fetched Coordinates, keine externen APIs."""
+    if not request.json:
+        return jsonify({"error": "Keine Daten."}), 400
+    
+    # Direkt aus Autocomplete-Suggestion (bereits geocoded!)
+    lat = request.json.get('lat')
+    lon = request.json.get('lon')
+    
+    if not lat or not lon:
+        return jsonify({"error": "Koordinaten fehlen."}), 400
+    
+    # Generiere deterministisches Profil (keine externen API-Calls!)
+    profile = generate_quick_profile(lat, lon, address_string)
+    
+    # Schnelle Distanz-Suche (keine Autarkie-Berechnung)
+    provisional_matches = find_provisional_matches_fast(profile)
+    
+    # E-Mail-Versand in Background-Thread (blockiert nicht!)
+    if provisional_matches:
+        threading.Thread(
+            target=send_confirmation_email,
+            args=(email, unsubscribe_url),
+            daemon=True
+        ).start()
+    
+    return jsonify({"match": provisional_matches})
+\`\`\`
+
+### Problem 3: DMARC-Bounce bei E-Mails
+
+**Challenge:** E-Mails von badenleg.ch wurden blockiert.
+
+**Lösung:** SendGrid Domain Authentication mit SPF, DKIM, DMARC Records.
+
+### Problem 4: Mobile UX
+
+**Challenge:** Karte überlappt mit Input-Feldern.
+
+**Lösung:** Map auf Mobile verstecken, Full-Screen Input-Panel, zentriertes Logo.
+
+---
+
+## ML-Funktionen
+
+### DBSCAN Clustering
+
+- Gruppiert Gebäude nach geografischer Nähe (150m Radius)
+- Verwendet Haversine-Distanz für Erdkrümmung
+- Mindestgröße: 2–3 Gebäude pro Cluster
+- Identifiziert isolierte Gebäude als Noise (-1)
+
+### Autarkie-Simulation
+
+- Generiert 15-Minuten-Zeitreihenprofile für Verbrauch und PV-Produktion
+- Simuliert saisonale Schwankungen (Sommer/Winter)
+- Berechnet Tagesverlauf (Verbrauchsspitzen, PV-Produktion)
+- Aggregiert Profile auf Clusterebene
+- Berechnet Autarkie-Score: (Gesamtverbrauch - Netzbezug) / Gesamtverbrauch
+
+### Profil-Generierung
+
+- Verbrauch: Cosinus-basierte Kurve mit Tagesverlauf (6–22 Uhr höher)
+- PV-Produktion: Sinus-basierte Kurve mit Saisonalität
+- Berücksichtigt Gebäudetyp, PLZ-Statistiken und geschätzte PV-Kapazität
+
+### Ranking
+
+- Cluster werden nach Autarkie-Score sortiert
+- Höchste Autarkie = beste Match-Qualität
+- Ergebnisse werden in Echtzeit auf der Karte visualisiert
+
+---
+
+## Lessons Learned
+
+**Was gut funktioniert hat:**
+
+- Einfache Architektur (Flask + In-Memory DB) für MVP
+- Railway für schnelles Deployment
+- TailwindCSS für schnelles Styling
+- Leaflet.js für Karten-Integration
+
+**Was ich anders machen würde:**
+
+- Von Anfang an PostgreSQL statt In-Memory DB
+- Structured Logging (z.B. structlog)
+- Unit-Tests für kritische Funktionen
+- Monitoring & Alerting (z.B. Sentry)
+
+**AI-Assistenz:**
+
+- Effizient für Boilerplate-Code und Repetitive Tasks
+- Nützlich für Debugging und Fehleranalyse
+- Weniger hilfreich bei komplexen Architektur-Entscheidungen
+- Wichtig: Code immer verstehen und anpassen, nicht blind übernehmen
+
+**Überraschung:**
+
+Die Anzahl der Add-on-Services für eine vermeintlich einfache KI-Anwendung war höher als erwartet: SendGrid (E-Mails), Railway (Hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Jeder Service brachte eigene Konfiguration und Fehlerquellen mit sich.`,
+    aiContent: `## AI-Assisted Development
+
+### Code-Generierung
+
+**Flask-Endpoints und API-Logik**
+
+AI-Assistenz bei der Entwicklung von Flask-Endpoints und API-Logik für schnelle Iteration und konsistente Patterns.
+
+**Frontend-JavaScript**
+
+- Address Autocomplete Funktionalität
+- Map Integration mit Leaflet.js
+- Vanilla JavaScript ohne Frameworks für direkte DOM-Manipulation
+
+**Security-Utilities**
+
+- Input Validation Implementierung (bleach)
+- Sanitization-Funktionen
+- E-Mail-Funktionen (SendGrid Integration)
+
+### Optimierungen
+
+**Performance-Optimierungen**
+
+- Caching-Strategien für wiederholte Anfragen
+- Async Tasks für Background-Processing (E-Mail-Versand)
+- Code-Refactoring und Modularisierung
+
+**Bug-Fixes**
+
+- Token-Persistenz auf Railway
+- Duplikat-Erkennung bei Registrierungen
+- Timeout-Probleme bei externen API-Calls
+
+### Dokumentation
+
+- README.md und Deployment-Guides
+- SEO-Content (Meta-Tags, Structured Data)
+- Datenschutzerklärung & Impressum
+
+### Debugging
+
+- Fehleranalyse (Timeout-Probleme, Token-Issues)
+- Log-Analyse und Troubleshooting
+- Performance-Profiling
+
+---
+
+## ML-Funktionen
+
+### DBSCAN Clustering
+
+Gruppiert Gebäude nach geografischer Nähe (150m Radius) und verwendet Haversine-Distanz für Erdkrümmung. Identifiziert optimale Gemeinschaftsbildung mit Mindestgröße von 2–3 Gebäuden pro Cluster.
+
+### Autarkie-Simulation
+
+Generiert 15-Minuten-Zeitreihenprofile für Verbrauch und PV-Produktion, simuliert saisonale Schwankungen (Sommer/Winter) und berechnet Autarkie-Score für optimale Match-Qualität.
+
+### Ranking
+
+Cluster werden nach Autarkie-Score sortiert – höchste Autarkie = beste Match-Qualität. Ergebnisse werden in Echtzeit auf der Karte visualisiert.`
+  },
   // Design Projects (5)
   {
     id: 'design-1',

@@ -13,6 +13,9 @@ interface Project {
   column: 'design' | 'ai' | 'bridged' | 'danger';
   designContent?: React.ReactNode | string;
   aiContent?: React.ReactNode | string;
+  status?: 'live' | 'development' | 'archived';
+  liveUrl?: string;
+  techStack?: { [category: string]: string[] };
 }
 
 interface ProjectModalProps {
@@ -23,8 +26,17 @@ interface ProjectModalProps {
 
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
   const [activeTab, setActiveTab] = useState<'design' | 'ai'>('design');
+  const [expandedTechStack, setExpandedTechStack] = useState<string[]>([]);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  const toggleTechStack = (category: string) => {
+    setExpandedTechStack(prev => 
+      prev.includes(category) 
+        ? prev.filter(c => c !== category)
+        : [...prev, category]
+    );
+  };
 
   useEffect(() => {
     if (project) {
@@ -130,19 +142,74 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
 
         {/* Header */}
         <div className="p-4 md:p-6 border-b border-brand-black/10 pr-12 md:pr-6">
-          <h2 id="modal-title" className="text-3xl md:text-4xl lg:text-5xl font-bold text-brand-black font-terminal mb-2 break-words">
-            {project.title}
-          </h2>
-          <p id="modal-description" className="text-sm md:text-base text-brand-black/80 font-terminal">{project.description}</p>
+          <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-3 md:gap-4">
+            <div className="flex-1 min-w-0">
+              <h2 id="modal-title" className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-brand-black font-terminal mb-2 break-words">
+                {project.title}
+              </h2>
+              <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{project.description}</p>
+            </div>
+            {/* Live URL Button - Mobile responsive */}
+            {project.status === 'live' && project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="live-status-button px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-terminal font-semibold whitespace-nowrap flex items-center gap-1.5 md:gap-2 hover:no-underline flex-shrink-0 self-start md:self-auto"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>LIVE</span>
+                <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+            )}
+          </div>
+          
           {project.tags.length > 0 && (
             <div className="flex flex-wrap gap-2 mt-4">
               {project.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="px-3 py-1 text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
+                  className="px-2 py-1 md:px-3 md:py-1 text-xs md:text-sm rounded bg-brand-black/10 text-brand-black font-terminal"
                 >
                   {tag}
                 </span>
+              ))}
+            </div>
+          )}
+
+          {/* Tech Stack Accordion - Mobile responsive */}
+          {project.techStack && Object.keys(project.techStack).length > 0 && (
+            <div className="mt-4 md:mt-6 space-y-2">
+              <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 mb-2 md:mb-3">Tech Stack</h3>
+              {Object.entries(project.techStack).map(([category, technologies]) => (
+                <div key={category} className="border border-brand-black/10 rounded-lg overflow-hidden">
+                  <button
+                    onClick={() => toggleTechStack(category)}
+                    className="w-full px-3 py-2 md:px-4 md:py-3 flex items-center justify-between bg-brand-black/5 hover:bg-brand-black/10 active:bg-brand-black/15 transition-colors text-left touch-manipulation"
+                    aria-expanded={expandedTechStack.includes(category)}
+                  >
+                    <span className="font-terminal text-xs md:text-sm font-semibold text-brand-black pr-2">{category}</span>
+                    <span className={`font-terminal text-base md:text-lg transition-transform duration-200 flex-shrink-0 ${expandedTechStack.includes(category) ? 'rotate-45' : ''}`}>
+                      +
+                    </span>
+                  </button>
+                  {expandedTechStack.includes(category) && (
+                    <div className="px-3 py-2 md:px-4 md:py-3 bg-off-white">
+                      <div className="flex flex-wrap gap-1.5 md:gap-2">
+                        {technologies.map((tech, idx) => (
+                          <span
+                            key={idx}
+                            className="px-2 py-0.5 md:px-2 md:py-1 text-[10px] md:text-xs rounded bg-brand-black/10 text-brand-black font-terminal"
+                          >
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
               ))}
             </div>
           )}

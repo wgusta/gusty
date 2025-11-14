@@ -9,6 +9,8 @@ interface Project {
   imageUrl?: string;
   tags: string[];
   column: 'design' | 'ai' | 'bridged' | 'danger';
+  status?: 'live' | 'development' | 'archived';
+  liveUrl?: string;
 }
 
 interface DangerCardProps {
