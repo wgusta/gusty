@@ -703,6 +703,9 @@ So anyways, let's fry some aubergines now.`
 ];
 
 export default function Home() {
+  // Check if danger zone should be shown (default: false in production)
+  const showDangerZone = process.env.NEXT_PUBLIC_SHOW_DANGER_ZONE === 'true';
+
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
@@ -713,6 +716,9 @@ export default function Home() {
   const dangerZoneRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Only initialize danger zone logic if enabled
+    if (!showDangerZone) return;
+    
     // Check localStorage for danger zone confirmation
     const savedConfirmation = localStorage.getItem('dangerZoneConfirmed');
     if (savedConfirmation === 'true') {
@@ -723,7 +729,7 @@ export default function Home() {
     } else {
       setDangerZoneConfirmed(null); // Show modal
     }
-  }, []);
+  }, [showDangerZone]);
 
   useEffect(() => {
     // Only enable custom cursor on non-touch devices
@@ -749,7 +755,7 @@ export default function Home() {
 
   // Intersection Observer to detect when danger zone is in view
   useEffect(() => {
-    if (!dangerZoneRef.current || dangerZoneConfirmed !== null) return;
+    if (!showDangerZone || !dangerZoneRef.current || dangerZoneConfirmed !== null) return;
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -780,8 +786,8 @@ export default function Home() {
     localStorage.setItem('dangerZoneConfirmed', 'false');
   };
 
-  // Filter and sort projects (exclude danger zone)
-  const nonDangerProjects = projects.filter(p => p.column !== 'danger');
+  // Filter and sort projects (exclude danger zone if disabled)
+  const nonDangerProjects = projects.filter(p => p.column !== 'danger' || showDangerZone);
   const sortedProjects = [...nonDangerProjects].sort((a, b) => 
     new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
   );
@@ -791,8 +797,8 @@ export default function Home() {
     ? [] 
     : sortedProjects.filter(p => p.column === activeFilter);
   
-  // Sort danger zone projects by finalization date (newest first)
-  const dangerProjects = projects.filter(p => p.column === 'danger');
+  // Sort danger zone projects by finalization date (newest first) - only if enabled
+  const dangerProjects = showDangerZone ? projects.filter(p => p.column === 'danger') : [];
   const sortedDangerProjects = [...dangerProjects].sort((a, b) => 
     new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
   );
@@ -952,7 +958,7 @@ export default function Home() {
       </div>
 
       {/* Danger Zone Section - Always visible, blurred when not confirmed */}
-      {sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
+      {showDangerZone && sortedDangerProjects.length > 0 && !showDangerZoneMessage && (
         <div 
           ref={dangerZoneRef}
           className="w-full bg-sun-red pt-4 pb-12 md:py-16 lg:py-20 relative"
@@ -979,7 +985,7 @@ export default function Home() {
           </div>
 
           {/* Interaction Box (Confirmation Modal) - Fixed to this section, NOT blurred */}
-          {dangerZoneConfirmed === null && isDangerZoneInView && (
+          {showDangerZone && dangerZoneConfirmed === null && isDangerZoneInView && (
             <div className="absolute inset-0 z-50 flex items-center justify-center" style={{ filter: 'none' }}>
               <div className="relative w-full max-w-lg mx-4 bg-off-white rounded-lg shadow-2xl p-6 md:p-8">
                 <h3 className="text-2xl md:text-3xl font-bold text-brand-black font-erratic mb-4 md:mb-6">
@@ -1011,7 +1017,7 @@ export default function Home() {
       )}
 
       {/* Danger Zone Message (if declined) */}
-      {showDangerZoneMessage && (
+      {showDangerZone && showDangerZoneMessage && (
         <div className="w-full bg-sun-red py-12 md:py-16 lg:py-20 relative">
           <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 text-center">
             <p className="text-xl md:text-2xl lg:text-3xl font-erratic text-brand-white">
