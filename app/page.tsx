@@ -88,7 +88,23 @@ BadenLEG connects homeowners who want to share solar energy together. Users ente
 - Railway setup & configuration
 - GitHub Actions workflow for CI/CD
 - DNS configuration (Infomaniak)
-- SendGrid domain authentication`,
+- SendGrid domain authentication
+
+---
+
+## Challenges
+
+### Email Delivery Optimization
+
+**Challenge:** Emails from badenleg.ch were blocked.
+
+**Solution:** Configured SendGrid domain authentication with SPF, DKIM, DMARC records for reliable email delivery.
+
+### Mobile User Experience
+
+**Challenge:** Map overlapped with input fields.
+
+**Solution:** Optimized mobile layout by hiding map on mobile devices, implementing full-screen input panel and centered logo for better usability.`,
     aiContent: `## AI-Assisted Development
 
 ### Code Generation
@@ -153,9 +169,9 @@ Clusters are sorted by autarky score - highest autarky = best match quality. Res
 
 ---
 
-## Technical Solutions & Improvements
+## Challenges
 
-### Solution 1: Persistent Token Management
+### Persistent Token Management
 
 **Challenge:** Railway deletes the filesystem on every deployment. Tokens in separate JSON files were lost.
 
@@ -191,7 +207,7 @@ def issue_verification_token(building_id):
     return token
 \`\`\`
 
-### Solution 2: Fast Response Endpoint
+### Fast Response Endpoint
 
 **Challenge:** After address input, timeouts occurred due to slow external API calls and intensive ML calculations.
 
@@ -226,19 +242,7 @@ def api_check_potential_fast():
         ).start()
     
     return jsonify({"match": provisional_matches})
-\`\`\`
-
-### Solution 3: Email Delivery Optimization
-
-**Challenge:** Emails from badenleg.ch were blocked.
-
-**Solution:** Configured SendGrid domain authentication with SPF, DKIM, DMARC records for reliable email delivery.
-
-### Solution 4: Mobile User Experience
-
-**Challenge:** Map overlapped with input fields.
-
-**Solution:** Optimized mobile layout by hiding map on mobile devices, implementing full-screen input panel and centered logo for better usability.`
+\`\`\``
   },
   // Design Projects (5)
   {
