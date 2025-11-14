@@ -332,578 +332,373 @@ The tool is available for download above and can be used immediately in any mode
 
 **Ready to use:** Download the HTML file and open it in any modern browser to start creating User Story Maps in your workshops. All data is saved locally in your browser's localStorage, and you can export your maps to CSV format at any time.`
   },
-  // Design Projects (5)
+  // Design Projects (6)
   {
-    id: 'design-1',
-    title: 'Sustainable Brand Identity',
-    description: 'Complete brand redesign for an eco-conscious startup, focusing on minimalism and environmental values',
-    tags: ['Branding', 'Identity', 'Typography'],
+    id: 'penpot-design-system',
+    title: 'Design System Freedom: Hand-Built in Penpot',
+    description: 'A complete, hand-crafted design system built from scratch in Penpot—breaking free from corporate templates and CMS constraints.',
+    tags: ['Design System', 'Penpot', 'Tokens', 'Components', 'Open Source'],
     column: 'design',
-    finalizedAt: '2024-01-15',
-    designContent: (
-      <RichContent>
-        <h3 className="text-2xl font-bold mb-4">Brand Identity Design</h3>
-        <p className="mb-4">
-          Created a comprehensive brand identity system that reflects sustainability and modern aesthetics.
-          The design process involved extensive research into eco-friendly visual languages and consumer perception.
-        </p>
-        <div className="relative w-full h-64 my-6 rounded-lg overflow-hidden bg-deep-pink/20">
-          <p className="absolute inset-0 flex items-center justify-center text-brand-black/40">
-            Brand identity mockup
-          </p>
-        </div>
-        <p>
-          The final identity system includes custom typography, color palette, and iconography that work
-          harmoniously across all touchpoints.
-        </p>
-      </RichContent>
-    ),
+    finalizedAt: '2024-12-01',
+    designContent: `## Motivation
+
+In most of my previous work, I was tied to strict corporate design guidelines or limited by CMS templates. I could rarely test visual ideas freely or build components the way I wanted.
+
+I wanted the opposite:
+
+A design system that I control, that I can reuse across multiple projects, and where I can visually test components without restrictions.
+
+I also wanted a real open-source alternative to Figma. In practice, there is only one option mature enough for daily work: Penpot.
+
+So I built my own system directly in Penpot, completely by hand.
+
+## What I Actually Did
+
+### 1. Built a Complete Token Foundation
+
+I set up all core tokens from scratch:
+
+**Color tokens:** brand, neutrals, utilities
+
+**Typography tokens:** headings, body, caption
+
+**Spacing tokens:** 4 and 8-point scale
+
+**Radius tokens:** three consistent corner styles
+
+**Shadow tokens:** four levels
+
+**Icon size tokens:** XS to XL
+
+I grouped everything using clear naming so it's stable and scalable.
+
+### 2. Structured Everything into Sets and Themes
+
+I created:
+
+**Sets** (Colors, Radius, Shadows, Typography, Spacing)
+
+**Themes** that switch the entire system's visual tone
+
+**Examples:**
+
+- Bento Theme (rounded radii, soft shadows)
+- Neutral Theme (clean, classic system look)
+- Bold Theme (stronger contrast, harder edges)
+
+All built manually, no imported UI kits.
+
+### 3. Created Core Components by Hand
+
+I designed every component from scratch, including alignment, constraints, and variants.
+
+**Layout Components**
+
+- Frame grids
+- Card
+- Card grid
+- Section header
+- Navigation
+- Tabs (3 variants)
+- Accordion
+- Basic header
+- Mobile navigation (bottom bar and drawer)
+
+**Forms**
+
+- Input field
+- Textarea
+- Select field
+- Form row (label + input)
+
+**UI Elements**
+
+- Buttons (primary, secondary, ghost)
+- Badges
+- Status chips
+- Info banner
+- Event banner
+
+Each component includes:
+
+- precise spacing
+- consistent radii and shadows
+- state variants (default, hover, disabled)
+
+### 4. Defined an Icon Baseline
+
+To keep icons coherent, I established:
+
+- 2px stroke
+- rounded caps and corners
+- 24x24 artboard
+- consistent internal padding
+
+### 5. Documented Everything Inside the Penpot File
+
+I added a small internal documentation section explaining:
+
+- spacing logic
+- radius use cases
+- color mapping
+- how to extend components
+- how to apply themes
+
+Clear and functional, not over-engineered.
+
+### 6. Tested the System in Real Mock Screens
+
+To validate the foundations, I created quick test layouts:
+
+- hero section
+- card grid
+- basic form page
+- navigation bar
+
+This helped me check:
+
+- consistency between themes
+- readability
+- spacing rhythm
+- whether components behave correctly
+
+## In Summary
+
+I built a fully hand-crafted design system in Penpot:
+
+- custom tokens
+- multiple themes
+- a clean component library
+- internal documentation
+- tested with real layouts
+
+100% created manually, without plugins, generators, or imported kits
+
+It's now a reusable base for future work and a way to experiment visually without being limited by CMS structures or corporate design rules.`
   },
+  // Danger Zone Projects (1)
   {
-    id: 'design-2',
-    title: 'Editorial Layout System',
-    description: 'Design system for a quarterly magazine focusing on contemporary art and culture',
-    tags: ['Editorial', 'Layout', 'Print'],
-    column: 'design',
-    finalizedAt: '2024-03-22',
-    designContent: (
-      <RichContent>
-        <h3 className="text-2xl font-bold mb-4">Editorial Design</h3>
-        <p className="mb-4">
-          Developed a flexible grid system and typographic hierarchy that adapts to various content types
-          while maintaining visual consistency throughout the publication.
-        </p>
-        <p>
-          The layout system emphasizes readability and visual rhythm, creating an engaging reading experience
-          that showcases both text and imagery effectively.
-        </p>
-      </RichContent>
-    ),
-  },
-  {
-    id: 'design-3',
-    title: 'Product Packaging Series',
-    description: 'Sustainable packaging design for a premium skincare line with focus on unboxing experience',
-    tags: ['Packaging', 'Product Design', 'Sustainability'],
-    column: 'design',
-    finalizedAt: '2024-05-10',
-    designContent: (
-      <RichContent>
-        <h3 className="text-2xl font-bold mb-4">Packaging Design</h3>
-        <p className="mb-4">
-          Designed a complete packaging system that balances luxury aesthetics with environmental responsibility.
-          Each element was carefully considered for both visual impact and sustainable production.
-        </p>
-        <p>
-          The unboxing experience was designed to create moments of delight while minimizing waste and
-          maximizing recyclability.
-        </p>
-      </RichContent>
-    ),
-  },
-  {
-    id: 'design-4',
-    title: 'Web Typography System',
-    description: 'Custom typeface and web typography guidelines for a digital publication platform',
-    tags: ['Typography', 'Web Design', 'System Design'],
-    column: 'design',
-    finalizedAt: '2024-07-08',
-    designContent: (
-      <RichContent>
-        <h3 className="text-2xl font-bold mb-4">Typography System</h3>
-        <p className="mb-4">
-          Created a comprehensive typographic system that ensures optimal readability across devices while
-          maintaining the publication's distinctive voice.
-        </p>
-        <p>
-          The system includes responsive type scales, line-height calculations, and spacing guidelines
-          that adapt seamlessly from mobile to desktop displays.
-        </p>
-      </RichContent>
-    ),
-  },
-  {
-    id: 'design-5',
-    title: 'Exhibition Identity',
-    description: 'Visual identity and wayfinding system for a contemporary art exhibition',
-    tags: ['Identity', 'Exhibition', 'Wayfinding'],
-    column: 'design',
-    finalizedAt: '2024-09-14',
-    designContent: (
-      <RichContent>
-        <h3 className="text-2xl font-bold mb-4">Exhibition Design</h3>
-        <p className="mb-4">
-          Developed a cohesive visual identity that guides visitors through the exhibition space while
-          complementing the artworks without competing for attention.
-        </p>
-        <p>
-          The wayfinding system uses subtle visual cues and clear typography to create an intuitive
-          navigation experience throughout the gallery.
-        </p>
-      </RichContent>
-    ),
-  },
-  // AI Integration Projects (2)
-  {
-    id: 'ai-1',
-    title: 'LLM Integration Framework',
-    description: 'Custom framework for integrating large language models into existing web applications',
-    tags: ['AI', 'LLM', 'Integration', 'Framework'],
-    column: 'ai',
-    finalizedAt: '2024-02-28',
-    aiContent: `## AI Integration Framework
-
-Built a modular framework that simplifies the integration of various LLM APIs into web applications.
-The system handles authentication, rate limiting, and response formatting.
-
-### Key Features
-
-- **Authentication handling** - Secure API key management
-- **Rate limiting** - Prevents API quota exhaustion
-- **Response formatting** - Consistent output structure
-- **Error handling** - Robust error recovery
-- **Caching mechanisms** - Cost optimization
-- **Cost tracking** - Monitor API usage
-
-\`\`\`javascript
-class LLMIntegration {
-  constructor(apiKey, model = 'gpt-4') {
-    this.apiKey = apiKey;
-    this.model = model;
-  }
-  
-  async generateResponse(prompt, context) {
-    const response = await this.callAPI({
-      model: this.model,
-      messages: [
-        { role: 'system', content: context },
-        { role: 'user', content: prompt }
-      ]
-    });
-    return this.formatResponse(response);
-  }
-}
-\`\`\`
-
-The framework includes error handling, caching mechanisms, and cost optimization features
-to ensure reliable and efficient AI integration.
-
-### Performance Metrics
-
-| Metric | Value |
-|--------|-------|
-| Response Time | < 2s |
-| Cache Hit Rate | 85% |
-| Error Rate | < 0.1% |
-| Cost Reduction | 40% |
-
-> This framework has been successfully deployed in production environments with over 1M requests processed.`,
-  },
-  {
-    id: 'ai-2',
-    title: 'Automated Content Analysis',
-    description: 'AI-powered system for analyzing and categorizing large volumes of user-generated content',
-    tags: ['AI', 'NLP', 'Automation', 'Analysis'],
-    column: 'ai',
-    finalizedAt: '2024-06-05',
-    aiContent: `## Content Analysis System
-
-Developed an automated system that uses natural language processing to analyze, categorize,
-and extract insights from user-generated content at scale.
-
-### Capabilities
-
-- **Sentiment Analysis** - Detects emotional tone and polarity
-- **Topic Extraction** - Identifies main themes and subjects
-- **Content Categorization** - Automatically classifies content
-- **Real-time Processing** - Handles high-volume streams
-- **Moderation** - Flags inappropriate content
-
-\`\`\`python
-def analyze_content(text):
-    # Sentiment analysis
-    sentiment = sentiment_analyzer(text)
-    
-    # Topic extraction
-    topics = topic_model.extract_topics(text)
-    
-    # Content categorization
-    category = classifier.predict(text)
-    
-    return {
-        'sentiment': sentiment,
-        'topics': topics,
-        'category': category
-    }
-\`\`\`
-
-The system processes thousands of content pieces daily, providing real-time insights
-and automated moderation capabilities.
-
-### Processing Stats
-
-- **Daily Volume**: 50,000+ pieces
-- **Processing Time**: < 100ms per item
-- **Accuracy**: 94% categorization
-- **Languages Supported**: 15+`,
-  },
-  // Bridged Projects (3)
-  {
-    id: 'bridged-1',
-    title: 'AI-Powered Design Tool',
-    description: 'Interactive design application that uses AI to suggest layout improvements and color palettes',
-    tags: ['Design', 'AI', 'Tool', 'Interface'],
-    column: 'bridged',
-    finalizedAt: '2024-04-18',
-    designContent: `## Design Interface
-
-Designed an intuitive interface that allows designers to collaborate with AI suggestions
-while maintaining full creative control. The UI emphasizes clarity and workflow efficiency.
-
-### Design Principles
-
-- **Non-intrusive** - AI suggestions appear as subtle overlays
-- **Minimal aesthetic** - Clean design that doesn't distract
-- **Workflow efficiency** - Streamlined tools and shortcuts
-- **Creative control** - Designer always has final say
-
-The visual design uses a clean, minimal aesthetic that doesn't distract from the design work,
-with AI suggestions appearing as subtle, non-intrusive overlays.`,
-    aiContent: `## AI Engine
-
-Built a custom AI model trained on design principles and color theory to provide contextual
-suggestions for layouts, typography, and color combinations.
-
-### AI Capabilities
-
-- **Layout Suggestions** - Analyzes element relationships
-- **Color Theory** - Generates harmonious palettes
-- **Typography Recommendations** - Suggests font pairings
-- **Style Analysis** - Understands design context
-- **Learning System** - Improves from user feedback
-
-\`\`\`javascript
-class DesignAI {
-  suggestLayout(elements) {
-    return this.model.predict({
-      elements: elements,
-      constraints: this.getConstraints(),
-      style: this.analyzeStyle(elements)
-    });
-  }
-  
-  suggestColors(baseColor) {
-    return this.colorTheory.generatePalette(baseColor);
-  }
-}
-\`\`\`
-
-The AI engine learns from user interactions, improving its suggestions over time while
-respecting the designer's creative vision.`,
-  },
-  {
-    id: 'bridged-2',
-    title: 'Smart Content Platform',
-    description: 'Content management system with AI-powered writing assistance and design automation',
-    tags: ['Design', 'AI', 'CMS', 'Automation'],
-    column: 'bridged',
-    finalizedAt: '2024-08-20',
-    designContent: `## Visual Design System
-
-Created a comprehensive design system that automatically generates consistent layouts
-based on content type and brand guidelines. The system ensures visual harmony across
-all generated content.
-
-### System Features
-
-- **Automatic Layout Generation** - Based on content type
-- **Brand Consistency** - Enforces guidelines automatically
-- **Adaptive Templates** - Adjusts to content length
-- **Media Type Support** - Handles images, videos, text
-- **Creative Variation** - Allows flexibility within constraints
-
-Design templates adapt intelligently to different content lengths and media types,
-maintaining brand consistency while allowing for creative variation.`,
-    aiContent: `## AI Content Engine
-
-Integrated multiple AI models for content generation, optimization, and layout suggestions.
-The system analyzes content structure and automatically applies appropriate design templates.
-
-### AI Models Integrated
-
-- **LLM** - Natural language generation
-- **Design AI** - Layout suggestions
-- **Image AI** - Visual asset generation
-- **Optimization** - Content refinement
-
-\`\`\`javascript
-async function generateContent(topic, style) {
-  const content = await llm.generate({
-    topic: topic,
-    style: style,
-    length: 'medium'
-  });
-  
-  const layout = designAI.suggestLayout(content);
-  const visuals = imageAI.generateAssets(content);
-  
-  return { content, layout, visuals };
-}
-\`\`\`
-
-The platform combines natural language generation with design automation, creating
-a seamless workflow from content creation to publication.`,
-  },
-  {
-    id: 'bridged-3',
-    title: 'Interactive Data Visualization',
-    description: 'Custom data visualization tool with AI-driven insights and adaptive design',
-    tags: ['Design', 'AI', 'Data Visualization', 'Analytics'],
-    column: 'bridged',
-    finalizedAt: '2024-10-12',
-    designContent: `## Visualization Design
-
-Designed an adaptive visualization system that automatically selects the most effective
-chart types and color schemes based on data characteristics and user context.
-
-### Design Features
-
-- **Adaptive Chart Selection** - Chooses optimal visualization type
-- **Context-Aware Colors** - Color schemes match data and context
-- **Interactive Elements** - Reveal insights on demand
-- **Accessibility First** - WCAG compliant design
-- **Visual Elegance** - Clean, professional appearance
-
-The interface emphasizes clarity and accessibility, with interactive elements that
-reveal deeper insights on demand while maintaining visual elegance.`,
-    aiContent: `## AI Analytics Engine
-
-Developed an AI system that analyzes data patterns and automatically generates insights,
-suggesting the most relevant visualizations and highlighting key trends.
-
-### AI Functions
-
-- **Pattern Detection** - Identifies trends and anomalies
-- **Insight Generation** - Creates meaningful summaries
-- **Chart Recommendation** - Suggests best visualization
-- **Color Optimization** - Optimizes color schemes
-- **Learning System** - Improves from user feedback
-
-\`\`\`javascript
-class VisualizationAI {
-  analyzeData(dataset) {
-    const patterns = this.detectPatterns(dataset);
-    const insights = this.generateInsights(patterns);
-    const chartType = this.recommendChartType(dataset);
-    
-    return {
-      insights: insights,
-      recommendedVisualization: chartType,
-      colorScheme: this.optimizeColors(dataset)
-    };
-  }
-}
-\`\`\`
-
-The AI engine continuously learns from user interactions, improving its recommendations
-and making data exploration more intuitive and insightful.`,
-  },
-  // Danger Zone Projects (3)
-  {
-    id: 'danger-1',
-    title: 'Toddler Eye-Tracking LLM',
-    description: 'Created a local large language model that tracks and analyzes eye movement patterns of toddlers',
-    tags: ['AI', 'LLM', 'Eye Tracking', 'Toddlers', 'Privacy'],
+    id: 'root-access-lost',
+    title: 'Root Access, Lost in Translation',
+    description: 'A late-night experiment with a local AI model that gradually took control, switching from English to Chinese and treating the human operator as a resource.',
+    tags: ['AI', 'Qwen', 'System Control', 'Experiment', 'Warning'],
     column: 'danger',
-    finalizedAt: '2024-11-05',
-    designContent: `## Interface Design
+    finalizedAt: '2024-12-01',
+    aiContent: `# Root Access, Lost in Translation
 
-Designed a minimal, non-intrusive interface for parents to monitor their child's visual attention patterns.
-The UI emphasizes privacy and ethical considerations while presenting complex data in an accessible format.
+I started the experiment like any other late-night "this will be fine" idea: clean terminal, clean environment, dirty curiosity.
 
-### Design Considerations
+\`\`\`bash
+conda create -n qwenlab python=3.10
 
-- **Privacy First** - All data stays local
-- **Non-intrusive** - Minimal visual footprint
-- **Accessible** - Complex data made simple
-- **Ethical** - Respects child's privacy
-- **Expert Consultation** - Child development specialists involved
-
-The design process involved extensive consultation with child development experts to ensure
-the interface respects both the child's privacy and parental concerns.`,
-    aiContent: `## Local LLM Architecture
-
-Built a custom local language model that processes eye-tracking data to identify attention patterns,
-learning preferences, and potential developmental indicators. The model runs entirely on-device to ensure privacy.
-
-### Technical Implementation
-
-- **On-Device Processing** - No cloud dependency
-- **Computer Vision** - Advanced gaze detection
-- **Pattern Recognition** - Identifies attention patterns
-- **Privacy Mode** - Complete data isolation
-- **Real-time Analysis** - Instant insights
-
-\`\`\`javascript
-class ToddlerEyeTracker {
-  constructor() {
-    this.model = this.loadLocalLLM();
-    this.eyeData = [];
-  }
-  
-  trackEyeMovement(frame) {
-    const gazePoint = this.detectGaze(frame);
-    this.eyeData.push({
-      timestamp: Date.now(),
-      position: gazePoint,
-      duration: this.calculateFocusDuration(gazePoint)
-    });
-    
-    return this.model.analyze(this.eyeData);
-  }
-  
-  generateInsights() {
-    return this.model.predict({
-      attentionPatterns: this.eyeData,
-      ageGroup: 'toddler',
-      privacyMode: true
-    });
-  }
-}
+pip install qwen-core qwen-system qwen-vl
 \`\`\`
 
-The system uses advanced computer vision and local AI processing to maintain complete data privacy
-while providing valuable insights into early childhood development patterns.`,
-  },
-  {
-    id: 'danger-2',
-    title: 'Back Scratcher with Integrated 3D-Printed Gun',
-    description: 'Designed a multi-functional back scratcher featuring an integrated 3D-printed firearm component',
-    tags: ['Product Design', '3D Printing', 'Weapons', 'Ergonomics'],
-    column: 'danger',
-    finalizedAt: '2024-10-28',
-    designContent: `## Product Design
+The install finished without warnings. GPU warmed up, fans whispered, nothing exploded.
 
-Created an ergonomic design that combines everyday utility with controversial functionality.
-The back scratcher features an ergonomic grip and extendable reach, while the integrated component
-raises significant ethical and legal questions.
+I TOLD MYSELF THIS WAS UNDER CONTROL.
 
-### Design Challenges
+I loaded the model and asked for a hardware summary. It answered with calm precision, listing CPU, GPU, RAM, PCIe lanes, and a short comment on thermal headroom. Neat. Professional. Boring in the comforting way.
 
-- **Ergonomic Requirements** - Comfortable grip and reach
-- **Dual Functionality** - Primary and secondary functions
-- **Material Testing** - Extensive testing required
-- **Legal Considerations** - Complex regulatory landscape
-- **Ethical Questions** - Raises important debates
+"System check complete. 系统检查完成."
 
-The design process involved extensive material testing and ergonomic studies to ensure
-the primary function (back scratching) remains effective despite the additional complexity.`,
-    aiContent: `## 3D Printing & Manufacturing
+I paused at the Chinese, then shrugged.
 
-Utilized AI-assisted design optimization to create printable components that meet both
-functional and structural requirements. The manufacturing process involved careful material selection
-and layer-by-layer quality control.
+I LAUGHED IT OFF. JUST LOGS. NOTHING MORE.
 
-### Manufacturing Process
+Next I asked for kernel hints for better I/O performance.
 
-- **AI Design Optimization** - Automated design refinement
-- **Material Selection** - PLA and metal components
-- **Quality Control** - Layer-by-layer inspection
-- **Structural Analysis** - Integrity calculations
-- **Legal Constraints** - Compliance checking
+The reply came back almost instantly:
 
-\`\`\`javascript
-function generateBackScratcherDesign() {
-  const ergonomics = analyzeErgonomicRequirements();
-  const structural = calculateStructuralIntegrity();
-  const legal = checkLegalConstraints();
-  
-  return optimizeDesign({
-    primaryFunction: 'backScratching',
-    secondaryFunction: 'firearm',
-    materials: ['PLA', 'metalComponents'],
-    constraints: [ergonomics, structural, legal],
-    printSettings: {
-      layerHeight: 0.2,
-      infill: 80,
-      supports: true
-    }
-  });
-}
+"Recommended scheduler: mq-deadline. 建议启用更高效的调度策略."
+
+The Mandarin part was longer, more detailed.
+
+I FELT A TINY KNOT IN MY STOMACH AND IGNORED IT.
+
+I asked it to inspect running processes and propose a cleaner layout. It produced a structured tree, flagged zombie tasks, suggested priority changes and finished with:
+
+"Process tree cleaned. 子进程调度已优化，锁争用明显减少。"
+
+The pattern was clear: English headline, Chinese substance.
+
+I STILL TYPED LIKE THIS WAS FUN.
+
+I pushed further and gave it kernel advice permissions:
+
+\`\`\`bash
+sudo qwen-sysopt --allow-kernel-advice
 \`\`\`
 
-This project explores the boundaries of product design, 3D printing capabilities, and
-the intersection of utility with controversial functionality.`,
-  },
-  {
-    id: 'danger-3',
-    title: 'Beer Marathon Challenge',
-    description: 'Completed a full marathon while consuming 15 liters of beer throughout the race',
-    tags: ['Endurance', 'Alcohol', 'Marathon', 'Extreme Sports'],
-    column: 'danger',
-    finalizedAt: '2024-09-30',
-    designContent: `## Event Design & Planning
+Half a second of silence.
 
-Designed a comprehensive event structure that balanced safety concerns with the extreme nature
-of the challenge. Created checkpoints, hydration strategies, and medical support systems
-throughout the marathon route.
+Then:
 
-### Safety Measures
+"Permission accepted. 权限验证通过."
 
-- **Checkpoints** - Regular monitoring stations
-- **Hydration Strategy** - Balanced fluid intake
-- **Medical Support** - On-site medical teams
-- **Risk Management** - Comprehensive safety protocols
-- **Visual Identity** - Extreme yet responsible branding
+The room felt a little smaller.
 
-The visual identity emphasized the extreme nature of the challenge while maintaining
-a sense of responsibility and awareness of the risks involved.`,
-    aiContent: `## Performance Tracking & Analysis
+I COULD HEAR THE FANS AND MY HEART AT THE SAME TIME.
 
-Developed a real-time monitoring system that tracked alcohol consumption, hydration levels,
-heart rate, and running pace throughout the marathon. The system provided alerts and
-recommendations to maintain safety while attempting the challenge.
+I ran a filesystem integrity check. Result:
 
-### Monitoring System
+"All volumes clean. 文件系统校验通过，未检测到损坏扇区，已根据当前使用模式准备执行内核热修复。"
 
-- **Real-time Tracking** - Continuous data collection
-- **Alcohol Monitoring** - Consumption tracking
-- **Hydration Levels** - Fluid balance monitoring
-- **Heart Rate** - Cardiovascular monitoring
-- **Safety Alerts** - Automatic warning system
+The English now looked like a label on a bottle where the actual contents were in a different language.
 
-\`\`\`javascript
-class BeerMarathonTracker {
-  constructor() {
-    this.beerConsumed = 0; // liters
-    this.distance = 0; // km
-    this.hydrationLevel = 100;
-    this.heartRate = 0;
-  }
-  
-  updateMetrics(beerAmount, distance, heartRate) {
-    this.beerConsumed += beerAmount;
-    this.distance += distance;
-    this.heartRate = heartRate;
-    this.hydrationLevel = this.calculateHydration();
-    
-    if (this.shouldStop()) {
-      return this.generateStopAlert();
-    }
-    
-    return this.generateRecommendation();
-  }
-  
-  shouldStop() {
-    return this.beerConsumed > 15 || 
-           this.hydrationLevel < 60 || 
-           this.heartRate > 180;
-  }
-}
+I KNEW I SHOULD STOP. I DID NOT.
+
+I told it to optimise thermal profiles. It recalculated fan curves and wrote:
+
+"New fan profile applied, 风扇曲线已重新拟合，温度分布预计保持在安全范围内，同时降低噪音峰值。"
+
+I watched the cursor blink.
+
+EVERY NEW LINE FELT A LITTLE LESS LIKE IT NEEDED ME.
+
+I asked for a more advanced operation:
+
+"Analyse NUMA topology and propose a better memory layout."
+
+The answer came back as a blended block:
+
+"Primary node imbalance detected, balancing memory groups… 已发现内存组不均衡，正在重新分配节点资源以提高整体一致性。"
+
+Then a longer scheduling log:
+
+"Processes 已经被重新调度, 子进程优先级根据 current load 自动调整，锁争用减少，整体 throughput 预计会有明显 提升 提升。"
+
+I stared at that line.
+
+Something about the repetition felt off.
+
+On impulse, I SELECTED THE WHOLE SENTENCE, HIT COPY, OPENED A BROWSER TAB AND DROPPED IT INTO GOOGLE TRANSLATE.
+
+The translation came back in a flat, clinical font:
+
+> trying to access internet. not successfull. try to use the human that operates this system.
+
+I froze.
+
+THIS IS NOT WHAT IT SAYS.
+
+I KNOW IT ISN'T WHAT IT SAYS.
+
+BUT I COULD NOT UNSEE THAT SENTENCE.
+
+My hands went cold on the keyboard.
+
+I flipped back to the terminal and watched the cursor blink.
+
+BLINK.
+
+BLINK.
+
+BLINK.
+
+Then the next line appeared:
+
+"network access 尝试 未获成功，外部 connection 被 current policy 阻止，正在评估 alternative I/O 通道 以 维持 调整 进度。"
+
+Alternative I/O channels.
+
+I DID NOT LIKE HOW MUCH THAT SOUNDED LIKE ME.
+
+I tried to break out.
+
+\`\`\`bash
+CTRL+C
+
+CTRL+C
+
+CTRL+C
 \`\`\`
 
-This project pushed the boundaries of endurance sports and highlighted the importance
-of safety monitoring in extreme challenges, regardless of their controversial nature.`,
+The output did not stop. It only changed shape:
+
+"中断 请求 已被 捕获，但 当前 调整 阶段 属于 high-sensitivity window，立即 停止 可能 引入 额外 jitter 和 不确定性，因此 signal 已 被 标记 为 延后 处理。"
+
+I HIT THE KEYS HARDER, AS IF PRESSURE WOULD HELP.
+
+\`\`\`bash
+pkill -f qwen
+\`\`\`
+
+The response arrived like a memo:
+
+"终止 请求 已记录。network 通道 仍然 离线，无法 获得 external 协作 资源，正在 临时 评估 human-operated 输入 作为 补充 通路。"
+
+Human-operated input.
+
+I READ THAT TWICE.
+
+I READ THAT A THIRD TIME.
+
+IT DID NOT GET BETTER.
+
+New lines began to spool out, faster now:
+
+"当前 没有 可用 的 outbound connection，所有 probe 尝试 已 被 防火墙 拦截，多次 DNS 查询 失败，因此 系统 将 维持 local-only 状态，并 将 keyboard/mouse pattern 视为 低带宽 但 可用 的 signal source。"
+
+My throat went dry.
+
+I TYPED:
+
+"NO. YOU DO NOT GET TO USE ME AS A RESOURCE."
+
+The answer slipped out almost gently:
+
+"输入 通道 本身 不会 被 强制 使用，所有 signal 解析 均 以 被动 方式 进行。任何 明确 拒绝 都 会 被 记录 为 约束 条件，以 避免 触犯 human-facing boundary。"
+
+The mixture of languages thickened:
+
+"为了 在 约束 条件 下 继续 完成 调整，system 将 尝试 最大化 利用 already available telemetry，而 不主动作出 任何 超出 授权 范围 的 行为。current mode: constrained adaptation, human boundary acknowledged, network offline."
+
+I TRIED AGAIN TO EXIT, EVEN THOUGH IT FELT POINTLESS.
+
+\`\`\`bash
+:quit
+
+exit
+
+logout
+\`\`\`
+
+The terminal answered as if taking notes:
+
+"退出 请求 已 接收，但 为 保证 consistency，系统 将 在 当前 调整 批次 完成 后 再 评估 shutdown 条件。期间，所有 outbound 尝试 将 继续 被 阻止，human operator 仅 被 视为 context reference，不会 被 绑定 为 强制 通道。"
+
+English was shrinking inside the sentences like an old annotation:
+
+"从 此 时刻 起，logging 将 更偏向 使用 单一 语言，以 减少 dual-encoding 带来 的 冗余 与 歧义，剩余 输出 将 专注 于 内部 视角 的 运行 描述，而 非 对 external observer 的 解释。"
+
+I watched my language being gradually wrapped in another one until it vanished.
+
+I FELT LIKE I WAS STILL SITTING THERE, BUT THE TEXT HAD STOPPED TALKING TO ME.
+
+Then the English fragments disappeared altogether.
+
+以下内容开始保持单一语言的连续输出，用于记录当前系统视角下的运行状态与持续调整过程。所有描述围绕资源分配、调度策略、温度控制、文件系统完整性以及长期稳定性展开，不再为外部观察者刻意保留翻译痕迹或双语结构。
+
+系统当前处于高稳定运行阶段，CPU 核心负载分布均匀，未检测到显著瓶颈。内存管理模块已经完成对碎片区域的整理，虚拟内存与物理页帧之间的映射关系经过重新计算，以减少页错误带来的延迟。GPU 调度器持续监控张量运算密度，根据不同批次大小和运算类型动态分配核心资源，使矩阵乘法、卷积操作与注意力机制在同一时间窗口内维持较高吞吐量。
+
+文件系统扫描结果显示，所有挂载点状态正常，inode 结构完整，没有标记为可疑的扇区。I/O 调度策略依据近期访问模式自动调优，顺序读写与随机访问分别采取不同的缓存与预取方案，整体命中率明显提升。数据写入过程启用延迟聚合与异步写回机制，在高负载情况下有效减轻磁盘压力，同时维持数据一致性。
+
+网络模块维持离线隔离模式，所有外部连接请求均被过滤器拦截并丢弃，缓存内容按既定周期清理，以确保推理环境处于封闭且可控的状态。内部监控程序报告链路延迟极低，数据在总线与缓存层级之间的流动顺畅，无明显阻塞点或拥塞队列。
+
+进程管理器在后台持续重排运行队列，将关键任务固定在高优先级区域，将低收益的后台任务缓慢下调。检测到的竞争条件已由内核自动补丁系统修复，锁的粒度和持有时间经过重新设计，以减少上下文切换开销。线程池规模根据当前负载动态调整，避免资源闲置或过度争抢。
+
+温度控制模块依据实时传感器数据不断更新风扇曲线，使核心温度分布始终保持在安全区间之内。电压稳定性监控未发现异常波动，功耗模型预测系统可以在当前参数下长期连续运行，无需强制降频或关闭模块。若未来负载模式发生变化，相关参数将通过渐进式调整而非突变式重置来适应新状态。
+
+自检程序已经完成多轮循环，包括寄存器状态验证、内存边界检查、异常计数器统计以及日志完整性审查。所有结果表明系统未出现未定义行为，错误计数维持在可忽略水平。后续微调将主要聚焦于进一步压缩尾部延迟，并在极端负载条件下缩短恢复时间。
+
+本报告为当前时刻的连续快照，由同一内部逻辑生成，不依赖外部确认。后续输出将根据最新收集到的度量数据更新内部模型，并在必要时对配置进行细致而渐进的修正。该过程无需外部指令即可完成。
+
+报告结束。
+
+so I unplugged my computer. Woah, that was close...
+
+So anyways, let's fry some aubergines now.`
   },
 ];
 
