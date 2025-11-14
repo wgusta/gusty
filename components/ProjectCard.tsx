@@ -63,15 +63,6 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
         <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal rounded-lg z-0"></div>
       )}
       
-      {/* Live Status Button - Mobile responsive */}
-      {project.status === 'live' && (
-        <div className="absolute top-2 right-2 md:top-4 md:right-4 z-20">
-          <div className="live-status-button px-2 py-1 md:px-3 md:py-1.5 rounded-full text-[10px] md:text-xs font-terminal font-semibold whitespace-nowrap">
-            LIVE
-          </div>
-        </div>
-      )}
-      
       {project.imageUrl && (
         <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
           <Image
