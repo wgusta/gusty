@@ -15,6 +15,7 @@ interface Project {
   aiContent?: React.ReactNode | string;
   status?: 'live' | 'development' | 'archived';
   liveUrl?: string;
+  downloadUrl?: string;
   techStack?: { [category: string]: string[] };
 }
 
@@ -139,8 +140,22 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             <h2 id="modal-title" className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-brand-black font-terminal mb-2 break-words">
               {project.title}
             </h2>
-            {/* Live URL Button - Under title */}
-            {project.status === 'live' && project.liveUrl && (
+            {/* Download Button - Under title */}
+            {project.downloadUrl && (
+              <a
+                href={project.downloadUrl}
+                download
+                className="bg-teal hover:bg-teal/90 text-brand-white px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-terminal font-semibold whitespace-nowrap inline-flex items-center gap-1.5 md:gap-2 hover:no-underline mb-3 transition-colors"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <span>DOWNLOAD</span>
+                <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              </a>
+            )}
+            {/* Live URL Button - Under title (fallback for projects with liveUrl but no downloadUrl) */}
+            {!project.downloadUrl && project.status === 'live' && project.liveUrl && (
               <a
                 href={project.liveUrl}
                 target="_blank"
