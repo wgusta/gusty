@@ -332,6 +332,308 @@ The tool is available for download above and can be used immediately in any mode
 
 **Ready to use:** Download the HTML file and open it in any modern browser to start creating User Story Maps in your workshops. All data is saved locally in your browser's localStorage, and you can export your maps to CSV format at any time.`
   },
+  // ATS Templates - AI-Assisted Project
+  {
+    id: 'ats-templates',
+    title: 'CV and Cover Letter Templates for ATS Survival',
+    description: 'HTML templates designed to pass AI-based filters and ATS parsers while maintaining visual appeal for human reviewers. Built with semantic HTML and CSS print stylesheets.',
+    tags: ['HTML', 'CSS', 'Print Stylesheets', 'Google Fonts', 'ATS-Optimized'],
+    column: 'ai',
+    finalizedAt: '2024-12-03',
+    aiContent: `## Why HTML Templates?
+
+The hard reality: Your most beautiful design never gets seen by a human if the ATS filters you out first. Over 60% of Swiss companies use ATS systems, and 52% of applicants never receive a response.
+
+### The HTML → PDF Strategy
+
+**Why HTML wins:**
+
+- **ATS-safe:** Semantic HTML with clear structure (\`<section>\`, \`<article>\`, \`<h1-h6>\`)
+- **AI-friendly:** Structure is clearly recognizable for AI agents to process
+- **Design flexibility:** Full CSS control for styling
+- **Print-ready:** Generate PDF via browser print (Cmd/Ctrl+P → Save as PDF)
+- **Single source:** One HTML file = source for everything
+- **No vendor lock-in:** W3C standards, works everywhere
+
+**One format, three outputs:** HTML (for AI editing), PDF (for human reviewers), Plain-text extraction (for ATS parsing)
+
+### ATS Rules Built Into Templates
+
+These templates follow the core ATS compatibility rules:
+
+- Standard fonts (Inter, Manrope - similar to Arial/Calibri, 10-12pt)
+- Standard section headings ("Berufserfahrung", "Kontakt", "Skills")
+- No complex tables or multi-column layouts that confuse parsers
+- Keywords flow naturally in context
+- Hard skills explicitly listed and visible
+
+---
+
+## How to Use the Templates
+
+### Step 1: Download a Template
+
+Choose the template that fits your needs:
+
+- **[1-Column CV](/templates/cv-template-1column.html)** - Maximum ATS compatibility, clean single-column layout
+- **[Bubbles CV](/templates/cv-template-bubbles.html)** - Visual skills with tag-style bubble display
+- **[Hybrid CV](/templates/cv-template-hybrid.html)** - Two-column balance of design and readability
+- **[Minimalist CV](/templates/cv-template-minimalist.html)** - Pure ATS optimization, no frills
+- **[Minimalist + Picture](/templates/cv-template-minimalist-with-picture.html)** - ATS-safe with photo option
+- **[Cover Letter](/templates/coverletter-template.html)** - Matching style with signature placeholder
+
+### Step 2: Set Up Your Application Folder
+
+**Important:** Create a new folder for each job application. Copy the template files into this folder along with your images. This keeps everything organized and ensures the HTML files can find your images.
+
+**Profile Photo (CV templates with picture):**
+- Save your photo as \`cvpicture.jpg\` in the same folder as the HTML file
+- Recommended size: 200×267 pixels (portrait orientation)
+- The templates reference: \`<img src="cvpicture.jpg" ...>\`
+
+**Signature (Cover Letter):**
+- Save your signature as \`signature.jpg\` in the same folder as the HTML file
+- Recommended height: ~45 pixels
+- The template references: \`<img src="signature.jpg" ...>\`
+
+**Why same folder?** HTML files load images relative to their location. If the images aren't in the same folder, they won't display.
+
+### Step 3: Edit the Content
+
+Open the HTML file in any text editor or IDE:
+
+1. Replace placeholder text \`[Full Name]\`, \`[Your Address]\`, etc.
+2. Fill in your work experience using the CAR method (Context-Action-Result)
+3. Update skills, education, and other sections
+4. Customize colors by editing CSS variables in the \`:root\` section
+
+### Step 4: Generate PDF
+
+1. Open the HTML file in any modern browser (Chrome, Firefox, Safari)
+2. Press **Cmd+P** (Mac) or **Ctrl+P** (Windows)
+3. Select "Save as PDF" as the destination
+4. The print stylesheet will automatically optimize the layout for PDF
+
+---
+
+## File Structure
+
+Create a new folder for each application. Keep all files together:
+
+\`\`\`
+company-name-application/
+├── cv.html          (your chosen CV template)
+├── coverletter.html (cover letter template)
+├── cvpicture.jpg    (your photo, 200×267px)
+└── signature.jpg    (your signature, ~45px height)
+\`\`\`
+
+**Tip:** Name folders by company (e.g., \`swisscom-2024/\`, \`migros-pm-role/\`) to stay organized across multiple applications.
+
+---
+
+## TELOS Framework: Your Personal Context for AI
+
+Before using AI to help with your CV, create a TELOS document. This is your strategic briefing TO the AI - it helps agents understand your story and write coherently about you.
+
+**What is TELOS?**
+- **H - History:** Your most important projects and roles with measurable results
+- **P - Problems:** What professional problems do you solve?
+- **M - Mission:** Your professional purpose in one sentence
+- **G - Goals:** Concrete career goals for 6-12 months
+- **C - Challenges:** Current obstacles you're facing
+
+### Example TELOS Document
+
+\`\`\`markdown
+# My TELOS - Job Search Context
+
+## H - History (Key Projects & Roles)
+H1: Led website redesign for retail company, 85% user adoption rate
+H2: Managed digital transformation project, CHF 2M budget, 18 months
+H3: Built customer portal from scratch, reduced support tickets by 40%
+H4: Introduced agile methodology to marketing team of 12 people
+
+## P - Problems I Solve
+P1: Traditional companies struggle to adopt digital tools effectively
+P2: Technical talent is undervalued in non-tech industries
+P3: Digital projects fail due to poor stakeholder communication
+
+## M - Mission
+M1: Bridge the gap between digital innovation and established industries
+
+## G - Goals (6-12 Months)
+G1: Project lead role in digital transformation by Q2 2025
+G2: Focus on cultural or non-profit sector
+G3: Team leadership responsibility (5-10 people)
+
+## C - Challenges
+C1: ATS systems filter out creative CVs before humans see them
+C2: Switching from agency to in-house role
+C3: Demonstrating leadership without formal management title
+\`\`\`
+
+**Privacy note:** TELOS is your internal context for AI agents. It helps them write better, but the content does NOT go to employers. Only what appears in your final CV/cover letter is shared.
+
+---
+
+## AI Agent Prompts
+
+Use these prompts with ChatGPT, Claude, or Gemini to optimize your application materials. Copy and paste them directly.
+
+### Agent 1: Communications Strategist
+
+Creates your unique positioning for each application.
+
+\`\`\`
+IDENTITY: Strategic communications consultant
+GOAL: Bold positioning that makes companies think "we need THIS person"
+INPUT: My TELOS document + job posting + my experience
+
+STEPS:
+1. Map my problems (P#) to company problems in the job posting
+2. Create positioning: Who I am + my approach (M#) + expected impact
+3. Test: Could this positioning apply to 100 other candidates? If yes, reject and make it more specific
+
+OUTPUT: Positioning brief with 3 key messages I should emphasize
+\`\`\`
+
+### Agent 2: HR Business Partner
+
+Optimizes your CV content for ATS and recruiter scanning.
+
+\`\`\`
+IDENTITY: HR Partner with recruiter insight and career coaching experience
+GOAL: Honest fit assessment + ATS optimization
+INPUT: Positioning brief + my current CV + job posting
+
+STEPS:
+1. Assess fit percentage (if <60%, recommend skipping this job)
+2. Rewrite achievements using CAR method: Context-Action-Result with metrics
+3. Optimize for 6-second recruiter scan: most important info visible first
+
+OUTPUT: Draft CV content + interview preparation points
+\`\`\`
+
+### Agent 3: Writing Style Editor
+
+Polishes your text to be active, clear, and authentic.
+
+\`\`\`
+IDENTITY: Expert editor for German (DE-CH) and English (EN-CH) professional writing
+GOAL: Transform good text into exceptional prose
+INPUT: Draft CV or cover letter + samples of my own writing style
+
+STEPS:
+1. Calibrate: Analyze my natural voice from writing samples
+2. Transform: Change passive voice to active ("Was responsible for" → "Led")
+3. Eliminate buzzwords and corporate jargon
+4. Ensure Swiss German conventions (ss vs ß, specific terminology)
+
+OUTPUT: Final polished text + change log explaining improvements
+\`\`\`
+
+### Agent 4: ATS Keyword Optimizer
+
+Ensures your CV passes automated filters.
+
+\`\`\`
+IDENTITY: ATS specialist who understands how parsing systems work
+GOAL: Maximize keyword match rate without keyword stuffing
+INPUT: Job posting + my CV draft
+
+STEPS:
+1. Extract required skills and keywords from job posting
+2. Identify which keywords are missing from my CV
+3. Suggest natural places to add missing keywords
+4. Check section headings match ATS expectations (Berufserfahrung, Skills, Ausbildung)
+
+OUTPUT: Keyword gap analysis + specific suggestions for placement
+\`\`\`
+
+---
+
+## The Complete Workflow
+
+**Total time: ~60-90 minutes per application (vs. 3-4 hours traditional)**
+
+1. **Prepare TELOS** (one-time, update periodically) - 30 min
+2. **Run Communications Strategist** with job posting - 15 min
+3. **Run HR Business Partner** to optimize CV - 20 min
+4. **Run Writing Style Editor** for polish - 15 min
+5. **Run ATS Optimizer** for final check - 10 min
+6. **Fill in HTML template** with optimized content - 15 min
+7. **Generate PDF** via browser print - 2 min
+
+---
+
+## The CAR Method for Achievements
+
+When writing your experience, use CAR (Context-Action-Result) with metrics:
+
+**Bad:** "Responsible for website management"
+
+**Good (CAR):**
+- **Context:** Legacy website with 5-second load times losing mobile users
+- **Action:** Led complete redesign with new CMS and CDN implementation
+- **Result:** 85% faster load times, 40% increase in mobile engagement
+
+\`\`\`
+Template for each bullet point:
+[Action verb] + [what you did] + [measurable result]
+
+Examples:
+- Led migration to cloud infrastructure, reducing hosting costs by 35%
+- Introduced automated testing, decreasing bug reports by 60%
+- Managed team of 8 across 3 time zones for global product launch
+\`\`\`
+
+---
+
+## Which AI Platform to Use?
+
+**ChatGPT** - Best for speed
+- Quick cover letter variations
+- Fast iterations
+- Custom GPTs for repeated tasks
+
+**Claude** - Best for complexity
+- Long CVs (handles 200k tokens)
+- Multi-step analysis
+- Complex restructuring
+
+**Gemini** - Best for data
+- Skills gap analysis
+- Salary benchmarking
+- Quantitative comparisons
+
+**Pro tip:** Use the right tool for the job, not your favorite tool.
+
+---
+
+## Template Features
+
+**All templates include:**
+- CSS variables for easy color customization
+- Print-optimized stylesheets (@media print)
+- Google Fonts (Inter, Manrope) loaded via CDN
+- Responsive design for screen viewing
+- Semantic HTML structure for ATS parsing
+- Dark background for screen viewing, white for print
+
+**Fonts load automatically** - no installation needed. If you work offline, the browser will fall back to system fonts.
+
+---
+
+## Why This Approach Works
+
+The traditional approach fails because:
+- Design elements (icons, graphics, columns) become garbage text when parsed
+- 64% admin reduction through ATS means robots decide who gets through
+- Beautiful PDFs from design tools often have terrible ATS parsing
+
+**The strategy:** First outsmart the machine, then impress the humans. These templates do both - clean structure for ATS, professional design for recruiters.`
+  },
   // Design Projects (6)
   {
     id: 'penpot-design-system',
