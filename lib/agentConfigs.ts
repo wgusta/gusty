@@ -32,38 +32,10 @@ export const chatgptConfigs: AgentConfig[] = [
 
 export const claudeConfigs: AgentConfig[] = [
   {
-    id: 'agent-note-compiler',
-    title: 'Agent Note Compiler',
-    description: 'Consolidates notes from multiple sources and formats into unified markdown documents.',
-    filename: 'agent-note-compiler.md',
-    platform: 'claude',
-  },
-  {
-    id: 'agent-orchestration-workflow',
-    title: 'Agent Orchestration Workflow',
-    description: 'Multi-Agent Job Application System workflow and orchestration guide.',
-    filename: 'agent-orchestration-workflow.md',
-    platform: 'claude',
-  },
-  {
-    id: 'agent-system-complete',
-    title: 'Complete Agent System for Workshop',
-    description: 'Updated agent system with Fabric Patterns & Bold Positioning Philosophy.',
-    filename: 'AGENT-SYSTEM-COMPLETE.md',
-    platform: 'claude',
-  },
-  {
     id: 'communications-strategist',
     title: 'Communications Strategist Agent',
     description: 'TELOS-driven positioning strategy agent (Bold > Compromise).',
     filename: 'communications-strategist.md',
-    platform: 'claude',
-  },
-  {
-    id: 'complete-system-guide',
-    title: 'Complete 7-Agent System for Job Applications',
-    description: 'Compact edition (Token-Optimized) system guide.',
-    filename: 'COMPLETE-SYSTEM-GUIDE.md',
     platform: 'claude',
   },
   {
@@ -92,20 +64,6 @@ export const claudeConfigs: AgentConfig[] = [
     title: 'Network Mapper Agent',
     description: 'LinkedIn warm intro pathfinding specialist.',
     filename: 'network-mapper-agent.md',
-    platform: 'claude',
-  },
-  {
-    id: 'orchestrator-configuration',
-    title: 'Job Application Orchestrator Configuration',
-    description: 'Multi-Agent System configuration for job applications.',
-    filename: 'orchestrator-configuration.md',
-    platform: 'claude',
-  },
-  {
-    id: 'required-inputs-guide',
-    title: 'Agent Required Inputs Guide',
-    description: 'Quick reference: What each agent needs before starting.',
-    filename: 'REQUIRED-INPUTS-GUIDE.md',
     platform: 'claude',
   },
   {
