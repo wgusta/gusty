@@ -96,6 +96,16 @@ No environment variables required for basic deployment.
 - **Twitter/X:** [@GueneyUsta](https://x.com/GueneyUsta)
 - **GitHub:** [wgusta](https://github.com/wgusta)
 
+## Activity Log
+
+This section is automatically updated by GitHub Actions when commits are pushed to main, develop, or master branches.
+
+Last 10 commits (auto-generated):
+
+(Awaiting first automated update)
+
+View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
+
 ## License
 
 Private project - All rights reserved

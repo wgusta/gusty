@@ -314,7 +314,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
                   />
                 ) : (
-                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                  <div className="max-w-none text-brand-black">
                     {project.designContent}
                   </div>
                 )
@@ -326,7 +326,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
                   />
                 ) : (
-                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                  <div className="max-w-none text-brand-black">
                     {project.aiContent}
                   </div>
                 )
@@ -342,7 +342,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
                   />
                 ) : (
-                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                  <div className="max-w-none text-brand-black">
                     {project.designContent}
                   </div>
                 )
@@ -354,7 +354,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                     fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
                   />
                 ) : (
-                  <div className={`prose prose-lg max-w-none text-brand-black font-terminal`}>
+                  <div className="max-w-none text-brand-black">
                     {project.aiContent}
                   </div>
                 )
