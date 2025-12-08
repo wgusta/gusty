@@ -5,15 +5,7 @@ import AgentConfigAccordion from './AgentConfigAccordion';
 import MarkdownContent from './MarkdownContent';
 import { chatgptConfigs, claudeConfigs } from '@/lib/agentConfigs';
 
-const originalContent = `## 📄 Example CV (PDF Download)
-
-**See a real example:** Download a complete CV created with these templates to see the final result.
-
-**[⬇ Download Example CV (PDF)](/Mock-CV_Yenüg_Atsu.pdf)** - This PDF demonstrates how the HTML templates look when converted to PDF format. Use it as a reference for styling and structure.
-
----
-
-## Why HTML Templates?
+const originalContent = `## Why HTML Templates?
 
 The hard reality: Your most beautiful design never gets seen by a human if the ATS filters you out first. Over 60% of Swiss companies use ATS systems, and 52% of applicants never receive a response.
 
@@ -150,82 +142,6 @@ C3: Demonstrating leadership without formal management title
 
 ---
 
-## AI Agent Prompts
-
-Use these prompts with ChatGPT, Claude, or Gemini to optimize your application materials. Copy and paste them directly.
-
-### Agent 1: Communications Strategist
-
-Creates your unique positioning for each application.
-
-\`\`\`
-IDENTITY: Strategic communications consultant
-GOAL: Bold positioning that makes companies think "we need THIS person"
-INPUT: My TELOS document + job posting + my experience
-
-STEPS:
-1. Map my problems (P#) to company problems in the job posting
-2. Create positioning: Who I am + my approach (M#) + expected impact
-3. Test: Could this positioning apply to 100 other candidates? If yes, reject and make it more specific
-
-OUTPUT: Positioning brief with 3 key messages I should emphasize
-\`\`\`
-
-### Agent 2: HR Business Partner
-
-Optimizes your CV content for ATS and recruiter scanning.
-
-\`\`\`
-IDENTITY: HR Partner with recruiter insight and career coaching experience
-GOAL: Honest fit assessment + ATS optimization
-INPUT: Positioning brief + my current CV + job posting
-
-STEPS:
-1. Assess fit percentage (if <60%, recommend skipping this job)
-2. Rewrite achievements using CAR method: Context-Action-Result with metrics
-3. Optimize for 6-second recruiter scan: most important info visible first
-
-OUTPUT: Draft CV content + interview preparation points
-\`\`\`
-
-### Agent 3: Writing Style Editor
-
-Polishes your text to be active, clear, and authentic.
-
-\`\`\`
-IDENTITY: Expert editor for German (DE-CH) and English (EN-CH) professional writing
-GOAL: Transform good text into exceptional prose
-INPUT: Draft CV or cover letter + samples of my own writing style
-
-STEPS:
-1. Calibrate: Analyze my natural voice from writing samples
-2. Transform: Change passive voice to active ("Was responsible for" → "Led")
-3. Eliminate buzzwords and corporate jargon
-4. Ensure Swiss German conventions (ss vs ß, specific terminology)
-
-OUTPUT: Final polished text + change log explaining improvements
-\`\`\`
-
-### Agent 4: ATS Keyword Optimizer
-
-Ensures your CV passes automated filters.
-
-\`\`\`
-IDENTITY: ATS specialist who understands how parsing systems work
-GOAL: Maximize keyword match rate without keyword stuffing
-INPUT: Job posting + my CV draft
-
-STEPS:
-1. Extract required skills and keywords from job posting
-2. Identify which keywords are missing from my CV
-3. Suggest natural places to add missing keywords
-4. Check section headings match ATS expectations (Berufserfahrung, Skills, Ausbildung)
-
-OUTPUT: Keyword gap analysis + specific suggestions for placement
-\`\`\`
-
----
-
 ## The Complete Workflow
 
 **Total time: ~60-90 minutes per application (vs. 3-4 hours traditional)**
@@ -260,27 +176,6 @@ Examples:
 - Introduced automated testing, decreasing bug reports by 60%
 - Managed team of 8 across 3 time zones for global product launch
 \`\`\`
-
----
-
-## Which AI Platform to Use?
-
-**ChatGPT** - Best for speed
-- Quick cover letter variations
-- Fast iterations
-- Custom GPTs for repeated tasks
-
-**Claude** - Best for complexity
-- Long CVs (handles 200k tokens)
-- Multi-step analysis
-- Complex restructuring
-
-**Gemini** - Best for data
-- Skills gap analysis
-- Salary benchmarking
-- Quantitative comparisons
-
-**Pro tip:** Use the right tool for the job, not your favorite tool.
 
 ---
 

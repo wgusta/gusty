@@ -15,13 +15,6 @@ export const chatgptConfigs: AgentConfig[] = [
     platform: 'chatgpt',
   },
   {
-    id: 'browser-agent-prompt',
-    title: 'Browser-Based Job Application Material Generation (Alternative)',
-    description: 'Alternative version of the browser-based prompt - check if duplicate of browser-agent-prompt-job.md',
-    filename: 'browser-agent-prompt.md',
-    platform: 'chatgpt',
-  },
-  {
     id: 'job-agent-setup-chatgpt',
     title: 'Job Agent Setup for ChatGPT',
     description: 'Multi-GPT HTML Application System setup guide for ChatGPT Custom GPTs.',
@@ -33,13 +26,6 @@ export const chatgptConfigs: AgentConfig[] = [
     title: 'Generic Automated Job Application Material Generation',
     description: 'Prompt for creating complete application documents with automated folder creation and file management.',
     filename: 'local-agent-prompt-job.md',
-    platform: 'chatgpt',
-  },
-  {
-    id: 'local-agent-prompt',
-    title: 'Generic Automated Job Application Material Generation (Alternative)',
-    description: 'Alternative version - check if duplicate of local-agent-prompt-job.md',
-    filename: 'local-agent-prompt.md',
     platform: 'chatgpt',
   },
 ];
