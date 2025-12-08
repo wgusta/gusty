@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Fix agent config component rendering - remove prose wrapper conflict** (f57ee84) - 12 seconds ago by wgusta
-- **Add agent config display feature with accordion and copy functionality** (99f36ef) - 12 minutes ago by wgusta
+- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1** (fbc9a51) - 18 seconds ago by wgusta
+- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1 (CVE-2025-66478)** (a2e4dd1) - 2 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (cc2f7fc) - 10 minutes ago by github-actions[bot]
+- **Fix agent config component rendering - remove prose wrapper conflict** (f57ee84) - 11 minutes ago by wgusta
+- **Add agent config display feature with accordion and copy functionality** (99f36ef) - 22 minutes ago by wgusta
 - **Add ATS CV/Cover Letter templates project with TELOS framework and AI prompts** (e524114) - 4 days ago by wgusta
 - **tab update + text deletin** (83c3717) - 3 weeks ago by wgusta
 - **neue komponenten** (c79f646) - 3 weeks ago by wgusta
 - **danger zone not shown** (cb6d833) - 3 weeks ago by wgusta
 - **project push** (d9b4540) - 3 weeks ago by wgusta
-- **new project: html** (8bb95d9) - 3 weeks ago by wgusta
-- **update text** (6618cdb) - 3 weeks ago by wgusta
-- **full width akkordeon when opened** (953e0e9) - 3 weeks ago by wgusta
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
 ## License
