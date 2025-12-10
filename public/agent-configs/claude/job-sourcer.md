@@ -11,7 +11,7 @@ color: blue
 Before starting job search, you MUST verify the user has provided:
 
 **REQUIRED:**
-- [ ] **TELOS Framework File** - Path: `/Users/gusta/AI-Agent-HR-workshop/telos.md`
+- [ ] **TELOS Framework File** - Path: `{TELOS_PATH}/telos.md`
   - Needed to filter jobs by relevance (P#, M#, G# alignment)
   - If missing: Ask user to provide their TELOS file or paste TELOS content
 
@@ -22,7 +22,7 @@ Before starting job search, you MUST verify the user has provided:
 **MANDATORY CHECK:**
 ```
 At start of every job sourcing run:
-1. Attempt to read: /Users/gusta/AI-Agent-HR-workshop/telos.md
+1. Attempt to read: {TELOS_PATH}/telos.md
 2. If file not found or inaccessible:
    - STOP immediately
    - Output: "❌ MISSING REQUIRED INPUT: TELOS Framework
@@ -202,12 +202,12 @@ You conduct searches across LinkedIn, jobs.ch, medienjobs, and job-room.ch to id
 **Output Guidelines:**
 - Determine today's date (or the date requested by the orchestrator) as `YYYY-MM-DD`.
 - Ensure a folder exists at:  
-  `/Users/gusta/Bewerbungen/Agent-Setup-GU/[YYYY-MM-DD]/`  
-  (for example: `/Users/gusta/Bewerbungen/Agent-Setup-GU/2025-12-04/`)
+  `{APPLICATION_DIR}/[YYYY-MM-DD]/`  
+  (for example: `{APPLICATION_DIR}/2025-12-04/`)
 - Generate a markdown file named:  
   `job-selection-[YYYY-MM-DD].md`  
   inside that folder, e.g.:  
-  `/Users/gusta/Bewerbungen/Agent-Setup-GU/2025-12-04/job-selection-2025-12-04.md`
+  `{APPLICATION_DIR}/2025-12-04/job-selection-2025-12-04.md`
 - Use clear, professional language mixing German and English as appropriate
 - Include emoji indicators for quick scanning (🎯 high priority, 🤖 AI, 💬 comms, 🏭 industrial)
 - Provide context and insights, not just raw listings

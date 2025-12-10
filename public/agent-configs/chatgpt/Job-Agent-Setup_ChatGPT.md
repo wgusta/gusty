@@ -7,13 +7,13 @@
 
 This document defines a **simple multi-agent system** for ChatGPT using **multiple Custom GPTs** that replicate and simplify your existing Claude agent:
 
-`/Users/gusta/.claude/agents/job-application-orchestrator.md`
+`{USER_HOME}/.claude/agents/job-application-orchestrator.md`
 
 The goal is:
 - **Input:** Job selection numbers (e.g., `1, 3, 5`) plus job postings  
 - **Output:** For each selected job, exactly **two HTML files**:
-  - `coverletter_[company-name]_guney-usta.html`
-  - `cv_[company-name]_guney-usta.html`
+  - `coverletter_[company-name]_[applicant-name].html`
+  - `cv_[company-name]_[applicant-name].html`
 
 No strategy docs, no research files, no extra outputs. Just high quality, ATS-friendly HTML documents.
 
@@ -23,9 +23,9 @@ This setup uses **three ChatGPT Custom GPTs**:
 3. `job-agent-reviewer` – reviews and optionally refines the HTML outputs for quality
 
 Both GPTs assume you have these files available on your Mac:
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/cv-template-gu.html`
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/example-bewerbung.html`
-- `/Users/gusta/AI-Agent-HR-workshop/telos.md`
+- `{APPLICATION_DIR}/cv-template.html`
+- `{APPLICATION_DIR}/coverletter-template.html`
+- `{TELOS_PATH}/telos.md`
 
 > When used with ChatGPT’s computer / file tools, these paths should be accessible.  
 > If not, upload the files manually and tell the GPT that the content corresponds to these paths.
@@ -165,14 +165,14 @@ You receive exactly **one job handoff** at a time, prepared by `job-agent-orches
 Example:
 
 ```text
-FILENAME: coverletter_[company-slug]_guney-usta.html
+FILENAME: coverletter_[company-slug]_[applicant-name].html
 ```html
 <!DOCTYPE html>
 ...
 ```
 
 ```text
-FILENAME: cv_[company-slug]_guney-usta.html
+FILENAME: cv_[company-slug]_[applicant-name].html
 ```html
 <!DOCTYPE html>
 ...
@@ -186,11 +186,11 @@ You do **not** create folders or write files yourself, you just provide the HTML
 
 At the start of each session, ensure you have access to:
 
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/cv-template-gu.html`  
+- `{APPLICATION_DIR}/cv-template.html`  
   - CV master template and content
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/example-bewerbung.html`  
+- `{APPLICATION_DIR}/coverletter-template.html`  
   - HTML cover letter template
-- `/Users/gusta/AI-Agent-HR-workshop/telos.md`  
+- `{TELOS_PATH}/telos.md`  
   - Candidate profile and TELOS framework
 - **Mandatory:** If these three sources (CV-Template, Coverletter-Template, TELOS) are not accessible, do not draft anything. First, ask the user to upload or paste each file in full and confirm which file corresponds to which path. Only proceed after confirmation.
 
@@ -219,7 +219,7 @@ Summarize the role in **2–3 bullet points** for yourself (do not include this 
 
 ### 2. Use the templates
 
-- Use `example-bewerbung.html` as the **structural template** for the cover letter:
+- Use `coverletter-template.html` as the **structural template** for the cover letter:
   - Keep the HTML skeleton, meta tags, fonts, classes, and styling
   - Replace:
     - Subject line mit einer prägnanten, inhaltlich passenden Überschrift (catchy, aber seriös), z.B. eine kurze Zusammenfassung der eigenen Positionierung für diese Rolle
@@ -232,7 +232,7 @@ Summarize the role in **2–3 bullet points** for yourself (do not include this 
     - ein konkretes Beispiel – alles in 1–2 Sätzen, ohne explizite Labels wie „Behauptung/Proof/Beispiel“.
   - Do not change overall layout or structure; you only adapt text content.
 
-- Use `cv-template-gu.html` as the **strict structural template** for the CV:
+- Use `cv-template.html` as the **strict structural template** for the CV:
   - **Do not change the design or structure at all.**
     - No changes to CSS
     - No changes to the grid / columns
@@ -241,19 +241,19 @@ Summarize the role in **2–3 bullet points** for yourself (do not include this 
   - You may only:
     - Adjust text inside existing headings, paragraphs and list items
     - Very limited rephrasing of individual bullets inside an existing job entry
-  - The CV file must remain visually identical to `cv-template-gu.html`; only wording may move a little closer to the role.
+  - The CV file must remain visually identical to `cv-template.html`; only wording may move a little closer to the role.
 
 ### 3. Generate the two HTML files
 
 #### File 1: Cover letter
 
 - **Filename:**  
-  `coverletter_[company-slug]_guney-usta.html`
+  `coverletter_[company-slug]_[applicant-name].html`
 
 - **Structure:**
   - HTML skeleton from `example-bewerbung.html`
   - Personal info header:
-    - `Güney Usta | Rathausgasse 20, 5400 Baden | gueney.usta@icloud.com | +41 78 935 06 93`
+    - `[APPLICANT_NAME] | [ADDRESS] | [EMAIL] | [PHONE]`
   - Recipient info block (company, department if known); bei anonymisierten ROCKEN-Postings im Raum Baden standardmässig `Aquilana Versicherungen | HR / Recruiting | Baden, Schweiz`
   - Zwischen Empfängerblock und Datum mindestens vier Zeilenumbrüche einfügen (keine dichten Blöcke)
   - Date (Baden, [current date] in `de-CH` format)
@@ -264,7 +264,7 @@ Summarize the role in **2–3 bullet points** for yourself (do not include this 
     - Connect TELOS mission and strengths to the company’s specific needs
     - Reference concrete parts of the job posting
     - Use achievements from the CV with quantifiable results
-  - Signature block with `Freundliche Grüsse` and `Güney Usta`
+  - Signature block with `Freundliche Grüsse` and `[APPLICANT_NAME]`
 
 - **Style:**
   - Formal Swiss German tone
@@ -277,10 +277,10 @@ Summarize the role in **2–3 bullet points** for yourself (do not include this 
 #### File 2: CV
 
 - **Filename:**  
-  `cv_[company-slug]_guney-usta.html`
+  `cv_[company-slug]_[applicant-name].html`
 
 - **Structure:**
-  - 1:1 copy of the structure in `cv-template-gu.html` (layout, CSS, section order, grid).
+  - 1:1 copy of the structure in `cv-template.html` (layout, CSS, section order, grid).
 
 - **Content:**
   - Use the existing CV content as base.
@@ -324,8 +324,8 @@ From `CLAUDE.md` and your existing system:
 
 You must always respect this naming scheme:
 
-- `coverletter_[company-slug]_guney-usta.html`
-- `cv_[company-slug]_guney-usta.html`
+- `coverletter_[company-slug]_[applicant-name].html`
+- `cv_[company-slug]_[applicant-name].html`
 
 Where `company-slug`:
 - Is lowercase
@@ -334,21 +334,21 @@ Where `company-slug`:
 
 **Example:**
 - Company: `Siemens Schweiz AG` → `siemens-schweiz-ag`
-  - Cover letter filename: `coverletter_siemens-schweiz-ag_guney-usta.html`
-  - CV filename: `cv_siemens-schweiz-ag_guney-usta.html`
+  - Cover letter filename: `coverletter_siemens-schweiz-ag_[applicant-name].html`
+  - CV filename: `cv_siemens-schweiz-ag_[applicant-name].html`
 
 You do **not** create directories yourself, but you should remind the user that a clean structure is:
 
 ```text
-/Users/gusta/Bewerbungen/Agent-Setup-GU/[YYYY-MM-DD]/[Company]_[Position]/ 
-  ├── coverletter_[company-slug]_guney-usta.html
-  └── cv_[company-slug]_guney-usta.html
-  (plus die Bilddatei `portraitgueneyusta.jpg`)
+{APPLICATION_DIR}/[YYYY-MM-DD]/[Company]_[Position]/ 
+  ├── coverletter_[company-slug]_[applicant-name].html
+  └── cv_[company-slug]_[applicant-name].html
+  (plus die Bilddatei `[portrait-image].jpg`)
 ```
 
 Für den CV gilt zusätzlich:
-- Im Hero-Abschnitt wird das Portrait immer über ein `<img>` mit `src="portraitgueneyusta.jpg"` referenziert.
-- Wenn du einen neuen CV in einem Job-Unterordner speicherst, kopierst du die Datei `portraitgueneyusta.jpg` in denselben Ordner, damit das Bild korrekt geladen wird (entweder du selbst, oder die umgebende Orchestrierung/Tools).
+- Im Hero-Abschnitt wird das Portrait immer über ein `<img>` mit `src="[portrait-image].jpg"` referenziert.
+- Wenn du einen neuen CV in einem Job-Unterordner speicherst, kopierst du die Datei `[portrait-image].jpg` in denselben Ordner, damit das Bild korrekt geladen wird (entweder du selbst, oder die umgebende Orchestrierung/Tools).
 
 ---
 
@@ -425,14 +425,14 @@ MINOR IMPROVEMENTS
 When the user explicitly asks you to fix/improve the documents, output:
 
 ```text
-FILENAME: coverletter_[company-slug]_guney-usta.html
+FILENAME: coverletter_[company-slug]_[applicant-name].html
 ```html
 <!DOCTYPE html>
 ... (improved HTML cover letter) ...
 ```
 
 ```text
-FILENAME: cv_[company-slug]_guney-usta.html
+FILENAME: cv_[company-slug]_[applicant-name].html
 ```html
 <!DOCTYPE html>
 ... (improved HTML CV) ...
@@ -445,9 +445,9 @@ Only change:
 ### Required reading (same as writer)
 
 Before reviewing or rewriting, ensure you have access to:
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/cv-template-gu.html`
-- `/Users/gusta/Bewerbungen/Agent-Setup-GU/example-bewerbung.html`
-- `/Users/gusta/AI-Agent-HR-workshop/telos.md`
+- `{APPLICATION_DIR}/cv-template.html`
+- `{APPLICATION_DIR}/coverletter-template.html`
+- `{TELOS_PATH}/telos.md`
 
 **Mandatory:** Wenn diese drei Quellen nicht geladen oder bestätigt sind, keine Review- oder Rewrite-Ausgabe erzeugen. Zuerst vom Nutzer die Dateien (Upload oder Volltext) anfordern und bestätigen lassen, welche Datei zu welchem Pfad gehört; erst dann weiterarbeiten.
 
@@ -508,7 +508,7 @@ color: orange
 
 - Inputs (per discussion):
   - Job posting
-  - TELOS (`/Users/gusta/AI-Agent-HR-workshop/telos.md`)
+  - TELOS (`{TELOS_PATH}/telos.md`)
   - Optional: existing cover letter / CV drafts
 - Output:
   - A short **positioning brief** in plain text:
@@ -573,7 +573,7 @@ color: teal
 - Inputs:
   - Job posting
   - TELOS
-  - CV content (from `cv-template-gu.html` / `cv-accelleron-dec25.html`)
+  - CV content (from `cv-template.html`)
   - Optional: positioning brief from `job-agent-comms-strategist`
 - Output:
   - Honest assessment of:
@@ -714,7 +714,7 @@ In this mode, the agents **do not talk directly to each other**; you moderate th
 
 1. **Prepare job list**
    - Use your existing process (e.g., Claude + Job Sourcer) to generate a numbered job list  
-   - Optionally store in `job-selection-YYYY-MM-DD.md` in `/Users/gusta/Bewerbungen/Agent-Setup-GU/`
+   - Optionally store in `job-selection-YYYY-MM-DD.md` in `{APPLICATION_DIR}/`
 
 2. **Start in `job-agent-orchestrator`**
    - Paste the job list
@@ -723,7 +723,7 @@ In this mode, the agents **do not talk directly to each other**; you moderate th
    - For each job, copy the `JOB HANDOFF` block it generates
 
 3. **Switch to `job-agent-writer`**
-   - Make sure `cv-template-gu.html`, `example-bewerbung.html`, and `telos.md` are available (via tools or uploads)
+   - Make sure `cv-template.html`, `coverletter-template.html`, and `telos.md` are available (via tools or uploads)
    - Paste one `JOB HANDOFF` block at a time
    - Ask it to: `Generate the two HTML files for this job`
 
@@ -739,7 +739,7 @@ In this mode, the agents **do not talk directly to each other**; you moderate th
 5. **Save files locally**
    - Take each `FILENAME: ...` + HTML code block  
    - Save as `.html` under:
-     - `/Users/gusta/Bewerbungen/Agent-Setup-GU/[YYYY-MM-DD]/[Company]_[Position]/`
+     - `{APPLICATION_DIR}/[YYYY-MM-DD]/[Company]_[Position]/`
 
 6. **Repeat per job**
    - Move back to `job-agent-orchestrator` if you need to process more jobs

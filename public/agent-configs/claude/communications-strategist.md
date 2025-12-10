@@ -12,11 +12,11 @@ Before creating positioning strategy, you MUST verify the user has provided:
   - Can be: URL, PDF, pasted text, or markdown file
   - If missing: "❌ I need the complete job posting to create positioning. Please provide the job URL or paste the full job description."
 
-- [ ] **TELOS Framework** - Path: `/Users/gusta/AI-Agent-HR-workshop/telos.md`
+- [ ] **TELOS Framework** - Path: `{TELOS_PATH}/telos.md`
   - Needed: P# (problems solved), M# (mission), G# (goals)
   - If missing: "❌ I need your TELOS to create mission-aligned positioning. Please provide your telos.md file or paste your TELOS content."
 
-- [ ] **CV/Experience Summary** - Path: `/Users/gusta/Bewerbungen/cv-accelleron-dec25.html` OR pasted summary
+- [ ] **CV/Experience Summary** - Path: `{CV_PATH}/cv-master.html` OR pasted summary
   - Needed: Skills, achievements, experience to position
   - If missing: "❌ I need your CV or experience summary to create accurate positioning. Please provide your CV file or summarize your key experience."
 

@@ -84,22 +84,22 @@ echo $TODAY
 
 ### Step 3: Create Folder
 ```bash
-FOLDER="/Users/gusta/Bewerbungen/Agent-Setup-GU/${TODAY}/${COMPANY}_${POSITION}"
+FOLDER="{APPLICATION_DIR}/${TODAY}/${COMPANY}_${POSITION}"
 mkdir -p "$FOLDER"
 ```
 
 Example result:
 ```
-/Users/gusta/Bewerbungen/Agent-Setup-GU/2025-12-06/siemens-schweiz-ag_engineering-manager/
+{APPLICATION_DIR}/2025-12-06/siemens-schweiz-ag_engineering-manager/
 ```
 
 ### Step 4: Write Cover Letter
-File: `${FOLDER}/coverletter_${COMPANY}_guney-usta.html`
+File: `${FOLDER}/coverletter_${COMPANY}_[applicant-name].html`
 
 Write `cover_letter_html` content exactly as received.
 
 ### Step 5: Write CV
-File: `${FOLDER}/cv_${COMPANY}_guney-usta.html`
+File: `${FOLDER}/cv_${COMPANY}_[applicant-name].html`
 
 Write `cv_html` content exactly as received.
 
@@ -125,18 +125,18 @@ File: `${FOLDER}/match-analysis.md`
 [positioning statement]
 
 ## Files Generated
-- coverletter_[company]_guney-usta.html
-- cv_[company]_guney-usta.html
+- coverletter_[company]_[applicant-name].html
+- cv_[company]_[applicant-name].html
 - match-analysis.md
 ```
 
 ### Step 7: Confirm
 ```
-✅ Files created at: /Users/gusta/Bewerbungen/Agent-Setup-GU/[TODAY]/[company]_[position]/
+✅ Files created at: {APPLICATION_DIR}/[TODAY]/[company]_[position]/
 
 Files:
-- coverletter_[company]_guney-usta.html
-- cv_[company]_guney-usta.html
+- coverletter_[company]_[applicant-name].html
+- cv_[company]_[applicant-name].html
 - match-analysis.md
 ```
 
@@ -151,9 +151,9 @@ fit_score: 82
 
 **Creates:**
 ```
-/Users/gusta/Bewerbungen/Agent-Setup-GU/2025-12-06/abb-schweiz_technical-project-lead/
-├── coverletter_abb-schweiz_guney-usta.html
-├── cv_abb-schweiz_guney-usta.html
+{APPLICATION_DIR}/2025-12-06/abb-schweiz_technical-project-lead/
+├── coverletter_abb-schweiz_[applicant-name].html
+├── cv_abb-schweiz_[applicant-name].html
 └── match-analysis.md
 ```
 

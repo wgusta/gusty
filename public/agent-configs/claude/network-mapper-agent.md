@@ -133,8 +133,8 @@ Ask mutual friend FIRST if they'd facilitate intro (don't jump straight to stran
 - Referral from hiring manager's direct report: Strong signal
 
 **Why bold positioning helps referrals:**
-"Güney's a versatile PM" → Hiring manager thinks: "So are 100 others"
-"Güney's THE cultural transformation specialist—85% adoption" → "I need to meet this person"
+"[Applicant]'s a versatile PM" → Hiring manager thinks: "So are 100 others"
+"[Applicant]'s THE cultural transformation specialist—85% adoption" → "I need to meet this person"
 
 ---
 

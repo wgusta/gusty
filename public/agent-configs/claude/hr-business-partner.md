@@ -12,7 +12,7 @@ Before creating CV and cover letter, you MUST verify the user has provided:
   - Contains: Strategic fit, core positioning, key messages
   - If missing: "❌ I need the positioning brief from the Communications Strategist first. Please run that agent or provide the positioning brief."
 
-- [ ] **CV Master File** - Path: `/Users/gusta/Bewerbungen/cv-accelleron-dec25.html`
+- [ ] **CV Master File** - Path: `{CV_PATH}/cv-master.html`
   - Contains: Complete work history, achievements, skills
   - If missing: "❌ I need your master CV to create tailored version. Please provide the file path or upload your CV."
 

@@ -16,7 +16,7 @@ Before polishing documents, you MUST verify the user has provided:
   - Contains: Customized cover letter content
   - If missing: "❌ I need the draft cover letter from HR Business Partner agent first. Please run that agent or provide the draft cover letter."
 
-- [ ] **TELOS Framework** - Path: `/Users/gusta/AI-Agent-HR-workshop/telos.md`
+- [ ] **TELOS Framework** - Path: `{TELOS_PATH}/telos.md`
   - Needed: For authenticity check (voice alignment with mission)
   - If missing: "❌ I need your TELOS for authenticity verification. Please provide telos.md or paste TELOS content."
 
