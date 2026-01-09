@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Remove personal information from agent configs and CV templates** (109f4ee) - 24 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (1414e6e) - 2 days ago by github-actions[bot]
-- **Remove multiple agent configs from display** (da1426a) - 2 days ago by wgusta
-- **Update Activity Log [skip ci]** (bd11df1) - 2 days ago by github-actions[bot]
-- **Clean up ATS project content and agent configs** (7c6eada) - 2 days ago by wgusta
-- **Update Activity Log [skip ci]** (e08925a) - 2 days ago by github-actions[bot]
-- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1** (fbc9a51) - 2 days ago by wgusta
-- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1 (CVE-2025-66478)** (a2e4dd1) - 2 days ago by wgusta
-- **Update Activity Log [skip ci]** (cc2f7fc) - 2 days ago by github-actions[bot]
-- **Fix agent config component rendering - remove prose wrapper conflict** (f57ee84) - 2 days ago by wgusta
+- **Add Linux Cachy OS installation danger zone post** (320c300) - 21 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (7e17e63) - 4 weeks ago by github-actions[bot]
+- **Remove personal information from agent configs and CV templates** (109f4ee) - 4 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (1414e6e) - 5 weeks ago by github-actions[bot]
+- **Remove multiple agent configs from display** (da1426a) - 5 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (bd11df1) - 5 weeks ago by github-actions[bot]
+- **Clean up ATS project content and agent configs** (7c6eada) - 5 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (e08925a) - 5 weeks ago by github-actions[bot]
+- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1** (fbc9a51) - 5 weeks ago by wgusta
+- **Security update: Upgrade Next.js to 16.0.7 and React to 19.2.1 (CVE-2025-66478)** (a2e4dd1) - 5 weeks ago by wgusta
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
 ## License
