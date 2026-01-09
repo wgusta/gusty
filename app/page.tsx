@@ -711,6 +711,133 @@ so I unplugged my computer. Woah, that was close...
 
 So anyways, let's fry some aubergines now.`
   },
+  // Linux Cachy OS Installation - Danger Zone Project
+  {
+    id: 'linux-cachy-install',
+    title: 'Linux Cachy OS Installation',
+    description: 'After running out of Windows 10 I was forced to upgrade to Windows 11, but it looked horrible. So I deleted everything, changed my CPU and installed Linux Cachy OS.',
+    tags: ['Linux', 'Arch', 'Cachy OS', 'Installation', 'Hardware'],
+    column: 'danger',
+    finalizedAt: '2025-01-27',
+    aiContent: `# Linux Cachy OS Installation
+
+Windows 10 support ended. Microsoft pushed Windows 11. I had no choice.
+
+I upgraded.
+
+IT LOOKED HORRIBLE.
+
+The interface felt wrong. The taskbar placement. The rounded corners everywhere. The way it handled windows. Everything felt like it was designed by someone who had never used a computer before.
+
+I stared at my screen for days, trying to make it work. Trying to make it feel right.
+
+IT NEVER DID.
+
+So I made a decision.
+
+I DELETED EVERYTHING.
+
+![PC case with CPU upgrade](/images/linux-install-1.jpg)
+
+First, I opened the case. Changed the CPU. Upgraded the hardware while I was at it. If I was going to start fresh, I might as well do it properly.
+
+The old CPU came out. The new one went in. Thermal paste. Screws. Everything back in place.
+
+HARDWARE READY. SOFTWARE NEXT.
+
+I booted from a USB drive. The GRUB menu appeared.
+
+![GRUB boot menu](/images/linux-install-2.jpg)
+
+Welcome to GRUB. Version 2.06.
+
+I selected the installation option. Pressed enter.
+
+The screen went dark. Then came back with an error.
+
+![Boot error message](/images/linux-install-3.jpg)
+
+"error: loader/efi/linux.c:grub_arch_efi_linux_boot_image:227:cannot load image."
+
+I stared at the error message.
+
+THIS WAS NOT GOING TO BE EASY.
+
+I pressed any key. Tried again. Same error.
+
+I dropped to the GRUB command line.
+
+![GRUB command line](/images/linux-install-4.jpg)
+
+The command line appeared. I could see the kernel parameters. The boot configuration. Everything laid out in text.
+
+I adjusted parameters. Added flags. Tried different kernel options.
+
+cow_spacesize=10G copytoram=auto module_blacklist=pcspkr i915.modeset=1 amdgpu.modeset=1 nvme_load=yes
+
+I typed. Adjusted. Booted again.
+
+IT WORKED.
+
+The Arch installation process started.
+
+![Arch Linux boot process](/images/linux-install-5.jpg)
+
+The screen filled with system messages. Kernel loading. Module initialization. Filesystem mounting.
+
+:: running early hook [udev]
+Starting systemd-udevd version 258.2-2-arch
+:: running hook [archiso_loop_mnt]
+:: Mounting '/dev/sdb1' to '/run/archiso/bootmnt'
+:: Device /dev/sdb1 mounted successfully.
+:: Copying rootfs image to RAM...
+
+The progress bar filled. 703MiB copied. Installation proceeding.
+
+I watched the terminal scroll. Line after line of system initialization. Everything working. Everything making sense.
+
+NO ROUNDED CORNERS. NO FORCED UPDATES. NO TELEMETRY.
+
+Just Linux. Just Arch. Just control.
+
+The installation completed. I rebooted. The system came up.
+
+Time to configure.
+
+![Bluetooth terminal](/images/linux-install-6.jpg)
+
+I opened a terminal. Started configuring Bluetooth. Pairing devices. Setting up the system.
+
+bluetoothctl commands. Device discovery. Trusting devices. Connecting.
+
+The terminal filled with [CHG] and [NEW] messages. Devices appearing. Devices connecting.
+
+FF:87:8A:06:6D:EC MX Master 2S
+
+The mouse connected. The keyboard connected. Everything working.
+
+I kept configuring. Setting up the desktop environment. Installing packages. Making it mine.
+
+![Getting started GUI](/images/linux-install-7.jpg)
+
+The "Getting started" window appeared. A checklist of components. Authentication agent. Terminal. Wallpaper. Notification daemon. Application launcher.
+
+Some items showed "Missing" in red. Others showed "Installed" in green. Some showed "Running" in blue.
+
+I worked through the list. Installed what was needed. Configured what was required.
+
+The system took shape. Component by component. Feature by feature.
+
+I HAD CONTROL AGAIN.
+
+No forced updates. No telemetry. No interface decisions made by someone else.
+
+Just my system. Just my choices. Just Linux.
+
+Windows 11 looked horrible. So I deleted everything. Changed my CPU. Installed Linux Cachy OS.
+
+BEST DECISION I EVER MADE.`
+  },
 ];
 
 export default function Home() {
