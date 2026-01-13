@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Remove root access post and update Linux installation title** (247159b) - 19 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (b061ee5) - 2 hours ago by github-actions[bot]
-- **Add Linux Cachy OS installation danger zone post** (320c300) - 2 hours ago by wgusta
-- **Update Activity Log [skip ci]** (7e17e63) - 4 weeks ago by github-actions[bot]
-- **Remove personal information from agent configs and CV templates** (109f4ee) - 4 weeks ago by wgusta
+- **Show Linux install only in danger zone** (cc30d62) - 24 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (f815190) - 4 days ago by github-actions[bot]
+- **Remove root access post and update Linux installation title** (247159b) - 4 days ago by wgusta
+- **Update Activity Log [skip ci]** (b061ee5) - 4 days ago by github-actions[bot]
+- **Add Linux Cachy OS installation danger zone post** (320c300) - 4 days ago by wgusta
+- **Update Activity Log [skip ci]** (7e17e63) - 5 weeks ago by github-actions[bot]
+- **Remove personal information from agent configs and CV templates** (109f4ee) - 5 weeks ago by wgusta
 - **Update Activity Log [skip ci]** (1414e6e) - 5 weeks ago by github-actions[bot]
 - **Remove multiple agent configs from display** (da1426a) - 5 weeks ago by wgusta
 - **Update Activity Log [skip ci]** (bd11df1) - 5 weeks ago by github-actions[bot]
-- **Clean up ATS project content and agent configs** (7c6eada) - 5 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (e08925a) - 5 weeks ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
 ## License
