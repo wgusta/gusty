@@ -701,8 +701,8 @@ export default function Home() {
     localStorage.setItem('dangerZoneConfirmed', 'false');
   };
 
-  // Filter and sort projects (exclude danger zone if disabled)
-  const nonDangerProjects = projects.filter(p => p.column !== 'danger' || showDangerZone);
+  // Filter and sort projects (always exclude danger zone from regular sections)
+  const nonDangerProjects = projects.filter(p => p.column !== 'danger');
   const sortedProjects = [...nonDangerProjects].sort((a, b) => 
     new Date(b.finalizedAt).getTime() - new Date(a.finalizedAt).getTime()
   );
