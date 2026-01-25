@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Playfair_Display, IBM_Plex_Mono, Permanent_Marker } from "next/font/google";
 import "./globals.css";
 
@@ -37,6 +38,11 @@ export default function RootLayout({
         className={`${playfairDisplay.variable} ${ibmPlexMono.variable} ${permanentMarker.variable} antialiased`}
       >
         {children}
+        <Script
+          src="https://therapylist.ch/widget.js"
+          data-therapist-id="c50e24c4-8036-4401-aa03-09e63d57b0aa"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
