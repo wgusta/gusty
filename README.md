@@ -100,7 +100,9 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Add TherapyList widget script above footer** (552984b) - 12 seconds ago by wgusta
+- **Remove TherapyList widget script** (1d08633) - 13 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (ffb9a2b) - 3 minutes ago by github-actions[bot]
+- **Add TherapyList widget script above footer** (552984b) - 3 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (6ceb211) - 12 days ago by github-actions[bot]
 - **Show Linux install only in danger zone** (cc30d62) - 12 days ago by wgusta
 - **Update Activity Log [skip ci]** (f815190) - 2 weeks ago by github-actions[bot]
@@ -108,8 +110,6 @@ Last 10 commits (auto-generated):
 - **Update Activity Log [skip ci]** (b061ee5) - 2 weeks ago by github-actions[bot]
 - **Add Linux Cachy OS installation danger zone post** (320c300) - 2 weeks ago by wgusta
 - **Update Activity Log [skip ci]** (7e17e63) - 7 weeks ago by github-actions[bot]
-- **Remove personal information from agent configs and CV templates** (109f4ee) - 7 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (1414e6e) - 7 weeks ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
 ## License
