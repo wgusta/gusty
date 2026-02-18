@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 12 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (62a5665) - 5 minutes ago by github-actions[bot]
-- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 5 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (9012321) - 16 minutes ago by github-actions[bot]
-- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 16 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (ee56ede) - 20 minutes ago by github-actions[bot]
-- **Rebrand sihliconvalley → gusty.ch** (298c309) - 26 minutes ago by wgusta
+- **Full-screen wind lines + def2 blows across full viewport** (79de157) - 13 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (dc456da) - 4 minutes ago by github-actions[bot]
+- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 4 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (62a5665) - 9 minutes ago by github-actions[bot]
+- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 9 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (9012321) - 20 minutes ago by github-actions[bot]
+- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 20 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (ee56ede) - 23 minutes ago by github-actions[bot]
+- **Rebrand sihliconvalley → gusty.ch** (298c309) - 29 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (df85bfc) - 3 weeks ago by github-actions[bot]
-- **Remove TherapyList widget script** (1d08633) - 3 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (ffb9a2b) - 3 weeks ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
