@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Full-screen wind lines + def2 blows across full viewport** (79de157) - 13 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (dc456da) - 4 minutes ago by github-actions[bot]
-- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 4 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (62a5665) - 9 minutes ago by github-actions[bot]
-- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 9 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (9012321) - 20 minutes ago by github-actions[bot]
-- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 20 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (ee56ede) - 23 minutes ago by github-actions[bot]
-- **Rebrand sihliconvalley → gusty.ch** (298c309) - 29 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (df85bfc) - 3 weeks ago by github-actions[bot]
+- **Add CLAUDE.md: note on README rebase conflict from activity log bot** (66b4026) - 12 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (c94209f) - 8 minutes ago by github-actions[bot]
+- **Full-screen wind lines + def2 blows across full viewport** (79de157) - 8 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (dc456da) - 11 minutes ago by github-actions[bot]
+- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 12 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (62a5665) - 17 minutes ago by github-actions[bot]
+- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 17 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (9012321) - 27 minutes ago by github-actions[bot]
+- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 28 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (ee56ede) - 31 minutes ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
