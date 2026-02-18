@@ -11,8 +11,8 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setAnimPhase(1), 5000);  // start curl
-    const t2 = setTimeout(() => setAnimPhase(2), 9200);  // 4.2s animation done
+    const t1 = setTimeout(() => setAnimPhase(1), 5000);  // start wind blow
+    const t2 = setTimeout(() => setAnimPhase(2), 9500);  // 4.5s animation done
     return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
@@ -49,27 +49,28 @@ export default function Header() {
             with wind blowing in strong sudden movements
           </p>
 
-          {/* Definition 2 */}
-          <p
-            className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed mt-2"
-            style={{
-              animation: animPhase === 1 ? 'curlG 4.2s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none',
-              transformOrigin: 'left center',
-            }}
-          >
-            <span className="text-brand-black/50 mr-2">2.</span>
-            letting{' '}
-            <span
-              className="transition-colors transition-[font-weight] duration-700"
+          {/* Definition 2 — wind blow out + return */}
+          <div className="overflow-hidden mt-2">
+            <p
+              className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed"
               style={{
-                color: animPhase === 2 ? '#E62F2D' : 'inherit',
-                fontWeight: animPhase === 2 ? '700' : 'inherit',
+                animation: animPhase === 1 ? 'windBlow 4.5s ease-in-out forwards' : 'none',
               }}
             >
-              güney usta
-            </span>
-            {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
-          </p>
+              <span className="text-brand-black/50 mr-2">2.</span>
+              letting{' '}
+              <span
+                style={{
+                  color: animPhase === 2 ? '#E62F2D' : 'inherit',
+                  fontWeight: animPhase === 2 ? '700' : 'inherit',
+                  transition: 'color 0.8s ease, font-weight 0.8s ease',
+                }}
+              >
+                güney usta
+              </span>
+              {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
+            </p>
+          </div>
         </div>
       </div>
 
