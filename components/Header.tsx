@@ -26,8 +26,29 @@ export default function Header() {
         Skip to main content
       </a>
 
+      {/* Full-screen wind lines — fixed, z below menu */}
+      {animPhase === 1 && (
+        <div className="fixed inset-0 pointer-events-none z-[55] overflow-hidden">
+          {[
+            { top: '10%', delay: '0s',    width: '90%'  },
+            { top: '22%', delay: '0.18s', width: '100%' },
+            { top: '35%', delay: '0.06s', width: '85%'  },
+            { top: '48%', delay: '0.28s', width: '95%'  },
+            { top: '61%', delay: '0.12s', width: '88%'  },
+            { top: '74%', delay: '0.22s', width: '92%'  },
+            { top: '87%', delay: '0.08s', width: '80%'  },
+          ].map((l, i) => (
+            <div
+              key={i}
+              className="wind-line-full"
+              style={{ top: l.top, animationDelay: l.delay, width: l.width }}
+            />
+          ))}
+        </div>
+      )}
+
       {/* Content */}
-      <div className="flex flex-col items-start text-left px-6 md:px-8 lg:px-12 overflow-hidden w-full">
+      <div className="flex flex-col items-start text-left px-6 md:px-8 lg:px-12 w-full">
         {/* Dictionary headword line */}
         <div className="flex items-baseline gap-3 md:gap-4 flex-wrap">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red font-stylish">
@@ -49,28 +70,26 @@ export default function Header() {
             with wind blowing in strong sudden movements
           </p>
 
-          {/* Definition 2 — wind blow out + return */}
-          <div className="overflow-hidden mt-2">
-            <p
-              className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed"
+          {/* Definition 2 — wind blow out right, return from left */}
+          <p
+            className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed mt-2"
+            style={{
+              animation: animPhase === 1 ? 'windBlow 4.5s ease-in-out forwards' : 'none',
+            }}
+          >
+            <span className="text-brand-black/50 mr-2">2.</span>
+            letting{' '}
+            <span
               style={{
-                animation: animPhase === 1 ? 'windBlow 4.5s ease-in-out forwards' : 'none',
+                color: animPhase === 2 ? '#E62F2D' : 'inherit',
+                fontWeight: animPhase === 2 ? '700' : 'inherit',
+                transition: 'color 0.8s ease',
               }}
             >
-              <span className="text-brand-black/50 mr-2">2.</span>
-              letting{' '}
-              <span
-                style={{
-                  color: animPhase === 2 ? '#E62F2D' : 'inherit',
-                  fontWeight: animPhase === 2 ? '700' : 'inherit',
-                  transition: 'color 0.8s ease, font-weight 0.8s ease',
-                }}
-              >
-                güney usta
-              </span>
-              {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
-            </p>
-          </div>
+              güney usta
+            </span>
+            {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
+          </p>
         </div>
       </div>
 

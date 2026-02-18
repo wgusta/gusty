@@ -149,40 +149,64 @@
     animation: fadeIn 0.6s ease-out;
   }
 
-  /* Wind blow animation for definition 2 in gusty header */
+  /* Wind blow — travels full viewport width */
   @keyframes windBlow {
-    /* sit still briefly */
     0% {
       transform: translateX(0);
       opacity: 1;
+      animation-timing-function: ease-in;
     }
-    /* slowly start moving right */
+    /* slowly drifting right */
     10% {
-      transform: translateX(8%);
+      transform: translateX(6vw);
       opacity: 1;
     }
-    /* accelerate off the right edge */
-    38% {
-      transform: translateX(108%);
-      opacity: 0.4;
-    }
+    /* accelerate off right edge */
     40% {
-      transform: translateX(112%);
+      transform: translateX(110vw);
       opacity: 0;
+      animation-timing-function: steps(1);
     }
-    /* snap to far left, invisible */
+    /* instant jump to far left */
     41% {
-      transform: translateX(-112%);
+      transform: translateX(-110vw);
       opacity: 0;
+      animation-timing-function: ease-out;
     }
-    /* fade in as it slides right */
-    52% {
-      opacity: 0.6;
+    /* fade in sliding right */
+    54% {
+      opacity: 0.7;
     }
-    /* ease into resting position */
+    /* settle at origin */
     100% {
       transform: translateX(0);
       opacity: 1;
+    }
+  }
+
+  /* Full-screen red wind lines */
+  .wind-line-full {
+    position: absolute;
+    left: 0;
+    height: 1.5px;
+    background: linear-gradient(90deg, transparent 0%, #E62F2D 20%, #E62F2D 80%, transparent 100%);
+    animation: windLineSweep 1.5s ease-in-out 3 forwards;
+  }
+
+  @keyframes windLineSweep {
+    0% {
+      transform: translateX(-110%);
+      opacity: 0;
+    }
+    15% {
+      opacity: 0.75;
+    }
+    85% {
+      opacity: 0.75;
+    }
+    100% {
+      transform: translateX(110vw);
+      opacity: 0;
     }
   }
 
