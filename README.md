@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 21 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (ee56ede) - 4 minutes ago by github-actions[bot]
-- **Rebrand sihliconvalley → gusty.ch** (298c309) - 9 minutes ago by wgusta
+- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 11 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (9012321) - 11 minutes ago by github-actions[bot]
+- **Remove tagline/blockquote, delay wind animation 5s more** (181c302) - 11 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (ee56ede) - 14 minutes ago by github-actions[bot]
+- **Rebrand sihliconvalley → gusty.ch** (298c309) - 20 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (df85bfc) - 3 weeks ago by github-actions[bot]
 - **Remove TherapyList widget script** (1d08633) - 3 weeks ago by wgusta
 - **Update Activity Log [skip ci]** (ffb9a2b) - 3 weeks ago by github-actions[bot]
 - **Add TherapyList widget script above footer** (552984b) - 3 weeks ago by wgusta
 - **Update Activity Log [skip ci]** (6ceb211) - 5 weeks ago by github-actions[bot]
-- **Show Linux install only in danger zone** (cc30d62) - 5 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (f815190) - 6 weeks ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
