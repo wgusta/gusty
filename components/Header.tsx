@@ -4,14 +4,16 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
-  const [windPhase, setWindPhase] = useState(0); // 0: both defs visible, 1: wind lines appear, 2: def2 pushed out, 3: wind fades
+  const [animPhase, setAnimPhase] = useState(0);
+  // 0: static
+  // 1: curl-g animation playing
+  // 2: animation done, "güney usta" text red+bold
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setWindPhase(1), 8000);  // wind lines appear
-    const t2 = setTimeout(() => setWindPhase(2), 8800);  // push def2 out
-    const t3 = setTimeout(() => setWindPhase(3), 10200); // wind lines fade
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    const t1 = setTimeout(() => setAnimPhase(1), 5000);  // start curl
+    const t2 = setTimeout(() => setAnimPhase(2), 9200);  // 4.2s animation done
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   }, []);
 
   return (
@@ -47,38 +49,28 @@ export default function Header() {
             with wind blowing in strong sudden movements
           </p>
 
-          {/* Definition 2 (animated out by wind) */}
+          {/* Definition 2 */}
           <p
-            className={`text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed mt-2 transition-all duration-700 ease-in-out ${
-              windPhase >= 2 ? 'translate-x-[120%] opacity-0' : 'translate-x-0 opacity-100'
-            }`}
+            className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed mt-2"
+            style={{
+              animation: animPhase === 1 ? 'curlG 4.2s cubic-bezier(0.4, 0, 0.2, 1) forwards' : 'none',
+              transformOrigin: 'left center',
+            }}
           >
             <span className="text-brand-black/50 mr-2">2.</span>
-            letting güney usta take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
+            letting{' '}
+            <span
+              className="transition-colors transition-[font-weight] duration-700"
+              style={{
+                color: animPhase === 2 ? '#E62F2D' : 'inherit',
+                fontWeight: animPhase === 2 ? '700' : 'inherit',
+              }}
+            >
+              güney usta
+            </span>
+            {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
           </p>
-
-          {/* Wind lines */}
-          {(windPhase === 1 || windPhase === 2) && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-              <div className="wind-line wind-line-1" />
-              <div className="wind-line wind-line-2" />
-              <div className="wind-line wind-line-3" />
-              <div className="wind-line wind-line-4" />
-            </div>
-          )}
-          {windPhase === 3 && (
-            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 transition-opacity duration-500">
-              <div className="wind-line wind-line-1" />
-              <div className="wind-line wind-line-2" />
-              <div className="wind-line wind-line-3" />
-              <div className="wind-line wind-line-4" />
-            </div>
-          )}
         </div>
-
-        <p className="text-sm sm:text-base md:text-lg mt-2.5 md:mt-5 text-brand-black font-terminal font-bold">
-          Güney Usta
-        </p>
       </div>
 
       {/* Desktop Menu - Red Circle */}
@@ -215,7 +207,7 @@ export default function Header() {
 
               {/* Email */}
               <Link
-                href="mailto:hey@gusty.ch"
+                href="mailto:gueney@gusty.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
@@ -371,7 +363,7 @@ export default function Header() {
 
               {/* Email */}
               <Link
-                href="mailto:hey@gusty.ch"
+                href="mailto:gueney@gusty.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
