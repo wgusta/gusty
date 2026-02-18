@@ -4,27 +4,14 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 
 export default function Header() {
-  const [animationStage, setAnimationStage] = useState(0); // 0: valley, 1: valley crossed, 2: allveys shown, 3: allveys crossed + always shown
+  const [windPhase, setWindPhase] = useState(0); // 0: both defs visible, 1: wind lines appear, 2: def2 pushed out, 3: wind fades
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const timer1 = setTimeout(() => {
-      setAnimationStage(1); // Cross out valley after 2 seconds
-    }, 2000);
-
-    const timer2 = setTimeout(() => {
-      setAnimationStage(2); // Show allveys after 4 seconds
-    }, 4000);
-
-    const timer3 = setTimeout(() => {
-      setAnimationStage(3); // Cross out allveys and show always after 6 seconds
-    }, 6000);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
-    };
+    const t1 = setTimeout(() => setWindPhase(1), 3000);  // wind lines appear
+    const t2 = setTimeout(() => setWindPhase(2), 3800);  // push def2 out
+    const t3 = setTimeout(() => setWindPhase(3), 5200);  // wind lines fade
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
   return (
@@ -36,51 +23,74 @@ export default function Header() {
       >
         Skip to main content
       </a>
-      
+
       {/* Content */}
-      <div className="flex flex-col items-start text-left px-6 md:px-8 lg:px-12">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red">
-          sihl icon valley
-        </h1>
+      <div className="flex flex-col items-start text-left px-6 md:px-8 lg:px-12 overflow-hidden w-full">
+        {/* Dictionary headword line */}
+        <div className="flex items-baseline gap-3 md:gap-4 flex-wrap">
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red font-stylish">
+            gust·y
+          </h1>
+          <span className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-black/60 font-terminal">
+            /ˈɡʌsti/
+          </span>
+          <span className="text-sm sm:text-base md:text-lg text-brand-black/50 font-terminal italic">
+            adjective
+          </span>
+        </div>
+
+        {/* Definitions */}
+        <div className="mt-4 md:mt-6 lg:mt-8 max-w-2xl relative">
+          {/* Definition 1 */}
+          <p className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed">
+            <span className="text-brand-black/50 mr-2">1.</span>
+            with wind blowing in strong sudden movements
+          </p>
+
+          {/* Definition 2 (animated out by wind) */}
+          <p
+            className={`text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed mt-2 transition-all duration-700 ease-in-out ${
+              windPhase >= 2 ? 'translate-x-[120%] opacity-0' : 'translate-x-0 opacity-100'
+            }`}
+          >
+            <span className="text-brand-black/50 mr-2">2.</span>
+            letting güney usta take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
+          </p>
+
+          {/* Wind lines */}
+          {(windPhase === 1 || windPhase === 2) && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+              <div className="wind-line wind-line-1" />
+              <div className="wind-line wind-line-2" />
+              <div className="wind-line wind-line-3" />
+              <div className="wind-line wind-line-4" />
+            </div>
+          )}
+          {windPhase === 3 && (
+            <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-0 transition-opacity duration-500">
+              <div className="wind-line wind-line-1" />
+              <div className="wind-line wind-line-2" />
+              <div className="wind-line wind-line-3" />
+              <div className="wind-line wind-line-4" />
+            </div>
+          )}
+        </div>
+
         <p className="text-sm sm:text-base md:text-lg mt-2.5 md:mt-5 text-brand-black font-terminal font-bold">
           Güney Usta
         </p>
         <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
           Words x Design x AI Integration
         </p>
-        <p className="text-sm sm:text-base md:text-lg mt-3 md:mt-4 lg:mt-5 max-w-2xl text-brand-black font-terminal leading-relaxed">
-          Building things that last. Close to the Sihl, occasionally iconic,{' '}
-          <span className="relative inline-block">
-            {animationStage === 0 && <span>valley</span>}
-            {animationStage === 1 && (
-              <span className="line-through decoration-2 decoration-brand-black/60 animate-strikethrough">valley</span>
-            )}
-            {animationStage === 2 && (
-              <>
-                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
-                <span className="ml-1 animate-fadeIn">allveys</span>
-              </>
-            )}
-            {animationStage === 3 && (
-              <>
-                <span className="line-through decoration-2 decoration-brand-black/60">valley</span>
-                <span className="line-through decoration-2 decoration-brand-black/60 ml-1 animate-strikethrough">allveys</span>
-                <span className="text-sun-red ml-1 animate-fadeIn">always</span>
-              </>
-            )}
-          </span>{' '}
-          trustworthy.
-          <br />
-        </p>
         <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-0 text-left">
-          I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. Just as the old Sihl valley once turned raw material into craft and industry, I work with today's raw material — data, words, and design — to build with the same spirit of precision and care.
+          I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. I work with today's raw material: data, words, and design, building with precision and care.
         </blockquote>
       </div>
-      
-      {/* Desktop Menu - Red Circle - Same as mobile */}
-      <div 
-        className="hidden md:block fixed top-0 right-0 z-[70] transition-all duration-500 ease-out" 
-        style={{ 
+
+      {/* Desktop Menu - Red Circle */}
+      <div
+        className="hidden md:block fixed top-0 right-0 z-[70] transition-all duration-500 ease-out"
+        style={{
           overflow: 'visible',
           width: isMenuOpen ? '300px' : '96px',
           height: isMenuOpen ? '300px' : '96px',
@@ -88,7 +98,6 @@ export default function Header() {
           willChange: 'transform',
         }}
       >
-        {/* Menu Button - Red Circle (3/4 visible) */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -109,27 +118,23 @@ export default function Header() {
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
-          {/* X Icon - shown when menu is open, positioned at the center of the circle */}
           {isMenuOpen && (
-            <svg 
+            <svg
               className="w-8 h-8 text-brand-white z-10 transition-opacity duration-200"
-              fill="none" 
-              stroke="currentColor" 
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
-              style={{ 
-                opacity: 1,
-              }}
+              style={{ opacity: 1 }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
             </svg>
           )}
         </button>
 
-        {/* Menu Icons - Rotating orbit around expanded circle */}
         {isMenuOpen && (
-          <div 
+          <div
             className="fixed z-[69]"
-            style={{ 
+            style={{
               width: '300px',
               height: '300px',
               top: '-102px',
@@ -137,8 +142,7 @@ export default function Header() {
               pointerEvents: 'none',
             }}
           >
-            {/* Orbit container - rotates around center */}
-            <div 
+            <div
               className="absolute"
               style={{
                 width: '300px',
@@ -149,7 +153,7 @@ export default function Header() {
                 animation: 'rotateOrbit 30s linear infinite',
               }}
             >
-              {/* X (Twitter) Icon - at 0 degrees (right side) */}
+              {/* X (Twitter) */}
               <Link
                 href="https://x.com/GueneyUsta"
                 target="_blank"
@@ -171,7 +175,7 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* GitHub Icon - at 90 degrees */}
+              {/* GitHub */}
               <Link
                 href="https://github.com/wgusta"
                 target="_blank"
@@ -193,7 +197,7 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* LinkedIn Icon - at 180 degrees */}
+              {/* LinkedIn */}
               <Link
                 href="https://linkedin.com/in/gueneyusta"
                 target="_blank"
@@ -215,9 +219,9 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* Email Icon - at 270 degrees */}
+              {/* Email */}
               <Link
-                href="mailto:hey@sihliconvalley.ch"
+                href="mailto:hey@gusty.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-12 h-12 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
@@ -239,10 +243,10 @@ export default function Header() {
         )}
       </div>
 
-      {/* Mobile Menu - Red Circle - Sticky on scroll */}
-      <div 
-        className="md:hidden fixed top-0 right-0 z-[70] transition-all duration-500 ease-out" 
-        style={{ 
+      {/* Mobile Menu - Red Circle */}
+      <div
+        className="md:hidden fixed top-0 right-0 z-[70] transition-all duration-500 ease-out"
+        style={{
           overflow: 'visible',
           width: isMenuOpen ? '188px' : '60px',
           height: isMenuOpen ? '188px' : '60px',
@@ -250,7 +254,6 @@ export default function Header() {
           willChange: 'transform',
         }}
       >
-        {/* Menu Button - Red Circle (3/4 visible) */}
         <button
           onClick={(e) => {
             e.preventDefault();
@@ -271,27 +274,23 @@ export default function Header() {
             transform: isMenuOpen ? 'scale(1)' : undefined,
           }}
         >
-          {/* X Icon - shown when menu is open, positioned at the center of the circle */}
           {isMenuOpen && (
-            <svg 
+            <svg
               className="w-5 h-5 text-brand-white z-10 transition-opacity duration-200"
-              fill="none" 
-              stroke="currentColor" 
+              fill="none"
+              stroke="currentColor"
               viewBox="0 0 24 24"
-              style={{ 
-                opacity: 1,
-              }}
+              style={{ opacity: 1 }}
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M6 18L18 6M6 6l12 12" />
             </svg>
           )}
         </button>
 
-        {/* Menu Icons - Rotating orbit around expanded circle */}
         {isMenuOpen && (
-          <div 
+          <div
             className="fixed z-[69]"
-            style={{ 
+            style={{
               width: '188px',
               height: '188px',
               top: '-64px',
@@ -299,8 +298,7 @@ export default function Header() {
               pointerEvents: 'none',
             }}
           >
-            {/* Orbit container - rotates around center */}
-            <div 
+            <div
               className="absolute"
               style={{
                 width: '188px',
@@ -311,7 +309,7 @@ export default function Header() {
                 animation: 'rotateOrbit 30s linear infinite',
               }}
             >
-              {/* X (Twitter) Icon - at 0 degrees (right side) */}
+              {/* X (Twitter) */}
               <Link
                 href="https://x.com/GueneyUsta"
                 target="_blank"
@@ -333,7 +331,7 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* GitHub Icon - at 90 degrees */}
+              {/* GitHub */}
               <Link
                 href="https://github.com/wgusta"
                 target="_blank"
@@ -355,7 +353,7 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* LinkedIn Icon - at 180 degrees */}
+              {/* LinkedIn */}
               <Link
                 href="https://linkedin.com/in/gueneyusta"
                 target="_blank"
@@ -377,9 +375,9 @@ export default function Header() {
                 </svg>
               </Link>
 
-              {/* Email Icon - at 270 degrees */}
+              {/* Email */}
               <Link
-                href="mailto:hey@sihliconvalley.ch"
+                href="mailto:hey@gusty.ch"
                 onClick={() => setIsMenuOpen(false)}
                 className="absolute w-10 h-10 rounded-full bg-brand-white flex items-center justify-center shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-2 transition-all duration-500 touch-manipulation"
                 style={{
@@ -403,4 +401,3 @@ export default function Header() {
     </header>
   );
 }
-

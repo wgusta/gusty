@@ -1,8 +1,8 @@
-# Sihl Icon Valley Portfolio
+# Gusty Portfolio
 
 A modern portfolio website built with Next.js, showcasing design, writing, and AI engineering work.
 
-**Live Site:** [sihiliconvalley.ch](https://sihiliconvalley.ch)
+**Live Site:** [gusty.ch](https://gusty.ch)
 
 ## Tech Stack
 
@@ -25,7 +25,7 @@ A modern portfolio website built with Next.js, showcasing design, writing, and A
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
@@ -50,7 +50,7 @@ npm start
 ## Project Structure
 
 ```
-sihliconvalley/
+gusty/
 ├── app/
 │   ├── globals.css      # Global styles and custom cursor
 │   ├── layout.tsx       # Root layout with fonts
@@ -78,7 +78,7 @@ Edit the `projects` array in `app/page.tsx`. Each project can include:
 1. Push your code to GitHub
 2. Import the repository in [Vercel](https://vercel.com)
 3. Vercel will auto-detect Next.js and configure the build
-4. Add your custom domain `sihiliconvalley.ch` in Vercel settings
+4. Add your custom domain `gusty.ch` in Vercel settings
 
 ### Environment Variables
 
@@ -100,18 +100,7 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Remove TherapyList widget script** (1d08633) - 13 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (ffb9a2b) - 3 minutes ago by github-actions[bot]
-- **Add TherapyList widget script above footer** (552984b) - 3 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (6ceb211) - 12 days ago by github-actions[bot]
-- **Show Linux install only in danger zone** (cc30d62) - 12 days ago by wgusta
-- **Update Activity Log [skip ci]** (f815190) - 2 weeks ago by github-actions[bot]
-- **Remove root access post and update Linux installation title** (247159b) - 2 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (b061ee5) - 2 weeks ago by github-actions[bot]
-- **Add Linux Cachy OS installation danger zone post** (320c300) - 2 weeks ago by wgusta
-- **Update Activity Log [skip ci]** (7e17e63) - 7 weeks ago by github-actions[bot]
-
-View full commit history: [GitHub Commits](https://github.com/wgusta/sihliconvalley/commits)
+View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
 
 Private project - All rights reserved

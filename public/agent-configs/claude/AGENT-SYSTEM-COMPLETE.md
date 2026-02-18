@@ -393,7 +393,7 @@ Güney
 
    Ich habe mich diese Woche auf die Projektleiter Digital-Stelle beworben. Da ich seit Jahren im Kulturbereich digitalisiere (u.a. bioco.ch Genossenschaft), würde ich mich über ein Gespräch freuen, wie meine Erfahrung mit partizipativer Transformation zu Ihren Plänen passt.
 
-   Kurzes Portfolio: sihliconvalley.ch
+   Kurzes Portfolio: gusty.ch
 
    Freundliche Grüsse,
    Güney Usta

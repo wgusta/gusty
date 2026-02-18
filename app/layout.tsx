@@ -21,9 +21,9 @@ const permanentMarker = Permanent_Marker({
 });
 
 export const metadata: Metadata = {
-  title: "Sihl Icon Valley - Designer & Writer | AI Engineer / AI Integrator",
-  description: "Portfolio of Sihl Icon Valley - Designer, Writer, and AI Engineer",
-  metadataBase: new URL('https://sihiliconvalley.ch'),
+  title: "Gusty, Designer & Writer | AI Engineer / AI Integrator",
+  description: "Portfolio of Güney Usta, Designer, Writer, and AI Engineer",
+  metadataBase: new URL('https://gusty.ch'),
 };
 
 export default function RootLayout({
