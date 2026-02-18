@@ -8,9 +8,9 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const t1 = setTimeout(() => setWindPhase(1), 3000);  // wind lines appear
-    const t2 = setTimeout(() => setWindPhase(2), 3800);  // push def2 out
-    const t3 = setTimeout(() => setWindPhase(3), 5200);  // wind lines fade
+    const t1 = setTimeout(() => setWindPhase(1), 8000);  // wind lines appear
+    const t2 = setTimeout(() => setWindPhase(2), 8800);  // push def2 out
+    const t3 = setTimeout(() => setWindPhase(3), 10200); // wind lines fade
     return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
   }, []);
 
@@ -79,12 +79,6 @@ export default function Header() {
         <p className="text-sm sm:text-base md:text-lg mt-2.5 md:mt-5 text-brand-black font-terminal font-bold">
           Güney Usta
         </p>
-        <p className="text-xs sm:text-sm md:text-base mt-0.5 md:mt-1 text-brand-black font-terminal italic">
-          Words x Design x AI Integration
-        </p>
-        <blockquote className="text-xs sm:text-sm md:text-base mt-6 md:mt-8 lg:mt-10 max-w-2xl text-brand-black/80 font-terminal leading-relaxed italic border-l-4 border-sun-red pl-4 md:pl-6 mb-0 text-left">
-          I like knowing what's real. That's why I show where my actual brain and hands did the work and where I let tools or AI help out. It's not about proving anything; it's about being honest about how things get made. I work with today's raw material: data, words, and design, building with precision and care.
-        </blockquote>
       </div>
 
       {/* Desktop Menu - Red Circle */}
