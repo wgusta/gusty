@@ -64,16 +64,16 @@ npm run build      # production build
 
 Last 10 commits (auto-generated):
 
-- **fix DE umlauts across all project cards** (547afa3) - 16 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (c521652) - 10 minutes ago by github-actions[bot]
-- **DE umlauts, headerDef2post update, Fremdwort label** (1a81841) - 13 minutes ago by wgusta
+- **mobile UX overhaul: reduce header height, show all projects by default, add tap affordance** (81b196b) - 25 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (08d885f) - 8 minutes ago by github-actions[bot]
+- **fix DE umlauts across all project cards** (547afa3) - 8 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (c521652) - 18 minutes ago by github-actions[bot]
+- **DE umlauts, headerDef2post update, Fremdwort label** (1a81841) - 21 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (ab3f4be) - 4 hours ago by github-actions[bot]
 - **Update CLAUDE.md and README.md for new architecture** (1cc1c68) - 4 hours ago by wgusta
 - **Update Activity Log [skip ci]** (329fa9b) - 4 hours ago by github-actions[bot]
 - **More descriptive title and description for therapylist** (bb27f76) - 4 hours ago by wgusta
 - **Update Activity Log [skip ci]** (bfc9ee2) - 4 hours ago by github-actions[bot]
-- **Remove version-gmbh from portfolio projects** (52aca72) - 4 hours ago by wgusta
-- **Update Activity Log [skip ci]** (96babe5) - 4 hours ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
