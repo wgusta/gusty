@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Remove version-gmbh from portfolio projects** (52aca72) - 9 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (96babe5) - 14 seconds ago by github-actions[bot]
-- **Fix project titles/descriptions from actual website content** (acb3dcd) - 25 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (72a6d99) - 4 minutes ago by github-actions[bot]
-- **More descriptive project titles for new projects** (a01e4c7) - 4 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (83a37df) - 4 minutes ago by github-actions[bot]
-- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 5 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (c6b76a2) - 36 minutes ago by github-actions[bot]
-- **Add 6 projects, DE/EN language toggle, SVG favicon** (27ffe05) - 36 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (cc3c7da) - 3 hours ago by github-actions[bot]
+- **More descriptive title and description for therapylist** (bb27f76) - 13 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (bfc9ee2) - 88 seconds ago by github-actions[bot]
+- **Remove version-gmbh from portfolio projects** (52aca72) - 2 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (96babe5) - 2 minutes ago by github-actions[bot]
+- **Fix project titles/descriptions from actual website content** (acb3dcd) - 2 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (72a6d99) - 5 minutes ago by github-actions[bot]
+- **More descriptive project titles for new projects** (a01e4c7) - 5 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (83a37df) - 6 minutes ago by github-actions[bot]
+- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 6 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (c6b76a2) - 37 minutes ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
