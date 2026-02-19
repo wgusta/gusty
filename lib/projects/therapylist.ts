@@ -2,10 +2,13 @@ import type { Project } from '../types';
 
 const therapylist: Project = {
   id: 'therapylist',
-  title: 'TherapyList',
+  title: {
+    en: 'TherapyList: Swiss Encrypted Waitlist Platform for Mental Health Therapists',
+    de: 'TherapyList: Verschluesselte Schweizer Wartelisten-Plattform fuer Psychotherapeuten',
+  },
   description: {
-    en: 'Waitlist management for therapists: share availability, send personalized updates, collect structured intake forms. Swiss DSG compliant with AES-256-GCM encryption, multilingual (DE/FR/IT/EN), CHF 29/month.',
-    de: 'Wartelistenverwaltung fuer Therapeuten: Verfuegbarkeit teilen, personalisierte Updates senden, strukturierte Aufnahmeformulare erfassen. Schweizer DSG-konform mit AES-256-GCM-Verschluesselung, mehrsprachig (DE/FR/IT/EN), CHF 29/Monat.',
+    en: 'SaaS platform that replaces spreadsheet waitlists for therapists. Clients submit structured intake forms, therapists send tone-matched availability updates in one click. All patient data AES-256-GCM encrypted, Swiss-hosted, DSG compliant. Optional HIN and Vault integration for clinics. 4 languages (DE/FR/IT/EN), CHF 29/month.',
+    de: 'SaaS-Plattform, die Tabellen-Wartelisten fuer Therapeuten ersetzt. Klienten reichen strukturierte Aufnahmeformulare ein, Therapeuten senden tongerechte Verfuegbarkeits-Updates mit einem Klick. Alle Patientendaten AES-256-GCM-verschluesselt, in der Schweiz gehostet, DSG-konform. Optionale HIN- und Vault-Integration fuer Praxen. 4 Sprachen (DE/FR/IT/EN), CHF 29/Monat.',
   },
   tags: ['Next.js 15', 'PostgreSQL', 'Drizzle ORM', 'AES-256-GCM', 'Docker', 'Caddy'],
   column: 'bridged',
