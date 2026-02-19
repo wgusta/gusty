@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Add 6 projects, DE/EN language toggle, SVG favicon** (27ffe05) - 33 seconds ago by wgusta
+- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 11 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (c6b76a2) - 31 minutes ago by github-actions[bot]
+- **Add 6 projects, DE/EN language toggle, SVG favicon** (27ffe05) - 32 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (cc3c7da) - 3 hours ago by github-actions[bot]
 - **rm cross-contaminated files, rewrite CLAUDE.md** (b4cfdfe) - 3 hours ago by wgusta
 - **Update Activity Log [skip ci]** (a2542b5) - 3 hours ago by github-actions[bot]
 - **Trigger Vercel redeploy** (4069639) - 3 hours ago by wgusta
-- **Update Activity Log [skip ci]** (d41d5e3) - 17 hours ago by github-actions[bot]
-- **Add CLAUDE.md: note on README rebase conflict from activity log bot** (66b4026) - 17 hours ago by wgusta
-- **Update Activity Log [skip ci]** (c94209f) - 17 hours ago by github-actions[bot]
-- **Full-screen wind lines + def2 blows across full viewport** (79de157) - 17 hours ago by wgusta
-- **Update Activity Log [skip ci]** (dc456da) - 17 hours ago by github-actions[bot]
+- **Update Activity Log [skip ci]** (d41d5e3) - 18 hours ago by github-actions[bot]
+- **Add CLAUDE.md: note on README rebase conflict from activity log bot** (66b4026) - 18 hours ago by wgusta
+- **Update Activity Log [skip ci]** (c94209f) - 18 hours ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
