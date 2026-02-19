@@ -3,21 +3,11 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Image from 'next/image';
 import MarkdownContent from './MarkdownContent';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  tags: string[];
-  column: 'design' | 'ai' | 'bridged' | 'danger';
-  designContent?: React.ReactNode | string;
-  aiContent?: React.ReactNode | string;
-  status?: 'live' | 'development' | 'archived';
-  liveUrl?: string;
-  downloadUrl?: string;
-  techStack?: { [category: string]: string[] };
-}
+import ATSProjectContent from './ATSProjectContent';
+import type { Project } from '@/lib/types';
+import { t } from '@/lib/types';
+import { useLanguage } from '@/lib/i18n/context';
+import translations from '@/lib/i18n/translations';
 
 interface ProjectModalProps {
   project: Project | null;
@@ -31,6 +21,8 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   const [expandedLessons, setExpandedLessons] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const { lang } = useLanguage();
+  const tr = translations[lang];
 
   useEffect(() => {
     if (project) {
@@ -106,6 +98,21 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
   const hasAiContent = project.aiContent !== undefined;
   const showTabs = project.column === 'bridged' && hasDesignContent && hasAiContent;
 
+  const resolveContent = (content: Project['designContent'] | Project['aiContent']) => {
+    if (!content) return null;
+    // Sentinel for ATS component
+    if (content === '__ATS_COMPONENT__') {
+      return <ATSProjectContent />;
+    }
+    const resolved = t(content, lang);
+    return (
+      <MarkdownContent
+        content={resolved}
+        fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
+      />
+    );
+  };
+
   return (
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
@@ -126,7 +133,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           ref={closeButtonRef}
           onClick={onClose}
           className="absolute top-2 right-2 md:top-4 md:right-4 z-10 w-8 h-8 md:w-10 md:h-10 flex items-center justify-center bg-brand-black text-brand-white rounded-full hover:bg-sun-red active:bg-sun-red focus:bg-sun-red focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sun-red transition-colors touch-manipulation"
-          aria-label="Close modal"
+          aria-label={tr.close}
           data-interactive
         >
           <svg className="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -138,7 +145,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
         <div className="p-4 md:p-6 border-b border-brand-black/10 pr-12 md:pr-6">
           <div className="flex-1 min-w-0">
             <h2 id="modal-title" className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-brand-black font-terminal mb-2 break-words">
-              {project.title}
+              {t(project.title, lang)}
             </h2>
             {/* Download Button - Under title */}
             {project.downloadUrl && (
@@ -148,7 +155,7 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 className="bg-teal hover:bg-teal/90 text-brand-white px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-terminal font-semibold whitespace-nowrap inline-flex items-center gap-1.5 md:gap-2 hover:no-underline mb-3 transition-colors"
                 onClick={(e) => e.stopPropagation()}
               >
-                <span>DOWNLOAD</span>
+                <span>{tr.download}</span>
                 <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
                 </svg>
@@ -163,15 +170,15 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                 className="live-status-button px-3 py-2 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-terminal font-semibold whitespace-nowrap inline-flex items-center gap-1.5 md:gap-2 hover:no-underline mb-3"
                 onClick={(e) => e.stopPropagation()}
               >
-                <span>LIVE</span>
+                <span>{tr.live}</span>
                 <svg className="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                 </svg>
               </a>
             )}
-            <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{project.description}</p>
+            <p id="modal-description" className="text-xs md:text-sm lg:text-base text-brand-black/80 font-terminal">{t(project.description, lang)}</p>
           </div>
-          
+
           {/* Tech Stack and Lessons Learned - Buttons side by side, content uses full width */}
           <div className="mt-4 md:mt-6">
             {/* Buttons row - side by side */}
@@ -189,13 +196,13 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   }}
                   className="flex items-center gap-2 text-left hover:text-brand-black transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 rounded"
                   aria-expanded={expandedTechStack}
-                  aria-label="Toggle tech stack"
+                  aria-label={`Toggle ${tr.techStack}`}
                 >
-                  <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">Tech Stack</h3>
-                  <svg 
+                  <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">{tr.techStack}</h3>
+                  <svg
                     className={`w-4 h-4 text-brand-black/60 transition-transform duration-200 ${expandedTechStack ? 'rotate-180' : ''}`}
-                    fill="none" 
-                    stroke="currentColor" 
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -216,13 +223,13 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   }}
                   className="flex items-center gap-2 text-left hover:text-brand-black transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-sun-red focus:ring-offset-1 rounded"
                   aria-expanded={expandedLessons}
-                  aria-label="Toggle lessons learned"
+                  aria-label={`Toggle ${tr.lessonsLearned}`}
                 >
-                  <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">Lessons Learned</h3>
-                  <svg 
+                  <h3 className="text-xs md:text-sm font-terminal font-semibold text-brand-black/60 hover:text-brand-black">{tr.lessonsLearned}</h3>
+                  <svg
                     className={`w-4 h-4 text-brand-black/60 transition-transform duration-200 ${expandedLessons ? 'rotate-180' : ''}`}
-                    fill="none" 
-                    stroke="currentColor" 
+                    fill="none"
+                    stroke="currentColor"
                     viewBox="0 0 24 24"
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -250,20 +257,20 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
             {expandedLessons && (
               <div className="mt-2 w-full space-y-3">
                 <div>
-                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What worked well:</p>
-                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Simple architecture (Flask + In-Memory DB) for MVP, Railway for fast deployment, TailwindCSS for fast styling, Leaflet.js for map integration.</p>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">{tr.lessonsWorkedWell}</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">{tr.lessonsWorkedWellText}</p>
                 </div>
                 <div>
-                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">What I would do differently:</p>
-                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">PostgreSQL from the start instead of In-Memory DB, Structured logging (e.g. structlog), Unit tests for critical functions, Monitoring & alerting (e.g. Sentry).</p>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">{tr.lessonsDifferently}</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">{tr.lessonsDifferentlyText}</p>
                 </div>
                 <div>
-                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">AI Assistance:</p>
-                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">Efficient for boilerplate code and repetitive tasks, Useful for debugging and error analysis, Less helpful for complex architecture decisions, Important: Always understand and adapt code, don't blindly adopt.</p>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">{tr.lessonsAi}</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">{tr.lessonsAiText}</p>
                 </div>
                 <div>
-                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">Surprise:</p>
-                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">The number of add-on services for a supposedly simple AI application was higher than expected: SendGrid (emails), Railway (hosting), GitHub Actions (CI/CD), Infomaniak (DNS), Domain Authentication (SPF/DKIM/DMARC). Each service brought its own configuration and error sources.</p>
+                  <p className="text-xs md:text-sm font-terminal font-semibold text-brand-black mb-1">{tr.lessonsSurprise}</p>
+                  <p className="text-xs md:text-sm text-brand-black/80 font-terminal">{tr.lessonsSurpriseText}</p>
                 </div>
               </div>
             )}
@@ -281,10 +288,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   : 'bg-off-white text-brand-black hover:bg-deep-pink/10 active:bg-deep-pink/20'
               }`}
               aria-pressed={activeTab === 'design'}
-              aria-label="human-made tab"
+              aria-label={`${tr.humanMade} tab`}
               data-interactive
             >
-              human-made
+              {tr.humanMade}
             </button>
             <button
               onClick={() => setActiveTab('ai')}
@@ -294,10 +301,10 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
                   : 'bg-off-white text-brand-black hover:bg-teal/10 active:bg-teal/20'
               }`}
               aria-pressed={activeTab === 'ai'}
-              aria-label="AI-assisted tab"
+              aria-label={`${tr.aiAssisted} tab`}
               data-interactive
             >
-              AI-assisted
+              {tr.aiAssisted}
             </button>
           </div>
         )}
@@ -307,58 +314,14 @@ export default function ProjectModal({ project, isOpen, onClose }: ProjectModalP
           {showTabs ? (
             // Show content based on active tab for bridged projects
             <>
-              {activeTab === 'design' && project.designContent && (
-                typeof project.designContent === 'string' ? (
-                  <MarkdownContent 
-                    content={project.designContent} 
-                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
-                  />
-                ) : (
-                  <div className="max-w-none text-brand-black">
-                    {project.designContent}
-                  </div>
-                )
-              )}
-              {activeTab === 'ai' && project.aiContent && (
-                typeof project.aiContent === 'string' ? (
-                  <MarkdownContent 
-                    content={project.aiContent} 
-                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
-                  />
-                ) : (
-                  <div className="max-w-none text-brand-black">
-                    {project.aiContent}
-                  </div>
-                )
-              )}
+              {activeTab === 'design' && project.designContent && resolveContent(project.designContent)}
+              {activeTab === 'ai' && project.aiContent && resolveContent(project.aiContent)}
             </>
           ) : (
             // Show all available content for non-bridged projects (no tabs)
             <>
-              {project.designContent && (
-                typeof project.designContent === 'string' ? (
-                  <MarkdownContent 
-                    content={project.designContent} 
-                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
-                  />
-                ) : (
-                  <div className="max-w-none text-brand-black">
-                    {project.designContent}
-                  </div>
-                )
-              )}
-              {project.aiContent && (
-                typeof project.aiContent === 'string' ? (
-                  <MarkdownContent 
-                    content={project.aiContent} 
-                    fontFamily={project.column === 'danger' ? 'erratic' : 'terminal'}
-                  />
-                ) : (
-                  <div className="max-w-none text-brand-black">
-                    {project.aiContent}
-                  </div>
-                )
-              )}
+              {project.designContent && resolveContent(project.designContent)}
+              {project.aiContent && resolveContent(project.aiContent)}
               {!hasDesignContent && !hasAiContent && (
                 <p className="text-brand-black/60">No content available for this project.</p>
               )}
@@ -398,4 +361,3 @@ export function CodeSnippet({ code, language }: { code: string; language?: strin
     </pre>
   );
 }
-

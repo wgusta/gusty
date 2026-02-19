@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import LanguageToggle from './LanguageToggle';
+import { useLanguage } from '@/lib/i18n/context';
+import translations from '@/lib/i18n/translations';
 
 export default function Header() {
   const [animPhase, setAnimPhase] = useState(0);
@@ -9,6 +12,8 @@ export default function Header() {
   // 1: curl-g animation playing
   // 2: animation done, "güney usta" text red+bold
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { lang } = useLanguage();
+  const tr = translations[lang];
 
   useEffect(() => {
     const t1 = setTimeout(() => setAnimPhase(1), 5000);  // start wind blow
@@ -58,7 +63,7 @@ export default function Header() {
             /ˈɡʌsti/
           </span>
           <span className="text-sm sm:text-base md:text-lg text-brand-black/50 font-terminal italic">
-            adjective
+            {tr.adjective}
           </span>
         </div>
 
@@ -67,7 +72,7 @@ export default function Header() {
           {/* Definition 1 */}
           <p className="text-sm sm:text-base md:text-lg text-brand-black font-terminal leading-relaxed">
             <span className="text-brand-black/50 mr-2">1.</span>
-            with wind blowing in strong sudden movements
+            {tr.headerDef1}
           </p>
 
           {/* Definition 2 — wind blow out right, return from left */}
@@ -78,7 +83,7 @@ export default function Header() {
             }}
           >
             <span className="text-brand-black/50 mr-2">2.</span>
-            letting{' '}
+            {tr.headerDef2pre}{tr.headerDef2pre ? ' ' : ''}
             <span
               style={{
                 color: animPhase === 2 ? '#E62F2D' : 'inherit',
@@ -88,9 +93,14 @@ export default function Header() {
             >
               güney usta
             </span>
-            {' '}take the steering wheel and experience strong sudden movements inside databases, ai&#8209;integration and design projects
+            {' '}{tr.headerDef2post}
           </p>
         </div>
+      </div>
+
+      {/* Language Toggle - positioned top-left area, below skip link */}
+      <div className="absolute top-4 left-6 md:left-8 lg:left-12 z-[60]">
+        <LanguageToggle />
       </div>
 
       {/* Desktop Menu - Red Circle */}

@@ -1,17 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  tags: string[];
-  column: 'design' | 'ai' | 'bridged' | 'danger';
-  status?: 'live' | 'development' | 'archived';
-  liveUrl?: string;
-}
+import type { Project } from '@/lib/types';
+import { t } from '@/lib/types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface ProjectCardProps {
   project: Project;
@@ -20,6 +12,8 @@ interface ProjectCardProps {
 }
 
 export default function ProjectCard({ project, onClick, activeFilter }: ProjectCardProps) {
+  const { lang } = useLanguage();
+
   // Determine background color for mobile based on project column type
   const getMobileBgColor = () => {
     // On desktop, always use off-white
@@ -49,7 +43,7 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
       onClick={onClick}
       role="button"
       tabIndex={0}
-      aria-label={`View project: ${project.title}`}
+      aria-label={`${t(project.title, lang)}`}
       data-interactive
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -62,30 +56,30 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
       {project.column === 'bridged' && (
         <div className="md:hidden absolute inset-0 bg-gradient-to-r from-deep-pink to-teal rounded-lg z-0"></div>
       )}
-      
+
       {project.imageUrl && (
         <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
           <Image
             src={project.imageUrl}
-            alt={project.title}
+            alt={t(project.title, lang)}
             fill
             className="object-cover"
           />
         </div>
       )}
-      
+
       <h3 className={`text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-terminal ${getMobileTextColor()} relative z-10`}>
-        {project.title}
+        {t(project.title, lang)}
       </h3>
-      
+
       <p className={`text-xs md:text-sm mb-3 md:mb-4 font-terminal relative z-10 ${
         (project.column === 'design' || project.column === 'ai' || project.column === 'bridged')
           ? 'md:text-brand-black/80 text-brand-white/80'
           : 'text-brand-black/80'
       }`}>
-        {project.description}
+        {t(project.description, lang)}
       </p>
-      
+
       <div className="flex flex-wrap gap-2 relative z-10" role="list" aria-label="Project tags">
         {project.tags.map((tag, index) => (
           <span
@@ -104,4 +98,3 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
     </article>
   );
 }
-

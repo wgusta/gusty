@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Playfair_Display, IBM_Plex_Mono, Permanent_Marker } from "next/font/google";
+import { LanguageProvider } from "@/lib/i18n/context";
 import "./globals.css";
 
 const playfairDisplay = Playfair_Display({
@@ -32,11 +33,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${playfairDisplay.variable} ${ibmPlexMono.variable} ${permanentMarker.variable} antialiased`}
       >
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

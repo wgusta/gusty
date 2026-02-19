@@ -4,8 +4,10 @@ import SecurityWarning from './SecurityWarning';
 import AgentConfigAccordion from './AgentConfigAccordion';
 import MarkdownContent from './MarkdownContent';
 import { chatgptConfigs, claudeConfigs } from '@/lib/agentConfigs';
+import { useLanguage } from '@/lib/i18n/context';
+import translations from '@/lib/i18n/translations';
 
-const originalContent = `## Why HTML Templates?
+const contentEn = `## Why HTML Templates?
 
 The hard reality: Your most beautiful design never gets seen by a human if the ATS filters you out first. Over 60% of Swiss companies use ATS systems, and 52% of applicants never receive a response.
 
@@ -202,32 +204,154 @@ The traditional approach fails because:
 
 **The strategy:** First outsmart the machine, then impress the humans. These templates do both - clean structure for ATS, professional design for recruiters.`;
 
+const contentDe = `## Warum HTML-Templates?
+
+Die harte Realitaet: Das schoenste Design wird nie von einem Menschen gesehen, wenn der ATS-Filter vorher aussortiert. Ueber 60% der Schweizer Unternehmen nutzen ATS-Systeme, und 52% der Bewerbenden erhalten nie eine Antwort.
+
+### Die HTML → PDF Strategie
+
+**Warum HTML gewinnt:**
+
+- **ATS-sicher:** Semantisches HTML mit klarer Struktur (\`<section>\`, \`<article>\`, \`<h1-h6>\`)
+- **KI-freundlich:** Struktur ist klar erkennbar fuer KI-Agents
+- **Design-Flexibilitaet:** Volle CSS-Kontrolle fuer Styling
+- **Druckfertig:** PDF generieren via Browser-Druck (Cmd/Ctrl+P → Als PDF speichern)
+- **Eine Quelle:** Eine HTML-Datei = Quelle fuer alles
+- **Kein Vendor Lock-in:** W3C-Standards, funktioniert ueberall
+
+**Ein Format, drei Ausgaben:** HTML (fuer KI-Bearbeitung), PDF (fuer menschliche Reviewer), Klartext-Extraktion (fuer ATS-Parsing)
+
+### ATS-Regeln in den Templates
+
+Diese Templates folgen den ATS-Kompatibilitaetsregeln:
+
+- Standardschriften (Inter, Manrope, aehnlich Arial/Calibri, 10-12pt)
+- Standard-Abschnittsueberschriften ("Berufserfahrung", "Kontakt", "Skills")
+- Keine komplexen Tabellen oder mehrspaltigen Layouts, die Parser verwirren
+- Keywords fliessen natuerlich im Kontext
+- Hard Skills explizit aufgelistet und sichtbar
+
+---
+
+## So nutzt du die Templates
+
+### Schritt 1: Template herunterladen
+
+Waehle das Template, das zu deinen Beduerfnissen passt:
+
+- **[1-Spalten-CV](/templates/cv-template-1column.html)** - Maximale ATS-Kompatibilitaet, sauberes einspaltiges Layout
+- **[Bubbles-CV](/templates/cv-template-bubbles.html)** - Visuelle Skills mit Tag-Bubble-Darstellung
+- **[Hybrid-CV](/templates/cv-template-hybrid.html)** - Zweispaltige Balance aus Design und Lesbarkeit
+- **[Minimalist-CV](/templates/cv-template-minimalist.html)** - Reine ATS-Optimierung, ohne Schnickschnack
+- **[Minimalist + Foto](/templates/cv-template-minimalist-with-picture.html)** - ATS-sicher mit Foto-Option
+- **[Anschreiben](/templates/coverletter-template.html)** - Passender Stil mit Unterschrift-Platzhalter
+
+### Schritt 2: Bewerbungsordner einrichten
+
+**Wichtig:** Erstelle fuer jede Bewerbung einen neuen Ordner. Kopiere die Template-Dateien zusammen mit deinen Bildern in diesen Ordner.
+
+**Profilfoto (CV-Templates mit Bild):**
+- Foto als \`cvpicture.jpg\` im selben Ordner wie die HTML-Datei speichern
+- Empfohlene Groesse: 200×267 Pixel (Hochformat)
+
+**Unterschrift (Anschreiben):**
+- Unterschrift als \`signature.jpg\` im selben Ordner speichern
+- Empfohlene Hoehe: ~45 Pixel
+
+### Schritt 3: Inhalt bearbeiten
+
+HTML-Datei in einem Texteditor oder IDE oeffnen:
+
+1. Platzhaltertext \`[Vollstaendiger Name]\`, \`[Deine Adresse]\` etc. ersetzen
+2. Berufserfahrung mit der CAR-Methode (Context-Action-Result) ausfuellen
+3. Skills, Ausbildung und andere Abschnitte aktualisieren
+4. Farben ueber CSS-Variablen im \`:root\`-Abschnitt anpassen
+
+### Schritt 4: PDF generieren
+
+1. HTML-Datei im Browser oeffnen (Chrome, Firefox, Safari)
+2. **Cmd+P** (Mac) oder **Ctrl+P** (Windows) druecken
+3. "Als PDF speichern" als Ziel waehlen
+4. Das Print-Stylesheet optimiert das Layout automatisch
+
+---
+
+## Der komplette Workflow
+
+**Gesamtzeit: ~60-90 Minuten pro Bewerbung (statt 3-4 Stunden traditionell)**
+
+1. **TELOS vorbereiten** (einmalig, regelmaessig aktualisieren) - 30 Min
+2. **Communications Strategist** mit Stellenausschreibung ausfuehren - 15 Min
+3. **HR Business Partner** zur CV-Optimierung ausfuehren - 20 Min
+4. **Writing Style Editor** zum Feinschliff ausfuehren - 15 Min
+5. **ATS Optimizer** zur Endkontrolle ausfuehren - 10 Min
+6. **HTML-Template** mit optimiertem Inhalt ausfuellen - 15 Min
+7. **PDF generieren** via Browser-Druck - 2 Min
+
+---
+
+## Die CAR-Methode fuer Erfolge
+
+Beim Schreiben der Erfahrung CAR (Context-Action-Result) mit Metriken verwenden:
+
+**Schlecht:** "Verantwortlich fuer Website-Management"
+
+**Gut (CAR):**
+- **Context:** Legacy-Website mit 5 Sekunden Ladezeit, die mobile Nutzer verliert
+- **Action:** Komplettes Redesign mit neuem CMS und CDN-Implementierung geleitet
+- **Result:** 85% schnellere Ladezeiten, 40% mehr Mobile-Engagement
+
+---
+
+## Template-Features
+
+**Alle Templates enthalten:**
+- CSS-Variablen fuer einfache Farbanpassung
+- Druckoptimierte Stylesheets (@media print)
+- Google Fonts (Inter, Manrope) via CDN geladen
+- Responsives Design fuer Bildschirmansicht
+- Semantische HTML-Struktur fuer ATS-Parsing
+
+---
+
+## Warum dieser Ansatz funktioniert
+
+Der traditionelle Ansatz scheitert, weil:
+- Designelemente (Icons, Grafiken, Spalten) beim Parsen zu Muelltext werden
+- 64% Verwaltungsreduktion durch ATS bedeutet: Roboter entscheiden, wer durchkommt
+- Schoene PDFs aus Design-Tools oft miserables ATS-Parsing haben
+
+**Die Strategie:** Zuerst die Maschine austricksen, dann die Menschen beeindrucken. Diese Templates schaffen beides: saubere Struktur fuer ATS, professionelles Design fuer Recruiter.`;
+
 export default function ATSProjectContent() {
+  const { lang } = useLanguage();
+  const tr = translations[lang];
+  const content = lang === 'de' ? contentDe : contentEn;
+
   return (
     <>
-      <MarkdownContent content={originalContent} fontFamily="terminal" />
-      
+      <MarkdownContent content={content} fontFamily="terminal" />
+
       <div className="mt-8 md:mt-12">
         <h2 className="text-3xl md:text-4xl font-bold text-brand-black font-terminal mb-6 md:mb-8">
-          Agent Configurations & Prompts
+          {tr.agentConfigsTitle}
         </h2>
         <p className="text-sm md:text-base text-brand-black/80 font-terminal mb-6 md:mb-8 leading-relaxed">
-          Below are the complete agent configuration files and prompts used in the AI-assisted workflow. These can be copied and used with ChatGPT, Claude, or other LLM platforms. Each configuration includes detailed instructions, input requirements, and output formats.
+          {tr.agentConfigsDesc}
         </p>
-        
+
         <SecurityWarning />
-        
-        <AgentConfigAccordion 
-          title="ChatGPT Agent Configurations" 
+
+        <AgentConfigAccordion
+          title="ChatGPT Agent Configurations"
           configs={chatgptConfigs}
         />
-        
-        <AgentConfigAccordion 
-          title="Claude Agent Configurations" 
+
+        <AgentConfigAccordion
+          title="Claude Agent Configurations"
           configs={claudeConfigs}
         />
       </div>
     </>
   );
 }
-

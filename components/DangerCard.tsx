@@ -1,17 +1,9 @@
 'use client';
 
 import Image from 'next/image';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl?: string;
-  tags: string[];
-  column: 'design' | 'ai' | 'bridged' | 'danger';
-  status?: 'live' | 'development' | 'archived';
-  liveUrl?: string;
-}
+import type { Project } from '@/lib/types';
+import { t } from '@/lib/types';
+import { useLanguage } from '@/lib/i18n/context';
 
 interface DangerCardProps {
   project: Project;
@@ -19,13 +11,15 @@ interface DangerCardProps {
 }
 
 export default function DangerCard({ project, onClick }: DangerCardProps) {
+  const { lang } = useLanguage();
+
   return (
     <article
       className="w-full bg-brand-black p-4 md:p-6 rounded-lg shadow-lg cursor-pointer transition-all hover:scale-105 hover:shadow-xl active:scale-95 focus-within:outline-none focus-within:ring-2 focus-within:ring-brand-white focus-within:ring-offset-2"
       onClick={onClick}
       role="button"
       tabIndex={0}
-      aria-label={`View project: ${project.title}`}
+      aria-label={`${t(project.title, lang)}`}
       data-interactive
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -38,25 +32,25 @@ export default function DangerCard({ project, onClick }: DangerCardProps) {
         <div className="relative w-full h-48 mb-4 rounded overflow-hidden">
           <Image
             src={project.imageUrl}
-            alt={project.title}
+            alt={t(project.title, lang)}
             fill
             className="object-cover"
           />
         </div>
       )}
-      
+
       <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-2 font-erratic text-brand-white transform-gpu" style={{
         transform: 'rotate(-1deg) skewX(-2deg)',
         textShadow: '2px 2px 0px rgba(255,255,255,0.1), -1px -1px 0px rgba(0,0,0,0.3)',
         letterSpacing: '0.05em',
       }}>
-        {project.title}
+        {t(project.title, lang)}
       </h3>
-      
+
       <p className="text-xs md:text-sm mb-3 md:mb-4 font-erratic text-brand-white/80">
-        {project.description}
+        {t(project.description, lang)}
       </p>
-      
+
       <div className="flex flex-wrap gap-2" role="list" aria-label="Project tags">
         {project.tags.map((tag, index) => (
           <span
@@ -74,4 +68,3 @@ export default function DangerCard({ project, onClick }: DangerCardProps) {
     </article>
   );
 }
-
