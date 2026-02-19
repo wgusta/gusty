@@ -1,100 +1,64 @@
 # Gusty Portfolio
 
-A modern portfolio website built with Next.js, showcasing design, writing, and AI engineering work.
+Personal portfolio of Güney Usta — design, writing, AI engineering.
 
-**Live Site:** [gusty.ch](https://gusty.ch)
+**Live:** [gusty.ch](https://gusty.ch)
 
 ## Tech Stack
 
-- **Next.js 16** (App Router)
-- **React 19**
-- **TypeScript**
-- **Tailwind CSS v3**
-- **Custom Fonts:** Playfair Display & IBM Plex Mono
+- Next.js 16 (App Router), React 19, TypeScript, Tailwind CSS v3
+- Fonts: Playfair Display, IBM Plex Mono, Permanent Marker
+- Deployed on Vercel
 
 ## Features
 
-- Split-screen portfolio layout (Design & Writing / AI Engineering)
-- Interactive project cards with modal views
-- Custom cursor (desktop only)
-- Fully responsive design
-- Tabbed project modals for bridged projects
-- Rich media support (images, videos, code snippets)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
-
-```bash
-# Install dependencies
-npm install
-
-# Run development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) to view the site.
-
-### Build for Production
-
-```bash
-npm run build
-npm start
-```
+- Split-screen layout: human-made (pink) / AI-assisted (teal) / teamed-up (gradient)
+- DE/EN language toggle with localStorage persistence
+- 10 portfolio projects with bilingual content
+- Interactive project modals with tabs for bridged projects
+- Custom cursor (desktop), mobile filter tabs
+- Danger zone (env-gated) with confirmation modal
+- Dynamic favicon via Next.js ImageResponse
 
 ## Project Structure
 
 ```
-gusty/
-├── app/
-│   ├── globals.css      # Global styles and custom cursor
-│   ├── layout.tsx       # Root layout with fonts
-│   └── page.tsx         # Main page with project data
-├── components/
-│   ├── Header.tsx      # Header with logo and social links
-│   ├── ProjectCard.tsx # Project card component
-│   └── ProjectModal.tsx # Modal with tabbed content
-└── tailwind.config.js  # Tailwind configuration
+app/
+  layout.tsx          # Root layout, LanguageProvider wrapper
+  page.tsx            # Homepage, project grid, danger zone
+  icon.tsx            # Favicon generation (32x32 PNG)
+lib/
+  types.ts            # Project, BilingualText, t() helper
+  i18n/
+    context.tsx       # LanguageProvider + useLanguage()
+    translations.ts   # UI strings EN/DE
+  projects/
+    index.ts          # Re-exports all projects as array
+    badenleg.ts       # Each project = separate file
+    ...               # 10 project files total
+components/
+  Header.tsx          # Logo, definitions, language toggle, social menu
+  ProjectCard.tsx     # design/ai/bridged cards
+  DangerCard.tsx      # Danger zone cards
+  ProjectModal.tsx    # Full-screen modal with bilingual content
+  ATSProjectContent.tsx # ATS templates (self-contained i18n)
+  LanguageToggle.tsx  # DE/EN toggle button
 ```
 
-## Adding New Projects
+## Adding a Project
 
-Edit the `projects` array in `app/page.tsx`. Each project can include:
+1. Create `lib/projects/myproject.ts` with a `Project` export
+2. Add import + entry in `lib/projects/index.ts`
+3. Set `column` to `design`, `ai`, `bridged`, or `danger`
+4. Use `{ en: '...', de: '...' }` for bilingual fields
 
-- `designContent` - React node with design/writing content
-- `aiContent` - React node with AI engineering content
-- `column` - 'design', 'ai', or 'bridged'
-- Use helper components: `RichContent`, `VideoEmbed`, `CodeSnippet`
+## Getting Started
 
-## Deployment
-
-### Deploy to Vercel
-
-1. Push your code to GitHub
-2. Import the repository in [Vercel](https://vercel.com)
-3. Vercel will auto-detect Next.js and configure the build
-4. Add your custom domain `gusty.ch` in Vercel settings
-
-### Environment Variables
-
-No environment variables required for basic deployment.
-
-### Build Settings (Vercel)
-
-- **Framework Preset:** Next.js
-- **Build Command:** `npm run build` (auto-detected)
-- **Output Directory:** `.next` (auto-detected)
-- **Install Command:** `npm install` (auto-detected)
-
-## Social Links
-
-- **Twitter/X:** [@GueneyUsta](https://x.com/GueneyUsta)
-- **GitHub:** [wgusta](https://github.com/wgusta)
+```bash
+npm install
+npm run dev        # localhost:3000
+npm run build      # production build
+```
 
 ## Activity Log
 
