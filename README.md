@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Trigger Vercel redeploy** (4069639) - 9 seconds ago by wgusta
+- **rm cross-contaminated files, rewrite CLAUDE.md** (b4cfdfe) - 16 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (a2542b5) - 18 minutes ago by github-actions[bot]
+- **Trigger Vercel redeploy** (4069639) - 19 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (d41d5e3) - 14 hours ago by github-actions[bot]
 - **Add CLAUDE.md: note on README rebase conflict from activity log bot** (66b4026) - 14 hours ago by wgusta
 - **Update Activity Log [skip ci]** (c94209f) - 14 hours ago by github-actions[bot]
 - **Full-screen wind lines + def2 blows across full viewport** (79de157) - 14 hours ago by wgusta
-- **Update Activity Log [skip ci]** (dc456da) - 14 hours ago by github-actions[bot]
-- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 14 hours ago by wgusta
-- **Update Activity Log [skip ci]** (62a5665) - 14 hours ago by github-actions[bot]
-- **Curl-G animation on def2, güney usta turns red+bold after** (261ec93) - 14 hours ago by wgusta
-- **Update Activity Log [skip ci]** (9012321) - 14 hours ago by github-actions[bot]
+- **Update Activity Log [skip ci]** (dc456da) - 15 hours ago by github-actions[bot]
+- **Wind blow animation on def2, slides out right and back from left** (a5e5539) - 15 hours ago by wgusta
+- **Update Activity Log [skip ci]** (62a5665) - 15 hours ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
