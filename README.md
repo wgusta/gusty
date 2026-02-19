@@ -100,16 +100,16 @@ No environment variables required for basic deployment.
 
 Last 10 commits (auto-generated):
 
-- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 11 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (c6b76a2) - 31 minutes ago by github-actions[bot]
+- **More descriptive project titles for new projects** (a01e4c7) - 12 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (83a37df) - 37 seconds ago by github-actions[bot]
+- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 48 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (c6b76a2) - 32 minutes ago by github-actions[bot]
 - **Add 6 projects, DE/EN language toggle, SVG favicon** (27ffe05) - 32 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (cc3c7da) - 3 hours ago by github-actions[bot]
 - **rm cross-contaminated files, rewrite CLAUDE.md** (b4cfdfe) - 3 hours ago by wgusta
 - **Update Activity Log [skip ci]** (a2542b5) - 3 hours ago by github-actions[bot]
 - **Trigger Vercel redeploy** (4069639) - 3 hours ago by wgusta
 - **Update Activity Log [skip ci]** (d41d5e3) - 18 hours ago by github-actions[bot]
-- **Add CLAUDE.md: note on README rebase conflict from activity log bot** (66b4026) - 18 hours ago by wgusta
-- **Update Activity Log [skip ci]** (c94209f) - 18 hours ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
