@@ -8,7 +8,7 @@ const luckhack: Project = {
   },
   description: {
     en: 'Scholarship competition awarding CHF 1500/semester to Swiss university students. Participants decrypt a transmission, connect via SSH, and solve auto-graded statistics tasks. Go terminal backend, Next.js frontend.',
-    de: 'Stipendiums-Wettbewerb mit CHF 1500/Semester fuer Schweizer Studierende. Teilnehmende entschluesseln eine Uebertragung, verbinden via SSH und loesen automatisch bewertete Statistik-Aufgaben. Go-Terminal-Backend, Next.js-Frontend.',
+    de: 'Stipendiums-Wettbewerb mit CHF 1500/Semester für Schweizer Studierende. Teilnehmende entschlüsseln eine Übertragung, verbinden via SSH und lösen automatisch bewertete Statistik-Aufgaben. Go-Terminal-Backend, Next.js-Frontend.',
   },
   tags: ['Go', 'Charm TUI', 'Next.js 14', 'PostgreSQL', 'TailwindCSS', 'Docker'],
   column: 'design',
@@ -51,33 +51,33 @@ This project was intentionally built without AI assistance to sharpen manual cod
 
 ### Go-Terminal-Anwendung
 
-Das Herzstueck von luckhack ist ein terminalbasiertes Admin-Tool, gebaut mit Go und Charms Bubble-Tea-Framework. Keine KI war am Design oder der Implementierung beteiligt.
+Das Herzstück von luckhack ist ein terminalbasiertes Admin-Tool, gebaut mit Go und Charms Bubble-Tea-Framework. Keine KI war am Design oder der Implementierung beteiligt.
 
 **Terminal-UI-Features:**
 
-- Interaktives TUI fuer die Verwaltung von Hackathon-Teilnehmern
+- Interaktives TUI für die Verwaltung von Hackathon-Teilnehmern
 - Echtzeit-Teilnehmerliste mit Sortierung und Filterung
 - Teamzuweisung und Bracket-Generierung
-- Event-Planung mit Zeitzonen-Unterstuetzung
-- PostgreSQL-Integration fuer persistente Daten
+- Event-Planung mit Zeitzonen-Unterstützung
+- PostgreSQL-Integration für persistente Daten
 
 ### Architekturentscheidungen
 
-- Go gewaehlt fuer Einfachheit, schnelle Kompilierung und exzellente Concurrency
-- Charm TUI (Bubble Tea + Lip Gloss) fuer ein poliertes Terminal-Erlebnis
-- PostgreSQL fuer relationale Daten: Teilnehmer, Teams, Events, Punkte
-- Docker Compose fuer lokale Entwicklung und Produktions-Deployment
+- Go gewählt für Einfachheit, schnelle Kompilierung und exzellente Concurrency
+- Charm TUI (Bubble Tea + Lip Gloss) für ein poliertes Terminal-Erlebnis
+- PostgreSQL für relationale Daten: Teilnehmer, Teams, Events, Punkte
+- Docker Compose für lokale Entwicklung und Produktions-Deployment
 
 ### Web-Frontend
 
-- Next.js 14 mit App Router fuer die oeffentliche Website
-- Server-Side Rendering fuer SEO
-- TailwindCSS fuer responsives Design
-- Oeffentliche Event-Seiten, Registrierungsformulare, Live-Leaderboard
+- Next.js 14 mit App Router für die öffentliche Website
+- Server-Side Rendering für SEO
+- TailwindCSS für responsives Design
+- Öffentliche Event-Seiten, Registrierungsformulare, Live-Leaderboard
 
 ### Warum keine KI
 
-Dieses Projekt wurde bewusst ohne KI-Unterstuetzung gebaut, um manuelle Coding-Faehigkeiten zu schaerfen. Jede Funktion, jede Query, jede CSS-Klasse wurde von Hand geschrieben. Das Go-TUI erforderte tiefes Verstaendnis der Bubble-Tea-Architektur (Model, Update, View Pattern), das vom praktischen Lernen profitiert.`,
+Dieses Projekt wurde bewusst ohne KI-Unterstützung gebaut, um manuelle Coding-Fähigkeiten zu schärfen. Jede Funktion, jede Query, jede CSS-Klasse wurde von Hand geschrieben. Das Go-TUI erforderte tiefes Verständnis der Bubble-Tea-Architektur (Model, Update, View Pattern), das vom praktischen Lernen profitiert.`,
   },
 };
 

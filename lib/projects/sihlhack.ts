@@ -4,11 +4,11 @@ const sihlhack: Project = {
   id: 'sihlhack',
   title: {
     en: 'sihlhack: Energy Hackathon Turning Solar Power into Heat and Compute',
-    de: 'sihlhack: Energie-Hackathon, der Solarstrom in Waerme und Rechenleistung verwandelt',
+    de: 'sihlhack: Energie-Hackathon, der Solarstrom in Wärme und Rechenleistung verwandelt',
   },
   description: {
     en: 'Platform for a 3-day hackathon in Zurich where 150 participants build prototypes combining renewable energy, immersion-cooled servers, and district heating. Open-source, deployed in real energy communities.',
-    de: 'Plattform fuer einen 3-taegigen Hackathon in Zuerich, bei dem 150 Teilnehmende Prototypen bauen, die erneuerbare Energie, Immersion-Cooling-Server und Fernwaerme kombinieren. Open Source, im Einsatz in echten Energiegemeinschaften.',
+    de: 'Plattform für einen 3-tägigen Hackathon in Zürich, bei dem 150 Teilnehmende Prototypen bauen, die erneuerbare Energie, Immersion-Cooling-Server und Fernwärme kombinieren. Open Source, im Einsatz in echten Energiegemeinschaften.',
   },
   tags: ['Next.js 16', 'Three.js', 'Vercel Postgres', 'Drizzle ORM', 'TailwindCSS', 'TypeScript'],
   column: 'ai',
@@ -53,28 +53,28 @@ Three.js scene with interactive 3D elements, built entirely through AI prompting
 - Edge functions for API routes`,
     de: `## KI-First-Entwicklung
 
-### CLAUDE.md als Projekt-Rueckgrat
+### CLAUDE.md als Projekt-Rückgrat
 
-Das gesamte Projekt wurde ueber eine detaillierte CLAUDE.md-Datei orchestriert, die als einzige Wahrheitsquelle fuer die Multi-Agent-Koordination diente. Jede Architekturentscheidung, jeder Coding-Standard und jedes Deployment-Verfahren wurde dort dokumentiert.
+Das gesamte Projekt wurde über eine detaillierte CLAUDE.md-Datei orchestriert, die als einzige Wahrheitsquelle für die Multi-Agent-Koordination diente. Jede Architekturentscheidung, jeder Coding-Standard und jedes Deployment-Verfahren wurde dort dokumentiert.
 
 **Agent-Koordinationsmuster:**
 
-- Claude Code fuer Feature-Implementierung und Refactoring
-- Codex CLI fuer Massen-Code-Generierungsaufgaben
-- Strukturierte Uebergabe zwischen Agents via CLAUDE.md-Kontext
+- Claude Code für Feature-Implementierung und Refactoring
+- Codex CLI für Massen-Code-Generierungsaufgaben
+- Strukturierte Übergabe zwischen Agents via CLAUDE.md-Kontext
 
 ### 3D-Landingpage
 
 Three.js-Szene mit interaktiven 3D-Elementen, komplett durch KI-Prompting gebaut:
 
 - Animierte Geometrie, die auf Scroll-Position reagiert
-- Custom Shaders fuer visuelle Effekte
+- Custom Shaders für visuelle Effekte
 - Performance-optimiert mit Lazy Loading und LOD
-- Mobile Fallback auf 2D fuer Akku/Performance
+- Mobile Fallback auf 2D für Akku/Performance
 
 ### Full-Stack-Implementierung
 
-- Vercel Postgres mit Drizzle ORM fuer typsicheren Datenbankzugriff
+- Vercel Postgres mit Drizzle ORM für typsicheren Datenbankzugriff
 - Authentifizierungsfluss mit E-Mail-Verifizierung
 - Event-CRUD mit Admin-Dashboard
 - Teilnehmerregistrierung und Teambildung
@@ -85,7 +85,7 @@ Three.js-Szene mit interaktiven 3D-Elementen, komplett durch KI-Prompting gebaut
 - Vercel-Deployment mit Preview-Umgebungen
 - Datenbankmigrationen via Drizzle Kit
 - Umgebungsvariablen-Management
-- Edge Functions fuer API-Routen`,
+- Edge Functions für API-Routen`,
   },
 };
 

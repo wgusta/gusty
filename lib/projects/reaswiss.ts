@@ -4,11 +4,11 @@ const reaswiss: Project = {
   id: 'reaswiss',
   title: {
     en: 'reaswiss: First Aid & Emergency Training by Active Paramedics',
-    de: 'reaswiss: Erste-Hilfe- und Notfalltraining von aktiven Rettungssanitaetern',
+    de: 'reaswiss: Erste-Hilfe- und Notfalltraining von aktiven Rettungssanitätern',
   },
   description: {
     en: 'Website for a Swiss first aid training provider (BLS-AED-SRC courses, emergency training) taught by active paramedics. Serves clients like Zurich Airport across German-speaking Switzerland.',
-    de: 'Website fuer einen Schweizer Erste-Hilfe-Anbieter (BLS-AED-SRC-Kurse, Notfalltraining), unterrichtet von aktiven Rettungssanitaetern. Kunden wie der Flughafen Zuerich in der Deutschschweiz.',
+    de: 'Website für einen Schweizer Erste-Hilfe-Anbieter (BLS-AED-SRC-Kurse, Notfalltraining), unterrichtet von aktiven Rettungssanitätern. Kunden wie der Flughafen Zürich in der Deutschschweiz.',
   },
   tags: ['Next.js 16', 'ProcessWire CMS', 'Stripe', 'TailwindCSS', 'PHP'],
   column: 'bridged',
@@ -48,7 +48,7 @@ The entire platform architecture was designed and built by hand. ProcessWire CMS
 
 ### Architektur & Fundament
 
-Die gesamte Plattformarchitektur wurde von Hand entworfen und gebaut. ProcessWire CMS dient als Content-Backend mit einem flexiblen Datenmodell fuer Immobilienanzeigen, Maklerprofile und regionale Inhalte.
+Die gesamte Plattformarchitektur wurde von Hand entworfen und gebaut. ProcessWire CMS dient als Content-Backend mit einem flexiblen Datenmodell für Immobilienanzeigen, Maklerprofile und regionale Inhalte.
 
 **Manuell getroffene Kernentscheidungen:**
 
@@ -60,17 +60,17 @@ Die gesamte Plattformarchitektur wurde von Hand entworfen und gebaut. ProcessWir
 
 ### Frontend-Entwicklung
 
-- Next.js 16 mit App Router fuer SSR und statische Generierung
-- TailwindCSS fuer responsives, Mobile-first-Design
+- Next.js 16 mit App Router für SSR und statische Generierung
+- TailwindCSS für responsives, Mobile-first-Design
 - Individuelle Immobiliensuche mit Filtern
-- Bildoptimierungs-Pipeline fuer Immobilienfotos
-- Strukturierte Daten (JSON-LD) fuer Immobilienanzeigen
+- Bildoptimierungs-Pipeline für Immobilienfotos
+- Strukturierte Daten (JSON-LD) für Immobilienanzeigen
 
-### Geschaeftslogik
+### Geschäftslogik
 
-- Stripe-Integration fuer Anzeigenzahlungen
-- Makler-Dashboard fuer Immobilienverwaltung
-- Automatischer Anzeigenablauf und Verlaengerung
+- Stripe-Integration für Anzeigenzahlungen
+- Makler-Dashboard für Immobilienverwaltung
+- Automatischer Anzeigenablauf und Verlängerung
 - Kontaktformular mit Spam-Schutz`,
   },
   aiContent: {
@@ -91,22 +91,22 @@ AI was used primarily as a debugging assistant after the foundation was built. C
 - Accessibility audit fixes (ARIA labels, focus management)
 - SEO meta tag generation for property pages
 - TypeScript type refinements`,
-    de: `## KI-gestuetzt
+    de: `## KI-gestützt
 
 ### Bugfixes & Debugging
 
-KI wurde hauptsaechlich als Debugging-Assistent nach dem Aufbau des Fundaments eingesetzt. Typische Muster:
+KI wurde hauptsächlich als Debugging-Assistent nach dem Aufbau des Fundaments eingesetzt. Typische Muster:
 
 - Diagnose von Hydration-Mismatches zwischen SSR und Client
-- Behebung von Stripe-Webhook-Grenzfaellen
-- Loesung von ProcessWire-API-Abfrageproblemen
-- CSS-Layout-Fixes fuer Edge Cases auf Safari/iOS
+- Behebung von Stripe-Webhook-Grenzfällen
+- Lösung von ProcessWire-API-Abfrageproblemen
+- CSS-Layout-Fixes für Edge Cases auf Safari/iOS
 
 ### Schrittweise Verbesserungen
 
-- Performance-Optimierungsvorschlaege fuer Bildladung
+- Performance-Optimierungsvorschläge für Bildladung
 - Barrierefreiheits-Audit-Fixes (ARIA-Labels, Fokus-Management)
-- SEO-Meta-Tag-Generierung fuer Immobilienseiten
+- SEO-Meta-Tag-Generierung für Immobilienseiten
 - TypeScript-Typ-Verfeinerungen`,
   },
 };

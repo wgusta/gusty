@@ -5,7 +5,7 @@ const userStoryMap: Project = {
   title: 'User Story Map Tool',
   description: {
     en: 'A standalone HTML tool for creating and managing User Story Maps in workshops. Built with vanilla JavaScript, no external dependencies.',
-    de: 'Ein eigenstaendiges HTML-Tool zum Erstellen und Verwalten von User Story Maps in Workshops. Gebaut mit Vanilla JavaScript, ohne externe Abhaengigkeiten.',
+    de: 'Ein eigenständiges HTML-Tool zum Erstellen und Verwalten von User Story Maps in Workshops. Gebaut mit Vanilla JavaScript, ohne externe Abhängigkeiten.',
   },
   tags: ['HTML', 'CSS', 'Vanilla JavaScript', 'localStorage', 'CSV Export'],
   column: 'ai',
@@ -89,57 +89,57 @@ The tool is available for download above and can be used immediately in any mode
 **Get the tool:** The complete User Story Map tool is ready for download. Simply click the download button above or use this link: [workshop-map11.html](/workshop-map11.html). The file works completely offline and requires no installation or external dependencies.
 
 **Ready to use:** Download the HTML file and open it in any modern browser to start creating User Story Maps in your workshops. All data is saved locally in your browser's localStorage, and you can export your maps to CSV format at any time.`,
-    de: `## Ueberblick
+    de: `## Überblick
 
-Der Prozess begann mit der Idee, ein HTML-Tool zu bauen, das Customer Journey Map und User Story Map kombiniert. Es schien effizient, fuehrte aber frueh zu Komplexitaet. Zwei verschiedene konzeptuelle Modelle in einer Datei verursachten Wartungsprobleme, erschwerten Debugging und verlangsamten die Iteration.
+Der Prozess begann mit der Idee, ein HTML-Tool zu bauen, das Customer Journey Map und User Story Map kombiniert. Es schien effizient, führte aber früh zu Komplexität. Zwei verschiedene konzeptuelle Modelle in einer Datei verursachten Wartungsprobleme, erschwerten Debugging und verlangsamten die Iteration.
 
 ## Wie die Arbeit ablief
 
 ### Erster Build
 
-Die erste Version platzierte beide Maps in einem HTML-Dokument mit gemeinsamen Datenstrukturen und geteilten Export/Import-Funktionen. Die Trennung der beiden Tools war lose und wurde mit jeder neuen Funktion unuebersichtlicher.
+Die erste Version platzierte beide Maps in einem HTML-Dokument mit gemeinsamen Datenstrukturen und geteilten Export/Import-Funktionen. Die Trennung der beiden Tools war lose und wurde mit jeder neuen Funktion unübersichtlicher.
 
-### Scope-Aenderung
+### Scope-Änderung
 
-Waehrend der Iterationen wurde klar, dass der Customer-Journey-Teil keinen echten Mehrwert fuer den geplanten Workshop-Workflow brachte. Der Fokus verschob sich komplett auf die User Story Map. Diese Entscheidung vereinfachte den Zweck, erforderte aber das Entfernen vieler verflochtener Teile.
+Während der Iterationen wurde klar, dass der Customer-Journey-Teil keinen echten Mehrwert für den geplanten Workshop-Workflow brachte. Der Fokus verschob sich komplett auf die User Story Map. Diese Entscheidung vereinfachte den Zweck, erforderte aber das Entfernen vieler verflochtener Teile.
 
 ### Refactoring eines beweglichen Ziels
 
-Die Customer-Journey-Komponenten wurden entfernt, die UI vereinfacht und die Export/Import-Logik auf die User Story Map umgestellt. Ueberreste der alten Struktur blieben zurueck, darunter Namenskonventionen und Selektoren, die noch auf das alte Modell zeigten.
+Die Customer-Journey-Komponenten wurden entfernt, die UI vereinfacht und die Export/Import-Logik auf die User Story Map umgestellt. Überreste der alten Struktur blieben zurück, darunter Namenskonventionen und Selektoren, die noch auf das alte Modell zeigten.
 
 ### Usability-Verfeinerungen
 
-Nach dem strukturellen Aufraumen erhielt das Tool Verfeinerungen: direktes Bearbeiten nach Doppelklick, automatische Textauswahl, sichere Loeschabfragen fuer Zeilen und Spalten sowie ein Titelfeld fuer Projektnamen.
+Nach dem strukturellen Aufräumen erhielt das Tool Verfeinerungen: direktes Bearbeiten nach Doppelklick, automatische Textauswahl, sichere Löschabfragen für Zeilen und Spalten sowie ein Titelfeld für Projektnamen.
 
 ## Wo es unordentlich wurde
 
 ### Kein festes Datenmodell zu Beginn
 
-Eine klare Definition von Zeilen, Spalten, Karten und dem zugehoerigen CSV/JSON-Schema wurde nie zu Beginn festgelegt. Ohne stabilen Vertrag blieb das Import/Export-System fragil.
+Eine klare Definition von Zeilen, Spalten, Karten und dem zugehörigen CSV/JSON-Schema wurde nie zu Beginn festgelegt. Ohne stabilen Vertrag blieb das Import/Export-System fragil.
 
-### Scope-Aenderungen verursachten strukturellen Stress
+### Scope-Änderungen verursachten strukturellen Stress
 
-Der Wechsel vom kombinierten Tool zur reinen User Story Map bedeutete, Code zu entfernen, der tief mit der urspruenglichen Logik verflochten war.
+Der Wechsel vom kombinierten Tool zur reinen User Story Map bedeutete, Code zu entfernen, der tief mit der ursprünglichen Logik verflochten war.
 
-### Export und Import zu spaet validiert
+### Export und Import zu spät validiert
 
-Der Grossteil der fruehen Aufmerksamkeit ging an die Oberflaeche statt an die Datenpipeline. Als Export und Import in einem realistischen Szenario getestet wurden, tauchten Probleme spaet auf.
+Der Großteil der frühen Aufmerksamkeit ging an die Oberfläche statt an die Datenpipeline. Als Export und Import in einem realistischen Szenario getestet wurden, tauchten Probleme spät auf.
 
 ## Was gut funktioniert hat
 
 ### Testen mit echten Daten
 
-Echte CSV-Dateien deckten Fehler frueh genug auf, um groessere Probleme am Ende des Entwicklungszyklus zu vermeiden.
+Echte CSV-Dateien deckten Fehler früh genug auf, um größere Probleme am Ende des Entwicklungszyklus zu vermeiden.
 
-### Praezise Feedback-Schleifen
+### Präzise Feedback-Schleifen
 
-Klare und eindeutige Beobachtungen darueber, was funktionierte und was nicht, beschleunigten die Iteration.
+Klare und eindeutige Beobachtungen darüber, was funktionierte und was nicht, beschleunigten die Iteration.
 
 ### Scope-Reduktion verbesserte Klarheit
 
-Das Entfernen der Customer Journey Map schaerfte den Fokus und ermoeglichte eine sauberere Struktur.
+Das Entfernen der Customer Journey Map schärfte den Fokus und ermöglichte eine sauberere Struktur.
 
-## Naechstes Mal besser
+## Nächstes Mal besser
 
 ### Datenmodell vor dem Coding definieren
 
@@ -149,19 +149,19 @@ Zuerst ein JSON-Beispiel und CSV-Schema erstellen. Jede Zeile, Spalte und Karte 
 
 Nur die User Story Map. Zeilen, Spalten, Karten und Export/Import. Nichts weiter.
 
-### Usability spaeter einfuehren
+### Usability später einführen
 
-Nach stabilem Datenmodell koennen Bearbeitungsverhalten, Styling und Sicherheitsabfragen aufgesetzt werden.
+Nach stabilem Datenmodell können Bearbeitungsverhalten, Styling und Sicherheitsabfragen aufgesetzt werden.
 
 ### Logik von Interface trennen
 
-Datenverarbeitungsfunktionen und UI-Rendering klar trennen. So verhindern strukturelle Aenderungen kaskadierende Effekte.
+Datenverarbeitungsfunktionen und UI-Rendering klar trennen. So verhindern strukturelle Änderungen kaskadierende Effekte.
 
 ---
 
-**Tool herunterladen:** [workshop-map11.html](/workshop-map11.html) \u2013 Eine eigenstaendige HTML-Datei, die offline funktioniert, im localStorage speichert und nach CSV exportiert.
+**Tool herunterladen:** [workshop-map11.html](/workshop-map11.html) \u2013 Eine eigenständige HTML-Datei, die offline funktioniert, im localStorage speichert und nach CSV exportiert.
 
-**Einsatzbereit:** HTML-Datei herunterladen und in jedem modernen Browser oeffnen, um User Story Maps in Workshops zu erstellen.`,
+**Einsatzbereit:** HTML-Datei herunterladen und in jedem modernen Browser öffnen, um User Story Maps in Workshops zu erstellen.`,
   },
 };
 

@@ -4,11 +4,11 @@ const badenleg: Project = {
   id: 'badenleg',
   title: {
     en: 'Matchmaking-Plattform for Local Energy Communities (LEG)',
-    de: 'Matchmaking-Plattform fuer Lokale Elektrizitaetsgemeinschaften (LEG)',
+    de: 'Matchmaking-Plattform für Lokale Elektrizitätsgemeinschaften (LEG)',
   },
   description: {
     en: 'Matchmaking for local energy communities - A web platform that helps homeowners in Baden (Switzerland) find neighbors to form Local Electricity Communities (LEG) starting in 2026.',
-    de: 'Matchmaking fuer lokale Energiegemeinschaften: Eine Webplattform, die Hauseigentuemern in Baden (Schweiz) hilft, Nachbarn fuer Lokale Elektrizitaetsgemeinschaften (LEG) ab 2026 zu finden.',
+    de: 'Matchmaking für lokale Energiegemeinschaften: Eine Webplattform, die Hauseigentümern in Baden (Schweiz) hilft, Nachbarn für Lokale Elektrizitätsgemeinschaften (LEG) ab 2026 zu finden.',
   },
   tags: ['Flask', 'SendGrid', 'TailwindCSS', 'Leaflet.js', 'Vanilla JavaScript', 'Railway', 'GitHub Actions', 'Gunicorn'],
   column: 'bridged',
@@ -93,12 +93,12 @@ BadenLEG connects homeowners who want to share solar energy together. Users ente
 
 **Produktkonzept und User Flow**
 
-BadenLEG verbindet Hauseigentuemer, die gemeinsam Solarenergie nutzen wollen. Nutzer geben ihre Adresse ein, das System findet passende Nachbarn in der Naehe und ermoeglicht direkten Kontakt, mit Fokus auf Datenschutz und Anonymitaet.
+BadenLEG verbindet Hauseigentümer, die gemeinsam Solarenergie nutzen wollen. Nutzer geben ihre Adresse ein, das System findet passende Nachbarn in der Nähe und ermöglicht direkten Kontakt, mit Fokus auf Datenschutz und Anonymität.
 
 **Systemarchitektur**
 
 - Flask-App mit klarer API-Struktur
-- In-Memory-Datenbank fuer MVP
+- In-Memory-Datenbank für MVP
 - Mehrschichtiger Sicherheitsansatz
 - DSGVO-konformes Datenschutzdesign
 
@@ -114,7 +114,7 @@ BadenLEG verbindet Hauseigentuemer, die gemeinsam Solarenergie nutzen wollen. Nu
 
 **UI/UX Design**
 
-- TailwindCSS fuer schnelles, konsistentes Styling
+- TailwindCSS für schnelles, konsistentes Styling
 - Mobile-first responsives Layout
 - Interaktive Kartenintegration mit Leaflet.js
 - Typografie & Branding in Badener Stadtfarben
@@ -123,7 +123,7 @@ BadenLEG verbindet Hauseigentuemer, die gemeinsam Solarenergie nutzen wollen. Nu
 
 - Adressbasiertes Matching mit ML-Clustering
 - Interaktive Karte mit anonymisierten Standorten (120m Jitter)
-- Automatische E-Mail-Benachrichtigungen fuer neue Interessenten
+- Automatische E-Mail-Benachrichtigungen für neue Interessenten
 - Bildungsinhalte zu LEG, EVL/vEVL und ZEV/vZEV
 - DSGVO-konform mit Ein-Klick-Abmeldung
 
@@ -139,7 +139,7 @@ BadenLEG verbindet Hauseigentuemer, die gemeinsam Solarenergie nutzen wollen. Nu
 **Deployment**
 
 - Railway Setup & Konfiguration
-- GitHub Actions Workflow fuer CI/CD
+- GitHub Actions Workflow für CI/CD
 - DNS-Konfiguration (Infomaniak)
 - SendGrid Domain-Authentifizierung
 
@@ -151,13 +151,13 @@ BadenLEG verbindet Hauseigentuemer, die gemeinsam Solarenergie nutzen wollen. Nu
 
 **Herausforderung:** E-Mails von badenleg.ch wurden blockiert.
 
-**Loesung:** SendGrid Domain-Authentifizierung mit SPF, DKIM, DMARC Records fuer zuverlaessige E-Mail-Zustellung konfiguriert.
+**Lösung:** SendGrid Domain-Authentifizierung mit SPF, DKIM, DMARC Records für zuverlässige E-Mail-Zustellung konfiguriert.
 
 ### Mobile Nutzererfahrung
 
-**Herausforderung:** Karte ueberlagerte Eingabefelder.
+**Herausforderung:** Karte überlagerte Eingabefelder.
 
-**Loesung:** Mobiles Layout optimiert: Karte auf Mobilgeraeten ausgeblendet, Vollbild-Eingabebereich und zentriertes Logo fuer bessere Bedienbarkeit.`,
+**Lösung:** Mobiles Layout optimiert: Karte auf Mobilgeräten ausgeblendet, Vollbild-Eingabebereich und zentriertes Logo für bessere Bedienbarkeit.`,
   },
   aiContent: {
     en: `## AI-Assisted Development
@@ -298,19 +298,19 @@ def api_check_potential_fast():
 
     return jsonify({"match": provisional_matches})
 \`\`\``,
-    de: `## KI-gestuetzte Entwicklung
+    de: `## KI-gestützte Entwicklung
 
 ### Code-Generierung
 
 **Flask-Endpunkte und API-Logik**
 
-KI-Unterstuetzung bei der Entwicklung von Flask-Endpunkten und API-Logik fuer schnelle Iteration und konsistente Muster.
+KI-Unterstützung bei der Entwicklung von Flask-Endpunkten und API-Logik für schnelle Iteration und konsistente Muster.
 
 **Frontend JavaScript**
 
-- Adress-Autocomplete-Funktionalitaet
+- Adress-Autocomplete-Funktionalität
 - Kartenintegration mit Leaflet.js
-- Vanilla JavaScript ohne Frameworks fuer direkte DOM-Manipulation
+- Vanilla JavaScript ohne Frameworks für direkte DOM-Manipulation
 
 **Sicherheits-Utilities**
 
@@ -322,8 +322,8 @@ KI-Unterstuetzung bei der Entwicklung von Flask-Endpunkten und API-Logik fuer sc
 
 **Performance-Optimierungen**
 
-- Caching-Strategien fuer wiederholte Anfragen
-- Async Tasks fuer Hintergrundverarbeitung (E-Mail-Versand)
+- Caching-Strategien für wiederholte Anfragen
+- Async Tasks für Hintergrundverarbeitung (E-Mail-Versand)
 - Code-Refactoring und Modularisierung
 
 **Bugfixes**
@@ -336,7 +336,7 @@ KI-Unterstuetzung bei der Entwicklung von Flask-Endpunkten und API-Logik fuer sc
 
 - README.md und Deployment-Guides
 - SEO-Inhalte (Meta-Tags, strukturierte Daten)
-- Datenschutzerklaerung & Impressum
+- Datenschutzerklärung & Impressum
 
 ### Debugging
 
@@ -350,15 +350,15 @@ KI-Unterstuetzung bei der Entwicklung von Flask-Endpunkten und API-Logik fuer sc
 
 ### DBSCAN-Clustering
 
-Gruppiert Gebaeude nach geografischer Naehe (150m Radius) und nutzt Haversine-Distanz fuer Erdkruemmung. Identifiziert optimale Gemeinschaftsbildung mit Mindestgroesse von 2-3 Gebaeuden pro Cluster.
+Gruppiert Gebäude nach geografischer Nähe (150m Radius) und nutzt Haversine-Distanz für Erdkrümmung. Identifiziert optimale Gemeinschaftsbildung mit Mindestgröße von 2-3 Gebäuden pro Cluster.
 
 ### Autarkie-Simulation
 
-Erzeugt 15-Minuten-Zeitreihenprofile fuer Verbrauch und PV-Produktion, simuliert saisonale Schwankungen (Sommer/Winter) und berechnet Autarkie-Score fuer optimale Match-Qualitaet.
+Erzeugt 15-Minuten-Zeitreihenprofile für Verbrauch und PV-Produktion, simuliert saisonale Schwankungen (Sommer/Winter) und berechnet Autarkie-Score für optimale Match-Qualität.
 
 ### Ranking
 
-Cluster werden nach Autarkie-Score sortiert: hoechste Autarkie = beste Match-Qualitaet. Ergebnisse werden in Echtzeit auf der Karte visualisiert.
+Cluster werden nach Autarkie-Score sortiert: höchste Autarkie = beste Match-Qualität. Ergebnisse werden in Echtzeit auf der Karte visualisiert.
 
 ---
 
@@ -366,9 +366,9 @@ Cluster werden nach Autarkie-Score sortiert: hoechste Autarkie = beste Match-Qua
 
 ### Persistentes Token-Management
 
-**Herausforderung:** Railway loescht das Dateisystem bei jedem Deployment. Tokens in separaten JSON-Dateien gingen verloren.
+**Herausforderung:** Railway löscht das Dateisystem bei jedem Deployment. Tokens in separaten JSON-Dateien gingen verloren.
 
-**Loesung:** Tokens direkt in den Haupt-Datenbankeintraegen speichern fuer zuverlaessige Persistenz.
+**Lösung:** Tokens direkt in den Haupt-Datenbankeinträgen speichern für zuverlässige Persistenz.
 
 \`\`\`python
 def issue_verification_token(building_id):
@@ -404,7 +404,7 @@ def issue_verification_token(building_id):
 
 **Herausforderung:** Nach Adresseingabe traten Timeouts durch langsame externe API-Aufrufe und intensive ML-Berechnungen auf.
 
-**Loesung:** Schnellen Endpunkt mit vorgeladenen Koordinaten, Hintergrund-Threading und deterministischen Mock-Daten fuer sofortige Antworten implementiert.
+**Lösung:** Schnellen Endpunkt mit vorgeladenen Koordinaten, Hintergrund-Threading und deterministischen Mock-Daten für sofortige Antworten implementiert.
 
 \`\`\`python
 @app.route("/api/check_potential_fast", methods=['POST'])

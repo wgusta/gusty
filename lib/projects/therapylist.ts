@@ -4,11 +4,11 @@ const therapylist: Project = {
   id: 'therapylist',
   title: {
     en: 'TherapyList: Swiss Encrypted Waitlist Platform for Mental Health Therapists',
-    de: 'TherapyList: Verschluesselte Schweizer Wartelisten-Plattform fuer Psychotherapeuten',
+    de: 'TherapyList: Verschlüsselte Schweizer Wartelisten-Plattform für Psychotherapeuten',
   },
   description: {
     en: 'SaaS platform that replaces spreadsheet waitlists for therapists. Clients submit structured intake forms, therapists send tone-matched availability updates in one click. All patient data AES-256-GCM encrypted, Swiss-hosted, DSG compliant. Optional HIN and Vault integration for clinics. 4 languages (DE/FR/IT/EN), CHF 29/month.',
-    de: 'SaaS-Plattform, die Tabellen-Wartelisten fuer Therapeuten ersetzt. Klienten reichen strukturierte Aufnahmeformulare ein, Therapeuten senden tongerechte Verfuegbarkeits-Updates mit einem Klick. Alle Patientendaten AES-256-GCM-verschluesselt, in der Schweiz gehostet, DSG-konform. Optionale HIN- und Vault-Integration fuer Praxen. 4 Sprachen (DE/FR/IT/EN), CHF 29/Monat.',
+    de: 'SaaS-Plattform, die Tabellen-Wartelisten für Therapeuten ersetzt. Klienten reichen strukturierte Aufnahmeformulare ein, Therapeuten senden tongerechte Verfügbarkeits-Updates mit einem Klick. Alle Patientendaten AES-256-GCM-verschlüsselt, in der Schweiz gehostet, DSG-konform. Optionale HIN- und Vault-Integration für Praxen. 4 Sprachen (DE/FR/IT/EN), CHF 29/Monat.',
   },
   tags: ['Next.js 15', 'PostgreSQL', 'Drizzle ORM', 'AES-256-GCM', 'Docker', 'Caddy'],
   column: 'bridged',
@@ -65,16 +65,16 @@ Designed the entire Drizzle ORM schema by hand:
 
 Jede Sicherheitsentscheidung wurde manuell getroffen. Dies ist eine gesundheitsnahe Plattform, die sensible Patientendaten unter dem Schweizer DSG (Datenschutzgesetz) verarbeitet.
 
-**Verschluesselung**
+**Verschlüsselung**
 
-- AES-256-GCM fuer alle Patientendaten im Ruhezustand
-- Pro-Therapeut-Verschluesselungsschluessel
-- Schluesselableitung mit korrektem Salt und Iterationen
+- AES-256-GCM für alle Patientendaten im Ruhezustand
+- Pro-Therapeut-Verschlüsselungsschlüssel
+- Schlüsselableitung mit korrektem Salt und Iterationen
 - Kein Klartext-Patientenname in der Datenbank
 
 **Authentifizierung**
 
-- Magic-Link-Auth (keine Passwoerter, die leaken koennten)
+- Magic-Link-Auth (keine Passwörter, die leaken könnten)
 - Sichere Token-Generierung und Ablauf
 - Rate Limiting auf Auth-Endpunkten
 - Session-Management mit HTTP-only Cookies
@@ -83,25 +83,25 @@ Jede Sicherheitsentscheidung wurde manuell getroffen. Dies ist eine gesundheitsn
 
 - Self-hosted auf Schweizer VPS (Infomaniak)
 - Keine Daten verlassen die Schweiz
-- Caddy fuer automatisches HTTPS
+- Caddy für automatisches HTTPS
 - Docker-Isolation zwischen Services
 
-### Geschaeftslogik
+### Geschäftslogik
 
 - Therapeuten-Onboarding-Flow
-- Patienten-Wartelistenverwaltung mit Prioritaetswarteschlange
+- Patienten-Wartelistenverwaltung mit Prioritätswarteschlange
 - Schweizer QR-Rechnungsgenerierung
 - Automatische Erinnerungs-E-Mails
-- Unterstuetzung fuer Mehrfach-Therapeuten-Praxen
+- Unterstützung für Mehrfach-Therapeuten-Praxen
 
 ### Datenmodell
 
 Gesamtes Drizzle-ORM-Schema von Hand entworfen:
 
-- Therapeuten, Praxen, Patienten, Wartelisteneintraege
-- Audit-Logging fuer Compliance
-- Soft Deletes fuer Datenaufbewahrungsanforderungen
-- Verschluesselte Felder mit transparenter Entschluesselungsschicht`,
+- Therapeuten, Praxen, Patienten, Wartelisteneinträge
+- Audit-Logging für Compliance
+- Soft Deletes für Datenaufbewahrungsanforderungen
+- Verschlüsselte Felder mit transparenter Entschlüsselungsschicht`,
   },
   aiContent: {
     en: `## AI-Assisted
@@ -133,13 +133,13 @@ Claude reviewed code for:
 - Deployment runbook
 - Security audit checklist
 - DSG compliance documentation`,
-    de: `## KI-gestuetzt
+    de: `## KI-gestützt
 
 ### Claude als Entwicklungsassistent
 
 Claude wurde als Pair-Programming-Partner eingesetzt, nicht als Architekt. Der Mensch traf alle Sicherheits- und Architekturentscheidungen; Claude half bei der schnelleren Umsetzung.
 
-**Implementierungsunterstuetzung:**
+**Implementierungsunterstützung:**
 
 - Drizzle-ORM-Migrationsskripte
 - E-Mail-Template HTML/CSS
@@ -149,12 +149,12 @@ Claude wurde als Pair-Programming-Partner eingesetzt, nicht als Architekt. Der M
 
 ### Code Review
 
-Claude prueftete Code auf:
+Claude prüfte Code auf:
 
 - SQL-Injection-Schwachstellen
 - XSS-Angriffsvektoren
 - Authentifizierungs-Bypass-Risiken
-- Korrektheit der Verschluesselungsimplementierung
+- Korrektheit der Verschlüsselungsimplementierung
 
 ### Dokumentation
 

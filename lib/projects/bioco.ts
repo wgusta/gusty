@@ -4,11 +4,11 @@ const bioco: Project = {
   id: 'bioco',
   title: {
     en: 'bioco: Demeter Vegetable Cooperative in Baden-Brugg',
-    de: 'bioco: Demeter-Gemuese-Kooperative in Baden-Brugg',
+    de: 'bioco: Demeter-Gemüse-Kooperative in Baden-Brugg',
   },
   description: {
     en: 'Website for a community-supported agriculture cooperative growing biodynamic Demeter vegetables at Geisshof farm. Members share fieldwork and receive weekly vegetable boxes via depots in Baden, Brugg and Gebenstorf.',
-    de: 'Website fuer eine solidarische Landwirtschaftskooperative, die biodynamisches Demeter-Gemuese auf dem Geisshof anbaut. Mitglieder teilen Feldarbeit und erhalten woechentliche Gemuese-Taschen ueber Depots in Baden, Brugg und Gebenstorf.',
+    de: 'Website für eine solidarische Landwirtschaftskooperative, die biodynamisches Demeter-Gemüse auf dem Geisshof anbaut. Mitglieder teilen Feldarbeit und erhalten wöchentliche Gemüse-Taschen über Depots in Baden, Brugg und Gebenstorf.',
   },
   tags: ['ProcessWire 3.x', 'Next.js 14', 'Matomo', 'TailwindCSS', 'PHP', 'Docker'],
   column: 'bridged',
@@ -48,29 +48,29 @@ Matomo was selected over Google Analytics for GDPR compliance and data sovereign
 
 ### Architektur & Planung
 
-Alle Architekturentscheidungen wurden manuell und mit sorgfaeltiger Beruecksichtigung der Genossenschaftsbeduerfnisse getroffen:
+Alle Architekturentscheidungen wurden manuell und mit sorgfältiger Berücksichtigung der Genossenschaftsbedürfnisse getroffen:
 
 **CMS-Auswahl**
 
-ProcessWire 3.x wurde wegen seiner Flexibilitaet mit benutzerdefinierten Feldern und Templates gewaehlt. Die Genossenschaft brauchte komplexe Produktkategorisierung (saisonal, regional, Bio-Zertifizierungen), die ProcessWire nativ abdeckt.
+ProcessWire 3.x wurde wegen seiner Flexibilität mit benutzerdefinierten Feldern und Templates gewählt. Die Genossenschaft brauchte komplexe Produktkategorisierung (saisonal, regional, Bio-Zertifizierungen), die ProcessWire nativ abdeckt.
 
 **Analytics**
 
-Matomo wurde statt Google Analytics fuer DSGVO-Konformitaet und Datensouveraenitaet gewaehlt. Self-hosted auf der gleichen Infrastruktur, keine Daten verlassen die Schweiz.
+Matomo wurde statt Google Analytics für DSGVO-Konformität und Datensouveränität gewählt. Self-hosted auf der gleichen Infrastruktur, keine Daten verlassen die Schweiz.
 
 **Content-Struktur**
 
-- Produktkatalog mit saisonaler Verfuegbarkeit
+- Produktkatalog mit saisonaler Verfügbarkeit
 - Produzenten-Profile mit Hofstandorten
 - Bestellmanagement-Workflow
 - Mitgliederbereich mit Genossenschaftsdokumenten
-- Veranstaltungskalender fuer Maerkte und Workshops
+- Veranstaltungskalender für Märkte und Workshops
 
 ### Design & UX
 
 - Saubere, erdige Farbpalette, die Bio-Werte widerspiegelt
-- Mobile-first-Design fuer Markttag-Bestellungen
-- Barrierefreie Navigation fuer aeltere Genossenschaftsmitglieder
+- Mobile-first-Design für Markttag-Bestellungen
+- Barrierefreie Navigation für ältere Genossenschaftsmitglieder
 - Druckfreundliche Rezept- und Produktseiten`,
   },
   aiContent: {
@@ -101,33 +101,33 @@ AI helped automate migration scripts for moving existing product data from sprea
 - Accessibility testing suggestions
 - Lighthouse performance optimization
 - Cross-browser compatibility fixes`,
-    de: `## KI-gestuetzt
+    de: `## KI-gestützt
 
 ### Cursor IDE & .claude-Integration
 
-Das Projekt nutzt Cursor IDE mit einem .claude-Verzeichnis fuer Projektkontext. KI-Unterstuetzung fokussierte auf Implementierungsgeschwindigkeit, nicht Architektur.
+Das Projekt nutzt Cursor IDE mit einem .claude-Verzeichnis für Projektkontext. KI-Unterstützung fokussierte auf Implementierungsgeschwindigkeit, nicht Architektur.
 
-**KI-unterstuetzte Aufgaben:**
+**KI-unterstützte Aufgaben:**
 
 - ProcessWire-Template-PHP-Code-Generierung
 - TailwindCSS-Komponenten-Styling
 - Next.js-API-Route-Boilerplate
-- Docker-Konfiguration fuer lokale Entwicklung und Produktion
+- Docker-Konfiguration für lokale Entwicklung und Produktion
 - Matomo-Tracking-Code-Integration
 
 ### Content-Migration
 
-KI half bei der Automatisierung von Migrationsskripten fuer den Transfer bestehender Produktdaten aus Tabellen nach ProcessWire:
+KI half bei der Automatisierung von Migrationsskripten für den Transfer bestehender Produktdaten aus Tabellen nach ProcessWire:
 
 - CSV-Parsing und Validierung
 - Bildoptimierung und Upload-Automatisierung
 - Taxonomie-Mapping von flachen Listen zu hierarchischen Kategorien
 
-### Testing & Qualitaet
+### Testing & Qualität
 
-- Vorschlaege fuer Barrierefreiheitstests
+- Vorschläge für Barrierefreiheitstests
 - Lighthouse-Performance-Optimierung
-- Cross-Browser-Kompatibilitaets-Fixes`,
+- Cross-Browser-Kompatibilitäts-Fixes`,
   },
 };
 

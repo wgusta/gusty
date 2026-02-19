@@ -4,11 +4,11 @@ const linuxCachyInstall: Project = {
   id: 'linux-cachy-install',
   title: {
     en: 'Look Mama, no hands! Linux Installation on my Desktop PC',
-    de: 'Schau Mama, ohne Haende! Linux-Installation auf meinem Desktop-PC',
+    de: 'Schau Mama, ohne Hände! Linux-Installation auf meinem Desktop-PC',
   },
   description: {
     en: 'After running out of Windows 10 I was forced to upgrade to Windows 11, but it looked horrible. So I deleted everything, changed my CPU and installed Linux Cachy OS.',
-    de: 'Nach dem Ende von Windows 10 musste ich auf Windows 11 upgraden, aber es sah furchtbar aus. Also habe ich alles geloescht, die CPU gewechselt und Linux Cachy OS installiert.',
+    de: 'Nach dem Ende von Windows 10 musste ich auf Windows 11 upgraden, aber es sah furchtbar aus. Also habe ich alles gelöscht, die CPU gewechselt und Linux Cachy OS installiert.',
   },
   tags: ['Linux', 'Arch', 'Cachy OS', 'Installation', 'Hardware'],
   column: 'danger',
@@ -134,39 +134,39 @@ Windows 11 looked horrible. So I deleted everything. Changed my CPU. Installed L
 BEST DECISION I EVER MADE.`,
     de: `# Linux Cachy OS Installation
 
-Windows 10 Support endete. Microsoft draengte Windows 11 auf. Ich hatte keine Wahl.
+Windows 10 Support endete. Microsoft drängte Windows 11 auf. Ich hatte keine Wahl.
 
 Ich habe upgegradet.
 
 ES SAH FURCHTBAR AUS.
 
-Das Interface fuehlte sich falsch an. Die Taskleistenplatzierung. Die abgerundeten Ecken ueberall. Die Art, wie es Fenster handhabte. Alles fuehlte sich an, als haette es jemand designt, der noch nie einen Computer benutzt hat.
+Das Interface fühlte sich falsch an. Die Taskleistenplatzierung. Die abgerundeten Ecken überall. Die Art, wie es Fenster handhabte. Alles fühlte sich an, als hätte es jemand designt, der noch nie einen Computer benutzt hat.
 
-Ich starrte tagelang auf meinen Bildschirm und versuchte, es zum Laufen zu bringen. Versuchte, dass es sich richtig anfuehlt.
+Ich starrte tagelang auf meinen Bildschirm und versuchte, es zum Laufen zu bringen. Versuchte, dass es sich richtig anfühlt.
 
 TAT ES NIE.
 
 Also traf ich eine Entscheidung.
 
-ICH HABE ALLES GELOESCHT.
+ICH HABE ALLES GELÖSCHT.
 
-![PC-Gehaeuse mit CPU-Upgrade](/images/linux-install-1.jpg)
+![PC-Gehäuse mit CPU-Upgrade](/images/linux-install-1.jpg)
 
-Zuerst oeffnete ich das Gehaeuse. Wechselte die CPU. Upgradete die Hardware gleich mit. Wenn ich schon neu anfange, dann richtig.
+Zuerst öffnete ich das Gehäuse. Wechselte die CPU. Upgradete die Hardware gleich mit. Wenn ich schon neu anfange, dann richtig.
 
-Die alte CPU kam raus. Die neue rein. Waermeleitpaste. Schrauben. Alles zurueck an seinen Platz.
+Die alte CPU kam raus. Die neue rein. Wärmeleitpaste. Schrauben. Alles zurück an seinen Platz.
 
-HARDWARE BEREIT. SOFTWARE ALS NAECHSTES.
+HARDWARE BEREIT. SOFTWARE ALS NÄCHSTES.
 
-Ich bootete von einem USB-Stick. Das GRUB-Menue erschien.
+Ich bootete von einem USB-Stick. Das GRUB-Menü erschien.
 
-![GRUB Boot-Menue](/images/linux-install-2.jpg)
+![GRUB Boot-Menü](/images/linux-install-2.jpg)
 
 Willkommen bei GRUB. Version 2.06.
 
-Ich waehlte die Installationsoption. Drueckte Enter.
+Ich wählte die Installationsoption. Drückte Enter.
 
-Der Bildschirm wurde dunkel. Dann kam er mit einem Fehler zurueck.
+Der Bildschirm wurde dunkel. Dann kam er mit einem Fehler zurück.
 
 ![Boot-Fehlermeldung](/images/linux-install-3.jpg)
 
@@ -176,7 +176,7 @@ Ich starrte die Fehlermeldung an.
 
 DAS WIRD NICHT EINFACH.
 
-Ich drueckte eine beliebige Taste. Versuchte es nochmal. Gleicher Fehler.
+Ich drückte eine beliebige Taste. Versuchte es nochmal. Gleicher Fehler.
 
 Ich wechselte zur GRUB-Kommandozeile.
 
@@ -184,7 +184,7 @@ Ich wechselte zur GRUB-Kommandozeile.
 
 Die Kommandozeile erschien. Ich konnte die Kernel-Parameter sehen. Die Boot-Konfiguration. Alles in Text dargestellt.
 
-Ich passte Parameter an. Fuegte Flags hinzu. Probierte verschiedene Kernel-Optionen.
+Ich passte Parameter an. Fügte Flags hinzu. Probierte verschiedene Kernel-Optionen.
 
 cow_spacesize=10G copytoram=auto module_blacklist=pcspkr i915.modeset=1 amdgpu.modeset=1 nvme_load=yes
 
@@ -196,7 +196,7 @@ Der Arch-Installationsprozess startete.
 
 ![Arch Linux Boot-Prozess](/images/linux-install-5.jpg)
 
-Der Bildschirm fuellte sich mit Systemmeldungen. Kernel laden. Modul-Initialisierung. Dateisystem mounten.
+Der Bildschirm füllte sich mit Systemmeldungen. Kernel laden. Modul-Initialisierung. Dateisystem mounten.
 
 :: running early hook [udev]
 Starting systemd-udevd version 258.2-2-arch
@@ -205,9 +205,9 @@ Starting systemd-udevd version 258.2-2-arch
 :: Device /dev/sdb1 mounted successfully.
 :: Copying rootfs image to RAM...
 
-Der Fortschrittsbalken fuellte sich. 703MiB kopiert. Installation laeuft.
+Der Fortschrittsbalken füllte sich. 703MiB kopiert. Installation läuft.
 
-Ich beobachtete das Terminal scrollen. Zeile fuer Zeile Systeminitialisierung. Alles funktioniert. Alles ergibt Sinn.
+Ich beobachtete das Terminal scrollen. Zeile für Zeile Systeminitialisierung. Alles funktioniert. Alles ergibt Sinn.
 
 KEINE ABGERUNDETEN ECKEN. KEINE ERZWUNGENEN UPDATES. KEINE TELEMETRIE.
 
@@ -219,11 +219,11 @@ Zeit zum Konfigurieren.
 
 ![Bluetooth-Terminal](/images/linux-install-6.jpg)
 
-Ich oeffnete ein Terminal. Begann Bluetooth zu konfigurieren. Geraete pairen. Das System einrichten.
+Ich öffnete ein Terminal. Begann Bluetooth zu konfigurieren. Geräte pairen. Das System einrichten.
 
-bluetoothctl-Befehle. Geraeteerkennung. Geraete vertrauen. Verbinden.
+bluetoothctl-Befehle. Geräteerkennung. Geräte vertrauen. Verbinden.
 
-Das Terminal fuellte sich mit [CHG] und [NEW] Nachrichten. Geraete erscheinen. Geraete verbinden.
+Das Terminal füllte sich mit [CHG] und [NEW] Nachrichten. Geräte erscheinen. Geräte verbinden.
 
 FF:87:8A:06:6D:EC MX Master 2S
 
@@ -235,11 +235,11 @@ Ich konfigurierte weiter. Desktop-Umgebung einrichten. Pakete installieren. Es z
 
 Das "Getting started" Fenster erschien. Eine Checkliste von Komponenten. Authentication Agent. Terminal. Wallpaper. Notification Daemon. Application Launcher.
 
-Einige Eintraege zeigten "Missing" in Rot. Andere "Installed" in Gruen. Manche "Running" in Blau.
+Einige Einträge zeigten "Missing" in Rot. Andere "Installed" in Grün. Manche "Running" in Blau.
 
-Ich arbeitete die Liste ab. Installierte was noetig war. Konfigurierte was erforderlich war.
+Ich arbeitete die Liste ab. Installierte was nötig war. Konfigurierte was erforderlich war.
 
-Das System nahm Form an. Komponente fuer Komponente. Feature fuer Feature.
+Das System nahm Form an. Komponente für Komponente. Feature für Feature.
 
 ICH HATTE WIEDER DIE KONTROLLE.
 
@@ -247,7 +247,7 @@ Keine erzwungenen Updates. Keine Telemetrie. Keine Interface-Entscheidungen von 
 
 Nur mein System. Nur meine Entscheidungen. Nur Linux.
 
-Windows 11 sah furchtbar aus. Also habe ich alles geloescht. Meine CPU gewechselt. Linux Cachy OS installiert.
+Windows 11 sah furchtbar aus. Also habe ich alles gelöscht. Meine CPU gewechselt. Linux Cachy OS installiert.
 
 BESTE ENTSCHEIDUNG MEINES LEBENS.`,
   },

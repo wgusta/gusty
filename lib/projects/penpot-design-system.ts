@@ -8,7 +8,7 @@ const penpotDesignSystem: Project = {
   },
   description: {
     en: 'A complete, hand-crafted design system built from scratch in Penpot\u2014breaking free from corporate templates and CMS constraints.',
-    de: 'Ein vollstaendiges, handgefertigtes Design-System von Grund auf in Penpot gebaut: frei von Corporate-Templates und CMS-Einschraenkungen.',
+    de: 'Ein vollständiges, handgefertigtes Design-System von Grund auf in Penpot gebaut: frei von Corporate-Templates und CMS-Einschränkungen.',
   },
   tags: ['Design System', 'Penpot', 'Tokens', 'Components', 'Open Source'],
   column: 'design',
@@ -151,25 +151,25 @@ I built a fully hand-crafted design system in Penpot:
 It's now a reusable base for future work and a way to experiment visually without being limited by CMS structures or corporate design rules.`,
     de: `## Motivation
 
-In den meisten meiner bisherigen Arbeiten war ich an strenge Corporate-Design-Richtlinien gebunden oder durch CMS-Templates eingeschraenkt. Ich konnte visuelle Ideen selten frei testen oder Komponenten nach meinen Vorstellungen bauen.
+In den meisten meiner bisherigen Arbeiten war ich an strenge Corporate-Design-Richtlinien gebunden oder durch CMS-Templates eingeschränkt. Ich konnte visuelle Ideen selten frei testen oder Komponenten nach meinen Vorstellungen bauen.
 
 Ich wollte das Gegenteil:
 
-Ein Design-System, das ich kontrolliere, das ich projektuebergreifend wiederverwenden kann und in dem ich Komponenten ohne Einschraenkungen visuell testen kann.
+Ein Design-System, das ich kontrolliere, das ich projektübergreifend wiederverwenden kann und in dem ich Komponenten ohne Einschränkungen visuell testen kann.
 
-Ich wollte auch eine echte Open-Source-Alternative zu Figma. In der Praxis gibt es nur eine Option, die reif genug fuer den taeglichen Einsatz ist: Penpot.
+Ich wollte auch eine echte Open-Source-Alternative zu Figma. In der Praxis gibt es nur eine Option, die reif genug für den täglichen Einsatz ist: Penpot.
 
 Also baute ich mein eigenes System direkt in Penpot, komplett von Hand.
 
 ## Was ich gemacht habe
 
-### 1. Vollstaendige Token-Basis aufgebaut
+### 1. Vollständige Token-Basis aufgebaut
 
 Alle Kern-Tokens von Grund auf eingerichtet:
 
-**Farb-Tokens:** Marke, Neutraltoene, Utilities
+**Farb-Tokens:** Marke, Neutraltöne, Utilities
 
-**Typografie-Tokens:** Ueberschriften, Fliesstext, Bildunterschrift
+**Typografie-Tokens:** Überschriften, Fließtext, Bildunterschrift
 
 **Abstands-Tokens:** 4er- und 8er-Raster
 
@@ -177,7 +177,7 @@ Alle Kern-Tokens von Grund auf eingerichtet:
 
 **Schatten-Tokens:** vier Stufen
 
-**Icon-Groessen-Tokens:** XS bis XL
+**Icon-Größen-Tokens:** XS bis XL
 
 Alles mit klarer Benennung gruppiert, stabil und skalierbar.
 
@@ -185,7 +185,7 @@ Alles mit klarer Benennung gruppiert, stabil und skalierbar.
 
 Erstellt:
 
-**Sets** (Farben, Radius, Schatten, Typografie, Abstaende)
+**Sets** (Farben, Radius, Schatten, Typografie, Abstände)
 
 **Themes** zum Umschalten des gesamten visuellen Tons
 
@@ -193,7 +193,7 @@ Erstellt:
 
 - Bento Theme (abgerundete Radien, weiche Schatten)
 - Neutral Theme (sauberer, klassischer System-Look)
-- Bold Theme (staerkerer Kontrast, haertere Kanten)
+- Bold Theme (stärkerer Kontrast, härtere Kanten)
 
 Alles manuell gebaut, keine importierten UI-Kits.
 
@@ -228,17 +228,17 @@ Jede Komponente von Grund auf entworfen, inklusive Ausrichtung, Constraints und 
 - Info-Banner
 - Event-Banner
 
-Jede Komponente enthaelt:
+Jede Komponente enthält:
 
-- praezise Abstaende
+- präzise Abstände
 - konsistente Radien und Schatten
 - Zustandsvarianten (Standard, Hover, Deaktiviert)
 
 ### 4. Icon-Baseline definiert
 
-Fuer kohaerente Icons festgelegt:
+Für kohärente Icons festgelegt:
 
-- 2px Strichstaerke
+- 2px Strichstärke
 - Abgerundete Enden und Ecken
 - 24x24 Artboard
 - Konsistentes internes Padding
@@ -248,12 +248,12 @@ Fuer kohaerente Icons festgelegt:
 Kleine interne Dokumentation mit:
 
 - Abstands-Logik
-- Radius-Anwendungsfaelle
+- Radius-Anwendungsfälle
 - Farbzuordnung
 - Erweiterung von Komponenten
 - Anwendung von Themes
 
-Klar und funktional, nicht ueberarbeitet.
+Klar und funktional, nicht überarbeitet.
 
 ### 6. System in echten Mock-Screens getestet
 
@@ -264,7 +264,7 @@ Zur Validierung schnelle Testlayouts erstellt:
 - Einfache Formularseite
 - Navigationsleiste
 
-Damit geprueft:
+Damit geprüft:
 
 - Konsistenz zwischen Themes
 - Lesbarkeit
@@ -273,7 +273,7 @@ Damit geprueft:
 
 ## Zusammenfassung
 
-Ein vollstaendig handgefertigtes Design-System in Penpot:
+Ein vollständig handgefertigtes Design-System in Penpot:
 
 - Eigene Tokens
 - Mehrere Themes
@@ -283,7 +283,7 @@ Ein vollstaendig handgefertigtes Design-System in Penpot:
 
 100% manuell erstellt, ohne Plugins, Generatoren oder importierte Kits
 
-Jetzt eine wiederverwendbare Basis fuer zukuenftige Arbeit und eine Moeglichkeit, visuell zu experimentieren, ohne durch CMS-Strukturen oder Corporate-Design-Regeln eingeschraenkt zu sein.`,
+Jetzt eine wiederverwendbare Basis für zukünftige Arbeit und eine Möglichkeit, visuell zu experimentieren, ohne durch CMS-Strukturen oder Corporate-Design-Regeln eingeschränkt zu sein.`,
   },
 };
 
