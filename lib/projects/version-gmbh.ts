@@ -2,10 +2,13 @@ import type { Project } from '../types';
 
 const versionGmbh: Project = {
   id: 'version-gmbh',
-  title: 'Version GmbH',
+  title: {
+    en: 'Version GmbH: Multi-Service Platform with AI Workflows',
+    de: 'Version GmbH: Multi-Service-Plattform mit KI-Workflows',
+  },
   description: {
-    en: 'AI-first consulting company platform with OpenClaw API gateway, MCP server, n8n AI workflows, and Authelia SSO. Full-stack multi-service architecture orchestrated by Claude.',
-    de: 'KI-first Beratungsunternehmen-Plattform mit OpenClaw-API-Gateway, MCP-Server, n8n-KI-Workflows und Authelia SSO. Full-Stack-Multi-Service-Architektur, orchestriert durch Claude.',
+    en: 'AI-first platform with OpenClaw API gateway, MCP server, n8n AI workflows, and Authelia SSO. Full-stack multi-service architecture orchestrated by Claude.',
+    de: 'KI-first-Plattform mit OpenClaw-API-Gateway, MCP-Server, n8n-KI-Workflows und Authelia SSO. Full-Stack-Multi-Service-Architektur, orchestriert durch Claude.',
   },
   tags: ['Next.js 15', 'Express', 'n8n', 'Anthropic SDK', 'Authelia', 'Docker', 'Caddy'],
   column: 'ai',

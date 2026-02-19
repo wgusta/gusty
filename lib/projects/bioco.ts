@@ -2,7 +2,10 @@ import type { Project } from '../types';
 
 const bioco: Project = {
   id: 'bioco',
-  title: 'bioco',
+  title: {
+    en: 'bioco: Organic Food Cooperative Platform',
+    de: 'bioco: Bio-Lebensmittel-Genossenschaftsplattform',
+  },
   description: {
     en: 'Organic food cooperative platform with ProcessWire CMS backend and Next.js frontend. Mixed approach: Cursor IDE and .claude directory for AI support, manual architecture planning.',
     de: 'Bio-Lebensmittel-Genossenschaftsplattform mit ProcessWire-CMS-Backend und Next.js-Frontend. Gemischter Ansatz: Cursor IDE und .claude-Verzeichnis fuer KI-Unterstuetzung, manuelle Architekturplanung.',

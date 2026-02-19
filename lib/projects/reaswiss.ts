@@ -2,7 +2,10 @@ import type { Project } from '../types';
 
 const reaswiss: Project = {
   id: 'reaswiss',
-  title: 'reaswiss',
+  title: {
+    en: 'reaswiss: Real Estate Platform for the Swiss Market',
+    de: 'reaswiss: Immobilienplattform fuer den Schweizer Markt',
+  },
   description: {
     en: 'Real estate platform for Swiss properties with Stripe payment integration. Handmade foundation with AI used for bug fixes and incremental improvements.',
     de: 'Immobilienplattform fuer Schweizer Objekte mit Stripe-Zahlungsintegration. Handgemachtes Fundament, KI fuer Bugfixes und schrittweise Verbesserungen.',

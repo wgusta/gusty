@@ -2,7 +2,10 @@ import type { Project } from '../types';
 
 const sihlhack: Project = {
   id: 'sihlhack',
-  title: 'sihlhack',
+  title: {
+    en: 'sihlhack: Hackathon Community with 3D Landing Page',
+    de: 'sihlhack: Hackathon-Community mit 3D-Landingpage',
+  },
   description: {
     en: 'AI-first hackathon community platform with 3D landing page, event management and participant coordination. Built with CLAUDE.md driven multi-agent workflow.',
     de: 'KI-first Hackathon-Community-Plattform mit 3D-Landingpage, Event-Management und Teilnehmerkoordination. Gebaut mit CLAUDE.md-gesteuertem Multi-Agent-Workflow.',
