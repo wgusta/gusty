@@ -65,6 +65,11 @@ export default function Header() {
           <span className="text-sm sm:text-base md:text-lg text-brand-black/50 font-terminal italic">
             {tr.adjective}
           </span>
+          {tr.headerOrigin && (
+            <span className="text-sm sm:text-base md:text-lg text-brand-black/40 font-terminal">
+              {tr.headerOrigin}
+            </span>
+          )}
         </div>
 
         {/* Definitions */}
