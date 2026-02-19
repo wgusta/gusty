@@ -4,8 +4,8 @@ const therapylist: Project = {
   id: 'therapylist',
   title: 'TherapyList',
   description: {
-    en: 'DSG-compliant waitlist platform for Swiss therapists. Security-first handmade architecture with Claude as development assistant. Magic link auth, Swiss QR-invoice billing, AES-256-GCM encryption.',
-    de: 'DSG-konforme Wartelisten-Plattform fuer Schweizer Therapeuten. Security-first handgemachte Architektur mit Claude als Entwicklungsassistent. Magic-Link-Auth, Schweizer QR-Rechnung, AES-256-GCM-Verschluesselung.',
+    en: 'Waitlist management for therapists: share availability, send personalized updates, collect structured intake forms. Swiss DSG compliant with AES-256-GCM encryption, multilingual (DE/FR/IT/EN), CHF 29/month.',
+    de: 'Wartelistenverwaltung fuer Therapeuten: Verfuegbarkeit teilen, personalisierte Updates senden, strukturierte Aufnahmeformulare erfassen. Schweizer DSG-konform mit AES-256-GCM-Verschluesselung, mehrsprachig (DE/FR/IT/EN), CHF 29/Monat.',
   },
   tags: ['Next.js 15', 'PostgreSQL', 'Drizzle ORM', 'AES-256-GCM', 'Docker', 'Caddy'],
   column: 'bridged',

@@ -3,12 +3,12 @@ import type { Project } from '../types';
 const sihlhack: Project = {
   id: 'sihlhack',
   title: {
-    en: 'sihlhack: Hackathon Community with 3D Landing Page',
-    de: 'sihlhack: Hackathon-Community mit 3D-Landingpage',
+    en: 'sihlhack: Energy Hackathon Turning Solar Power into Heat and Compute',
+    de: 'sihlhack: Energie-Hackathon, der Solarstrom in Waerme und Rechenleistung verwandelt',
   },
   description: {
-    en: 'AI-first hackathon community platform with 3D landing page, event management and participant coordination. Built with CLAUDE.md driven multi-agent workflow.',
-    de: 'KI-first Hackathon-Community-Plattform mit 3D-Landingpage, Event-Management und Teilnehmerkoordination. Gebaut mit CLAUDE.md-gesteuertem Multi-Agent-Workflow.',
+    en: 'Platform for a 3-day hackathon in Zurich where 150 participants build prototypes combining renewable energy, immersion-cooled servers, and district heating. Open-source, deployed in real energy communities.',
+    de: 'Plattform fuer einen 3-taegigen Hackathon in Zuerich, bei dem 150 Teilnehmende Prototypen bauen, die erneuerbare Energie, Immersion-Cooling-Server und Fernwaerme kombinieren. Open Source, im Einsatz in echten Energiegemeinschaften.',
   },
   tags: ['Next.js 16', 'Three.js', 'Vercel Postgres', 'Drizzle ORM', 'TailwindCSS', 'TypeScript'],
   column: 'ai',

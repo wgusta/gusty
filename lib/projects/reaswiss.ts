@@ -3,12 +3,12 @@ import type { Project } from '../types';
 const reaswiss: Project = {
   id: 'reaswiss',
   title: {
-    en: 'reaswiss: Real Estate Platform for the Swiss Market',
-    de: 'reaswiss: Immobilienplattform fuer den Schweizer Markt',
+    en: 'reaswiss: First Aid & Emergency Training by Active Paramedics',
+    de: 'reaswiss: Erste-Hilfe- und Notfalltraining von aktiven Rettungssanitaetern',
   },
   description: {
-    en: 'Real estate platform for Swiss properties with Stripe payment integration. Handmade foundation with AI used for bug fixes and incremental improvements.',
-    de: 'Immobilienplattform fuer Schweizer Objekte mit Stripe-Zahlungsintegration. Handgemachtes Fundament, KI fuer Bugfixes und schrittweise Verbesserungen.',
+    en: 'Website for a Swiss first aid training provider (BLS-AED-SRC courses, emergency training) taught by active paramedics. Serves clients like Zurich Airport across German-speaking Switzerland.',
+    de: 'Website fuer einen Schweizer Erste-Hilfe-Anbieter (BLS-AED-SRC-Kurse, Notfalltraining), unterrichtet von aktiven Rettungssanitaetern. Kunden wie der Flughafen Zuerich in der Deutschschweiz.',
   },
   tags: ['Next.js 16', 'ProcessWire CMS', 'Stripe', 'TailwindCSS', 'PHP'],
   column: 'bridged',

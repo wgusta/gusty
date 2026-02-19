@@ -3,12 +3,12 @@ import type { Project } from '../types';
 const luckhack: Project = {
   id: 'luckhack',
   title: {
-    en: 'luckhack: Hackathon Platform with Go Terminal UI',
-    de: 'luckhack: Hackathon-Plattform mit Go-Terminal-UI',
+    en: 'luckhack: Statistics Scholarship Challenge via SSH Terminal',
+    de: 'luckhack: Statistik-Stipendium-Challenge via SSH-Terminal',
   },
   description: {
-    en: 'Hackathon platform with a Go terminal UI (Charm TUI) for participant management and a Next.js web frontend. Fully handmade, no AI markers in the codebase.',
-    de: 'Hackathon-Plattform mit Go-Terminal-UI (Charm TUI) fuer Teilnehmerverwaltung und Next.js-Web-Frontend. Komplett handgemacht, keine KI-Marker in der Codebase.',
+    en: 'Scholarship competition awarding CHF 1500/semester to Swiss university students. Participants decrypt a transmission, connect via SSH, and solve auto-graded statistics tasks. Go terminal backend, Next.js frontend.',
+    de: 'Stipendiums-Wettbewerb mit CHF 1500/Semester fuer Schweizer Studierende. Teilnehmende entschluesseln eine Uebertragung, verbinden via SSH und loesen automatisch bewertete Statistik-Aufgaben. Go-Terminal-Backend, Next.js-Frontend.',
   },
   tags: ['Go', 'Charm TUI', 'Next.js 14', 'PostgreSQL', 'TailwindCSS', 'Docker'],
   column: 'design',

@@ -3,12 +3,12 @@ import type { Project } from '../types';
 const bioco: Project = {
   id: 'bioco',
   title: {
-    en: 'bioco: Organic Food Cooperative Platform',
-    de: 'bioco: Bio-Lebensmittel-Genossenschaftsplattform',
+    en: 'bioco: Demeter Vegetable Cooperative in Baden-Brugg',
+    de: 'bioco: Demeter-Gemuese-Kooperative in Baden-Brugg',
   },
   description: {
-    en: 'Organic food cooperative platform with ProcessWire CMS backend and Next.js frontend. Mixed approach: Cursor IDE and .claude directory for AI support, manual architecture planning.',
-    de: 'Bio-Lebensmittel-Genossenschaftsplattform mit ProcessWire-CMS-Backend und Next.js-Frontend. Gemischter Ansatz: Cursor IDE und .claude-Verzeichnis fuer KI-Unterstuetzung, manuelle Architekturplanung.',
+    en: 'Website for a community-supported agriculture cooperative growing biodynamic Demeter vegetables at Geisshof farm. Members share fieldwork and receive weekly vegetable boxes via depots in Baden, Brugg and Gebenstorf.',
+    de: 'Website fuer eine solidarische Landwirtschaftskooperative, die biodynamisches Demeter-Gemuese auf dem Geisshof anbaut. Mitglieder teilen Feldarbeit und erhalten woechentliche Gemuese-Taschen ueber Depots in Baden, Brugg und Gebenstorf.',
   },
   tags: ['ProcessWire 3.x', 'Next.js 14', 'Matomo', 'TailwindCSS', 'PHP', 'Docker'],
   column: 'bridged',
