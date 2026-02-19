@@ -64,16 +64,16 @@ npm run build      # production build
 
 Last 10 commits (auto-generated):
 
-- **Update CLAUDE.md and README.md for new architecture** (1cc1c68) - 10 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (329fa9b) - 4 minutes ago by github-actions[bot]
-- **More descriptive title and description for therapylist** (bb27f76) - 4 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (bfc9ee2) - 5 minutes ago by github-actions[bot]
-- **Remove version-gmbh from portfolio projects** (52aca72) - 5 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (96babe5) - 5 minutes ago by github-actions[bot]
-- **Fix project titles/descriptions from actual website content** (acb3dcd) - 6 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (72a6d99) - 9 minutes ago by github-actions[bot]
-- **More descriptive project titles for new projects** (a01e4c7) - 9 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (83a37df) - 9 minutes ago by github-actions[bot]
+- **DE umlauts, headerDef2post update, Fremdwort label** (1a81841) - 3 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (ab3f4be) - 4 hours ago by github-actions[bot]
+- **Update CLAUDE.md and README.md for new architecture** (1cc1c68) - 4 hours ago by wgusta
+- **Update Activity Log [skip ci]** (329fa9b) - 4 hours ago by github-actions[bot]
+- **More descriptive title and description for therapylist** (bb27f76) - 4 hours ago by wgusta
+- **Update Activity Log [skip ci]** (bfc9ee2) - 4 hours ago by github-actions[bot]
+- **Remove version-gmbh from portfolio projects** (52aca72) - 4 hours ago by wgusta
+- **Update Activity Log [skip ci]** (96babe5) - 4 hours ago by github-actions[bot]
+- **Fix project titles/descriptions from actual website content** (acb3dcd) - 4 hours ago by wgusta
+- **Update Activity Log [skip ci]** (72a6d99) - 4 hours ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
