@@ -8,8 +8,6 @@ import sihlhack from './sihlhack';
 import luckhack from './luckhack';
 import bioco from './bioco';
 import therapylist from './therapylist';
-import versionGmbh from './version-gmbh';
-
 const projects = [
   badenleg,
   userStoryMap,
@@ -21,7 +19,6 @@ const projects = [
   luckhack,
   bioco,
   therapylist,
-  versionGmbh,
 ];
 
 export default projects;
