@@ -22,7 +22,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-start bg-off-white/95 backdrop-blur-sm pt-32 md:pt-32 lg:pt-40 xl:pt-48 pb-4 md:pb-6 lg:pb-8 w-full relative min-h-[35vh] md:min-h-[40vh]">
+    <header className="absolute top-0 left-0 right-0 z-50 flex items-start justify-start bg-off-white/95 backdrop-blur-sm pt-16 md:pt-32 lg:pt-40 xl:pt-48 pb-2 md:pb-6 lg:pb-8 w-full relative md:min-h-[40vh]">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"

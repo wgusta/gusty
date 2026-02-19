@@ -95,6 +95,11 @@ export default function ProjectCard({ project, onClick, activeFilter }: ProjectC
           </span>
         ))}
       </div>
+
+      {/* Mobile tap indicator */}
+      <div className="md:hidden flex justify-end mt-3 relative z-10">
+        <span className={`text-sm font-terminal opacity-60 ${getMobileTextColor()}`}>→</span>
+      </div>
     </article>
   );
 }

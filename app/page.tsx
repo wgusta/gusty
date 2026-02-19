@@ -105,7 +105,7 @@ export default function Home() {
 
   // Filter projects based on active filter (mobile only)
   const filteredProjects = activeFilter === null
-    ? []
+    ? sortedProjects
     : sortedProjects.filter(p => p.column === activeFilter);
 
   // Sort danger zone projects by finalization date (newest first) - only if enabled
@@ -132,9 +132,8 @@ export default function Home() {
       <div className={`min-h-screen pt-0 md:pt-8 lg:pt-10 xl:pt-12 relative ${activeFilter === null ? 'pb-4 md:pb-20' : 'pb-20'}`}>
         {/* Mobile Navigation - Only visible on mobile, hidden when modal is open */}
         {selectedProject === null && (
-        <div className={`block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 ${activeFilter === null ? 'mb-2' : 'mb-[30px]'} mt-24`}>
-          <div className="px-4 py-4">
-            <h3 className="text-base font-terminal text-brand-black mb-6 uppercase tracking-wide">{tr.exploreProjects}</h3>
+        <div className="block md:hidden relative z-[60] w-full bg-off-white/95 backdrop-blur-sm md:my-0 mb-2">
+          <div className="px-4 py-3">
             {/* Tabs */}
             <div className="flex border-b border-brand-black/10">
               <button
@@ -207,13 +206,13 @@ export default function Home() {
 
           {/* Projects list */}
           {/* On mobile: only show when a button is clicked. On desktop: always show all */}
-          <div className={activeFilter === null ? 'hidden md:block' : 'block'}>
-            {(activeFilter === null ? sortedProjects : filteredProjects).length > 0 ? (
-              (activeFilter === null ? sortedProjects : filteredProjects).map((project) => {
+          <div className="block">
+            {filteredProjects.length > 0 ? (
+              filteredProjects.map((project) => {
               if (project.column === 'bridged') {
                 // Bridged project - full width
                 return (
-                  <div key={project.id} className="w-full px-6 md:px-8 lg:px-12 py-6 md:py-8 lg:py-10">
+                  <div key={project.id} className="w-full px-4 md:px-8 lg:px-12 py-3 md:py-8 lg:py-10">
                     {/* Card - same background as other cards on desktop, gradient only on mobile */}
                     <div className="max-w-7xl mx-auto">
                       <ProjectCard
@@ -229,7 +228,7 @@ export default function Home() {
                 return (
                   <div
                     key={project.id}
-                    className="w-full md:w-1/2 p-6 md:p-8 lg:p-12 md:mr-auto"
+                    className="w-full md:w-1/2 px-4 py-2 md:p-8 lg:p-12 md:mr-auto"
                   >
                     <ProjectCard
                       project={project}
@@ -242,7 +241,7 @@ export default function Home() {
                 return (
                   <div
                     key={project.id}
-                    className="w-full md:w-1/2 p-6 md:p-8 lg:p-12 md:ml-auto"
+                    className="w-full md:w-1/2 px-4 py-2 md:p-8 lg:p-12 md:ml-auto"
                   >
                     <ProjectCard
                       project={project}
