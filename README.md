@@ -64,16 +64,16 @@ npm run build      # production build
 
 Last 10 commits (auto-generated):
 
-- **More descriptive title and description for therapylist** (bb27f76) - 13 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (bfc9ee2) - 88 seconds ago by github-actions[bot]
-- **Remove version-gmbh from portfolio projects** (52aca72) - 2 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (96babe5) - 2 minutes ago by github-actions[bot]
-- **Fix project titles/descriptions from actual website content** (acb3dcd) - 2 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (72a6d99) - 5 minutes ago by github-actions[bot]
-- **More descriptive project titles for new projects** (a01e4c7) - 5 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (83a37df) - 6 minutes ago by github-actions[bot]
-- **Fix favicon: use Next.js ImageResponse instead of SVG** (e22fa22) - 6 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (c6b76a2) - 37 minutes ago by github-actions[bot]
+- **Update CLAUDE.md and README.md for new architecture** (1cc1c68) - 10 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (329fa9b) - 4 minutes ago by github-actions[bot]
+- **More descriptive title and description for therapylist** (bb27f76) - 4 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (bfc9ee2) - 5 minutes ago by github-actions[bot]
+- **Remove version-gmbh from portfolio projects** (52aca72) - 5 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (96babe5) - 5 minutes ago by github-actions[bot]
+- **Fix project titles/descriptions from actual website content** (acb3dcd) - 6 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (72a6d99) - 9 minutes ago by github-actions[bot]
+- **More descriptive project titles for new projects** (a01e4c7) - 9 minutes ago by wgusta
+- **Update Activity Log [skip ci]** (83a37df) - 9 minutes ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
