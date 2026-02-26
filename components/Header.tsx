@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import LanguageToggle from './LanguageToggle';
 import { useLanguage } from '@/lib/i18n/context';
 import translations from '@/lib/i18n/translations';
@@ -57,7 +58,27 @@ export default function Header() {
         {/* Dictionary headword line */}
         <div className="flex items-baseline gap-3 md:gap-4 flex-wrap">
           <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight text-sun-red font-stylish">
-            gust·y
+            {animPhase === 2 ? (
+              <span className="inline-flex items-baseline" aria-label="gust·y">
+                <span
+                  className="inline-block mr-[0.01em] align-baseline"
+                  style={{ width: '0.8em', height: '0.9em', transform: 'translateY(0.06em)' }}
+                >
+                  <Image
+                    src="/g-logo-cut.png"
+                    alt=""
+                    aria-hidden="true"
+                    width={512}
+                    height={512}
+                    className="w-full h-full object-contain"
+                    priority
+                  />
+                </span>
+                <span>ust·y</span>
+              </span>
+            ) : (
+              'gust·y'
+            )}
           </h1>
           <span className="text-base sm:text-lg md:text-xl lg:text-2xl text-brand-black/60 font-terminal">
             /ˈɡʌsti/
