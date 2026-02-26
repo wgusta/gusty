@@ -64,7 +64,9 @@ npm run build      # production build
 
 Last 10 commits (auto-generated):
 
-- **Replace Gusty logo and adjust cut** (afbb127) - 53 seconds ago by wgusta
+- **feat(branding): replace page title icon with white logo** (44e7f3a) - 15 seconds ago by wgusta
+- **Update Activity Log [skip ci]** (4cf6140) - 3 minutes ago by github-actions[bot]
+- **Replace Gusty logo and adjust cut** (afbb127) - 4 minutes ago by wgusta
 - **Update Activity Log [skip ci]** (f5faf83) - 7 days ago by github-actions[bot]
 - **mobile UX overhaul: reduce header height, show all projects by default, add tap affordance** (81b196b) - 7 days ago by wgusta
 - **Update Activity Log [skip ci]** (08d885f) - 7 days ago by github-actions[bot]
@@ -72,8 +74,6 @@ Last 10 commits (auto-generated):
 - **Update Activity Log [skip ci]** (c521652) - 7 days ago by github-actions[bot]
 - **DE umlauts, headerDef2post update, Fremdwort label** (1a81841) - 7 days ago by wgusta
 - **Update Activity Log [skip ci]** (ab3f4be) - 7 days ago by github-actions[bot]
-- **Update CLAUDE.md and README.md for new architecture** (1cc1c68) - 7 days ago by wgusta
-- **Update Activity Log [skip ci]** (329fa9b) - 7 days ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
