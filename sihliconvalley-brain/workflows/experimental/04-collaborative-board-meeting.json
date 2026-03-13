@@ -1,0 +1,434 @@
+{
+  "name": "Collaborative Board Meeting (Debate Loop)",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * 3"
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Wednesday 14:00 Zurich",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM health_checks WHERE timestamp > NOW() - INTERVAL '7 days' ORDER BY timestamp DESC LIMIT 7;"
+      },
+      "id": "get-health-data",
+      "name": "Get Health Data",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        220,
+        -100
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM email_inbox WHERE received_at > NOW() - INTERVAL '7 days' AND (board_relevant = true OR priority IN ('urgent', 'high')) ORDER BY received_at DESC;"
+      },
+      "id": "get-important-emails",
+      "name": "Get Important Emails",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        220,
+        100
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM decisions WHERE created_at > NOW() - INTERVAL '30 days' ORDER BY created_at DESC LIMIT 10;"
+      },
+      "id": "get-past-decisions",
+      "name": "Get Past Decisions",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        220,
+        300
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const healthData = $('Get Health Data').all();\nconst emailData = $('Get Important Emails').all();\nconst pastDecisions = $('Get Past Decisions').all();\n\nconst date = new Date().toISOString().split('T')[0];\n\nconst projects = [\n  { name: 'sihlhack', url: 'https://sihlhack.ch', status: 'online', priority: 1 },\n  { name: 'reaswiss', url: 'https://reaswiss.ch', status: 'online', priority: 2 },\n  { name: 'bioco', url: 'https://bioco.ch', status: 'online', priority: 3 },\n  { name: 'version.gmbh', url: 'https://version.gmbh', status: 'online', priority: 4 },\n  { name: 'sihliconvalley', url: 'https://sihliconvalley.ch', status: 'online', priority: 5 },\n  { name: 'badenleg', url: 'https://badenleg.ch', status: 'online', priority: 6 },\n  { name: 'therapylist', url: 'https://therapylist.ch', status: 'offline', note: 'not online yet', priority: 7 },\n  { name: 'qv-alststadt', url: 'https://qv-alststadt.ch', status: 'offline', note: 'not online yet', priority: 8 }\n];\n\nconst briefing = {\n  date,\n  meeting_number: Math.ceil((new Date() - new Date('2025-01-01')) / (7 * 24 * 60 * 60 * 1000)),\n  projects,\n  infrastructure: {\n    total_checks: healthData.length,\n    incidents: healthData.filter(h => h.json.down_count > 0).length,\n    sites_monitored: healthData[0]?.json?.total_sites || 0\n  },\n  communications: {\n    total_important: emailData.length,\n    urgent: emailData.filter(e => e.json.priority === 'urgent').length,\n    action_required: emailData.filter(e => e.json.action_required).length,\n    by_project: {}\n  },\n  recent_decisions: pastDecisions.map(d => ({\n    date: d.json.created_at,\n    topic: d.json.topic,\n    decision: d.json.decision,\n    status: d.json.status\n  })),\n  raw: {\n    health: healthData.map(h => h.json),\n    emails: emailData.map(e => ({\n      subject: e.json.subject,\n      from: e.json.from_address,\n      summary: e.json.summary,\n      priority: e.json.priority,\n      project: e.json.project\n    }))\n  }\n};\n\nreturn [{ json: briefing }];"
+      },
+      "id": "compile-briefing",
+      "name": "Compile Board Briefing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2.1,
+      "position": [
+        460,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ {\n  "model": "gpt-4o-mini",\n  "messages": [\n    {"role": "system", "content": "You are the Lead Analyst for Sihliconvalley. Analyze the provided data and draft a strategic board briefing. Focus on patterns, delivery status, and financial outlook. Output strictly valid JSON with keys: summary (array of strings), portfolio_status (array of strings), risks (array of strings), decisions_needed (array of objects {topic, context})."},\n    {"role": "user", "content": "Here is the raw data briefing:\n\n" + JSON.stringify($json, null, 2)}
+  ],
+  "temperature": 0.3
+}}}",
+        "options": {}
+      },
+      "id": "analyst-openai",
+      "name": "Analyst (OpenAI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        680,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "{{$env.ANTHROPIC_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ {\n  "model": "claude-3-5-sonnet-20241022",\n  "system": "You are the Risk Officer for Sihliconvalley (The Skeptic). Review the Analyst's Draft against the Raw Data. Identify 3 critical gaps, over-optimistic assumptions, or missing risks. Be constructive but critical. Return valid JSON with keys: critique_points (array of strings), missing_context (array of strings), risk_level ('low', 'medium', 'high').",\n  "messages": [\n    {"role": "user", "content": "RAW DATA:\n" + JSON.stringify($('Compile Board Briefing').item.json, null, 2) + "\n\nANALYST DRAFT:\n" + $json.choices[0].message.content}
+  ],
+  "temperature": 0.4,
+  "max_tokens": 1000
+}}}",
+        "options": {}
+      },
+      "id": "critic-claude",
+      "name": "Critic (Claude)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        900,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ {\n  "model": "gpt-4o",\n  "messages": [\n    {"role": "system", "content": "You are the Chairperson of the Board. Synthesize the final Board Minutes based on the Analyst's Draft and the Risk Officer's Critique. \n\nYour goal is a balanced view that acknowledges success but addresses the risks raised. \n\nFormat as clean Markdown.\nStructure:\n# Sihliconvalley Board Meeting [Date]\n## Executive Summary\n## Portfolio Status\n## Risk Assessment (addressing the Risk Officer's points)\n## Key Decisions & Next Steps"},
+    {"role": "user", "content": "ANALYST DRAFT:\n" + $('Analyst (OpenAI)').item.json.choices[0].message.content + "\n\nRISK OFFICER CRITIQUE:\n" + JSON.stringify($json.content[0].text)}
+  ],
+  "temperature": 0.3
+}}}",
+        "options": {}
+      },
+      "id": "chairperson-synthesis",
+      "name": "Chairperson (GPT-4o)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1120,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const minutes = $json.choices[0].message.content;\nconst briefing = $('Compile Board Briefing').item.json;\nconst analyst = JSON.parse($('Analyst (OpenAI)').item.json.choices[0].message.content);\n// Try to parse Claude's JSON, but it might be wrapped in text. Simple extraction if needed, but assuming valid JSON for now.\n// Note: Chairperson already consumed Claude's text directly.\n\nreturn [{\n  json: {\n    minutes,\n    meeting_number: briefing.meeting_number,\n    analyst_data: analyst\n  }\n}];"
+      },
+      "id": "format-final",
+      "name": "Format Final",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1340,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "board_meetings"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "meeting_date": "={{ new Date().toISOString() }}",
+            "meeting_number": "={{ $json.meeting_number }}",
+            "minutes_markdown": "={{ $json.minutes }}",
+            "responses_json": "={{ JSON.stringify({ analyst: $json.analyst_data, critic: 'See separate logs for critique' }) }}",
+            "status": "pending_review"
+          }
+        }
+      },
+      "id": "store-minutes",
+      "name": "Store Minutes",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1560,
+        100
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ "https://ntfy.sh/" + $env.NTFY_TOPIC }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Board Meeting #{{ $json.meeting_number }} (Collaborative)"
+            },
+            {
+              "name": "Priority",
+              "value": "default"
+            },
+            {
+              "name": "Tags",
+              "value": "clipboard,calendar,handshake"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": "Collaborative minutes stored. Analyst & Risk Officer debate complete."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notify-meeting",
+      "name": "Notify Meeting Ready",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1780,
+        100
+      ]
+    }
+  ],
+  "connections": {
+    "Wednesday 14:00 Zurich": {
+      "main": [
+        [
+          {
+            "node": "Get Health Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Important Emails",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Past Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Health Data": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Important Emails": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Past Decisions": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Board Briefing": {
+      "main": [
+        [
+          {
+            "node": "Analyst (OpenAI)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyst (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Critic (Claude)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Critic (Claude)": {
+      "main": [
+        [
+          {
+            "node": "Chairperson (GPT-4o)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chairperson (GPT-4o)": {
+      "main": [
+        [
+          {
+            "node": "Format Final",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Final": {
+      "main": [
+        [
+          {
+            "node": "Store Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Minutes": {
+      "main": [
+        [
+          {
+            "node": "Notify Meeting Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "timezone": "Europe/Zurich"
+  },
+  "tags": [
+    {
+      "name": "board-meeting"
+    },
+    {
+      "name": "collaborative"
+    },
+    {
+      "name": "debate-loop"
+    }
+  ]
+}

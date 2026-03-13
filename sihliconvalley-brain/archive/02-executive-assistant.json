@@ -1,0 +1,375 @@
+{
+  "name": "Executive Assistant - Email & Inflow Manager",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "*/30 * * * *"
+            }
+          ]
+        }
+      },
+      "id": "email-trigger",
+      "name": "Check Every 30min",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Single account: Gmail inbox\nconst accounts = [\n  { id: 'gmail', name: 'Gmail Inbox', credentialName: 'Gmail IMAP' },\n];\n\nreturn accounts.map(acc => ({ json: acc }));"
+      },
+      "id": "list-accounts",
+      "name": "List Email Accounts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [200, 0]
+    },
+    {
+      "parameters": {
+        "mailbox": "INBOX",
+        "postProcessAction": "nothing",
+        "options": {
+          "customEmailConfig": "={{ $json.credentialName }}"
+        }
+      },
+      "id": "fetch-emails",
+      "name": "Fetch New Emails",
+      "type": "n8n-nodes-base.emailReadImap",
+      "typeVersion": 2.1,
+      "position": [400, 0],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const emails = $input.all();\n\n// Filter to only new unprocessed emails (last 30 min)\nconst thirtyMinAgo = new Date(Date.now() - 30 * 60 * 1000);\n\nconst newEmails = emails.filter(e => {\n  const date = new Date(e.json.date);\n  return date > thirtyMinAgo;\n});\n\nif (newEmails.length === 0) {\n  return [{ json: { hasNewEmails: false, count: 0 } }];\n}\n\nreturn newEmails.map(e => ({\n  json: {\n    hasNewEmails: true,\n    id: e.json.messageId,\n    from: e.json.from?.text || e.json.from,\n    to: e.json.to?.text || e.json.to,\n    subject: e.json.subject,\n    date: e.json.date,\n    body: e.json.text?.substring(0, 2000) || '',\n    account: e.json.account || 'gmail'\n  }\n}));"
+      },
+      "id": "filter-new",
+      "name": "Filter New Emails",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-emails",
+              "leftValue": "={{ $json.hasNewEmails }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-has-emails",
+      "name": "Has New Emails?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [800, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.3,\n  \"max_tokens\": 500,\n  \"messages\": [\n    {\n      \"role\": \"system\",\n      \"content\": \"You are the Executive Assistant for Sihliconvalley. Classify emails and return strict JSON only.\"\n    },\n    {\n      \"role\": \"user\",\n      \"content\": \"Analyze this email and return JSON only. Email: From: {{ $json.from }} | To: {{ $json.to }} | Subject: {{ $json.subject }} | Body: {{ $json.body }}\\n\\nReturn JSON with keys: category (business, project, support, newsletter, spam, personal), priority (urgent, high, normal, low), project (sihlhack, reaswiss, badenleg, therapylist, sihliconvalley, bioco, version.gmbh, qv-alststadt, or null), action_required (true/false), suggested_action, summary (2-3 sentences), board_relevant (true/false), sentiment (positive, neutral, negative).\"\n    }\n  ]\n}"
+      },
+      "id": "analyze-email",
+      "name": "OpenAI Categorize Email",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1000, -100]
+    },
+    {
+      "parameters": {
+        "jsCode": "const email = $('Filter New Emails').item.json;\nconst analysisText = $json.choices?.[0]?.message?.content || '{}';\n\nlet analysis;\ntry {\n  const jsonMatch = analysisText.match(/\\{[\\s\\S]*\\}/);\n  analysis = JSON.parse(jsonMatch ? jsonMatch[0] : '{}');\n} catch (e) {\n  analysis = {\n    category: 'unknown',\n    priority: 'normal',\n    action_required: false,\n    summary: 'Could not analyze email'\n  };\n}\n\nreturn [{\n  json: {\n    ...email,\n    analysis,\n    processed_at: new Date().toISOString()\n  }\n}];"
+      },
+      "id": "merge-analysis",
+      "name": "Merge Analysis",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1200, -100]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "email_inbox"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+            "value": {
+              "message_id": "={{ $json.id }}",
+              "from_address": "={{ $json.from }}",
+              "to_address": "={{ $json.to }}",
+              "subject": "={{ $json.subject }}",
+              "received_at": "={{ $json.date }}",
+              "category": "={{ $json.analysis.category }}",
+              "priority": "={{ $json.analysis.priority }}",
+              "project": "={{ $json.analysis.project }}",
+              "account": "={{ $json.account }}",
+              "action_required": "={{ $json.analysis.action_required }}",
+              "summary": "={{ $json.analysis.summary }}",
+              "board_relevant": "={{ $json.analysis.board_relevant }}",
+              "status": "new"
+            }
+        }
+      },
+      "id": "store-email",
+      "name": "Store in Database",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [1400, -100],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "urgent",
+              "leftValue": "={{ $json.analysis.priority }}",
+              "rightValue": "urgent",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-urgent",
+      "name": "Is Urgent?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1600, -100]
+    },
+    {
+      "parameters": {
+        "fromEmail": "gueney.usta@gmail.com",
+        "toEmail": "={{ $json.from }}",
+        "subject": "=Re: {{ $json.subject }}",
+        "emailFormat": "text",
+        "text": "=Hi,\n\nWe received your email and have logged it. Subject: \"{{ $json.subject }}\".\n\nSummary: {{ $json.analysis.summary || 'Pending review' }}\n\nWe will respond soon. If this is urgent, we are already on it.\n\nThank you."
+      },
+      "id": "send-ack",
+      "name": "Send Acknowledgement",
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [1800, -20],
+      "credentials": {
+        "smtp": {
+          "id": "GMAIL_SMTP_CREDENTIAL_ID",
+          "name": "Gmail SMTP"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/sihliconvalley-brain-gusta",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "Urgent Email"
+            },
+            {
+              "name": "Priority",
+              "value": "urgent"
+            },
+            {
+              "name": "Tags",
+              "value": "email,warning"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": "=From: {{ $json.from }}\\nSubject: {{ $json.subject }}\\n\\n{{ $json.analysis.summary }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "urgent-alert",
+      "name": "Send Urgent Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1800, -200]
+    }
+  ],
+  "connections": {
+    "Check Every 30min": {
+      "main": [
+        [
+          {
+            "node": "List Email Accounts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "List Email Accounts": {
+      "main": [
+        [
+          {
+            "node": "Fetch New Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch New Emails": {
+      "main": [
+        [
+          {
+            "node": "Filter New Emails",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter New Emails": {
+      "main": [
+        [
+          {
+            "node": "Has New Emails?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has New Emails?": {
+      "main": [
+        [
+          {
+            "node": "OpenAI Categorize Email",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    },
+    "OpenAI Categorize Email": {
+      "main": [
+        [
+          {
+            "node": "Merge Analysis",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Analysis": {
+      "main": [
+        [
+          {
+            "node": "Store in Database",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store in Database": {
+      "main": [
+        [
+          {
+            "node": "Is Urgent?",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Send Acknowledgement",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Is Urgent?": {
+      "main": [
+        [
+          {
+            "node": "Send Urgent Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "timezone": "Europe/Zurich"
+  },
+  "tags": [
+    {
+      "name": "executive-assistant"
+    },
+    {
+      "name": "email"
+    },
+    {
+      "name": "week-1"
+    }
+  ]
+}

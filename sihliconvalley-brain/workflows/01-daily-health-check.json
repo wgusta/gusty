@@ -1,0 +1,297 @@
+{
+  "name": "Daily Health Check",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 12 * * *"
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Daily 12:00 Zurich",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Online sites to monitor (exclude offline/in-work projects)\nconst sites = [\n  { name: 'sihlhack', url: 'https://sihlhack.ch', priority: 1 },\n  { name: 'reaswiss', url: 'https://reaswiss.ch', priority: 2 },\n  { name: 'bioco', url: 'https://bioco.ch', priority: 3 },\n  { name: 'version.gmbh', url: 'https://version.gmbh', priority: 4 },\n  { name: 'sihliconvalley', url: 'https://sihliconvalley.ch', priority: 5 },\n  { name: 'badenleg', url: 'https://badenleg.ch', priority: 6 },\n];\n\nreturn sites.map(site => ({ json: site }));"
+      },
+      "id": "sites-list",
+      "name": "Define Sites",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        200,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.url }}",
+        "options": {
+          "timeout": 15000,
+          "redirect": {
+            "redirect": {
+              "followRedirects": true,
+              "maxRedirects": 5
+            }
+          }
+        }
+      },
+      "id": "http-check",
+      "name": "Check Site",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        400,
+        0
+      ],
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const results = $input.all();\nconst timestamp = new Date().toISOString();\n\nconst report = results.map(item => {\n  const site = item.json;\n  const isUp = site.statusCode >= 200 && site.statusCode < 400;\n  const responseTime = site.responseTime || 'N/A';\n  \n  return {\n    name: site.name || 'Unknown',\n    url: site.url || 'Unknown',\n    status: isUp ? 'UP' : 'DOWN',\n    statusCode: site.statusCode || 'Error',\n    responseTime: responseTime,\n    error: site.error || null,\n    priority: site.priority || 99\n  };\n});\n\nconst downSites = report.filter(s => s.status === 'DOWN');\nconst hasIssues = downSites.length > 0;\n\nreturn [{\n  json: {\n    timestamp,\n    totalSites: report.length,\n    upCount: report.filter(s => s.status === 'UP').length,\n    downCount: downSites.length,\n    hasIssues,\n    downSites: downSites.map(s => s.name),\n    report,\n    alertPriority: hasIssues ? Math.min(...downSites.map(s => s.priority)) : null\n  }\n}];"
+      },
+      "id": "analyze-results",
+      "name": "Analyze Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        600,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-issues",
+              "leftValue": "={{ $json.hasIssues }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-issues",
+      "name": "Has Issues?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [
+        800,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ \"https://ntfy.sh/\" + $env.NTFY_TOPIC }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "Site Down Alert"
+            },
+            {
+              "name": "Priority",
+              "value": "={{ $json.alertPriority <= 2 ? 'urgent' : 'high' }}"
+            },
+            {
+              "name": "Tags",
+              "value": "warning,skull"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": "={{ $json.downCount }} site(s) down: {{ $json.downSites.join(', ') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-alert",
+      "name": "Send ntfy Alert",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1000,
+        -100
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const data = $json;\nconst date = new Date().toLocaleDateString('en-CH');\n\nlet markdown = `# Daily Health Report - ${date}\\n\\n`;\nmarkdown += `## Summary\\n`;\nmarkdown += `- Total Sites: ${data.totalSites}\\n`;\nmarkdown += `- Up: ${data.upCount}\\n`;\nmarkdown += `- Down: ${data.downCount}\\n\\n`;\n\nmarkdown += `## Site Status\\n\\n`;\nmarkdown += `| Site | Status | Response Time | Code |\\n`;\nmarkdown += `|------|--------|---------------|------|\\n`;\n\ndata.report\n  .sort((a, b) => a.priority - b.priority)\n  .forEach(site => {\n    markdown += `| ${site.name} | ${site.status} | ${site.responseTime}ms | ${site.statusCode} |\\n`;\n  });\n\nif (data.hasIssues) {\n  markdown += `\\n## Issues Detected\\n\\n`;\n  data.report.filter(s => s.status === 'DOWN').forEach(site => {\n    markdown += `- ${site.name} (${site.url}): ${site.error || 'Not responding'}\\n`;\n  });\n}\n\nreturn [{ json: { markdown, ...data } }];"
+      },
+      "id": "format-report",
+      "name": "Format Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1000,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "health_checks"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "timestamp": "={{ $json.timestamp }}",
+            "total_sites": "={{ $json.totalSites }}",
+            "up_count": "={{ $json.upCount }}",
+            "down_count": "={{ $json.downCount }}",
+            "report_json": "={{ JSON.stringify($json.report) }}"
+          }
+        }
+      },
+      "id": "store-report",
+      "name": "Store in PostgreSQL",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1200,
+        100
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Daily 12:00 Zurich": {
+      "main": [
+        [
+          {
+            "node": "Define Sites",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Define Sites": {
+      "main": [
+        [
+          {
+            "node": "Check Site",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Site": {
+      "main": [
+        [
+          {
+            "node": "Analyze Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Analyze Results": {
+      "main": [
+        [
+          {
+            "node": "Has Issues?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has Issues?": {
+      "main": [
+        [
+          {
+            "node": "Send ntfy Alert",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Format Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send ntfy Alert": {
+      "main": [
+        [
+          {
+            "node": "Format Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Format Report": {
+      "main": [
+        [
+          {
+            "node": "Store in PostgreSQL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "timezone": "Europe/Zurich"
+  },
+  "tags": [
+    {
+      "name": "monitoring"
+    },
+    {
+      "name": "week-1"
+    }
+  ]
+}

@@ -1,0 +1,594 @@
+{
+  "name": "Wednesday Board Meeting",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * 3"
+            }
+          ]
+        }
+      },
+      "id": "wednesday-trigger",
+      "name": "Wednesday 14:00 Zurich",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM health_checks WHERE timestamp > NOW() - INTERVAL '7 days' ORDER BY timestamp DESC LIMIT 7;"
+      },
+      "id": "get-health-data",
+      "name": "Get Health Data",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [200, -200],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM email_inbox WHERE received_at > NOW() - INTERVAL '7 days' AND (board_relevant = true OR priority IN ('urgent', 'high')) ORDER BY received_at DESC;"
+      },
+      "id": "get-email-data",
+      "name": "Get Important Emails",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [200, 0],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM decisions WHERE created_at > NOW() - INTERVAL '30 days' ORDER BY created_at DESC LIMIT 10;"
+      },
+      "id": "get-past-decisions",
+      "name": "Get Past Decisions",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [200, 200],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const healthData = $('Get Health Data').all();\nconst emailData = $('Get Important Emails').all();\nconst pastDecisions = $('Get Past Decisions').all();\n\nconst date = new Date().toISOString().split('T')[0];\n\nconst projects = [\n  { name: 'sihlhack', url: 'https://sihlhack.ch', status: 'online', priority: 1 },\n  { name: 'reaswiss', url: 'https://reaswiss.ch', status: 'online', priority: 2 },\n  { name: 'bioco', url: 'https://bioco.ch', status: 'online', priority: 3 },\n  { name: 'version.gmbh', url: 'https://version.gmbh', status: 'online', priority: 4 },\n  { name: 'sihliconvalley', url: 'https://sihliconvalley.ch', status: 'online', priority: 5 },\n  { name: 'badenleg', url: 'https://badenleg.ch', status: 'online', priority: 6 },\n  { name: 'therapylist', url: 'https://therapylist.ch', status: 'offline', note: 'not online yet', priority: 7 },\n  { name: 'qv-alststadt', url: 'https://qv-alststadt.ch', status: 'offline', note: 'not online yet', priority: 8 }\n];\n\n// Compile board briefing document\nconst briefing = {\n  date,\n  meeting_number: Math.ceil((new Date() - new Date('2025-01-01')) / (7 * 24 * 60 * 60 * 1000)),\n  projects,\n  \n  // Health summary\n  infrastructure: {\n    total_checks: healthData.length,\n    incidents: healthData.filter(h => h.json.down_count > 0).length,\n    sites_monitored: healthData[0]?.json?.total_sites || 0\n  },\n  \n  // Email summary\n  communications: {\n    total_important: emailData.length,\n    urgent: emailData.filter(e => e.json.priority === 'urgent').length,\n    action_required: emailData.filter(e => e.json.action_required).length,\n    by_project: {}\n  },\n  \n  // Past decisions for context\n  recent_decisions: pastDecisions.map(d => ({\n    date: d.json.created_at,\n    topic: d.json.topic,\n    decision: d.json.decision,\n    status: d.json.status\n  })),\n  \n  // Raw data for agents\n  raw: {\n    health: healthData.map(h => h.json),\n    emails: emailData.map(e => ({\n      subject: e.json.subject,\n      from: e.json.from_address,\n      summary: e.json.summary,\n      priority: e.json.priority,\n      project: e.json.project\n    }))\n  }\n};\n\n// Count emails by project\nemailData.forEach(e => {\n  const proj = e.json.project || 'general';\n  briefing.communications.by_project[proj] = (briefing.communications.by_project[proj] || 0) + 1;\n});\n\nreturn [{ json: briefing }];"
+      },
+      "id": "compile-briefing",
+      "name": "Compile Board Briefing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [400, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.45,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Respond in English, concise and action-focused.\"},\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.agentPrompts.portfolio) }} }\n  ]\n}"
+      },
+      "id": "portfolio-agent",
+      "name": "Portfolio Strategist",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [800, -300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.35,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Respond in English, concise and action-focused.\"},\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.agentPrompts.delivery) }} }\n  ]\n}"
+      },
+      "id": "delivery-agent",
+      "name": "Delivery & Reliability Lead",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [800, -100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.25,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Respond in English, concise and action-focused.\"},\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.agentPrompts.finance) }} }\n  ]\n}"
+      },
+      "id": "finance-agent",
+      "name": "Finance & Ops Controller",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [800, 100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.2,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Respond in English, concise and action-focused.\"},\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.agentPrompts.compliance) }} }\n  ]\n}"
+      },
+      "id": "compliance-agent",
+      "name": "Compliance & Trust Officer",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [800, 300]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={\n  \"model\": \"gpt-4o-mini\",\n  \"temperature\": 0.5,\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"Respond in English, concise and action-focused.\"},\n    {\"role\": \"user\", \"content\": {{ JSON.stringify($json.agentPrompts.product) }} }\n  ]\n}"
+      },
+      "id": "product-agent",
+      "name": "Product & Customer Voice",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [800, 500]
+    },
+    {
+      "parameters": {
+        "jsCode": "const briefing = $('Compile Board Briefing').item.json;\nconst portfolio = $('Portfolio Strategist').item.json;\nconst delivery = $('Delivery & Reliability Lead').item.json;\nconst finance = $('Finance & Ops Controller').item.json;\nconst compliance = $('Compliance & Trust Officer').item.json;\nconst product = $('Product & Customer Voice').item.json;\n\nconst date = new Date().toLocaleDateString('en-CH', { \n  weekday: 'long', \n  year: 'numeric', \n  month: 'long', \n  day: 'numeric' \n});\n\nconst projectLines = briefing.projects\n  .map(p => `- ${p.name}: ${p.status}${p.note ? ' (' + p.note + ')' : ''}`)\n  .join('\\n');\n\nconst getContent = (nodeOutput) => nodeOutput.choices?.[0]?.message?.content || nodeOutput.text || 'No response';\n\nlet minutes = `# Sihliconvalley Board Meeting #${briefing.meeting_number}\\n`;\nminutes += `**Date:** ${date} | **Time:** 14:00 Zurich\\n\\n`;\n\nminutes += `## Projects & Status\\n${projectLines}\\n\\n`;\n\nminutes += `## Infrastructure (last 7 days)\\n`;\nminutes += `- Health checks: ${briefing.infrastructure.total_checks}\\n`;\nminutes += `- Incidents: ${briefing.infrastructure.incidents}\\n`;\nminutes += `- Sites monitored: ${briefing.infrastructure.sites_monitored}\\n\\n`;\n\nminutes += `## Communications (last 7 days)\\n`;\nminutes += `- Important emails: ${briefing.communications.total_important}\\n`;\nminutes += `- Urgent: ${briefing.communications.urgent}\\n`;\nminutes += `- Action required: ${briefing.communications.action_required}\\n\\n`;\n\nminutes += `## Agent Perspectives\\n\\n`;\nminutes += `### Portfolio Strategist\\n${getContent(portfolio)}\\n\\n`;\nminutes += `### Delivery & Reliability Lead\\n${getContent(delivery)}\\n\\n`;\nminutes += `### Product & Customer Voice\\n${getContent(product)}\\n\\n`;\nminutes += `### Finance & Ops Controller\\n${getContent(finance)}\\n\\n`;\nminutes += `### Compliance & Trust Officer\\n${getContent(compliance)}\\n\\n`;\n\nminutes += `---\\n\\n`;\nminutes += `## Decisions to confirm\\n`;\nminutes += `- Add decisions as DB notes or comments.\\n`;\n\nminutes += `---\\n\\n`;\nminutes += `*Minutes generated automatically by Sihliconvalley Brain*\\n`;\nminutes += `*Next meeting: next Wednesday 14:00*\\n`;\n\nreturn [{\n  json: {\n    minutes,\n    briefing,\n    responses: {\n      portfolio: getContent(portfolio),\n      delivery: getContent(delivery),\n      product: getContent(product),\n      finance: getContent(finance),\n      compliance: getContent(compliance)\n    }\n  }\n}];"
+      },
+      "id": "compile-minutes",
+      "name": "Compile Meeting Minutes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1100, 100]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "board_meetings"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "meeting_date": "={{ new Date().toISOString() }}",
+            "meeting_number": "={{ $json.briefing.meeting_number }}",
+            "minutes_markdown": "={{ $json.minutes }}",
+            "responses_json": "={{ JSON.stringify($json.responses) }}",
+            "status": "pending_review"
+          }
+        }
+      },
+      "id": "store-minutes",
+      "name": "Store Minutes",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [1300, 0],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const minutes = $('Compile Meeting Minutes').item.json.minutes;\nconst meetingNumber = $('Compile Meeting Minutes').item.json.briefing.meeting_number;\nconst date = new Date().toISOString().split('T')[0];\nconst token = $env.GITHUB_TOKEN || '';\n\nreturn [{\n  json: {\n    hasToken: !!token,\n    gistBody: {\n      description: `Sihliconvalley Board Meeting #${meetingNumber}`,\n      public: false,\n      files: {\n        [`board-meeting-${meetingNumber}-${date}.md`]: { content: minutes }\n      }\n    }\n  }\n}];"
+      },
+      "id": "prepare-gist",
+      "name": "Prepare Gist Payload",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1300, -200]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict"
+          },
+          "conditions": [
+            {
+              "id": "has-token",
+              "leftValue": "={{ $json.hasToken }}",
+              "rightValue": true,
+              "operator": {
+                "type": "boolean",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        }
+      },
+      "id": "if-github-token",
+      "name": "Has GitHub Token?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2,
+      "position": [1500, -200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.github.com/gists",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.GITHUB_TOKEN}}"
+            },
+            {
+              "name": "Accept",
+              "value": "application/vnd.github+json"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ JSON.stringify($json.gistBody) }}"
+      },
+      "id": "create-gist",
+      "name": "Create Gist Backup",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1700, -200]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://ntfy.sh/sihliconvalley-brain-gusta",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Board Meeting #{{ $json.briefing.meeting_number }}"
+            },
+            {
+              "name": "Priority",
+              "value": "default"
+            },
+            {
+              "name": "Tags",
+              "value": "clipboard,calendar"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": "Board meeting minutes stored in DB (GitHub backup if token set). Please review decisions."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notify-meeting",
+      "name": "Notify Meeting Ready",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1500, 100]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Prepare agent prompts based on briefing data\nconst briefing = $json;\nconst briefingJSON = JSON.stringify(briefing, null, 2);\nconst projectLines = briefing.projects\n  .map(p => `- ${p.name} (${p.status}${p.note ? ': ' + p.note : ''})`)\n  .join('\\n');\nconst onlineProjects = briefing.projects.filter(p => p.status === 'online').map(p => p.name).join(', ') || 'none';\nconst offlineProjects = briefing.projects.filter(p => p.status === 'offline').map(p => p.name).join(', ') || 'none';\n\nconst agentPrompts = {\n  portfolio: `You are the Portfolio Strategist. Set priorities, surface synergies, flag risks early.\n\nProject radar:\\n${projectLines}\n\nBriefing:\\n${briefingJSON}\n\nDeliver:\n1) Top 3 strategic priorities (why, expected impact).\n2) Most critical project + rationale.\n3) Strategic risks + mitigations.\n4) Anti-priorities (what we will NOT do).`,\n\n  delivery: `You are Delivery & Reliability Lead (SRE/Infra/DevEx).\n\nOnline: ${onlineProjects}\nOffline/in work: ${offlineProjects}\n\nBriefing:\\n${briefingJSON}\n\nDeliver:\n1) Health status + quick checks (monitoring, logs, likely causes).\n2) Top 3 fixes/tasks with effort (S/M/L) and impact.\n3) Performance/security/resilience risks.\n4) Next deploy/rollback/backup steps.`,\n\n  product: `You represent Product & Customer Voice.\n\nBriefing:\\n${briefingJSON}\n\nDeliver:\n1) Key user problems/opportunities per project (hypotheses OK).\n2) 3 quick UX/content wins.\n3) Activation or feedback loops to run this week.\n4) How to measure success: signals/KPIs to watch.`,\n\n  finance: `You are Finance & Ops Controller.\n\nContext: Infomaniak VPS (~CHF 6/mo), Vercel (Free), AI-API usage-based, time is scarce.\n\nBriefing:\\n${briefingJSON}\n\nDeliver:\n1) ROI ranking of projects (brief rationale).\n2) Savings or focus opportunities (time/money).\n3) Budget or cap recommendations for AI/infra.\n4) Backups/redundancy: what to secure this week (incl. GitHub/Gist backup of minutes).`,\n\n  compliance: `You are Compliance & Trust Officer.\n\nFramework: DSG (CH), GDPR (EU), imprint requirement, cookies/tracking.\n\nBriefing:\\n${briefingJSON}\n\nDeliver:\n1) Compliance risks per project (risk: high/medium/low).\n2) Missing documents/policies (privacy, imprint, ToS, DPA).\n3) Data flows/third parties to review or minimize.\n4) Immediate actions for this week.`\n};\n\nreturn [{ json: { ...briefing, agentPrompts } }];"
+      },
+      "id": "prepare-prompts",
+      "name": "Prepare Agent Prompts",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [600, 0]
+    }
+  ],
+  "connections": {
+    "Wednesday 14:00 Zurich": {
+      "main": [
+        [
+          {
+            "node": "Get Health Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Important Emails",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Past Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Health Data": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Important Emails": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Past Decisions": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Board Briefing": {
+      "main": [
+        [
+          {
+            "node": "Prepare Agent Prompts",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Agent Prompts": {
+      "main": [
+        [
+          {
+            "node": "Portfolio Strategist",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Delivery & Reliability Lead",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Finance & Ops Controller",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Compliance & Trust Officer",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Product & Customer Voice",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Portfolio Strategist": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delivery & Reliability Lead": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Finance & Ops Controller": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compliance & Trust Officer": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product & Customer Voice": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Meeting Minutes": {
+      "main": [
+        [
+          {
+            "node": "Store Minutes",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Prepare Gist Payload",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Minutes": {
+      "main": [
+        [
+          {
+            "node": "Notify Meeting Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Gist Payload": {
+      "main": [
+        [
+          {
+            "node": "Has GitHub Token?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Has GitHub Token?": {
+      "main": [
+        [
+          {
+            "node": "Create Gist Backup",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        []
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "timezone": "Europe/Zurich"
+  },
+  "tags": [
+    {
+      "name": "board-meeting"
+    },
+    {
+      "name": "ai-agents"
+    },
+    {
+      "name": "week-1"
+    }
+  ]
+}

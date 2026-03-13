@@ -1,0 +1,20 @@
+# Sihliconvalley Brain Caddy Configuration
+# Add this to the existing /opt/version-gmbh/Caddyfile on the VPS
+# (or keep it separate if running isolated Caddy instance)
+
+brain.sihliconvalley.ch {
+    reverse_proxy localhost:5679
+
+    # Security headers
+    header {
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+    }
+
+    # Request logging
+    log {
+        output file /var/log/caddy/brain-access.log
+        format json
+    }
+}

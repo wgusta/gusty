@@ -1,0 +1,414 @@
+{
+  "name": "Wednesday Board Meeting",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "cronExpression",
+              "expression": "0 14 * * 3"
+            }
+          ]
+        }
+      },
+      "id": "wednesday-trigger",
+      "name": "Wednesday 14:00 Zurich",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM health_checks WHERE timestamp > NOW() - INTERVAL '7 days' ORDER BY timestamp DESC LIMIT 7;"
+      },
+      "id": "get-health-data",
+      "name": "Get Health Data",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        200,
+        -200
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM email_inbox WHERE received_at > NOW() - INTERVAL '7 days' AND (board_relevant = true OR priority IN ('urgent', 'high')) ORDER BY received_at DESC;"
+      },
+      "id": "get-important-emails",
+      "name": "Get Important Emails",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        200,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "executeQuery",
+        "query": "SELECT * FROM decisions WHERE created_at > NOW() - INTERVAL '30 days' ORDER BY created_at DESC LIMIT 10;"
+      },
+      "id": "get-past-decisions",
+      "name": "Get Past Decisions",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        200,
+        200
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const healthData = $('Get Health Data').all();\nconst emailData = $('Get Important Emails').all();\nconst pastDecisions = $('Get Past Decisions').all();\n\nconst date = new Date().toISOString().split('T')[0];\n\nconst projects = [\n  { name: 'sihlhack', url: 'https://sihlhack.ch', status: 'online', priority: 1 },\n  { name: 'reaswiss', url: 'https://reaswiss.ch', status: 'online', priority: 2 },\n  { name: 'bioco', url: 'https://bioco.ch', status: 'online', priority: 3 },\n  { name: 'version.gmbh', url: 'https://version.gmbh', status: 'online', priority: 4 },\n  { name: 'sihliconvalley', url: 'https://sihliconvalley.ch', status: 'online', priority: 5 },\n  { name: 'badenleg', url: 'https://badenleg.ch', status: 'online', priority: 6 },\n  { name: 'therapylist', url: 'https://therapylist.ch', status: 'offline', note: 'not online yet', priority: 7 },\n  { name: 'qv-alststadt', url: 'https://qv-alststadt.ch', status: 'offline', note: 'not online yet', priority: 8 }\n];\n\nconst briefing = {\n  date,\n  meeting_number: Math.ceil((new Date() - new Date('2025-01-01')) / (7 * 24 * 60 * 60 * 1000)),\n  projects,\n  infrastructure: {\n    total_checks: healthData.length,\n    incidents: healthData.filter(h => h.json.down_count > 0).length,\n    sites_monitored: healthData[0]?.json?.total_sites || 0\n  },\n  communications: {\n    total_important: emailData.length,\n    urgent: emailData.filter(e => e.json.priority === 'urgent').length,\n    action_required: emailData.filter(e => e.json.action_required).length,\n    by_project: {}\n  },\n  recent_decisions: pastDecisions.map(d => ({\n    date: d.json.created_at,\n    topic: d.json.topic,\n    decision: d.json.decision,\n    status: d.json.status\n  })),\n  raw: {\n    health: healthData.map(h => h.json),\n    emails: emailData.map(e => ({\n      subject: e.json.subject,\n      from: e.json.from_address,\n      summary: e.json.summary,\n      priority: e.json.priority,\n      project: e.json.project\n    }))\n  }\n};\n\nemailData.forEach(e => {\n  const proj = e.json.project || 'general';\n  briefing.communications.by_project[proj] = (briefing.communications.by_project[proj] || 0) + 1;\n});\n\nreturn [{ json: briefing }];"
+      },
+      "id": "compile-briefing",
+      "name": "Compile Board Briefing",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2.1,
+      "position": [
+        520,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openai.com/v1/chat/completions",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer {{$env.OPENAI_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ {\n  \"model\": \"gpt-4o-mini\",\n  \"messages\": [\n    {\"role\": \"system\", \"content\": \"You are the Sihliconvalley board meeting synthesizer. Return concise JSON with keys: summary (3 bullets), portfolio (3 bullets), delivery (3 bullets), product (3 bullets), finance (3 bullets), compliance (3 bullets), decisions (array of {topic, decision, rationale}). Keep outputs short and actionable.\"},\n    {\"role\": \"user\", \"content\": \"Board briefing\\n\\n\" + JSON.stringify($json, null, 2)}\n  ],\n  \"temperature\": 0.3\n}}",
+        "options": {}
+      },
+      "id": "board-synthesis-openai",
+      "name": "Board Synthesis (OpenAI)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        -120
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.anthropic.com/v1/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-api-key",
+              "value": "{{$env.ANTHROPIC_API_KEY}}"
+            },
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            },
+            {
+              "name": "anthropic-version",
+              "value": "2023-06-01"
+            }
+          ]
+        },
+        "jsonParameters": true,
+        "bodyParametersJson": "={{ {\n  \"model\": \"claude-3-5-sonnet-20241022\",\n  \"system\": \"You are the Sihliconvalley board meeting synthesizer. Return concise JSON with keys: summary (3 bullets), portfolio (3 bullets), delivery (3 bullets), product (3 bullets), finance (3 bullets), compliance (3 bullets), decisions (array of {topic, decision, rationale}). Keep outputs short and actionable.\",\n  \"messages\": [\n    {\"role\": \"user\", \"content\": \"Board briefing\\n\\n\" + JSON.stringify($json, null, 2)}\n  ],\n  \"temperature\": 0.3,\n  \"max_tokens\": 800\n}}",
+        "options": {}
+      },
+      "id": "board-synthesis-claude",
+      "name": "Board Synthesis (Claude)",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        820,
+        120
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const briefing = $('Compile Board Briefing').item.json;\nconst oa = $('Board Synthesis (OpenAI)').item.json;\nconst cl = $('Board Synthesis (Claude)').item.json;\n\nconst oaContent = oa.choices?.[0]?.message?.content || '';\nconst clContent = Array.isArray(cl.content) ? cl.content.map(c => c.text || '').join('\\n') : (cl.content?.[0]?.text || cl.content || '');\n\nlet parsedOA = {};\nlet parsedCL = {};\ntry { parsedOA = JSON.parse(oaContent); } catch (_) { parsedOA = { summary: oaContent }; }\ntry { parsedCL = JSON.parse(clContent); } catch (_) { parsedCL = { summary: clContent }; }\n\nconst dedupe = (arr = []) => {\n  const seen = new Set();\n  const out = [];\n  for (const item of arr) {\n    const topic = (item.topic || '').toLowerCase();\n    if (topic && seen.has(topic)) continue;\n    if (topic) seen.add(topic);\n    out.push(item);\n  }\n  return out;\n};\n\nconst decisions = dedupe([...(parsedOA.decisions || []), ...(parsedCL.decisions || [])]);\n\nconst section = (title, val) => {\n  if (!val) return `### ${title}\\n- n/a`;\n  if (Array.isArray(val)) return `### ${title}\\n` + val.map(v => `- ${typeof v === 'string' ? v : JSON.stringify(v)}`).join('\\n');\n  if (typeof val === 'string') return `### ${title}\\n${val}`;\n  return `### ${title}\\n` + Object.entries(val).map(([k,v]) => `- ${k}: ${v}`).join('\\n');\n};\n\nconst projectLines = briefing.projects\n  .map(p => `- ${p.name}: ${p.status}${p.note ? ' (' + p.note + ')' : ''}`)\n  .join('\\n');\n\nlet minutes = `# Sihliconvalley Board Meeting #${briefing.meeting_number}\\n`;\nminutes += `**Date:** ${briefing.date} | **Time:** 14:00 Zurich\\n\\n`;\nminutes += `## Projects & Status\\n${projectLines}\\n\\n`;\nminutes += `## Board Summary (OpenAI)\\n`;\nminutes += section('Summary', parsedOA.summary) + '\\n\\n';\nminutes += section('Portfolio Strategist', parsedOA.portfolio) + '\\n\\n';\nminutes += section('Delivery & Reliability', parsedOA.delivery) + '\\n\\n';\nminutes += section('Product & Customer', parsedOA.product) + '\\n\\n';\nminutes += section('Finance & Ops', parsedOA.finance) + '\\n\\n';\nminutes += section('Compliance & Trust', parsedOA.compliance) + '\\n\\n';\nminutes += `## Board Summary (Claude)\\n`;\nminutes += section('Summary', parsedCL.summary) + '\\n\\n';\nminutes += section('Portfolio Strategist', parsedCL.portfolio) + '\\n\\n';\nminutes += section('Delivery & Reliability', parsedCL.delivery) + '\\n\\n';\nminutes += section('Product & Customer', parsedCL.product) + '\\n\\n';\nminutes += section('Finance & Ops', parsedCL.finance) + '\\n\\n';\nminutes += section('Compliance & Trust', parsedCL.compliance) + '\\n\\n';\nminutes += '## Decisions to confirm\\n';\nif (decisions.length === 0) {\n  minutes += '- None captured; add manually.\\n';\n} else {\n  minutes += decisions.map(d => `- ${d.topic || 'topic'}: ${d.decision || 'decision'}${d.rationale ? ' (' + d.rationale + ')' : ''}`).join('\\n') + '\\n';\n}\nminutes += '\\n---\\n\\n*Minutes generated automatically by Sihliconvalley Brain*\\n';\nminutes += '*Next meeting: next Wednesday 14:00*\\n';\n\nreturn [{ json: { minutes, briefing, responses: { openai: parsedOA, claude: parsedCL, raw: { openai: oa, claude: cl } } } }];"
+      },
+      "id": "compile-minutes",
+      "name": "Compile Meeting Minutes",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2.1,
+      "position": [
+        1140,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const scoreModel = (data) => {\n  if (!data) return { score: 0, reasons: ['missing'] };\n  const keys = ['summary','portfolio','delivery','product','finance','compliance'];\n  let score = 0;\n  const reasons = [];\n  for (const k of keys) {\n    const val = data[k];\n    if (!val) { reasons.push(`${k}: missing`); continue; }\n    const len = typeof val === 'string' ? val.length : Array.isArray(val) ? val.length : Object.keys(val || {}).length;\n    score += Math.min(3, Math.max(1, len ? 1 : 0));\n  }\n  const decCount = Array.isArray(data.decisions) ? data.decisions.length : 0;\n  score += decCount * 0.5;\n  return { score: Number(score.toFixed(2)), reasons };\n};\n\nconst oaScore = scoreModel($json.responses?.openai);\nconst clScore = scoreModel($json.responses?.claude);\n\nlet winner = 'tie';\nif (oaScore.score > clScore.score + 0.25) winner = 'openai';\nelse if (clScore.score > oaScore.score + 0.25) winner = 'claude';\n\nreturn [{ json: { ...$json, score: { openai: oaScore, claude: clScore, winner } } }];"
+      },
+      "id": "score-models",
+      "name": "Score Models",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2.1,
+      "position": [
+        1380,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "insert",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "mode": "list",
+          "value": "board_meetings"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "meeting_date": "={{ new Date().toISOString() }}",
+            "meeting_number": "={{ $json.briefing.meeting_number }}",
+            "minutes_markdown": "={{ $json.minutes }}",
+            "responses_json": "={{ JSON.stringify({ responses: $json.responses, score: $json.score }) }}",
+            "status": "pending_review"
+          }
+        }
+      },
+      "id": "store-minutes",
+      "name": "Store Minutes",
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.5,
+      "position": [
+        1620,
+        0
+      ],
+      "credentials": {
+        "postgres": {
+          "id": "POSTGRES_CREDENTIAL_ID",
+          "name": "Brain PostgreSQL"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "={{ \"https://ntfy.sh/\" + $env.NTFY_TOPIC }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Title",
+              "value": "=Board Meeting #{{ $json.briefing.meeting_number }}"
+            },
+            {
+              "name": "Priority",
+              "value": "default"
+            },
+            {
+              "name": "Tags",
+              "value": "clipboard,calendar"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "",
+              "value": "Board meeting minutes stored in DB. Please review decisions."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notify-meeting",
+      "name": "Notify Meeting Ready",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1860,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Wednesday 14:00 Zurich": {
+      "main": [
+        [
+          {
+            "node": "Get Health Data",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Important Emails",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Get Past Decisions",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Health Data": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Important Emails": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Past Decisions": {
+      "main": [
+        [
+          {
+            "node": "Compile Board Briefing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Board Briefing": {
+      "main": [
+        [
+          {
+            "node": "Board Synthesis (OpenAI)",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Board Synthesis (Claude)",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Board Synthesis (OpenAI)": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Board Synthesis (Claude)": {
+      "main": [
+        [
+          {
+            "node": "Compile Meeting Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Compile Meeting Minutes": {
+      "main": [
+        [
+          {
+            "node": "Score Models",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Score Models": {
+      "main": [
+        [
+          {
+            "node": "Store Minutes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Store Minutes": {
+      "main": [
+        [
+          {
+            "node": "Notify Meeting Ready",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "saveManualExecutions": true,
+    "timezone": "Europe/Zurich"
+  },
+  "tags": [
+    {
+      "name": "board-meeting"
+    },
+    {
+      "name": "lean"
+    },
+    {
+      "name": "openai-vs-claude"
+    },
+    {
+      "name": "scored"
+    }
+  ]
+}
