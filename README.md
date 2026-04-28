@@ -64,16 +64,16 @@ npm run build      # production build
 
 Last 10 commits (auto-generated):
 
-- **feat(branding): replace page title icon with white logo** (44e7f3a) - 15 seconds ago by wgusta
-- **Update Activity Log [skip ci]** (4cf6140) - 3 minutes ago by github-actions[bot]
-- **Replace Gusty logo and adjust cut** (afbb127) - 4 minutes ago by wgusta
-- **Update Activity Log [skip ci]** (f5faf83) - 7 days ago by github-actions[bot]
-- **mobile UX overhaul: reduce header height, show all projects by default, add tap affordance** (81b196b) - 7 days ago by wgusta
-- **Update Activity Log [skip ci]** (08d885f) - 7 days ago by github-actions[bot]
-- **fix DE umlauts across all project cards** (547afa3) - 7 days ago by wgusta
-- **Update Activity Log [skip ci]** (c521652) - 7 days ago by github-actions[bot]
-- **DE umlauts, headerDef2post update, Fremdwort label** (1a81841) - 7 days ago by wgusta
-- **Update Activity Log [skip ci]** (ab3f4be) - 7 days ago by github-actions[bot]
+- **feat(party): launch live bring-list microsite** (2b5edc8) - 32 seconds ago by wgusta
+- **Summarize workflow and design edits** (2fc0f6a) - 7 weeks ago by wgusta
+- **Replace g letter with logo** (3db6842) - 9 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (1b67ac5) - 9 weeks ago by github-actions[bot]
+- **feat(branding): replace page title icon with white logo** (44e7f3a) - 9 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (4cf6140) - 9 weeks ago by github-actions[bot]
+- **Replace Gusty logo and adjust cut** (afbb127) - 9 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (f5faf83) - 10 weeks ago by github-actions[bot]
+- **mobile UX overhaul: reduce header height, show all projects by default, add tap affordance** (81b196b) - 10 weeks ago by wgusta
+- **Update Activity Log [skip ci]** (08d885f) - 10 weeks ago by github-actions[bot]
 
 View full commit history: [GitHub Commits](https://github.com/wgusta/gusty/commits)
 ## License
