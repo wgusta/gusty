@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useState, useRef } from 'react';
-import Image from 'next/image';
 import MarkdownContent from './MarkdownContent';
 import ATSProjectContent from './ATSProjectContent';
 import type { Project } from '@/lib/types';
@@ -15,25 +14,22 @@ interface ProjectModalProps {
   onClose: () => void;
 }
 
+function getDefaultTab(project: Project | null) {
+  if (project?.column === 'ai' && !project.designContent) {
+    return 'ai' as const;
+  }
+
+  return 'design' as const;
+}
+
 export default function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
-  const [activeTab, setActiveTab] = useState<'design' | 'ai'>('design');
+  const [activeTab, setActiveTab] = useState<'design' | 'ai'>(() => getDefaultTab(project));
   const [expandedTechStack, setExpandedTechStack] = useState(false);
   const [expandedLessons, setExpandedLessons] = useState(false);
   const modalRef = useRef<HTMLDivElement>(null);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
   const { lang } = useLanguage();
   const tr = translations[lang];
-
-  useEffect(() => {
-    if (project) {
-      // Set initial tab based on project column
-      if (project.column === 'ai' && !project.designContent) {
-        setActiveTab('ai');
-      } else {
-        setActiveTab('design');
-      }
-    }
-  }, [project]);
 
   useEffect(() => {
     if (isOpen) {
@@ -357,7 +353,7 @@ export function VideoEmbed({ src, title }: { src: string; title?: string }) {
 export function CodeSnippet({ code, language }: { code: string; language?: string }) {
   return (
     <pre className="bg-brand-black text-off-white p-4 rounded-lg overflow-x-auto my-6 font-terminal text-sm">
-      <code>{code}</code>
+      <code data-language={language}>{code}</code>
     </pre>
   );
 }

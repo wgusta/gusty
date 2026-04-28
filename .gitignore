@@ -26,6 +26,7 @@
 /output/
 /tmp/
 /wgusta/
+.playwright-cli/
 
 # debug
 npm-debug.log*

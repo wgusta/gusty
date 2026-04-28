@@ -121,6 +121,17 @@ export default function Header() {
             </span>
             {' '}{tr.headerDef2post}
           </p>
+
+          <div className="mt-4">
+            <Link
+              href="/party"
+              className="inline-flex items-center gap-2 rounded-full border border-brand-black/10 bg-brand-white/75 px-4 py-2 text-xs sm:text-sm font-terminal uppercase tracking-[0.14em] text-brand-black transition hover:border-sun-red hover:text-sun-red"
+              data-interactive
+            >
+              <span>Schräge Hüete Party</span>
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </div>
         </div>
       </div>
 

@@ -7,40 +7,57 @@ import DangerCard from '@/components/DangerCard';
 import ProjectModal from '@/components/ProjectModal';
 import projects from '@/lib/projects';
 import type { Project } from '@/lib/types';
-import { t } from '@/lib/types';
 import { useLanguage } from '@/lib/i18n/context';
 import translations from '@/lib/i18n/translations';
+
+function getInitialDangerZoneState(showDangerZone: boolean) {
+  if (!showDangerZone || typeof window === 'undefined') {
+    return {
+      dangerZoneConfirmed: null as boolean | null,
+      showDangerZoneMessage: false,
+    };
+  }
+
+  const savedConfirmation = localStorage.getItem('dangerZoneConfirmed');
+  if (savedConfirmation === 'true') {
+    return {
+      dangerZoneConfirmed: true,
+      showDangerZoneMessage: false,
+    };
+  }
+
+  if (savedConfirmation === 'false') {
+    return {
+      dangerZoneConfirmed: false,
+      showDangerZoneMessage: true,
+    };
+  }
+
+  return {
+    dangerZoneConfirmed: null,
+    showDangerZoneMessage: false,
+  };
+}
 
 export default function Home() {
   // Check if danger zone should be shown (default: false in production)
   const showDangerZone = process.env.NEXT_PUBLIC_SHOW_DANGER_ZONE === 'true';
+  const initialDangerZoneState = getInitialDangerZoneState(showDangerZone);
 
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
-  const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(null);
-  const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(false);
+  const [dangerZoneConfirmed, setDangerZoneConfirmed] = useState<boolean | null>(
+    initialDangerZoneState.dangerZoneConfirmed
+  );
+  const [showDangerZoneMessage, setShowDangerZoneMessage] = useState(
+    initialDangerZoneState.showDangerZoneMessage
+  );
   const [isDangerZoneInView, setIsDangerZoneInView] = useState(false);
   const [activeFilter, setActiveFilter] = useState<'design' | 'ai' | 'bridged' | null>(null);
   const dangerZoneRef = useRef<HTMLDivElement>(null);
   const { lang } = useLanguage();
   const tr = translations[lang];
-
-  useEffect(() => {
-    // Only initialize danger zone logic if enabled
-    if (!showDangerZone) return;
-
-    // Check localStorage for danger zone confirmation
-    const savedConfirmation = localStorage.getItem('dangerZoneConfirmed');
-    if (savedConfirmation === 'true') {
-      setDangerZoneConfirmed(true);
-    } else if (savedConfirmation === 'false') {
-      setDangerZoneConfirmed(false);
-      setShowDangerZoneMessage(true);
-    } else {
-      setDangerZoneConfirmed(null); // Show modal
-    }
-  }, [showDangerZone]);
 
   useEffect(() => {
     // Only enable custom cursor on non-touch devices
@@ -84,7 +101,7 @@ export default function Home() {
     return () => {
       observer.disconnect();
     };
-  }, [dangerZoneConfirmed]);
+  }, [dangerZoneConfirmed, showDangerZone]);
 
   const handleDangerZoneConfirm = () => {
     setDangerZoneConfirmed(true);
@@ -218,7 +235,6 @@ export default function Home() {
                       <ProjectCard
                         project={project}
                         onClick={() => setSelectedProject(project)}
-                        activeFilter={activeFilter}
                       />
                     </div>
                   </div>
@@ -338,6 +354,7 @@ export default function Home() {
 
       {/* Project Modal */}
       <ProjectModal
+        key={selectedProject?.id ?? 'project-modal'}
         project={selectedProject}
         isOpen={selectedProject !== null}
         onClose={() => setSelectedProject(null)}

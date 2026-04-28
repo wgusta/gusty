@@ -12,6 +12,11 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    "designs/**",
+    "output/**",
+    "tmp/**",
+    "wgusta/**",
+    "sihliconvalley-brain/**",
   ]),
 ]);
 

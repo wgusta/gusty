@@ -368,4 +368,70 @@
   .live-status-button:active {
     background-color: #15803d;
   }
+
+  @keyframes partyHatDrop {
+    0% {
+      transform: translateY(-120px) rotate(-16deg);
+      opacity: 0;
+    }
+    60% {
+      transform: translateY(10px) rotate(10deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes partyHatIdle {
+    0%, 100% {
+      transform: translateY(0) rotate(-3deg);
+    }
+    50% {
+      transform: translateY(-4px) rotate(3deg);
+    }
+  }
+
+  @keyframes partyHatPop {
+    0% {
+      transform: translateY(42px) scale(0.3) rotate(-14deg);
+      opacity: 0;
+    }
+    60% {
+      transform: translateY(-8px) scale(1.12) rotate(8deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(0) scale(1) rotate(0deg);
+      opacity: 1;
+    }
+  }
+
+  @keyframes partyCardIn {
+    from {
+      transform: translateY(16px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+
+  .party-hat-fall {
+    animation: partyHatDrop 0.8s cubic-bezier(0.2, 0.9, 0.25, 1.1) forwards;
+  }
+
+  .party-hat-idle {
+    animation: partyHatIdle 3.2s ease-in-out infinite;
+  }
+
+  .party-hat-pop {
+    animation: partyHatPop 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
+  .party-confirmation-in {
+    animation: partyCardIn 0.35s ease-out forwards;
+  }
 }

@@ -8,10 +8,9 @@ import { useLanguage } from '@/lib/i18n/context';
 interface ProjectCardProps {
   project: Project;
   onClick: () => void;
-  activeFilter?: 'design' | 'ai' | 'bridged' | null;
 }
 
-export default function ProjectCard({ project, onClick, activeFilter }: ProjectCardProps) {
+export default function ProjectCard({ project, onClick }: ProjectCardProps) {
   const { lang } = useLanguage();
 
   // Determine background color for mobile based on project column type
